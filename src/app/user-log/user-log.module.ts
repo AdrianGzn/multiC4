@@ -5,6 +5,7 @@ import { SignPatientComponent } from './sign-patient/sign-patient.component';
 import { SignEmployeeComponent } from './sign-employee/sign-employee.component';
 import { UserLogRoutingModule } from './user-log-routing.module';
 
+
 @NgModule({
   declarations: [
     LoginComponent,
@@ -12,6 +13,7 @@ import { UserLogRoutingModule } from './user-log-routing.module';
     SignEmployeeComponent
   ],
   imports: [
+    
     CommonModule,
     UserLogRoutingModule
   ]

@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrl: './sign-patient.component.css'
 })
 export class SignPatientComponent {
-
+  
+  
 }
