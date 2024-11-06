@@ -1,1 +1,10 @@
-<p>header-receptionist works!</p>
+<header class="h-32 w-full flex justify-between flex-wrap items-center bg-slate-50">
+    <div class="flex flex-wrap items-center">
+        <img src="./assets/icon-vital.png" class="h-24 w-20 ml-12 mr-5">
+        <button class="text-[#9042B7] font-bold mx-5" (click)="welcome()">BIENVENIDA</button>
+        <button class="text-[#9042B7] font-bold mx-5" (click)="establishments()">ESTABLECIMIENTO</button>
+        <button class="text-[#9042B7] font-bold mx-5" (click)="appointments()">CITAS</button>
+    </div>
+
+    <button class="bg-[#BE6DD7] text-white font-medium p-1 mx-10 rounded-sm" (click)="endSesion()">CERRAR SESIÓN</button>
+</header>

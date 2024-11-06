@@ -5,7 +5,6 @@ import { HeaderDoctorComponent } from './header-doctor/header-doctor.component';
 import { HeaderReceptionistComponent } from './header-receptionist/header-receptionist.component';
 
 
-
 @NgModule({
   declarations: [
     HeaderPatientComponent,
@@ -13,7 +12,7 @@ import { HeaderReceptionistComponent } from './header-receptionist/header-recept
     HeaderReceptionistComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
   ],
   exports: [
     HeaderPatientComponent,
