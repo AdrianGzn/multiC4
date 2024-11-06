@@ -4,21 +4,18 @@ import { SearchEstablishmentComponent } from './search-establishment/search-esta
 import { DetailsEstablishmentComponent } from './details-establishment/details-establishment.component';
 import { SaveEstablishmentComponent } from './save-establishment/save-establishment.component';
 import { EstablishmentRoutingModule } from './establishment-routing.module';
-import { HeaderPatientComponent } from '../shared/components/header-patient/header-patient.component';
-import { HeaderReceptionistComponent } from '../shared/components/header-receptionist/header-receptionist.component';
-
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
     SearchEstablishmentComponent,
     DetailsEstablishmentComponent,
     SaveEstablishmentComponent,
-    HeaderPatientComponent,
-    HeaderReceptionistComponent
   ],
   imports: [
     CommonModule,
-    EstablishmentRoutingModule
+    EstablishmentRoutingModule,
+    SharedModule
   ]
 })
 export class EstablishmentModule { }
