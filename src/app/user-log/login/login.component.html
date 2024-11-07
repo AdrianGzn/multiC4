@@ -1,21 +1,24 @@
 <div class="flex items-center justify-center min-h-screen bg-cover bg-no-repeat" style="background-image: url('assets/l.webp');">
-    <div class="bg-white/70 py-16 px-10 rounded-lg shadow-lg max-w-sm w-full lg:ml-4">
-      <h2 class="text-center text-2xl font-bold mb-6">LOG IN</h2>
-      <form>
-        <div class="mb-4">
-          <label class="block text-gray-700 text-sm font-bold mb-2" for="username">Usuario:</label>
-          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Usuario">
-        </div>
-        <div class="mb-6">
-          <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Contraseña:</label>
-          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="Contraseña">
-        </div>
-        <div class="flex items-center justify-center">
-          <button class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-3 w-full rounded focus:outline-none focus:shadow-outline"  type="button">INGRESAR</button>
-        </div>
-      </form>
-      <p class="text-center text-gray-500 text-sm mt-4">Aun no tienes una cuenta? <a (click)="signPatient()" class="text-blue-500">Regístrate</a></p>
-    </div>
+  <div class="bg-white/70 py-16 px-10 rounded-lg shadow-lg max-w-sm w-full lg:ml-4">
+    <h2 class="text-center text-2xl font-bold mb-6">LOG IN</h2>
+    <form>
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="username">Usuario:</label>
+        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Usuario">
+      </div>
+      <div class="mb-6">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Contraseña:</label>
+        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="Contraseña">
+      </div>
+      <div class="flex items-center justify-center">
+        <button class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 w-full rounded focus:outline-none focus:shadow-outline" type="button">INGRESAR</button>
+      </div>
+    </form>
+    <p class="text-center text-gray-500 text-sm mt-4">
+      Aún no tienes una cuenta? 
+      <a role="button" (click)="signPatient()" class="text-blue-500 hover:underline cursor-pointer">Regístrate</a>
+    </p>
   </div>
-  
+</div>
+
   

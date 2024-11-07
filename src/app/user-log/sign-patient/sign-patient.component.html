@@ -1,32 +1,31 @@
-<div class="flex items-center justify-center min-h-screen bg-cover bg-center" style="background-image: url('/assets/doctor-background.jpg')">
-    <div class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
-      <h2 class="text-2xl font-bold mb-4 text-center">SIGNIN PACIENTE</h2>
+<div class="flex items-center justify-center min-h-screen bg-cover bg-center" style="background-image: url('assets/register.jpg')">
+  <div class="bg-white/50 py-16 px-10 rounded-lg shadow-lg max-w-sm w-full">
+    <h2 class="text-2xl font-bold mb-4 text-center">SIGNIN PACIENTE</h2>
+    
+    <form>
+      <div class="mb-4">
+        <label class="block text-gray-700">Nombre de Usuario:</label>
+        <input type="text" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+      </div>
       
-      <form>
-        <div class="mb-4">
-          <label class="block text-gray-700">Nombre de Usuario:</label>
-          <input type="text" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" />
-        </div>
-        
-        <div class="mb-4">
-          <label class="block text-gray-700">Contraseña:</label>
-          <input type="password" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" />
-        </div>
-        
-        <div class="mb-4">
-          <label class="block text-gray-700">Confirmar Contraseña:</label>
-          <input type="password" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" />
-        </div>
-        
-        <button type="submit" class="w-full py-2 bg-purple-500 text-white font-bold rounded-lg hover:bg-purple-700 transition-colors">
-          REGISTRATE
-        </button>
-      </form>
+      <div class="mb-4">
+        <label class="block text-gray-700">Contraseña:</label>
+        <input type="password" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+      </div>
       
-      <p class="mt-4 text-center text-gray-600">
-        ¿No eres un paciente? Eres un empleado?
-        <a href="#" class="text-indigo-500 hover:underline">Regístrate</a>
-      </p>
-    </div>
+      <div class="mb-4">
+        <label class="block text-gray-700">Confirmar Contraseña:</label>
+        <input type="password" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+      </div>
+      
+      <button type="submit" class="w-full py-2 bg-purple-500 text-white font-bold rounded-lg hover:bg-purple-700 transition-colors">
+        REGISTRATE
+      </button>
+    </form>
+    
+    <p class="mt-4 text-center text-gray-600">
+      ¿No eres un paciente? Eres un empleado?
+      <a (click)="signEmployee()" class="text-indigo-500 hover:underline cursor-pointer">Regístrate</a>
+    </p>
   </div>
-  
+</div>
