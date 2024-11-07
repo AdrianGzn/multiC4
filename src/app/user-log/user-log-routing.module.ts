@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'sign-patient', component: SignPatientComponent },
   { path: 'sign-employee', component: SignEmployeeComponent },
+  { path: 'sign-regresar', component: LoginComponent },
 ];
 
 @NgModule({

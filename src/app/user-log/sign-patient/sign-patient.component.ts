@@ -13,5 +13,9 @@ export class SignPatientComponent {
   signEmployee(): void {
     this.router.navigate(['/sign-employee']);
   }
+  signRegresar(): void {
+    this.router.navigate(['/sign-regresar']);
+  }
+
   
 }
