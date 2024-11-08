@@ -4,12 +4,11 @@ import { HeaderPatientComponent } from './header-patient/header-patient.componen
 import { HeaderDoctorComponent } from './header-doctor/header-doctor.component';
 import { HeaderReceptionistComponent } from './header-receptionist/header-receptionist.component';
 
-
 @NgModule({
   declarations: [
     HeaderPatientComponent,
     HeaderDoctorComponent,
-    HeaderReceptionistComponent
+    HeaderReceptionistComponent,
   ],
   imports: [
     CommonModule,
@@ -17,7 +16,10 @@ import { HeaderReceptionistComponent } from './header-receptionist/header-recept
   exports: [
     HeaderPatientComponent,
     HeaderDoctorComponent,
-    HeaderReceptionistComponent
+    HeaderReceptionistComponent,
   ]
 })
-export class SharedModule { }
+export class SharedModule {
+
+  
+ }
