@@ -5,12 +5,21 @@ import { WelcomeDoctorComponent } from './welcome-doctor/welcome-doctor.componen
 import { WelcomeReceptionistComponent } from './welcome-receptionist/welcome-receptionist.component';
 import { WelcomeRoutingModule } from './welcome-routing.module';
 import { SharedModule } from '../shared/shared.module';
+import { CartpatientComponent } from './cartpatient/cartpatient.component';
+import { CartpatientcampanisComponent } from './cartpatientcampanis/cartpatientcampanis.component';
+import { SitiosComponent } from './sitios/sitios.component';
+import { FooterpatientComponent } from './footerpatient/footerpatient.component';
 
 @NgModule({
   declarations: [
     WelcomePatientComponent,
     WelcomeDoctorComponent,
     WelcomeReceptionistComponent,
+    CartpatientComponent,
+    CartpatientcampanisComponent,
+    SitiosComponent,
+    FooterpatientComponent,
+  
   ],
   imports: [
     CommonModule,
