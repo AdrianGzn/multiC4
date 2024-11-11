@@ -32,6 +32,7 @@ export class LoginComponent {
       this.generalservices.loginEmployee(person).subscribe(
         data => {
           console.log(data)
+          
         },
 
         erro => {
