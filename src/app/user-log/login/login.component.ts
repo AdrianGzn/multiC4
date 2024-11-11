@@ -30,12 +30,12 @@ export class LoginComponent {
     console.log(person)
     if (this.loginForm.valid) {
       this.generalservices.loginEmployee(person).subscribe(
-        (response) => {
-          localStorage.setItem('dataUser', response)
-          this.router.navigate(['/home']); 
+        data => {
+          console.log(data)
         },
-        (error) => {
-          console.error('Error en el login:', error);
+
+        erro => {
+          console.log(erro)
         }
       );
     } else {
