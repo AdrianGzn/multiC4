@@ -1,2 +1,51 @@
 <app-header-patient></app-header-patient>
-<p>search-establishment works!</p>
+
+<div id="body" class="w-full min-h-[calc(100vh-128px)] flex items-center justify-center bg-gray-200">
+    <div id="content" class="w-[calc(100%-40px)] h-[90%] text-black flex flex-col md:flex-row justify-evenly flex-wrap">
+        <div id="dashBoard" class="w-full md:w-[40%] lg:w-[25%] bg-purple-100 p-4 md:p-6 rounded-lg shadow-lg mb-6 md:mb-0">
+            <form class="form mb-6" [formGroup]="formEstablishment">
+                <p class="subtitle text-lg font-semibold text-purple-800">Búsqueda normal</p>
+                
+                <label class="form-child-label block text-sm font-medium text-gray-700 mb-2">Tipo:</label>
+                <select id="targetCurrency" class="w-full p-2 border border-gray-300 rounded-md mb-4" formControlName="tipo">
+                    <option *ngFor="let item of tipo" [value]="item">{{ item }}</option>
+                </select>
+                
+                <label class="form-child-label block text-sm font-medium text-gray-700 mb-2">Categoría:</label>
+                <select id="targetCurrency" class="w-full p-2 border border-gray-300 rounded-md mb-4" formControlName="categoria">
+                    <option *ngFor="let item of categoria" [value]="item">{{ item }}</option>
+                </select>
+                
+                <button class="form-child h-8 w-full bg-purple-600 text-white rounded-sm hover:bg-purple-700" (click)="submitTipoCategoria()">Buscar</button>
+            </form>
+
+            <form class="form mb-6" [formGroup]="formEstablishmentByName">
+                <p class="subtitle text-lg font-semibold text-purple-800">Búsqueda por nombre</p>
+                
+                <label class="form-child-label block text-sm font-medium text-gray-700 mb-2">Nombre:</label>
+                <input class="form-child w-full p-2 border border-gray-300 rounded-md mb-4" type="text" formControlName="nombre">
+                
+                <button class="form-child h-8 w-full bg-purple-600 text-white rounded-sm hover:bg-purple-700" (click)="submitNombre()">Buscar</button>
+            </form>
+
+            <form class="form" [formGroup]="formEstablishmentByService">
+                <p class="subtitle text-lg font-semibold text-purple-800">Búsqueda por servicio</p>
+                
+                <label class="form-child-label block text-sm font-medium text-gray-700 mb-2">Servicio:</label>
+                <select id="targetCurrency" class="w-full p-2 border border-gray-300 rounded-md mb-4" formControlName="servicio">
+                    <option *ngFor="let service of services" [value]="service">{{ service }}</option>
+                </select>
+                
+                <button class="form-child h-8 w-full bg-purple-600 text-white rounded-sm hover:bg-purple-700" (click)="submitServicio()">Buscar</button>
+            </form>
+        </div>
+
+        <div id="showData" class="w-full md:w-[55%] lg:w-[65%] bg-purple-100 p-4 md:p-6 rounded-lg shadow-lg">
+            <p class="text-lg font-semibold text-purple-800 mb-4">Resultados</p>
+
+            <div *ngFor="let item of establishmentFinded" class="mb-4">
+                <app-card-establishment [card]="item"></app-card-establishment>
+            </div>
+        </div>
+    </div>
+</div>

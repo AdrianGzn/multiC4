@@ -5,17 +5,21 @@ import { DetailsEstablishmentComponent } from './details-establishment/details-e
 import { SaveEstablishmentComponent } from './save-establishment/save-establishment.component';
 import { EstablishmentRoutingModule } from './establishment-routing.module';
 import { SharedModule } from '../shared/shared.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CardEstablishmentComponent } from './card-establishment/card-establishment.component';
 
 @NgModule({
   declarations: [
     SearchEstablishmentComponent,
     DetailsEstablishmentComponent,
     SaveEstablishmentComponent,
+    CardEstablishmentComponent
   ],
   imports: [
     CommonModule,
     EstablishmentRoutingModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ]
 })
 export class EstablishmentModule { }
