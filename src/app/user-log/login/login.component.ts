@@ -23,16 +23,27 @@ export class LoginComponent {
   }
 
   onSubmit() {
+    const person = {
+      nombre: this.loginForm.value.nombre,
+      contraseña: this.loginForm.value.contraseña
+    }
     if (this.loginForm.valid) {
+<<<<<<< HEAD
       this.generalservices.loginEmployee(this.loginForm.value).subscribe(
         (response) => {
           console.log('Login exitoso:', response);
           this.router.navigate(['/home']); 
+=======
+      this.generalservices.loginEmployee(person).subscribe({
+        next: (data) => {
+          console.log(data);
+          localStorage.setItem('dataUser', data);
+>>>>>>> 41ec59050771f0190f59fcfc240d83439fe319ff
         },
-        (error) => {
-          console.error('Error en el login:', error);
+        error: (erro) => {
+          console.log(erro)
         }
-      );
+      });
     } else {
       console.log('Formulario no válido');
     }

@@ -10,6 +10,8 @@ import { Role } from '../models/role';
 import { ScheduleDoctor } from '../models/schedule-doctor';
 import { Schedule } from '../models/schedule';
 
+import { catchError } from 'rxjs';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -41,10 +43,6 @@ export class GeneralServices {
 
   createEmployee(employeeData: Employee): Observable<Employee> {
     return this.http.post<Employee>(`${this.baseUrl}/employee/`, employeeData);
-  }
-
-  loginEmployee(loginData: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/login`, loginData);
   }
 
   changeEmployee(idEmployee: string, employeeData: Employee): Observable<Employee> {
@@ -87,7 +85,15 @@ export class GeneralServices {
     return this.http.delete<void>(`${this.baseUrl}/scheduleDoctor/${idSchedule}`);
   }
 
-  login(datos: any): Observable<any> {
-    return this.http.delete<void>(`${this.baseUrl}/login/${datos}`);
+  loginEmployee(loginData: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/login`, loginData)
+  }
+
+  getEstablishmentByName(name: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/searchEstablishment/${name}`);
+  }
+  
+  getEstablishmentByService (servicio: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/searchEstablishmentService/${servicio}`);
   }
 }
