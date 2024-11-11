@@ -1,14 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Address } from '../models/address';
-import { Campaign } from '../models/campaign';
 import { Employee } from '../models/employee';
 import { Patient } from '../models/patient';
-import { Quote } from '../models/quote';
 import { Role } from '../models/role';
 import { ScheduleDoctor } from '../models/schedule-doctor';
-import { Schedule } from '../models/schedule';
 
 import { catchError } from 'rxjs';
 
@@ -89,11 +85,27 @@ export class GeneralServices {
     return this.http.post(`${this.baseUrl}/login`, loginData)
   }
 
+  getEstablishment(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/establishment/`);
+  }
+
   getEstablishmentByName(name: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/searchEstablishment/${name}`);
   }
   
   getEstablishmentByService (servicio: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/searchEstablishmentService/${servicio}`);
+  }
+
+  createEstablishment(establishmentData: any): Observable<any> {
+    return this.http.post<Role>(`${this.baseUrl}/establishment/`, establishmentData);
+  }
+
+  changeEstablishment(idEstablishment: number, establishmentData: any): Observable<any> {
+    return this.http.put<any>(`${this.baseUrl}/users/${idEstablishment}`, establishmentData);
+  }
+
+  deleteEstablishment(idRol: string): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/establishment/${idRol}`);
   }
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CardData } from '../models/card-data';
+import { GeneralServices } from '../../shared/services/general-services.service';
 
 @Component({
   selector: 'app-search-establishment',
@@ -23,9 +24,9 @@ export class SearchEstablishmentComponent {
       titulo: 'Mi primera card',
       direccion: 'Mi casa'
     },
-  ]; //lista de los hospitales encontrados según la búsqueda
+  ];
 
-  constructor() {
+  constructor(private generalService: GeneralServices) {
     this.formEstablishment = new FormGroup({
       tipo: new FormControl(null, [Validators.required, Validators.min(1), Validators.max(100), Validators.pattern(/^\d+$/)]),
       categoria: new FormControl(null, [Validators.required, Validators.min(10), Validators.max(250), Validators.pattern(/^\d+(\.\d+)?$/)]),
@@ -41,7 +42,7 @@ export class SearchEstablishmentComponent {
   }
 
   submitTipoCategoria(): void {
-    
+      
   }
 
   submitNombre(): void {
