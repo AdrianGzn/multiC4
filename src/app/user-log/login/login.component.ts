@@ -27,18 +27,16 @@ export class LoginComponent {
       nombre: this.loginForm.value.nombre,
       contraseña: this.loginForm.value.contraseña
     }
-    console.log(person)
     if (this.loginForm.valid) {
-      this.generalservices.loginEmployee(person).subscribe(
-        data => {
-          console.log(data)
-          
+      this.generalservices.loginEmployee(person).subscribe({
+        next: (data) => {
+          console.log(data);
+          localStorage.setItem('dataUser', data);
         },
-
-        erro => {
+        error: (erro) => {
           console.log(erro)
         }
-      );
+      });
     } else {
       console.log('Formulario no válido');
     }
