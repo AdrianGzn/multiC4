@@ -14,7 +14,7 @@ export class HeaderPatientComponent {
   }
 
   establishments(): void {
-    this.router.navigate(['/establishment/patient']);
+    this.router.navigate(['/establishment/search']);
   }
 
   appointments(): void {
@@ -23,11 +23,12 @@ export class HeaderPatientComponent {
   campaigns(): void {
     this.router.navigate(['/campaigns/patient']);
   }
-  login(): void {
-    this.router.navigate(['/sign-login']);
+  citas(): void {
+    this.router.navigate(['/citas/patient']);
   }
   endSesion(): void {
-    
+    localStorage.removeItem('dataUser');
+    this.router.navigate(['/sign-login'])
   }
 
 }

@@ -10,6 +10,7 @@ import { CartpatientcampanisComponent } from './cartpatientcampanis/cartpatientc
 import { SitiosComponent } from './sitios/sitios.component';
 import { FooterpatientComponent } from './footerpatient/footerpatient.component';
 
+
 @NgModule({
   declarations: [
     WelcomePatientComponent,
@@ -19,12 +20,16 @@ import { FooterpatientComponent } from './footerpatient/footerpatient.component'
     CartpatientcampanisComponent,
     SitiosComponent,
     FooterpatientComponent,
+    
+    
+ 
   
   ],
   imports: [
     CommonModule,
     WelcomeRoutingModule,
-    SharedModule
+    SharedModule,
+    
   ]
 })
 export class WelcomeModule { }

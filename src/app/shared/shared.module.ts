@@ -4,6 +4,7 @@ import { HeaderPatientComponent } from './header-patient/header-patient.componen
 import { HeaderDoctorComponent } from './header-doctor/header-doctor.component';
 import { HeaderReceptionistComponent } from './header-receptionist/header-receptionist.component';
 
+
 @NgModule({
   declarations: [
     HeaderPatientComponent,

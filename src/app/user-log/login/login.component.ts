@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { GeneralServices } from '../../shared/services/general-services.service';
 
 @Component({
   selector: 'app-login',
@@ -10,17 +11,28 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class LoginComponent {
   loginForm: FormGroup;
 
-  constructor(private router: Router, private fb: FormBuilder) {
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    private generalservices: GeneralServices
+  ) {
     this.loginForm = this.fb.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
+      nombre: ['', Validators.required],
+      contraseña: ['', Validators.required]
     });
   }
 
   onSubmit() {
     if (this.loginForm.valid) {
-      // Manejar el envío del formulario aquí
-      console.log('Formulario válido:', this.loginForm.value);
+      this.generalservices.loginEmployee(this.loginForm.value).subscribe(
+        (response) => {
+          localStorage.setItem('dataUser', response)
+          this.router.navigate(['/home']); 
+        },
+        (error) => {
+          console.error('Error en el login:', error);
+        }
+      );
     } else {
       console.log('Formulario no válido');
     }
