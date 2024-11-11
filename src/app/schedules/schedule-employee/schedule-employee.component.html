@@ -1,0 +1,52 @@
+<app-header-doctor></app-header-doctor>
+
+<div class="w-full min-h-[calc(100vh-128px)] flex items-center justify-center bg-gray-200">
+    <div class="w-[70%] min-h-[calc(70vh)] bg-purple-100 flex flex-col items-center">
+        
+        <form class="form" [formGroup]="formSchedules">
+            <p>Domingo</p>
+            <label class="form-child-label">Entrada:</label>
+            <input class="form-child border-fuchsia-800" type="text" formControlName="domingoE">
+            <label class="form-child-label">Salida:</label>
+            <input class="form-child border-fuchsia-800" type="text" formControlName="domingoS">
+
+            <p>Lunes</p>
+            <label class="form-child-label">Entrada:</label>
+            <input class="form-child border-fuchsia-800" type="time" formControlName="lunesE">
+            <label class="form-child-label">Salida:</label>
+            <input class="form-child border-fuchsia-800" type="text" formControlName="lunesS">
+
+            <p>Martes</p>
+            <label class="form-child-label">Entrada:</label>
+            <input class="form-child border-fuchsia-800" type="time" formControlName="martesE">
+            <label class="form-child-label">Salida:</label>
+            <input class="form-child border-fuchsia-800" type="text" formControlName="martesS">
+
+            <p>Miercoles</p>
+            <label class="form-child-label">Entrada:</label>
+            <input class="form-child border-fuchsia-800" type="time" formControlName="miercolesE">
+            <label class="form-child-label">Salida:</label>
+            <input class="form-child border-fuchsia-800" type="text" formControlName="miercolesS">
+
+            <p>Jueves</p>
+            <label class="form-child-label">Entrada:</label>
+            <input class="form-child border-fuchsia-800" type="time" formControlName="juevesE">
+            <label class="form-child-label">Salida:</label>
+            <input class="form-child border-fuchsia-800" type="text" formControlName="juevesS">
+
+            <p>Viernes</p>
+            <label class="form-child-label">Entrada:</label>
+            <input class="form-child border-fuchsia-800" type="time" formControlName="viernesE">
+            <label class="form-child-label">Salida:</label>
+            <input class="form-child border-fuchsia-800" type="text" formControlName="viernesS">
+
+            <p>Sábado</p>
+            <label class="form-child-label">Entrada:</label>
+            <input class="form-child border-fuchsia-800" type="time" formControlName="sabadoE">
+            <label class="form-child-label">Salida:</label>
+            <input class="form-child border-fuchsia-800" type="text" formControlName="sabadoS">
+            
+        </form>
+        
+    </div>
+</div>
