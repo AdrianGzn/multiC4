@@ -23,8 +23,13 @@ export class LoginComponent {
   }
 
   onSubmit() {
+    const person = {
+      nombre: this.loginForm.value.nombre,
+      contraseña: this.loginForm.value.contraseña
+    }
+    console.log(person)
     if (this.loginForm.valid) {
-      this.generalservices.loginEmployee(this.loginForm.value).subscribe(
+      this.generalservices.loginEmployee(person).subscribe(
         (response) => {
           localStorage.setItem('dataUser', response)
           this.router.navigate(['/home']); 

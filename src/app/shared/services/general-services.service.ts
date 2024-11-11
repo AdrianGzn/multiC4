@@ -86,13 +86,7 @@ export class GeneralServices {
   }
 
   loginEmployee(loginData: any): Observable<any> {
-    console.log('Si llega al servicio');
-    return this.http.post(`${this.baseUrl}/login`, loginData).pipe(
-      catchError(error => {
-        console.error('Error al obtener todos los usuarios: ', error);
-        throw error;
-      })
-    )
+    return this.http.post(`${this.baseUrl}/login`, loginData)
   }
 
   getEstablishmentByName(name: string): Observable<any> {
