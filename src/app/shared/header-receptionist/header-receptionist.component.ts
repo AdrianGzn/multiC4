@@ -16,11 +16,18 @@ export class HeaderReceptionistComponent {
   establishments(): void {
     this.router.navigate(['/establishment/receptionist']);
   }
-
+  citas(): void {
+    this.router.navigate(['/citas/receptionist']);
+  }
   appointments(): void {
     this.router.navigate(['/appointments/receptionist']);
   }
-
+  campaigns(): void {
+    this.router.navigate(['/campaigns/receptionist']);
+  }
+  login(): void {
+    this.router.navigate(['/sign-login']);
+  }
   endSesion(): void {
     
   }

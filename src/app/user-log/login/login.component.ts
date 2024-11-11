@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GeneralServices } from '../../shared/services/general-services.service';
-import { log } from 'console';
 
 @Component({
   selector: 'app-login',
@@ -12,30 +11,28 @@ import { log } from 'console';
 export class LoginComponent {
   loginForm: FormGroup;
 
-  constructor(private router: Router, private fb: FormBuilder, private generalServices: GeneralServices) {
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    private generalservices: GeneralServices
+  ) {
     this.loginForm = this.fb.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
+      nombre: ['', Validators.required],
+      contraseña: ['', Validators.required]
     });
   }
 
-  onSubmit() {   
-    const loginData = {
-      username: this.loginForm.value.username,
-      password: this.loginForm.value.password
-    };
-
+  onSubmit() {
     if (this.loginForm.valid) {
-      
-      this.generalServices.loginEmployee(loginData).subscribe({
-        next: (item: any) => {
-          console.log(item);
+      this.generalservices.loginEmployee(this.loginForm.value).subscribe(
+        (response) => {
+          localStorage.setItem('dataUser', response)
+          this.router.navigate(['/home']); 
         },
-        error: (err) => {
-          console.log("Error fetching data for currency : " + err);
-        }      
-      });
-
+        (error) => {
+          console.error('Error en el login:', error);
+        }
+      );
     } else {
       console.log('Formulario no válido');
     }

@@ -9,19 +9,19 @@ import { Router } from '@angular/router';
 export class HeaderDoctorComponent {
   constructor(private router: Router) { }
 
-  welcome(): void {
-    this.router.navigate(['/welcome/patient']);
+  horarios(): void {
+    this.router.navigate(['/horarios/doctor']);
   }
 
-  establishments(): void {
-    this.router.navigate(['/establishment/patient']);
+  citas(): void {
+    this.router.navigate(['/citas/doctor']);
   }
 
   appointments(): void {
-    this.router.navigate(['/appointments/patient']);
+    this.router.navigate(['/appointments/doctor']);
   }
   campaigns(): void {
-    this.router.navigate(['/campaigns/patient']);
+    this.router.navigate(['/campaigns/doctor']);
   }
   login(): void {
     this.router.navigate(['/sign-login']);
