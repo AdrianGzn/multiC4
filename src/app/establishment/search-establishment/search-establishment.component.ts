@@ -17,14 +17,7 @@ export class SearchEstablishmentComponent {
   tipo: string[] = ['Hospital', 'Clínica', 'Consultorio']; //lista de todos lo que va en formularios
   categoria: string[] = ['Público', 'Privado'];
 
-  establishmentFinded: CardData[] = [
-    {
-      id: 1,
-      imagen: '',
-      titulo: 'Mi primera card',
-      direccion: 'Mi casa'
-    },
-  ];
+  establishmentFinded: CardData[] = [];
 
   constructor(private generalService: GeneralServices) {
     this.formEstablishment = new FormGroup({
@@ -33,11 +26,11 @@ export class SearchEstablishmentComponent {
     });
 
     this.formEstablishmentByName = new FormGroup({
-      nombre: new FormControl(null, [Validators.required, Validators.min(1), Validators.max(100), Validators.pattern(/^\d+$/)]),
+      nombre: new FormControl(null, []),
     });
 
     this.formEstablishmentByService = new FormGroup({
-      servicio: new FormControl(null, [Validators.required, Validators.min(1), Validators.max(100), Validators.pattern(/^\d+$/)]),
+      servicio: new FormControl(null, []),
     });
   }
 
@@ -46,11 +39,30 @@ export class SearchEstablishmentComponent {
   }
 
   submitNombre(): void {
+    console.log(this.formEstablishmentByName.value)
+    this.generalService.getEstablishmentByName(this.formEstablishmentByName.value.nombre).subscribe(
+      data => {
+        console.log(data)
+        this.establishmentFinded.push(data)
+      },
 
+      error => {    
+        alert("no se pudo encontrar")
+      }
+
+    )
   }
 
   submitServicio(): void {
+    this.generalService.getEstablishmentByService(this.formEstablishmentByService.value).subscribe(
+      data => {
+        this.establishmentFinded = data
+      },
 
+      error => {    
+        alert("no se pudo encontrar")
+      }
+    )
   }
 
 }

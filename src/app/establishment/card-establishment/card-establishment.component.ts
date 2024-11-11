@@ -8,10 +8,7 @@ import { CardData } from '../models/card-data';
 })
 export class CardEstablishmentComponent {
   @Input() card: CardData = { 
-    id: 0,
-    imagen: '', 
-    titulo: '', 
-    direccion: '' 
+    nombre: '' 
   };
 
   details(id: number):void {
