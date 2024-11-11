@@ -1,4 +1,50 @@
 <app-header-receptionist></app-header-receptionist>
-<div [classList]="'w-full h-68 border border-red-200'">
-    
+<div class="w-full min-h-[calc(100vh-128px)] flex items-center justify-center bg-gray-200">
+    <div class="w-[70%] min-h-[calc(70vh)] bg-purple-100 flex flex-col items-center ">
+
+        <form class="form" [formGroup]="formData">
+            <label class="form-child-label">Nombre:</label>
+            <input class="form-child" type="text" formControlName="nombre">
+
+            <label class="form-child-label">Descripción:</label>
+            <input class="form-child" type="text" formControlName="descripcion">
+        </form>
+
+        <form class="form" [formGroup]="formUbication">
+            <label class="form-child-label">Calle:</label>
+            <input class="form-child" type="text" formControlName="calle">
+
+            <label class="form-child-label">Colonia:</label>
+            <input class="form-child" type="text" formControlName="colonia">
+
+            <label class="form-child-label">Número:</label>
+            <input class="form-child" type="text" formControlName="numero">
+
+            <label class="form-child-label">Latitud:</label>
+            <input class="form-child" type="text" formControlName="latitud">
+
+            <label class="form-child-label">Longitud:</label>
+            <input class="form-child" type="text" formControlName="longitud">
+
+            <label class="form-child-label">O usar la ubicación del dispositivo:</label>
+            <input class="form-child" type="checkbox" formControlName="thisUbication">
+        </form>
+
+        <form class="form" [formGroup]="formServices">
+            <label class="form-child-label">Servicio:</label>
+            <input class="form-child" type="text" formControlName="servicio">
+
+            <label class="form-child-label">Costo:</label>
+            <input class="form-child" type="text" formControlName="costo">
+        </form>
+
+        <form class="form" [formGroup]="formDoctors">
+            <label class="form-child-label">Doctor:</label>
+            <input class="form-child" type="text" formControlName="doctor">
+
+            <label class="form-child-label">Servicio:</label>
+            <input class="form-child" type="text" formControlName="servicio">
+        </form>
+        <button>Guardar</button>
+    </div>
 </div>
