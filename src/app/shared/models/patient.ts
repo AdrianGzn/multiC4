@@ -1,4 +1,6 @@
 export interface Patient {
-    name: string,
-    password: string
+    nombres: string,
+    apellidos: string,
+    contraseña: string
 }
+  
