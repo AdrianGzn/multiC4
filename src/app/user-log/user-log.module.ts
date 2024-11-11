@@ -4,6 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { SignPatientComponent } from './sign-patient/sign-patient.component';
 import { SignEmployeeComponent } from './sign-employee/sign-employee.component';
 import { UserLogRoutingModule } from './user-log-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -13,7 +14,7 @@ import { UserLogRoutingModule } from './user-log-routing.module';
     SignEmployeeComponent
   ],
   imports: [
-    
+    ReactiveFormsModule,
     CommonModule,
     UserLogRoutingModule
   ]
