@@ -9,7 +9,6 @@ const routes: Routes = [
   { path: 'receptionist', component: WelcomeReceptionistComponent },
   { path: 'doctor', component: WelcomeDoctorComponent },
   {path:'establishment',component:EstablishmentModule },
-  { path: 'establishment/patient', component: EstablishmentModule },
 ];
 
 @NgModule({

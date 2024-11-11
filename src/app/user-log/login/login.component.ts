@@ -26,7 +26,7 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       this.generalservices.loginEmployee(this.loginForm.value).subscribe(
         (response) => {
-          localStorage.setItem('dataUser', response)
+          console.log('Login exitoso:', response);
           this.router.navigate(['/home']); 
         },
         (error) => {

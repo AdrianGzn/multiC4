@@ -16,6 +16,7 @@ export class HeaderPatientComponent {
   establishments(): void {
     this.router.navigate(['/establishment/search']);
   }
+  
 
   appointments(): void {
     this.router.navigate(['/appointments/patient']);

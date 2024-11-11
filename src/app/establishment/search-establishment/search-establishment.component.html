@@ -1,7 +1,7 @@
 <app-header-patient></app-header-patient>
 
-<div id="body" class="w-full min-h-[calc(100vh-128px)] flex items-center justify-center bg-gray-200">
-    <div id="content" class="w-[calc(100%-40px)] h-[90%] text-black flex flex-col md:flex-row justify-evenly flex-wrap">
+<div id="body" class="w-full min-h-[calc(100vh-128px)] flex items-center justify-center bg-gray-200 mb-6"> <!-- Agregado mb-6 para margen inferior -->
+    <div id="content" class="w-[calc(100%-40px)] h-[90%] text-black flex flex-col md:flex-row justify-evenly flex-wrap mt-6"> <!-- Agregado mt-6 para margen superior -->
         <div id="dashBoard" class="w-full md:w-[40%] lg:w-[25%] bg-purple-100 p-4 md:p-6 rounded-lg shadow-lg mb-6 md:mb-0">
             <form class="form mb-6" [formGroup]="formEstablishment">
                 <p class="subtitle text-lg font-semibold text-purple-800">Búsqueda normal</p>
@@ -40,7 +40,7 @@
             </form>
         </div>
 
-        <div id="showData" class="w-full md:w-[55%] lg:w-[65%] bg-purple-100 p-4 md:p-6 rounded-lg shadow-lg">
+        <div id="showData" class="w-full md:w-[55%] lg:w-[65%] bg-purple-100 p-4 md:p-6 rounded-lg shadow-lg mb-6">
             <p class="text-lg font-semibold text-purple-800 mb-4">Resultados</p>
 
             <div *ngFor="let item of establishmentFinded" class="mb-4">
