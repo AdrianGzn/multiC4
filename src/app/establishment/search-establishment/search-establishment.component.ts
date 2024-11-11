@@ -46,7 +46,18 @@ export class SearchEstablishmentComponent {
   }
 
   submitNombre(): void {
-
+    let name = this.formEstablishmentByName.value.nombre;
+    this.generalService.getEstablishmentByName(name).subscribe({
+      next: (data) => {
+        console.log(data);
+        this.establishmentFinded = [];
+        this.establishmentFinded.push(data);        
+      },
+      error: (error) => {
+        console.log('Error obteniendo los datos del establecimiento: ' + error);
+        
+      }
+    })
   }
 
   submitServicio(): void {
