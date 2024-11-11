@@ -13,7 +13,7 @@ import { Schedule } from '../models/schedule';
 @Injectable({
   providedIn: 'root'
 })
-export class ApiService {
+export class GeneralServices {
 
   private baseUrl: string = 'http://3.227.141.174:8000';  
 
