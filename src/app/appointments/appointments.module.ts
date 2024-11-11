@@ -4,6 +4,7 @@ import { GenerateComponent } from './generate/generate.component';
 import { SeeComponent } from './see/see.component';
 import { AppointmentsRoutingModule } from './appointments-routing.module';
 import { SharedModule } from '../shared/shared.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { SharedModule } from '../shared/shared.module';
   imports: [
     CommonModule,
     AppointmentsRoutingModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ]
 })
 export class AppointmentsModule { }

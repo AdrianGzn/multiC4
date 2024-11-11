@@ -1,1 +1,30 @@
-<p>generate works!</p>
+<app-header-patient></app-header-patient>
+
+<div class="max-w-sm mx-auto p-6 bg-purple-100 rounded-lg shadow-md mt-3 mb-5">
+    <div class="flex items-center justify-center mb-4">
+        <img src="/assets/historial.png" alt="Ícono de agenda" class="w-12 h-12 mr-3" />
+        <h1 class="text-xl font-bold text-purple-700">Agendar Cita</h1>
+    </div>
+
+    <form [formGroup]="agendarCitaForm" (ngSubmit)="onSubmit()">
+        <label class="block text-purple-700 font-light text-xs">Servicios:</label>
+        <select formControlName="servicio" class="w-full p-2 mb-3 border border-purple-300 rounded-md">
+            <option value="">Seleccione un servicio</option>
+        </select>
+
+        <label class="block text-purple-700 font-light text-xs">Doctor:</label>
+        <select formControlName="doctor" class="w-full p-2 mb-3 border border-purple-300 rounded-md">
+            <option value="">Seleccione un doctor</option>
+        </select>
+
+        <label class="block text-purple-700 font-light text-xs">Fecha:</label>
+        <input type="date" formControlName="fecha" class="w-full p-2 mb-3 border border-purple-300 rounded-md" />
+
+        <label class="block text-purple-700 font-light text-xs">Hora:</label>
+        <input type="time" formControlName="hora" class="w-full p-2 mb-4 border border-purple-300 rounded-md" />
+
+        <button type="submit" class="w-full bg-purple-700 text-white font-bold py-2 rounded-md hover:bg-purple-800">
+            Agendar Cita
+        </button>
+    </form>
+</div>
