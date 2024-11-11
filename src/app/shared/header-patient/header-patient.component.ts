@@ -20,7 +20,12 @@ export class HeaderPatientComponent {
   appointments(): void {
     this.router.navigate(['/appointments/patient']);
   }
-
+  campaigns(): void {
+    this.router.navigate(['/campaigns/patient']);
+  }
+  login(): void {
+    this.router.navigate(['/sign-login']);
+  }
   endSesion(): void {
     
   }

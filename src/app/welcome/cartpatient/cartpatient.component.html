@@ -1,0 +1,38 @@
+<div class="text-center my-8">
+    <h2 class="text-5xl font-bold text-[#9042B7]">Servicios médicos</h2> <!-- Color del texto a #9042B7 -->
+    
+    <div class="flex justify-center mt-6 max-w-5xl mx-auto overflow-hidden">
+      <div
+        class="flex space-x-6 transition-transform duration-300 ease-in-out"
+        [style.transform]="'translateX(-' + (serviciosIndex * (100 / visibleCards)) + '%)'">
+        <ng-container *ngFor="let servicio of visibleServicios">
+          <div class="bg-[#EAE2F5] rounded-lg shadow-lg p-6 w-60 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl"> <!-- Fondo de las cartas cambiado a #EAE2F5 -->
+            <img [src]="servicio.img" [alt]="servicio.nombre" class="w-full h-52 object-cover rounded-t-lg" />
+            <h3 class="text-lg font-semibold text-[#9042B7] mt-4">{{ servicio.nombre }}</h3> <!-- Color del texto a #9042B7 -->
+            <button class="bg-[#9042B7] text-white rounded-md mt-4 py-2 px-4 w-full hover:bg-[#7d3486]"> <!-- Fondo del botón a #9042B7 y hover a un tono más oscuro -->
+              Más Información
+            </button>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="flex justify-center mt-8 space-x-4">
+      <button
+        class="text-white rounded-full h-10 w-10 flex items-center justify-center"
+        [ngClass]="{
+          'bg-purple-500': currentButton === 'prev', 
+          'bg-purple-300': currentButton !== 'prev'
+        }"
+        (click)="prev()">&lt;</button>
+        
+      <button
+        class="text-white rounded-full h-10 w-10 flex items-center justify-center"
+        [ngClass]="{
+          'bg-purple-500': currentButton === 'next', 
+          'bg-purple-300': currentButton !== 'next'
+        }"
+        (click)="next()">&gt;</button>
+    </div>
+  </div>
+  
