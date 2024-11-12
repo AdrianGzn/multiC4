@@ -6,47 +6,49 @@
         <form class="form" [formGroup]="formSchedules">
             <p>Domingo</p>
             <label class="form-child-label">Entrada:</label>
-            <input class="form-child border-fuchsia-800" type="text" formControlName="domingoE">
+            <input class="form-child border-fuchsia-800" type="time" formControlName="domingoE">
             <label class="form-child-label">Salida:</label>
-            <input class="form-child border-fuchsia-800" type="text" formControlName="domingoS">
+            <input class="form-child border-fuchsia-800" type="time" formControlName="domingoS">
 
             <p>Lunes</p>
             <label class="form-child-label">Entrada:</label>
             <input class="form-child border-fuchsia-800" type="time" formControlName="lunesE">
             <label class="form-child-label">Salida:</label>
-            <input class="form-child border-fuchsia-800" type="text" formControlName="lunesS">
+            <input class="form-child border-fuchsia-800" type="time" formControlName="lunesS">
 
             <p>Martes</p>
             <label class="form-child-label">Entrada:</label>
             <input class="form-child border-fuchsia-800" type="time" formControlName="martesE">
             <label class="form-child-label">Salida:</label>
-            <input class="form-child border-fuchsia-800" type="text" formControlName="martesS">
+            <input class="form-child border-fuchsia-800" type="time" formControlName="martesS">
 
             <p>Miercoles</p>
             <label class="form-child-label">Entrada:</label>
             <input class="form-child border-fuchsia-800" type="time" formControlName="miercolesE">
             <label class="form-child-label">Salida:</label>
-            <input class="form-child border-fuchsia-800" type="text" formControlName="miercolesS">
+            <input class="form-child border-fuchsia-800" type="time" formControlName="miercolesS">
 
             <p>Jueves</p>
             <label class="form-child-label">Entrada:</label>
             <input class="form-child border-fuchsia-800" type="time" formControlName="juevesE">
             <label class="form-child-label">Salida:</label>
-            <input class="form-child border-fuchsia-800" type="text" formControlName="juevesS">
+            <input class="form-child border-fuchsia-800" type="time" formControlName="juevesS">
 
             <p>Viernes</p>
             <label class="form-child-label">Entrada:</label>
             <input class="form-child border-fuchsia-800" type="time" formControlName="viernesE">
             <label class="form-child-label">Salida:</label>
-            <input class="form-child border-fuchsia-800" type="text" formControlName="viernesS">
+            <input class="form-child border-fuchsia-800" type="time" formControlName="viernesS">
 
             <p>Sábado</p>
             <label class="form-child-label">Entrada:</label>
             <input class="form-child border-fuchsia-800" type="time" formControlName="sabadoE">
             <label class="form-child-label">Salida:</label>
-            <input class="form-child border-fuchsia-800" type="text" formControlName="sabadoS">
+            <input class="form-child border-fuchsia-800" type="time" formControlName="sabadoS">
             
         </form>
         
+        <button (click)="onSubmit()">Guardar</button>
+
     </div>
 </div>

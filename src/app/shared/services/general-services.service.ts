@@ -6,8 +6,6 @@ import { Patient } from '../models/patient';
 import { Role } from '../models/role';
 import { ScheduleDoctor } from '../models/schedule-doctor';
 
-import { catchError } from 'rxjs';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -41,7 +39,7 @@ export class GeneralServices {
     return this.http.post<Employee>(`${this.baseUrl}/employee/`, employeeData);
   }
 
-  changeEmployee(idEmployee: string, employeeData: Employee): Observable<Employee> {
+  changeEmployee(idEmployee: string, employeeData: any): Observable<Employee> {
     return this.http.put<Employee>(`${this.baseUrl}/employee/${idEmployee}`, employeeData);
   }
 
