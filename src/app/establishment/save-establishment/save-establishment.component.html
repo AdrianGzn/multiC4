@@ -1,146 +1,173 @@
 <app-header-receptionist></app-header-receptionist>
 <div class="w-full min-h-[calc(100vh-128px)] flex items-center justify-center bg-gray-200">
-    <div class="w-[70%] min-h-[calc(70vh)] bg-purple-100 flex flex-col items-center p-5">
+
+    <div class="w-[85%] min-h-[calc(70vh)] my-8 bg-purple-100 flex flex-col items-center p-5 lg:w-[70%]">
         <p class="text-lg font-bold mb-4 text-purple-800">Agregar Establecimiento</p>
 
-        <!-- Formulario General -->
-        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="w-full px-10">
-            <!-- Sección de Datos -->
-            <div class="w-full mb-6 grid grid-cols-3 gap-4" formGroupName="formData">
-                <p class="font-semibold text-purple-600 col-span-3 mb-2">DATOS</p>
+        <form [formGroup]="formData" class="w-[90%] lg:px-10">
+            <div class="w-full mb-6">
+                <p class="font-semibold text-purple-600 mb-2">DATOS</p>
                 
-                <div>
-                    <label class="form-child-label">Nombre:</label>
-                    <input class="form-child border-fuchsia-800 w-full" type="text" formControlName="nombre">
-                </div>
-                
-                <div>
-                    <label class="form-child-label">Descripción:</label>
-                    <input class="form-child border-fuchsia-800 w-full" type="text" formControlName="descripcion">
-                </div>
-                
-                <div>
-                    <label class="form-child-label">Tipo:</label>
-                    <select class="form-child border-fuchsia-800 w-full" formControlName="tipo">
-                        <!-- Opciones de tipo -->
-                    </select>
+                <div class="flex flex-wrap justify-between">
+                    <div class="w-[calc(30%)] min-w-[210px]">
+                        <label class="form-child-label">Nombre:</label>
+                        <input class="form-child border-fuchsia-800 w-full" type="text" formControlName="nombre">
+                    </div>
+                    
+                    <div class="w-[calc(30%)] min-w-[210px]">
+                        <label class="form-child-label">Descripción:</label>
+                        <input class="form-child border-fuchsia-800 w-full" type="text" formControlName="descripcion">
+                    </div>
+                    
+                    <div class="w-[calc(30%)] min-w-[210px]">
+                        <label class="form-child-label">Tipo:</label>
+                            <select class="form-child border-fuchsia-800 w-full" formControlName="tipo">
+                        </select>
+                    </div>
                 </div>
             </div>
-
-            <!-- Sección de Ubicación -->
-            <div class="w-full mb-6 grid grid-cols-3 gap-4" formGroupName="formUbication">
-                <p class="font-semibold text-purple-600 col-span-3 mb-2">UBICACIÓN</p>
+        </form>
+        <form [formGroup]="formUbication" class="w-[90%] lg:px-10">
+            <div class="w-full mb-6">
+                <p class="font-semibold text-purple-600 mb-2">UBICACIÓN</p>
                 
-                <div>
-                    <label class="form-child-label">Calle:</label>
-                    <input class="form-child w-full" type="text" formControlName="calle">
-                </div>
-                
-                <div>
-                    <label class="form-child-label">Colonia:</label>
-                    <input class="form-child w-full" type="text" formControlName="colonia">
-                </div>
-                
-                <div>
-                    <label class="form-child-label">Número:</label>
-                    <input class="form-child w-full" type="text" formControlName="numero">
-                </div>
-                
-                <div>
-                    <label class="form-child-label">Latitud:</label>
-                    <input class="form-child w-full" type="text" formControlName="latitud">
-                </div>
-                
-                <div>
-                    <label class="form-child-label">Longitud:</label>
-                    <input class="form-child w-full" type="text" formControlName="longitud">
-                </div>
-                
-                <div class="flex items-center">
-                    <label class="form-child-label mr-2">O usar la ubicación del dispositivo:</label>
-                    <input type="checkbox" formControlName="thisUbication">
+                <div class="flex flex-wrap justify-between">
+                    <div class="w-[calc(31%)] min-w-[210px]">
+                        <label class="form-child-label">Calle:</label>
+                        <input class="form-child w-full" type="text" formControlName="calle">
+                    </div>
+                    
+                    <div class="w-[calc(31%)] min-w-[210px]">
+                        <label class="form-child-label">Colonia:</label>
+                        <input class="form-child w-full" type="text" formControlName="colonia">
+                    </div>
+                    
+                    <div class="w-[calc(31%)] min-w-[210px]">
+                        <label class="form-child-label">Número:</label>
+                        <input class="form-child w-full" type="text" formControlName="numero">
+                    </div>
+                    
+                    <div class="w-[calc(31%)] min-w-[210px]">
+                        <label class="form-child-label">Latitud:</label>
+                        <input class="form-child w-full" type="text" formControlName="latitud">
+                    </div>
+                    
+                    <div class="w-[calc(31%)] min-w-[210px]">
+                        <label class="form-child-label">Longitud:</label>
+                        <input class="form-child w-full" type="text" formControlName="longitud">
+                    </div>
+                    
+                    <div class="w-[calc(31%)] min-w-[210px]">
+                        <label class="form-child-label mr-2">O usar la ubicación del dispositivo:</label>
+                        <input type="checkbox" formControlName="thisUbication">
+                    </div>
                 </div>
             </div>
-
-            <!-- Sección de Horario -->
-            <div class="w-full mb-6 grid grid-cols-3 gap-4" formGroupName="formSchedule">
-                <p class="font-semibold text-purple-600 col-span-3 mb-2">HORARIO</p>
+        </form>
+        <form [formGroup]="formSchedule" class="w-[90%] lg:px-10">
+            <div class="w-full mb-6 flex flex-wrap">
+                <p class="font-semibold text-purple-600 mb-2">HORARIO</p>
                 
-                <div>
-                    <label class="form-child-label">Hora de inicio:</label>
-                    <input class="form-child w-full" type="time" formControlName="horaInicio">
-                </div>
-
-                <div>
-                    <label class="form-child-label">Hora de cierre:</label>
-                    <input class="form-child w-full" type="time" formControlName="horaCierre">
-                </div>
-
-                <div>
-                    <label class="form-child-label">Día de inicio:</label>
-                    <select class="form-child w-full" formControlName="diaInicio">
-                        <!-- Opciones de días -->
-                    </select>
-                </div>
-
-                <div>
-                    <label class="form-child-label">Día de cierre:</label>
-                    <select class="form-child w-full" formControlName="diaCierre">
-                       
-                    </select>
+                <div class="w-full flex flex-wrap justify-between">
+                    <div class="w-[calc(48%)] min-w-[260px]">
+                        <div class="w-full">
+                            <label class="form-child-label">Hora de inicio:</label>
+                            <input class="form-child w-full" type="time" formControlName="horaInicio">
+                        </div>
+    
+                        <div class="w-full">
+                            <label class="form-child-label">Día de inicio:</label>
+                            <select class="form-child w-full" formControlName="diaInicio">
+                            
+                            </select>
+                        </div>
+                    </div>
+    
+                    <div class="w-[calc(48%)] min-w-[260px]">
+                        <div class="w-full">
+                            <label class="form-child-label">Hora de cierre:</label>
+                            <input class="form-child w-full" type="time" formControlName="horaCierre">
+                        </div> 
+                        <div class="w-full">
+                            <label class="form-child-label">Día de cierre:</label>
+                            <select class="form-child w-full" formControlName="diaCierre">
+                            </select>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-      
-            <div class="w-full mb-6" formGroupName="formImage">
+        </form>
+        <form [formGroup]="formImage" class="w-[90%] lg:px-10">
+            <div class="w-full mb-6">
                 <p class="font-semibold text-purple-600 mb-2">IMAGEN</p>
                 
                 <label class="form-child-label">Agregar Imagen:</label>
-                <div class="flex items-center">
-                    <input class="form-child w-full" type="file" formControlName="imagen">
-                    <button type="button" class="bg-purple-700 text-white p-1 ml-2 rounded">Eliminar</button>
+                <div class="flex justify-between">
+                    <input class="bg-white form-child w-[48%]" type="file" formControlName="imagen">
+                    <button type="button" class="w-[48%] bg-purple-700 text-white p-1 ml-2 rounded">Eliminar</button>
                 </div>
             </div>
-
-            
-            <div class="w-full mb-6" formGroupName="formServices">
-                <p class="font-semibold text-purple-600 mb-2">SERVICIOS</p>
-                
-                <label class="form-child-label">Servicio:</label>
-                <div class="flex items-center">
-                    <select class="form-child w-full" formControlName="servicio">
-                        <!-- Opciones de servicios -->
-                    </select>
-                    <button type="button" class="bg-purple-700 text-white p-1 ml-2 rounded">Añadir</button>
-                    <button type="button" class="bg-purple-700 text-white p-1 ml-2 rounded">Eliminar</button>
-                </div>
-                <textarea class="form-child w-full mt-2" formControlName="serviciosActuales" readonly></textarea>
-            </div>
-
-        
-            <div class="w-full mb-6" formGroupName="formDoctors">
-                <p class="font-semibold text-purple-600 mb-2">SERVICIOS</p>
-                
-                <label class="form-child-label">Doctor:</label>
-                <div class="flex items-center">
-                    <select class="form-child w-full" formControlName="doctor">
-            
-                    </select>
-                </div>
-
-                <label class="form-child-label mt-2">Servicio:</label>
-                <div class="flex items-center">
-                    <select class="form-child w-full" formControlName="servicioDoctor">
-                        <!-- Opciones de servicios -->
-                    </select>
-                    <button type="button" class="bg-purple-700 text-white p-1 ml-2 rounded">Añadir</button>
-                    <button type="button" class="bg-purple-700 text-white p-1 ml-2 rounded">Eliminar</button>
-                </div>
-                <textarea class="form-child w-full mt-2" formControlName="doctoresActuales" readonly></textarea>
-            </div>
-
-           
-            <button type="submit" class="bg-purple-800 text-white p-2 rounded w-full">Guardar</button>
         </form>
+        <form [formGroup]="formServices" class="w-[90%] lg:px-10">
+            <div class="w-full mb-6">
+                <p class="font-semibold text-purple-600 mb-2">SERVICIOS</p>
+                
+                <div class="w-full flex flex-wrap justify-between">
+                    <div class="w-[48%]">
+                        <label class="form-child-label">Servicio:</label>
+                        <div class="">
+                            <select class="form-child w-full" formControlName="servicio">
+                                <!-- Opciones de servicios -->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="w-[48%]">
+                        <label class="form-child-label">Costo:</label>
+                        <input class="form-child border-fuchsia-800 w-full" type="text" formControlName="costo">
+                    </div>
+                </div>
+
+                <div class="w-full flex flex-wrap justify-between mt-2">
+                    <button type="button" class="w-[48%] bg-purple-700 text-white p-1 rounded">Añadir</button>
+                    <button type="button" class="w-[48%] bg-purple-700 text-white p-1 rounded">Eliminar</button>
+                </div>
+
+                <div class="w-full min-h-[50px] bg-white mt-2">
+                    
+                </div>
+            </div>
+        </form>
+        <form [formGroup]="formDoctors" class="w-[90%] lg:px-10">
+            <div class="w-full mb-6 ">
+                <p class="font-semibold text-purple-600 mb-2">DOCTORES</p>
+                
+                <div class="w-full flex flex-wrap justify-between">
+                    <div class="w-[48%]">
+                        <label class="form-child-label">Doctor:</label>
+                        <select class="form-child w-full" formControlName="doctor">
+                            <!-- Opciones de doctor -->
+                        </select>
+                    </div>
+                    
+                    <div class="w-[48%]">
+                        <label class="form-child-label mt-2">Servicio:</label>
+                        <select class="form-child w-full" formControlName="servicioDoctor">
+    
+                        </select>
+                    </div>
+                </div>
+
+                <div class="w-full flex flex-wrap justify-between">
+                    <button type="button" class="w-[48%] bg-purple-700 text-white p-1 mt-2 rounded">Añadir</button>
+                    <button type="button" class="w-[48%] bg-purple-700 text-white p-1 mt-2 rounded">Eliminar</button>
+                </div>
+
+                <div class="w-full min-h-[50px] bg-white mt-2">
+                    
+                </div>
+            </div>
+        </form>
+           
+            <button type="submit" class="bg-purple-800 text-white p-2 rounded w-[82%]">Guardar</button>
     </div>
 </div>
