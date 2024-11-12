@@ -1,49 +1,40 @@
 <app-header-patient></app-header-patient>
-<div class="max-w-4xl mx-auto bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden mt-6 flex">
-  <!-- Imagen al lado izquierdo -->
-  <div class="w-1/3">
-    <img src="/assets/centro.jpeg" alt="Centro de Salud Suchiapa" class="w-full h-80 object-cover" />
+<div class="max-w-4xl mx-auto bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden mt-6">
+  <div class="flex">
+    <div class="w-1/2 ml-4 mt-6">
+      <img src="/assets/centro.jpeg" alt="Centro de Salud Suchiapa" class="w-full h-[495px] object-cover" />
+    </div>
+
+    <div class="w-1/2 p-6">
+      <h2 class="text-4xl font-bold text-[#A526CB]">Centro de Salud Suchiapa</h2>
+      <h3 class="text-3xl font-semibold text-[#A526CB] mt-4">Servicios</h3>
+      <ul class="list-disc list-inside text-gray-700 mt-2 space-y-1">
+        <li class="text-xl">Medicina general</li>
+        <li class="text-xl">Odontología</li>
+        <li class="text-xl">Nutrición</li>
+        <li class="text-xl">Medicina preventiva</li>
+        <li class="text-xl">Vacunación</li>
+        <li class="text-xl">Farmacia</li>
+        <li class="text-xl">Estimulación temprana</li>
+      </ul>
+      <h3 class="text-3xl font-semibold text-[#A526CB] mt-4">Descripción:</h3>
+      <p class="text-xl text-gray-700 mt-1">
+        Contamos con varias especialidades, nutrición, podología, trabajo social, ultrasonido y psicología.
+      </p>
+    </div>
   </div>
-
-  <!-- Contenido al lado derecho -->
-  <div class="w-2/3 p-6">
-    <!-- Título -->
-    <h2 class="text-2xl font-bold text-purple-600">Centro de Salud Suchiapa</h2>
-
-    <!-- Servicios -->
-    <h3 class="text-lg font-semibold text-purple-500 mt-4">Servicios</h3>
-    <ul class="list-disc list-inside text-gray-700 mt-2 space-y-1">
-      <li>medicina general</li>
-      <li>odontología</li>
-      <li>nutrición</li>
-      <li>medicina preventiva</li>
-      <li>vacunación</li>
-      <li>farmacia</li>
-      <li>estimulación temprana</li>
-    </ul>
-
-    <!-- Descripción -->
-    <h3 class="text-lg font-semibold text-purple-500 mt-4">Descripción:</h3>
-    <p class="text-gray-700 mt-1">
-      Contamos con varias especialidades, nutrición, podología, trabajo social, ultrasonido y psicología.
+  <div class="mt-6">
+    <img src="assets/ubic.jpeg" alt="Mapa de ubicación" class="w-[96%] h-[250px] object-cover rounded-md mx-auto" />
+  </div>
+  <div class="p-6 mt-6">
+    <p class="text-[#A526CB] text-xl font-semibold">
+      Se ubica en: Calle Ejemplo 1, Colonia Ejemplo 2, número 00
     </p>
 
-    <!-- Mapa -->
-    <img src="ruta_de_mapa.jpg" alt="Mapa de ubicación" class="w-full h-40 object-cover mt-4 rounded-md" />
-
-    <!-- Ubicación -->
-    <p class="text-gray-700 mt-4">
-      <span class="text-purple-500 font-semibold">Se ubica en:</span> Calle Ejemplo 1, Colonia Ejemplo 2, número 00
+    <p class="text-[#A526CB] mt-1 text-xl font-semibold">
+      Horario: De 00:00 a 24:00 Lunes a Domingo
     </p>
+    <button class="w-[80%] bg-[#A526CB] text-white text-xl font-semibold py-2 mt-4 rounded hover:bg-purple-600 transition-colors mx-auto block text-[#9042B7] font-bold hover:underline" (click)="generate()">Agendar Cita</button>
 
-    <!-- Horario -->
-    <p class="text-gray-700 mt-1">
-      <span class="text-purple-500 font-semibold">Horario:</span> De 00:00 a 24:00 Lunes a Domingo
-    </p>
-
-    <!-- Botón de Agendar Cita -->
-    <button class="w-full bg-purple-500 text-white text-lg font-semibold py-2 mt-4 rounded hover:bg-purple-600 transition-colors">
-      Agendar Cita
-    </button>
   </div>
 </div>
