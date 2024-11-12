@@ -4,19 +4,15 @@
     <img src="./assets/icon-vital.png" alt="Vital SH Logo" class="h-24 w-25">
   </button>
 
-  <!-- Navegación de botones -->
   <nav class="flex space-x-40">
     <button class="text-[#9042B7] font-bold hover:underline text-xl" (click)="establishments()">ESTABLECIMIENTOS</button>
     <button class="text-[#9042B7] font-bold hover:underline text-xl" (click)="see()">CITAS</button>
     
-    <!-- Botón de Campañas con flecha para desplegar opciones -->
     <div class="relative">
       <button class="text-[#9042B7] font-bold hover:underline text-xl flex items-center" (click)="toggleCampaignMenu()">
         CAMPAÑAS
-        <span class="ml-1">&#9660;</span> <!-- Ícono de flecha -->
+        <span class="ml-1">&#9660;</span> 
       </button>
-
-      <!-- Opciones desplegables -->
       <div *ngIf="isCampaignMenuOpen" class="absolute top-4 w-24 bg-white border border-gray-300 rounded shadow-lg text-xs">
         <button class="block px-2 py-1 text-[#9042B7] hover:bg-gray-200 w-full text-left" (click)="receptionistSee()">Ver</button>
         <button class="block px-2 py-1 text-[#9042B7] hover:bg-gray-200 w-full text-left" (click)="addCampaign()">Agregar</button>
