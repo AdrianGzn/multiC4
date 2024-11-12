@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-header-receptionist',
@@ -7,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrl: './header-receptionist.component.css'
 })
 export class HeaderReceptionistComponent {
-  constructor(private router: Router) { }
+  constructor(private router: Router, private userService: UserService) { }
   isCampaignMenuOpen = false;
 
   toggleCampaignMenu() {
@@ -55,7 +56,8 @@ export class HeaderReceptionistComponent {
     this.router.navigate(['/sign-login']);
   }
   endSesion(): void {
-    
+    this.userService.logOut;
+    this.router.navigate(['/sign-login'])
   }
 
 }

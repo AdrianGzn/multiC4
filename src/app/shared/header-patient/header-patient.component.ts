@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-header-patient',
@@ -7,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrl: './header-patient.component.css'
 })
 export class HeaderPatientComponent {
-  constructor(private router: Router) { }
+  constructor(private router: Router, private userService: UserService) { }
 
   welcome(): void {
     this.router.navigate(['/welcome/patient']);
@@ -29,7 +30,7 @@ export class HeaderPatientComponent {
   }
  
   endSesion(): void {
-    localStorage.removeItem('dataUser');
+    this.userService.logOut;
     this.router.navigate(['/sign-login'])
   }
 

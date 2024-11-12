@@ -4,7 +4,7 @@ import { GeneralServices } from '../../shared/services/general-services.service'
 import { Horarios } from '../../shared/models/horarios';
 import { OnInit } from '@angular/core';
 import { User } from '../../shared/models/user';
-import { error, log } from 'console';
+import { UserService } from '../../shared/services/user.service';
 
 @Component({
   selector: 'app-schedule-employee',
@@ -22,8 +22,7 @@ export class ScheduleEmployeeComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    if (typeof window !== 'undefined' && window.localStorage) {
-      const data = localStorage.getItem('userData');
+      /*const data = localStorage.getItem('userData');
       
       if (data) {
         const dataUser: User = JSON.parse(data);
@@ -31,15 +30,12 @@ export class ScheduleEmployeeComponent implements OnInit {
         console.log(this.user);
       } else {
         console.log("No se encontró 'userData' en el localStorage");
-      }
-    } else {
-      console.log("No estamos en el navegador, no se puede acceder a localStorage");
-    }
+      }*/
   }
   
 
   formSchedules: FormGroup;
-  constructor(private generalServices: GeneralServices) {
+  constructor(private generalServices: GeneralServices, private userService: UserService) {
     this.formSchedules = new FormGroup({
       domingoE: new FormControl(null, [Validators.required]),
       domingoS: new FormControl(null, [Validators.required]),
@@ -99,7 +95,7 @@ export class ScheduleEmployeeComponent implements OnInit {
     ];
 
     this.user.horario = dias;
-    this.generalServices.changeEmployee(`${this.user.id_usuario}`, this.user).subscribe({
+    this.userService.changeEmployee(`${this.user.id_usuario}`, this.user).subscribe({
       next: (response) => {
         console.log("Niceee: " + response);
       },
