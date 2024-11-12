@@ -40,29 +40,26 @@ export class SearchEstablishmentComponent {
 
   submitNombre(): void {
     console.log(this.formEstablishmentByName.value)
-    this.generalService.getEstablishmentByName(this.formEstablishmentByName.value.nombre).subscribe(
-      data => {
+    this.generalService.getEstablishmentByName(this.formEstablishmentByName.value.nombre).subscribe({
+      next: (data) => {
         console.log(data)
         this.establishmentFinded.push(data)
       },
-
-      error => {    
-        alert("no se pudo encontrar")
+      error: (error) => {    
+        alert("No se pudo encontrar: " + error)
       }
-
-    )
+    })
   }
 
   submitServicio(): void {
-    this.generalService.getEstablishmentByService(this.formEstablishmentByService.value).subscribe(
-      data => {
-        this.establishmentFinded = data
+    this.generalService.getEstablishmentByService(this.formEstablishmentByService.value).subscribe({
+      next: (data) => {
+        this.establishmentFinded = data;
       },
-
-      error => {    
-        alert("no se pudo encontrar")
+      error: (error) => {    
+        alert("No se pudo encontrar: " + error);
       }
-    )
+    })
   }
 
 }
