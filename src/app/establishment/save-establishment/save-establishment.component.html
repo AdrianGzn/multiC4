@@ -86,12 +86,12 @@
                 <div>
                     <label class="form-child-label">Día de cierre:</label>
                     <select class="form-child w-full" formControlName="diaCierre">
-                       
+                        <!-- Opciones de días -->
                     </select>
                 </div>
             </div>
 
-      
+            <!-- Sección de Imagen -->
             <div class="w-full mb-6" formGroupName="formImage">
                 <p class="font-semibold text-purple-600 mb-2">IMAGEN</p>
                 
@@ -102,7 +102,7 @@
                 </div>
             </div>
 
-            
+            <!-- Sección de Servicios -->
             <div class="w-full mb-6" formGroupName="formServices">
                 <p class="font-semibold text-purple-600 mb-2">SERVICIOS</p>
                 
@@ -117,14 +117,14 @@
                 <textarea class="form-child w-full mt-2" formControlName="serviciosActuales" readonly></textarea>
             </div>
 
-        
+            <!-- Sección de Doctores -->
             <div class="w-full mb-6" formGroupName="formDoctors">
                 <p class="font-semibold text-purple-600 mb-2">SERVICIOS</p>
                 
                 <label class="form-child-label">Doctor:</label>
                 <div class="flex items-center">
                     <select class="form-child w-full" formControlName="doctor">
-            
+                        <!-- Opciones de doctores -->
                     </select>
                 </div>
 
@@ -139,7 +139,7 @@
                 <textarea class="form-child w-full mt-2" formControlName="doctoresActuales" readonly></textarea>
             </div>
 
-           
+            <!-- Botón de Guardar -->
             <button type="submit" class="bg-purple-800 text-white p-2 rounded w-full">Guardar</button>
         </form>
     </div>

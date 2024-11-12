@@ -11,6 +11,9 @@ export class CartpatientcampanisComponent {
     { image: '/assets/sexuales.jpeg', title: 'Educación Sexual' },
     { image: '/assets/nutricion.jpeg', title: 'Nutrición' },
     { image: '/assets/nutricion.jpeg', title: 'Nutrición' },
+    { image: '/assets/nutricionsss.jpeg', title: 'Nutrición' },
+    { image: '/assets/nutricionaaa.jpeg', title: 'Nutrición' },
+    { image: '/assets/nutricionwww.jpeg', title: 'Nutrición' },
   ];
 
   serviciosIndex = 0;

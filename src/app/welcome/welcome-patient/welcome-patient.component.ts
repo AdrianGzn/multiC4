@@ -11,4 +11,5 @@ export class WelcomePatientComponent {
   establishments(): void {
     this.router.navigate(['/establishment/search']);
   }
+ 
 }
