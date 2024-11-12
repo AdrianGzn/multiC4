@@ -20,12 +20,14 @@ export class HeaderPatientComponent {
   appointments(): void {
     this.router.navigate(['/appointments/patient']);
   }
-  campaigns(): void {
-    this.router.navigate(['/campaigns/patient']);
+  see(): void {
+    this.router.navigate(['/appointments/see']);
   }
-  citas(): void {
-    this.router.navigate(['/citas/patient']);
+
+  userSee(): void {
+    this.router.navigate(['/campaigns/userSee']);
   }
+ 
   endSesion(): void {
     localStorage.removeItem('dataUser');
     this.router.navigate(['/sign-login'])

@@ -1,12 +1,12 @@
 <header class="h-32 w-full flex justify-between items-center bg-slate-50 px-12 shadow-lg">
-  <div class="flex items-center space-x-10">
+  <button (click)="welcome()">
     <img src="./assets/icon-vital.png" alt="Vital SH Logo" class="h-24 w-25">
-  </div>
+  </button>
   <nav class="flex-grow flex justify-center space-x-16">
     <button class="text-[#9042B7] font-bold hover:underline" (click)="welcome()">SOBRE NOSOTROS</button>
     <button class="text-[#9042B7] font-bold hover:underline" (click)="establishments()">ESTABLECIMIENTOS</button>
-    <button class="text-[#9042B7] font-bold hover:underline" (click)="appointments()">CITAS</button>
-    <button class="text-[#9042B7] font-bold hover:underline" (click)="campaigns()">CAMPAÑAS</button>
+    <button class="text-[#9042B7] font-bold hover:underline" (click)="see()">CITAS</button>
+    <button class="text-[#9042B7] font-bold hover:underline" (click)="userSee()">CAMPAÑAS</button>
   </nav>
-  <button class="bg-[#BE6DD7] text-white font-medium py-2 px-6 rounded hover:bg-purple-700 transition-colors" (click)="endSesion()">Log In</button>
+  <button class="bg-[#BE6DD7] text-white font-medium py-2 px-6 rounded hover:bg-purple-700 transition-colors" (click)="endSesion()">Cerrar Sesion</button>
 </header>

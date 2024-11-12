@@ -14,11 +14,18 @@ export class HeaderReceptionistComponent {
   }
 
   establishments(): void {
-    this.router.navigate(['/establishment/receptionist']);
+    this.router.navigate(['/establishment/save']);
   }
-  citas(): void {
-    this.router.navigate(['/citas/receptionist']);
+  see(): void {
+    this.router.navigate(['/appointments/receptionist']);
   }
+  horarios(): void {
+    this.router.navigate(['/schedules/scheduleEmployee']);
+  }
+  receptionistSee(): void {
+    this.router.navigate(['/campaigns/receptionistSee']);
+  }
+  
   appointments(): void {
     this.router.navigate(['/appointments/receptionist']);
   }

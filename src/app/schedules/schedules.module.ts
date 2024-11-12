@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SchedulesRoutingModule } from './schedules-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { ScheduleEmployeeComponent } from './schedule-employee/schedule-employee.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -11,7 +12,8 @@ import { ScheduleEmployeeComponent } from './schedule-employee/schedule-employee
   imports: [
     CommonModule,
     SchedulesRoutingModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ]
 })
 export class SchedulesModule { }

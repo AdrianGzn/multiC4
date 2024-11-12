@@ -9,24 +9,28 @@ import { Router } from '@angular/router';
 export class HeaderDoctorComponent {
   constructor(private router: Router) { }
 
+  welcome(): void {
+    this.router.navigate(['/welcome/doctor']);
+  }
   horarios(): void {
-    this.router.navigate(['/horarios/doctor']);
+    this.router.navigate(['/schedules/scheduleEmployee']);
   }
 
-  citas(): void {
-    this.router.navigate(['/citas/doctor']);
+  see(): void {
+    this.router.navigate(['/appointments/see']);
   }
 
   appointments(): void {
     this.router.navigate(['/appointments/doctor']);
   }
-  campaigns(): void {
-    this.router.navigate(['/campaigns/doctor']);
+  userSee(): void {
+    this.router.navigate(['/campaigns/userSee']);
   }
   login(): void {
     this.router.navigate(['/sign-login']);
   }
   endSesion(): void {
-    
+    localStorage.removeItem('dataUser');
+    this.router.navigate(['/sign-login'])
   }
 }
