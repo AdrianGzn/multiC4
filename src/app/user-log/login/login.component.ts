@@ -28,10 +28,11 @@ export class LoginComponent {
 
     if (this.loginForm.valid) {
       this.userService.loginEmployee(person).subscribe({
-        next: (data: User) => {
-          console.log('Inicio se Sesión exitoso');
-          localStorage.setItem('userData', JSON.stringify(data));
-
+        next: (data: any) => {
+          localStorage.setItem('userData', JSON.stringify(data.data_user));
+          data.data_user.rol === 'doctor' ? this.router.navigate(["./Welcome/patient"]) : ''
+          data.data_user.rol === null ? this.router.navigate(["./Welcome/patient"]) : ''
+          data.data_user.rol === 'enfermera' ? this.router.navigate(["./Welcome/patient"]) : ''
         },
         error: (erro) => {
           console.log('Ha ocurrido un error: ' + erro);
