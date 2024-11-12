@@ -8,6 +8,7 @@ import { UpdateComponent } from './update/update.component';
 import { GeneralsComponent } from './generals/generals.component';
 import { CampaignsRoutingModule } from './campaigns-routing.module';
 import { SharedModule } from '../shared/shared.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { SharedModule } from '../shared/shared.module';
   imports: [
     CommonModule,
     CampaignsRoutingModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ]
 })
 export class CampaignsModule { }

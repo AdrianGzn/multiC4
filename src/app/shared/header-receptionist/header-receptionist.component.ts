@@ -8,7 +8,26 @@ import { Router } from '@angular/router';
 })
 export class HeaderReceptionistComponent {
   constructor(private router: Router) { }
+  isCampaignMenuOpen = false;
 
+  toggleCampaignMenu() {
+    this.isCampaignMenuOpen = !this.isCampaignMenuOpen;
+  }
+
+
+
+  deleteCampaigns() {
+    this.router.navigate(['/campaigns/delete']);
+    
+  }
+
+  editCampaigns() {
+    this.router.navigate(['/campaigns/details']);
+  }
+  addCampaign(){
+   this.router.navigate(['/campaigns/update']);
+  }
+  
   welcome(): void {
     this.router.navigate(['/welcome/receptionist']);
   }
