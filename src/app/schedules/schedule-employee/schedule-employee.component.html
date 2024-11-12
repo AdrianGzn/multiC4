@@ -1,54 +1,98 @@
 <app-header-doctor></app-header-doctor>
 
 <div class="w-full min-h-[calc(100vh-128px)] flex items-center justify-center bg-gray-200">
-    <div class="w-[70%] min-h-[calc(70vh)] bg-purple-100 flex flex-col items-center">
+    <div class="w-[70%] min-h-[calc(70vh)] mt-8 mb-12 bg-purple-100 flex flex-col items-center">
         
-        <form class="form" [formGroup]="formSchedules">
-            <p>Domingo</p>
-            <label class="form-child-label">Entrada:</label>
-            <input class="form-child border-fuchsia-800" type="time" formControlName="domingoE">
-            <label class="form-child-label">Salida:</label>
-            <input class="form-child border-fuchsia-800" type="time" formControlName="domingoS">
+        <p class="text-3xl font-semibold text-purple-800 mt-6 mb-2">Horarios</p>
 
-            <p>Lunes</p>
-            <label class="form-child-label">Entrada:</label>
-            <input class="form-child border-fuchsia-800" type="time" formControlName="lunesE">
-            <label class="form-child-label">Salida:</label>
-            <input class="form-child border-fuchsia-800" type="time" formControlName="lunesS">
+        <form class="form lg:w-5/6 flex flex-wrap justify-evenly" [formGroup]="formSchedules">
+            <div class="w-40 m-5">
+                <div class="h-16 rounded-t-md flex justify-center items-center bg-purple-800 text-white"><p>Domingo</p></div>
+                <div class="h-20 flex flex-col justify-center items-center bg-white border-2 border-purple-800">
+                    <label class="form-child-label">Entrada:</label>
+                    <input class="form-child border-2 border-fuchsia-700" type="time" formControlName="domingoE">
+                </div>
+                <div class="h-20 rounded-b-md flex flex-col justify-center items-center bg-white border-2 border-purple-800">
+                    <label class="form-child-label">Salida:</label>
+                    <input class="form-child border-2 border-fuchsia-700" type="time" formControlName="domingoS">
+                </div>
+            </div>
 
-            <p>Martes</p>
-            <label class="form-child-label">Entrada:</label>
-            <input class="form-child border-fuchsia-800" type="time" formControlName="martesE">
-            <label class="form-child-label">Salida:</label>
-            <input class="form-child border-fuchsia-800" type="time" formControlName="martesS">
+            <div class="w-40 m-5">
+                <div class="h-16 rounded-t-md flex justify-center items-center bg-purple-800 text-white"><p>Lunes</p></div>
+                <div class="h-20 flex flex-col justify-center items-center bg-white border-2 border-purple-800">
+                    <label class="form-child-label">Entrada:</label>
+                    <input class="form-child border-2 border-fuchsia-700" type="time" formControlName="lunesE">
+                </div>
+                <div class="h-20 rounded-b-md flex flex-col justify-center items-center bg-white border-2 border-purple-800">
+                    <label class="form-child-label">Salida:</label>
+                    <input class="form-child border-2 border-fuchsia-700" type="time" formControlName="lunesS">
+                </div>
+            </div>
 
-            <p>Miercoles</p>
-            <label class="form-child-label">Entrada:</label>
-            <input class="form-child border-fuchsia-800" type="time" formControlName="miercolesE">
-            <label class="form-child-label">Salida:</label>
-            <input class="form-child border-fuchsia-800" type="time" formControlName="miercolesS">
+            <div class="w-40 m-5">
+                <div class="h-16 rounded-t-md flex justify-center items-center bg-purple-800 text-white"><p>Martes</p></div>
+                <div class="h-20 flex flex-col justify-center items-center bg-white border-2 border-purple-800">
+                    <label class="form-child-label">Entrada:</label>
+                    <input class="form-child border-2 border-fuchsia-700" type="time" formControlName="martesE">
+                </div>
+                <div class="h-20 rounded-b-md flex flex-col justify-center items-center bg-white border-2 border-purple-800">
+                    <label class="form-child-label">Salida:</label>
+                    <input class="form-child border-2 border-fuchsia-700" type="time" formControlName="martesS">
+                </div>
+            </div>
+            
+            <div class="w-40 m-5">
+                <div class="h-16 rounded-t-md flex justify-center items-center bg-purple-800 text-white"><p>Miercoles</p></div>
+                <div class="h-20 flex flex-col justify-center items-center bg-white border-2 border-purple-800">
+                    <label class="form-child-label">Entrada:</label>
+                    <input class="form-child border-2 border-fuchsia-700" type="time" formControlName="miercolesE">
+                </div>
+                <div class="h-20 rounded-b-md flex flex-col justify-center items-center bg-white border-2 border-purple-800">
+                    <label class="form-child-label">Salida:</label>
+                    <input class="form-child border-2 border-fuchsia-700" type="time" formControlName="miercolesS">
+                </div>
+            </div>
 
-            <p>Jueves</p>
-            <label class="form-child-label">Entrada:</label>
-            <input class="form-child border-fuchsia-800" type="time" formControlName="juevesE">
-            <label class="form-child-label">Salida:</label>
-            <input class="form-child border-fuchsia-800" type="time" formControlName="juevesS">
-
-            <p>Viernes</p>
-            <label class="form-child-label">Entrada:</label>
-            <input class="form-child border-fuchsia-800" type="time" formControlName="viernesE">
-            <label class="form-child-label">Salida:</label>
-            <input class="form-child border-fuchsia-800" type="time" formControlName="viernesS">
-
-            <p>Sábado</p>
-            <label class="form-child-label">Entrada:</label>
-            <input class="form-child border-fuchsia-800" type="time" formControlName="sabadoE">
-            <label class="form-child-label">Salida:</label>
-            <input class="form-child border-fuchsia-800" type="time" formControlName="sabadoS">
+            <div class="w-40 m-5">
+                <div class="h-16 rounded-t-md flex justify-center items-center bg-purple-800 text-white"><p>Jueves</p></div>
+                <div class="h-20 flex flex-col justify-center items-center bg-white border-2 border-purple-800">
+                    <label class="form-child-label">Entrada:</label>
+                    <input class="form-child border-2 border-fuchsia-700" type="time" formControlName="juevesE">
+                </div>
+                <div class="h-20 rounded-b-md flex flex-col justify-center items-center bg-white border-2 border-purple-800">
+                    <label class="form-child-label">Salida:</label>
+                    <input class="form-child border-2 border-fuchsia-700" type="time" formControlName="juevesS">
+                </div>
+            </div>
+            
+            <div class="w-40 m-5">
+                <div class="h-16 rounded-t-md flex justify-center items-center bg-purple-800 text-white"><p>Viernes</p></div>
+                <div class="h-20 flex flex-col justify-center items-center bg-white border-2 border-purple-800">
+                    <label class="form-child-label">Entrada:</label>
+                    <input class="form-child border-2 border-fuchsia-700" type="time" formControlName="viernesE">
+                </div>
+                <div class="h-20 rounded-b-md flex flex-col justify-center items-center bg-white border-2 border-purple-800">
+                    <label class="form-child-label">Salida:</label>
+                    <input class="form-child border-2 border-fuchsia-700" type="time" formControlName="viernesS">
+                </div>
+            </div>
+            
+            <div class="w-40 m-5">
+                <div class="h-16 rounded-t-md flex justify-center items-center bg-purple-800 text-white"><p>Sábado</p></div>
+                <div class="h-20 flex flex-col justify-center items-center bg-white border-2 border-purple-800">
+                    <label class="form-child-label">Entrada:</label>
+                    <input class="form-child border-2 border-fuchsia-700" type="time" formControlName="sabadoE">
+                </div>
+                <div class="h-20 rounded-b-md flex flex-col justify-center items-center bg-white border-2 border-purple-800">
+                    <label class="form-child-label">Salida:</label>
+                    <input class="form-child border-2 border-fuchsia-700" type="time" formControlName="sabadoS">
+                </div>
+            </div>
             
         </form>
         
-        <button (click)="onSubmit()">Guardar</button>
+        <button (click)="onSubmit()" class=" w-40 mb-5 bg-purple-800 text-white px-6 py-3 rounded-md font-semibold transition-all duration-300 transform hover:bg-purple-900 hover:scale-105">Guardar</button>
 
     </div>
 </div>
