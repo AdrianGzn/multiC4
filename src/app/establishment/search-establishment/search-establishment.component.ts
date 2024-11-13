@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { CardData } from '../models/card-data';
 import { GeneralServices } from '../../shared/services/general-services.service';
+import { EstablishmentShortResponse } from '../../shared/models/establishment-short-response';
 
 @Component({
   selector: 'app-search-establishment',
@@ -17,7 +17,7 @@ export class SearchEstablishmentComponent {
   tipo: string[] = ['Hospital', 'Clínica', 'Consultorio']; //lista de todos lo que va en formularios
   categoria: string[] = ['Público', 'Privado'];
 
-  establishmentFinded: CardData[] = [];
+  establishmentFinded: EstablishmentShortResponse[] = [];
 
   constructor(private generalService: GeneralServices) {
     this.formEstablishment = new FormGroup({
@@ -38,12 +38,12 @@ export class SearchEstablishmentComponent {
       
   }
 
-  submitNombre(): void {
-    console.log(this.formEstablishmentByName.value)
-    this.generalService.getEstablishmentByName(this.formEstablishmentByName.value.nombre).subscribe({
+  submitNombre(): void { //Ayuda con esta función
+    let nombre = this.formEstablishmentByName.value.nombre;
+    this.generalService.getEstablishmentByName(nombre).subscribe({
       next: (data) => {
-        console.log(data)
-        this.establishmentFinded.push(data)
+        alert(data)
+        
       },
       error: (error) => {    
         alert("No se pudo encontrar: " + error)
@@ -52,9 +52,10 @@ export class SearchEstablishmentComponent {
   }
 
   submitServicio(): void {
-    this.generalService.getEstablishmentByService(this.formEstablishmentByService.value).subscribe({
+    this.generalService.getEstablishmentByService(this.formEstablishmentByService.value.servicio).subscribe({
       next: (data) => {
-        this.establishmentFinded = data;
+        console.log(data);
+        
       },
       error: (error) => {    
         alert("No se pudo encontrar: " + error);

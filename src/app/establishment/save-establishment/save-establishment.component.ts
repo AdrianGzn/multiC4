@@ -20,6 +20,7 @@ export class SaveEstablishmentComponent {
         nombre: new FormControl(null, [Validators.required]),
         descripcion: new FormControl(null, [Validators.required]),
         tipo: new FormControl(null, [Validators.required]),
+        categoria: new FormControl(null, [Validators.required])
       }),
       this.formUbication = new FormGroup({
         calle: new FormControl(null, [Validators.required]),

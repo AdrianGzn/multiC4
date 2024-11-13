@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap, catchError } from 'rxjs';
 import { User } from '../models/user';
-import { Employee } from '../models/employee';
-import { Patient } from '../models/patient';
 
 @Injectable({
   providedIn: 'root'
@@ -49,7 +47,7 @@ export class UserService {
     return this.user;
   }
 
-  //Lo anterior que no sé si sirva
+  /*Lo anterior que no sé si sirva
   
 
   getEmployees(): Observable<Employee[]> {
@@ -82,5 +80,5 @@ export class UserService {
 
   deletePatient(idPatient: string): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/patient/${idPatient}`);
-  }
+  }*/
 }

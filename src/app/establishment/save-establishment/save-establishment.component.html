@@ -9,19 +9,27 @@
                 <p class="font-semibold text-purple-600 mb-2">DATOS</p>
                 
                 <div class="flex flex-wrap justify-between">
-                    <div class="w-[calc(30%)] min-w-[210px]">
+                    <div class="w-[calc(48%)] min-w-[210px]">
                         <label class="form-child-label">Nombre:</label>
                         <input class="form-child border-fuchsia-800 w-full" type="text" formControlName="nombre">
                     </div>
                     
-                    <div class="w-[calc(30%)] min-w-[210px]">
+                    <div class="w-[calc(48%)] min-w-[210px]">
                         <label class="form-child-label">Descripción:</label>
                         <input class="form-child border-fuchsia-800 w-full" type="text" formControlName="descripcion">
                     </div>
                     
-                    <div class="w-[calc(30%)] min-w-[210px]">
+                    <div class="w-[calc(48%)] min-w-[210px]">
                         <label class="form-child-label">Tipo:</label>
-                            <select class="form-child border-fuchsia-800 w-full" formControlName="tipo">
+                        <select class="form-child border-fuchsia-800 w-full" formControlName="tipo">
+
+                        </select>
+                    </div>
+
+                    <div class="w-[calc(48%)] min-w-[210px]">
+                        <label class="form-child-label">Categoría:</label>
+                        <select class="form-child border-fuchsia-800 w-full" formControlName="categoria">
+
                         </select>
                     </div>
                 </div>
@@ -76,22 +84,8 @@
                         </div>
     
                         <div class="w-full">
-                            <label class="form-child-label">Día de inicio:</label>
-                            <select class="form-child w-full" formControlName="diaInicio">
-                            
-                            </select>
-                        </div>
-                    </div>
-    
-                    <div class="w-[calc(48%)] min-w-[260px]">
-                        <div class="w-full">
                             <label class="form-child-label">Hora de cierre:</label>
                             <input class="form-child w-full" type="time" formControlName="horaCierre">
-                        </div> 
-                        <div class="w-full">
-                            <label class="form-child-label">Día de cierre:</label>
-                            <select class="form-child w-full" formControlName="diaCierre">
-                            </select>
                         </div>
                     </div>
                 </div>
@@ -104,7 +98,7 @@
                 <label class="form-child-label">Agregar Imagen:</label>
                 <div class="flex justify-between">
                     <input class="bg-white form-child w-[48%]" type="file" formControlName="imagen">
-                    <button type="button" class="w-[48%] bg-purple-700 text-white p-1 ml-2 rounded">Eliminar</button>
+                    <button type="button" class="w-[48%] bg-purple-700 text-white p-1 ml-2 rounded">Eliminar imágen</button>
                 </div>
             </div>
         </form>
@@ -128,8 +122,8 @@
                 </div>
 
                 <div class="w-full flex flex-wrap justify-between mt-2">
-                    <button type="button" class="w-[48%] bg-purple-700 text-white p-1 rounded">Añadir</button>
-                    <button type="button" class="w-[48%] bg-purple-700 text-white p-1 rounded">Eliminar</button>
+                    <button type="button" class="w-[48%] bg-fuchsia-700 text-white p-1 rounded">Añadir</button>
+                    <button type="button" class="w-[48%] bg-purple-700 text-white p-1 rounded">Eliminar servicio</button>
                 </div>
 
                 <div class="w-full min-h-[50px] bg-white mt-2">
@@ -158,8 +152,8 @@
                 </div>
 
                 <div class="w-full flex flex-wrap justify-between">
-                    <button type="button" class="w-[48%] bg-purple-700 text-white p-1 mt-2 rounded">Añadir</button>
-                    <button type="button" class="w-[48%] bg-purple-700 text-white p-1 mt-2 rounded">Eliminar</button>
+                    <button type="button" class="w-[48%] bg-fuchsia-700 text-white p-1 mt-2 rounded">Añadir</button>
+                    <button type="button" class="w-[48%] bg-purple-700 text-white p-1 mt-2 rounded">Eliminar doctor</button>
                 </div>
 
                 <div class="w-full min-h-[50px] bg-white mt-2">
@@ -168,6 +162,6 @@
             </div>
         </form>
            
-            <button type="submit" class="bg-purple-800 text-white p-2 rounded w-[82%]">Guardar</button>
+            <button type="submit" class="bg-fuchsia-700 text-white p-2 rounded w-[82%]">Guardar</button>
     </div>
 </div>

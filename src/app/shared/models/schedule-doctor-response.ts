@@ -1,5 +1,4 @@
-export interface ScheduleDoctor {
-    id_horario: number;
+export interface ScheduleDoctorResponse {
     dia: string;
     entrada: string;
     salida: string;

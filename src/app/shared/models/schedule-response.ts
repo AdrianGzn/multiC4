@@ -1,6 +1,4 @@
-export interface Schedule {
-    id_horario: number;
+export interface ScheduleResponse {
     entrada: Date | string
     salida: Date | string
 }
-  

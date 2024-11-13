@@ -1,5 +1,4 @@
-export interface Address {
-    id_address: number;
+export interface AddressResponse {
     latitud: number
     longitud: number
     descripcion: string
