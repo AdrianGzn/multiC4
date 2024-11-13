@@ -8,6 +8,11 @@ import { UserService } from '../services/user.service';
   styleUrl: './header-doctor.component.css'
 })
 export class HeaderDoctorComponent {
+  isMobileMenuOpen = false;
+
+  toggleMobileMenu() {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+  }
   constructor(private router: Router, private userService: UserService) { }
 
   welcome(): void {

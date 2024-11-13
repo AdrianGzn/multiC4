@@ -9,15 +9,15 @@ export class CartpatientComponent {
   constructor(private router: Router) { }
 
   servicios = [
-    { nombre: 'ODONTOLOGIA', img: '/assets/odontologia.jpeg' },
-    { nombre: 'NUTRICION', img: '/assets/nutricion.jpeg' },
-    { nombre: 'ULTRASONIDO', img: '/assets/ultrasonido.jpeg' },
-    { nombre: 'PODOLOGIA', img: '/assets/podologia.jpeg' },
-    { nombre: 'PEDIATRIA', img: '/assets/pediatria.jpeg' },
-    { nombre: 'GINECOLOGIA', img: '/assets/ginecologia.jpeg' },
-    { nombre: 'DERMATOLOGIA', img: '/assets/dermatologia.jpeg' },
-    { nombre: 'CARDIOLOGIA', img: '/assets/cardiologia.jpeg' },
-    { nombre: 'FISIATRIA', img: '/assets/fisiatria.jpeg' },
+    { nombre: 'Odontologia', img: '/assets/odontologia.jpeg' },
+    { nombre: 'Nutricion', img: '/assets/nutricion.jpeg' },
+    { nombre: 'Ultrasonido', img: '/assets/ultrasonido.jpeg' },
+    { nombre: 'Podologia', img: '/assets/podologia.jpeg' },
+    { nombre: 'Pedatria', img: '/assets/pediatria.jpeg' },
+    { nombre: 'Ginecologia', img: '/assets/ginecologia.jpeg' },
+    { nombre: 'Dermatologia', img: '/assets/dermatologia.jpeg' },
+    { nombre: 'Cardiologia', img: '/assets/cardiologia.jpeg' },
+    { nombre: 'Fisiatria', img: '/assets/fisiatria.jpeg' },
   ];
 
   serviciosIndex = 0;
