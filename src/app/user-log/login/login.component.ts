@@ -43,4 +43,7 @@ export class LoginComponent {
   signPatient(): void {
     this.router.navigate(['/sign-patient']);
   }
+  signEmployee(): void {
+    this.router.navigate(['/sign-employee']); 
+  }
 }

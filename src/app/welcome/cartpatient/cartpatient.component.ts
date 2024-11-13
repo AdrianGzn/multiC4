@@ -10,7 +10,7 @@ export class CartpatientComponent {
 
   servicios = [
     { nombre: 'Odontologia', img: '/assets/odontologia.jpeg' },
-    { nombre: 'Nutricion', img: '/assets/nutricion.jpeg' },
+    { nombre: 'Nutricion', img: '/assets/nutrision.jpeg' },
     { nombre: 'Ultrasonido', img: '/assets/ultrasonido.jpeg' },
     { nombre: 'Podologia', img: '/assets/podologia.jpeg' },
     { nombre: 'Pedatria', img: '/assets/pediatria.jpeg' },
