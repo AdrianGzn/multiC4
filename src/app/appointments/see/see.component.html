@@ -1,30 +1,31 @@
 <app-header-patient></app-header-patient>
 
-<div class="bg-purple-100 p-32 rounded-md">
-  <div class="relative inline-flex items-center border-2 border-[#9042B7] px-8 py-4 rounded-md ml-12">
+<!-- Contenedor morado con más espacio en la parte inferior -->
+<div class="bg-purple-100 p-12 pb-80 rounded-md mx-auto max-w-6xl mt-8">
+    <div class="relative inline-flex items-center border-2 border-[#9042B7] px-4 py-2 rounded-md w-auto">
+    
+      <div class="relative w-auto">
+        <button 
+          (click)="toggleSelect()" 
+          class="appearance-none text-[#9042B7] font-semibold bg-transparent focus:outline-none pr-6 pl-2 w-auto text-left h-10"
+        >
+          {{ selectedOption }}
+          <svg 
+            [ngClass]="{'rotate-180': isOpen}" 
+            class="w-5 h-5 text-[#9042B7] absolute right-1 top-1/2 transform -translate-y-1/2 pointer-events-auto transition-transform cursor-pointer"
+            xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M7 10l5 5 5-5H7z"/>
+          </svg>
+        </button>
   
-    <div class="relative w-full">
-      <button 
-        (click)="toggleSelect()" 
-        class="appearance-none text-[#9042B7] font-semibold bg-transparent focus:outline-none pr-10 w-full text-left"
-      >
-        {{ selectedOption }}
-        <svg 
-          [ngClass]="{'rotate-180': isOpen}" 
-          class="w-8 h-8 text-[#9042B7] absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-auto transition-transform cursor-pointer"
-          xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M7 10l5 5 5-5H7z"/>
-        </svg>
-      </button>
-
-
-      <ul *ngIf="isOpen" class="absolute bg-white border-2 border-[#9042B7] w-full rounded-md mt-2">
-        <li *ngFor="let option of options" 
-            (click)="selectOption(option)"
-            class="p-2 cursor-pointer hover:bg-gray-100">
-          {{ option }}
-        </li>
-      </ul>
+        <!-- Contenedor de opciones con menor ancho y centrado -->
+        <ul *ngIf="isOpen" class="absolute bg-white border-2 border-[#9042B7] w-auto left-0 rounded-md mt-2">
+          <li *ngFor="let option of options" 
+              (click)="selectOption(option)"
+              class="p-2 cursor-pointer hover:bg-gray-100">
+            {{ option }}
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
 </div>
