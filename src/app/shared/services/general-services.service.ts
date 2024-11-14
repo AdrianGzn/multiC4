@@ -11,7 +11,7 @@ import { ScheduleDoctor } from '../models/schedule-doctor';
 })
 export class GeneralServices {
 
-  private baseUrl: string = 'http://3.227.141.174:8000';  
+  private baseUrl: string = 'http://127.0.0.1:8000';  
 
   constructor(private http: HttpClient) {}
 
@@ -29,6 +29,10 @@ export class GeneralServices {
 
   deleteRole(idRol: string): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/rol/${idRol}`);
+  }
+  
+  establishmentInformation(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/establishmentInformation/`)
   }
 
   getDoctorSchedules(): Observable<ScheduleDoctor[]> {

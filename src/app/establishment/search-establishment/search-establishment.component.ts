@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CardData } from '../models/card-data';
 import { GeneralServices } from '../../shared/services/general-services.service';
@@ -8,7 +8,7 @@ import { GeneralServices } from '../../shared/services/general-services.service'
   templateUrl: './search-establishment.component.html',
   styleUrl: './search-establishment.component.css'
 })
-export class SearchEstablishmentComponent {
+export class SearchEstablishmentComponent implements OnInit {
 
   formEstablishment: FormGroup;
   formEstablishmentByName: FormGroup;
@@ -34,8 +34,21 @@ export class SearchEstablishmentComponent {
     });
   }
 
+  ngOnInit(): void {
+    this.generalService.establishmentInformation().subscribe(
+      (next) => {
+        this.establishmentFinded = next;
+        console.log(next)
+      },
+
+      error => {
+        console.log(error)
+      }
+    )
+  }
+
   submitTipoCategoria(): void {
-      
+
   }
 
   submitNombre(): void {

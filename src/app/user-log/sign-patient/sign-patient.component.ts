@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { GeneralServices } from '../../shared/services/general-services.service';
+import { UserService } from '../../shared/services/user.service';
 
 @Component({
   selector: 'app-sign-patient',
@@ -12,7 +14,8 @@ export class SignPatientComponent {
 
   constructor(
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private userService: UserService
   ) {
     this.signInForm = this.fb.group({
       usernameGroup: this.fb.group({
@@ -28,8 +31,21 @@ export class SignPatientComponent {
   }
 
   onSubmit(): void {
+    const newPatient = {
+      id_rol: 1,
+      nombre: "re",
+      contraseña: "re"
+    }
+    console.log(newPatient)
     if (this.signInForm.valid) {
-      console.log('Formulario válido:', this.signInForm.value);
+      this.userService.register(newPatient).subscribe(
+        data => {
+          console.log(data)
+        },
+        error => {
+          console.log(error)
+        }
+      )
     } else {
       console.log('Formulario no válido');
     }
