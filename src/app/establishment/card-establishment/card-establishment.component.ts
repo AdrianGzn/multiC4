@@ -10,7 +10,7 @@ export class CardEstablishmentComponent {
   @Input() card: EstablishmentShortResponse = { 
     id_establishment: 0,
     name: '',
-    direccion:  0,
+    direccion:  '',
   };
 
   details(id: number):void {

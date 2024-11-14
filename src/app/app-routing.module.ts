@@ -7,7 +7,8 @@ const routes: Routes = [
   { path: 'campaigns', loadChildren: () => import('./campaigns/campaigns.module').then(m => m.CampaignsModule) },
   { path: 'appointments', loadChildren: () => import('./appointments/appointments.module').then(m => m.AppointmentsModule) },
   { path: 'schedules', loadChildren: () => import('./schedules/schedules.module').then(m => m.SchedulesModule) },
-  { path: '', loadChildren: () => import('./user-log/user-log.module').then(m => m.UserLogModule) }
+  { path: '', loadChildren: () => import('./user-log/user-log.module').then(m => m.UserLogModule) },
+  { path: 'tests', loadChildren: () => import('./shared/shared.module').then(m => m.SharedModule) }
 ];
 
 @NgModule({

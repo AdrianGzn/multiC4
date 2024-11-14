@@ -26,7 +26,7 @@ import { TypeEstablishmentResponse } from '../models/type-establishment-response
 })
 export class GeneralServices {
 
-  private baseUrl: string = 'http://3.227.141.174:8000';  
+  private baseUrl: string = 'http://localhost:8000';  
 
   constructor(private http: HttpClient) {}
 
