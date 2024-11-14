@@ -1,5 +1,5 @@
 export interface EstablishmentShortResponse {
     id_establishment: number,
-    name: string,
+    nombre: string,
     direccion:  string
 }

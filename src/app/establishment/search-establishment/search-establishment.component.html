@@ -37,7 +37,7 @@
                 
                 <label class="form-child-label block text-sm font-medium text-gray-700 mb-2">Servicio:</label>
                 <select id="targetCurrency" class="w-full p-2 border border-gray-300 rounded-md mb-3" formControlName="servicio">
-                    <option *ngFor="let service of services" [value]="service">{{ service }}</option>
+                    <option *ngFor="let item of services" [value]="item">{{ item }}</option>
                 </select>
                 
                 <button class="form-child h-8 w-full bg-purple-600 text-white rounded-sm hover:bg-purple-700" (click)="submitServicio()">Buscar</button>

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { GeneralServices } from '../../shared/services/general-services.service';
 import { EstablishmentShortResponse } from '../../shared/models/establishment-short-response';
 import { Establishment } from '../../shared/models/establishment';
 import { Address } from '../../shared/models/address';
+import { catchError, tap } from 'rxjs';
 
 @Component({
   selector: 'app-search-establishment',
@@ -21,17 +22,17 @@ export class SearchEstablishmentComponent implements OnInit {
 
   establishmentFinded: EstablishmentShortResponse[] = [];
 
-  constructor(private generalService: GeneralServices) {
-    this.formEstablishment = new FormGroup({
-      tipo: new FormControl(null, [Validators.required, Validators.min(1), Validators.max(100), Validators.pattern(/^\d+$/)]),
-      categoria: new FormControl(null, [Validators.required, Validators.min(10), Validators.max(250), Validators.pattern(/^\d+(\.\d+)?$/)]),
+  constructor(private generalService: GeneralServices, private formBuilder: FormBuilder) {
+    this.formEstablishment = this.formBuilder.group({
+      tipo: new FormControl('', [Validators.required, Validators.min(1), Validators.max(100), Validators.pattern(/^\d+$/)]),
+      categoria: new FormControl('', [Validators.required, Validators.min(10), Validators.max(250), Validators.pattern(/^\d+(\.\d+)?$/)]),
     });
 
-    this.formEstablishmentByName = new FormGroup({
+    this.formEstablishmentByName = this.formBuilder.group({
       nombre: new FormControl(null, []),
     });
 
-    this.formEstablishmentByService = new FormGroup({
+    this.formEstablishmentByService = this.formBuilder.group({
       servicio: new FormControl(null, []),
     });
   }
@@ -54,17 +55,18 @@ export class SearchEstablishmentComponent implements OnInit {
   }
 
   submitNombre(): void {
-    let nombre = this.formEstablishmentByName.value.nombre;
+    let nombre = this.formEstablishmentByName.value;
     let idAddress = 0;
 
     let estabishmentResponse: EstablishmentShortResponse = {
       id_establishment: 0,
-      name: nombre,
+      nombre: nombre,
       direccion:  ''
     }
-
-    this.generalService.getEstablishmentByName(nombre).subscribe({
+    console.log(nombre)
+    this.generalService.getEstablishmentByName("string").subscribe({
       next: (data: Establishment) => {
+        console.log(data)
         estabishmentResponse.id_establishment = data.id_establishment;
         idAddress = data.id_dirección;
 
@@ -94,9 +96,11 @@ export class SearchEstablishmentComponent implements OnInit {
   }
 
   submitServicio(): void {
+    console.log(this.formEstablishmentByService.value.servicio)
     let myService = this.formEstablishmentByService.value.servicio;
     this.generalService.getEstablishmentByService(myService).subscribe({
       next: (data: EstablishmentShortResponse[]) => {
+        console.log(data)
         this.establishmentFinded = data;        
       },
       error: (error) => {    

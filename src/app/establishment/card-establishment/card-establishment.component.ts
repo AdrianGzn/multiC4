@@ -9,7 +9,7 @@ import { EstablishmentShortResponse } from '../../shared/models/establishment-sh
 export class CardEstablishmentComponent {
   @Input() card: EstablishmentShortResponse = { 
     id_establishment: 0,
-    name: '',
+    nombre: '',
     direccion:  '',
   };
 

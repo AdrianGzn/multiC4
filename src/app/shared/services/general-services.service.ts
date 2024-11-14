@@ -66,8 +66,8 @@ export class GeneralServices {
     return this.http.get<Establishment[]>(`${this.baseUrl}/establishment/`);
   }
 
-  getEstablishmentByName(name: string): Observable<Establishment> {
-    return this.http.get<Establishment>(`${this.baseUrl}/searchEstablishment/${name}`);
+  getEstablishmentByName(name_establishment: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/searchEstablishment/${name_establishment}`);
   }
 
   getEstablishmentByService(service: string): Observable<EstablishmentShortResponse[]> {
