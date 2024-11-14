@@ -4,7 +4,7 @@
     
     <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
       
-      <div formGroupName="usernameGroup" class="mb-4">
+      <div class="mb-4">
         <label class="block text-black">Nombre de Usuario:</label>
         <input
           formControlName="username"
@@ -19,7 +19,7 @@
         </div>
       </a>
 
-      <div formGroupName="roleGroup" class="mb-4">
+      <div class="mb-4">
         <label class="block text-black">Rol:</label>
         <div class="relative">
           <select
@@ -36,7 +36,7 @@
         </div>
       </div>
       
-      <div formGroupName="passwordGroup" class="mb-4">
+      <div class="mb-4">
         <label class="block text-black">Contraseña:</label>
         <input
           formControlName="password"
@@ -45,7 +45,7 @@
         />
       </div>
       
-      <div formGroupName="confirmPasswordGroup" class="mb-4">
+      <div class="mb-4">
         <label class="block text-black">Confirmar Contraseña:</label>
         <input
           formControlName="confirmPassword"

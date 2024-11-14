@@ -56,52 +56,10 @@ export class ScheduleEmployeeComponent implements OnInit {
   }
 
   onSubmit(): void {
-    let dias: ScheduleDoctor[] = [
-      {
-        id_horario: 0,
-        dia: 'domingo',
-        entrada: this.formSchedules.value.domingoE,
-        salida: this.formSchedules.value.domingoS
-      },
-      {
-        id_horario: 0,
-        dia: 'lunes',
-        entrada: this.formSchedules.value.lunesE,
-        salida: this.formSchedules.value.lunesS
-      },
-      {
-        id_horario: 0,
-        dia: 'martes',
-        entrada: this.formSchedules.value.martesE,
-        salida: this.formSchedules.value.martesS
-      },
-      {
-        id_horario: 0,
-        dia: 'miercoles',
-        entrada: this.formSchedules.value.miercolesE,
-        salida: this.formSchedules.value.miercolesS
-      },
-      {
-        id_horario: 0,
-        dia: 'jueves',
-        entrada: this.formSchedules.value.juevesE,
-        salida: this.formSchedules.value.juevesS
-      },
-      {
-        id_horario: 0,
-        dia: 'viernes',
-        entrada: this.formSchedules.value.viernesE,
-        salida: this.formSchedules.value.viernesS
-      },
-      {
-        id_horario: 0,
-        dia: 'sabado',
-        entrada: this.formSchedules.value.sabadoE,
-        salida: this.formSchedules.value.sabadoS
-      }
-    ];
 
-    this.user.horario = dias;
+    //this.user.horario = dias;
+
+    
     /*this.userService.changeEmployee(`${this.user.id_usuario}`, this.user).subscribe({
       next: (response) => {
         console.log("Niceee: " + response);

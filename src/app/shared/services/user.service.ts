@@ -33,9 +33,10 @@ export class UserService {
   }
 
   register(registerData: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/user/`, registerData).pipe(
+    return this.http.post<User>(`${this.baseUrl}/user/`, registerData).pipe(
       tap((data) => {
-        console.log(data)
+        console.log(data);
+        this.user = data;
       }),
       catchError(error => {
         console.log(error)
@@ -61,5 +62,18 @@ export class UserService {
 
   postUsers(): void {
     
+  }
+
+  updateUser(updatedUser: User): Observable<User> {
+    return this.http.put<User>(`${this.baseUrl}/user/`, updatedUser).pipe(
+      tap((data: User) => {
+        console.log(data);
+        this.user = data;
+      }),
+      catchError(error => {
+        console.log(error)
+        throw error
+      })
+    )
   }
 }

@@ -20,6 +20,7 @@ import { Service } from '../models/service';
 import { ServiceResponse } from '../models/service-response';
 import { TypeEstablishment } from '../models/type-establishment';
 import { TypeEstablishmentResponse } from '../models/type-establishment-response';
+import { Scheduler } from 'timers/promises';
 
 @Injectable({
   providedIn: 'root'
@@ -110,7 +111,7 @@ export class GeneralServices {
     return this.http.get(`${this.baseUrl}/establishmentInformation/`)
   }
 
-  createSchedule(scheduleData: QuoteResponse): Observable<Schedule> {
+  createSchedule(scheduleData: ScheduleResponse): Observable<Schedule> {
     return this.http.post<Schedule>(`${this.baseUrl}/schedule/`, scheduleData);
   }
 
