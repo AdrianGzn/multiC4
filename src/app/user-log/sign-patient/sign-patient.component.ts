@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { GeneralServices } from '../../shared/services/general-services.service';
 import { UserService } from '../../shared/services/user.service';
 
 @Component({
@@ -12,43 +11,39 @@ import { UserService } from '../../shared/services/user.service';
 export class SignPatientComponent {
   signInForm: FormGroup;
 
-  constructor(
-    private fb: FormBuilder,
-    private router: Router,
-    private userService: UserService
-  ) {
+  constructor(private fb: FormBuilder,private router: Router, private userService: UserService) {
     this.signInForm = this.fb.group({
-      usernameGroup: this.fb.group({
-        username: ['', Validators.required]
-      }),
-      passwordGroup: this.fb.group({
-        password: ['', Validators.required]
-      }),
-      confirmPasswordGroup: this.fb.group({
-        confirmPassword: ['', Validators.required]
-      })
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+      confirmPassword: ['', Validators.required]
     });
   }
 
-  onSubmit(): void {
+  onSubmit(): void {    
     const newPatient = {
       id_rol: 1,
-      nombre: "re",
-      contraseña: "re"
+      nombre: this.signInForm.value.username,
+      contraseña: this.signInForm.value.password
     }
-    console.log(newPatient)
-    if (this.signInForm.valid) {
-      this.userService.register(newPatient).subscribe(
-        data => {
-          console.log(data)
-        },
-        error => {
-          console.log(error)
-        }
-      )
-    } else {
-      console.log('Formulario no válido');
-    }
+    console.log(newPatient);
+
+    if(this.signInForm.valid){
+      if (this.signInForm.value.password === this.signInForm.value.confirmPassword) {
+        this.userService.register(newPatient).subscribe({
+          next: (data) => {
+            console.log(data);
+            this.router.navigate(['/welcome/patient']);
+          },
+          error: (error) => {
+            console.log(error)
+          }
+        });
+      } else {
+        alert('Las contraseñas no corresponden');
+      };
+    }else {
+      alert('Formulario no válido')
+    };
   }
 
   signRegresar(): void {

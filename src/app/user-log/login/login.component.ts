@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { UserService } from '../../shared/services/user.service';
 
 @Component({
@@ -13,8 +13,8 @@ export class LoginComponent {
 
   constructor(private router: Router, private fb: FormBuilder, private userService: UserService) {
     this.loginForm = this.fb.group({
-      nombre: ['', Validators.required],
-      contraseña: ['', Validators.required]
+      nombre: new FormControl(null, [Validators.required]),
+      contraseña: new FormControl(null, [Validators.required]),
     });
   }
 
