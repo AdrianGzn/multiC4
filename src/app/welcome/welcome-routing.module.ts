@@ -4,11 +4,14 @@ import { WelcomeDoctorComponent } from './welcome-doctor/welcome-doctor.componen
 import { WelcomePatientComponent } from './welcome-patient/welcome-patient.component';
 import { WelcomeReceptionistComponent } from './welcome-receptionist/welcome-receptionist.component';
 import { EstablishmentModule } from '../establishment/establishment.module';
+import { CartpatientComponent } from './cartpatient/cartpatient.component';
 const routes: Routes = [
   { path: 'patient', component: WelcomePatientComponent },
   { path: 'receptionist', component: WelcomeReceptionistComponent },
   { path: 'doctor', component: WelcomeDoctorComponent },
   {path:'establishment',component:EstablishmentModule },
+
+  
 ];
 
 @NgModule({

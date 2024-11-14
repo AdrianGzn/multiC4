@@ -8,13 +8,22 @@ import { UserService } from '../services/user.service';
   styleUrl: './header-receptionist.component.css'
 })
 export class HeaderReceptionistComponent {
-  constructor(private router: Router, private userService: UserService) { }
+  isMobileMenuOpen = false;
   isCampaignMenuOpen = false;
+  isCampaignMenuOpenMobile = false;
+
+  toggleMobileMenu() {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+  }
 
   toggleCampaignMenu() {
     this.isCampaignMenuOpen = !this.isCampaignMenuOpen;
   }
 
+  toggleCampaignMenuMobile() {
+    this.isCampaignMenuOpenMobile = !this.isCampaignMenuOpenMobile;
+  }
+  constructor(private router: Router, private userService: UserService) { }
 
 
   deleteCampaigns() {

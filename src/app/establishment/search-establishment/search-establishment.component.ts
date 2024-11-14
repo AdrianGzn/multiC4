@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { CardData } from '../models/card-data';
 import { GeneralServices } from '../../shared/services/general-services.service';
+import { EstablishmentShortResponse } from '../../shared/models/establishment-short-response';
+import { Establishment } from '../../shared/models/establishment';
+import { Address } from '../../shared/models/address';
 
 @Component({
   selector: 'app-search-establishment',
@@ -17,7 +19,7 @@ export class SearchEstablishmentComponent implements OnInit {
   tipo: string[] = ['Hospital', 'Clínica', 'Consultorio']; //lista de todos lo que va en formularios
   categoria: string[] = ['Público', 'Privado'];
 
-  establishmentFinded: CardData[] = [];
+  establishmentFinded: EstablishmentShortResponse[] = [];
 
   constructor(private generalService: GeneralServices) {
     this.formEstablishment = new FormGroup({
@@ -48,29 +50,57 @@ export class SearchEstablishmentComponent implements OnInit {
   }
 
   submitTipoCategoria(): void {
-
+      
   }
 
   submitNombre(): void {
-    console.log(this.formEstablishmentByName.value)
-    this.generalService.getEstablishmentByName(this.formEstablishmentByName.value.nombre).subscribe({
-      next: (data) => {
-        console.log(data)
-        this.establishmentFinded.push(data)
+    let nombre = this.formEstablishmentByName.value.nombre;
+    let idAddress = 0;
+
+    let estabishmentResponse: EstablishmentShortResponse = {
+      id_establishment: 0,
+      name: nombre,
+      direccion:  ''
+    }
+
+    this.generalService.getEstablishmentByName(nombre).subscribe({
+      next: (data: Establishment) => {
+        estabishmentResponse.id_establishment = data.id_establishment;
+        idAddress = data.id_dirección;
+
+
+        this.generalService.getAddress().subscribe({
+          next: (data: Address[]) => {
+            let tempAddress: Address | undefined = data.find((item: Address) => item.id_address === idAddress) //Como lo que se evalua es un id quiero que almacene una única instancia de Addres en tempAddres
+            if (tempAddress) {
+              let direccion = `${tempAddress.calle}, ${tempAddress.colonia}, #${tempAddress.numero}. ${tempAddress.descripcion}`
+              estabishmentResponse.direccion = direccion;
+            }
+
+            this.establishmentFinded = [];
+            this.establishmentFinded.push(estabishmentResponse);
+
+          },
+          error: (error) => {    
+            alert("No se pudo encontrar el horario: " + error)
+          }
+        });
+        
       },
       error: (error) => {    
-        alert("No se pudo encontrar: " + error)
+        alert("No se pudo encontrar al establecimiento: " + error)
       }
     })
   }
 
   submitServicio(): void {
-    this.generalService.getEstablishmentByService(this.formEstablishmentByService.value).subscribe({
-      next: (data) => {
-        this.establishmentFinded = data;
+    let myService = this.formEstablishmentByService.value.servicio;
+    this.generalService.getEstablishmentByService(myService).subscribe({
+      next: (data: EstablishmentShortResponse[]) => {
+        this.establishmentFinded = data;        
       },
       error: (error) => {    
-        alert("No se pudo encontrar: " + error);
+        alert("No se pudieron encontrar los establecimientos con el servicio: " + error);
       }
     })
   }

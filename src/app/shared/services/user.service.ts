@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap, catchError } from 'rxjs';
 import { User } from '../models/user';
-import { Employee } from '../models/employee';
-import { Patient } from '../models/patient';
 
 @Injectable({
   providedIn: 'root'
@@ -61,38 +59,7 @@ export class UserService {
     return this.user;
   }
 
-  //Lo anterior que no sé si sirva
-  
-
-  getEmployees(): Observable<Employee[]> {
-    return this.http.get<Employee[]>(`${this.baseUrl}/employee/`);
-  }
-
-  createEmployee(employeeData: Employee): Observable<Employee> {
-    return this.http.post<Employee>(`${this.baseUrl}/employee/`, employeeData);
-  }
-
-  changeEmployee(idEmployee: string, employeeData: any): Observable<Employee> {
-    return this.http.put<Employee>(`${this.baseUrl}/employee/${idEmployee}`, employeeData);
-  }
-
-  deleteEmployee(idEmployee: string): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/employee/${idEmployee}`);
-  }
-
-  getPatients(): Observable<Patient[]> {
-    return this.http.get<Patient[]>(`${this.baseUrl}/patient/`);
-  }
-
-  createPatient(patientData: Patient): Observable<Patient> {
-    return this.http.post<Patient>(`${this.baseUrl}/patient/`, patientData);
-  }
-
-  changePatient(idPatient: string, patientData: Patient): Observable<Patient> {
-    return this.http.put<Patient>(`${this.baseUrl}/patient/${idPatient}`, patientData);
-  }
-
-  deletePatient(idPatient: string): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/patient/${idPatient}`);
+  postUsers(): void {
+    
   }
 }

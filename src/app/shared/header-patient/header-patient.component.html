@@ -1,12 +1,36 @@
-<header class="h-32 w-full flex justify-between items-center bg-slate-50 px-12 shadow-lg">
-  <button (click)="welcome()">
-    <img src="./assets/icon-vital.png" alt="Vital SH Logo" class="h-24 w-25">
+<header class="h-28 w-full flex flex-wrap justify-between items-center bg-slate-50 px-4 md:px-12 shadow-lg">
+  <!-- Logo -->
+  <button (click)="welcome()" class="flex-shrink-0">
+    <img src="./assets/icon-vital.png" alt="Vital SH Logo" class="h-16 md:h-24 w-auto">
   </button>
-  <nav class="flex-grow flex justify-center space-x-16">
-    <button class="text-[#9042B7] font-bold hover:underline" (click)="welcome()">SOBRE NOSOTROS</button>
-    <button class="text-[#9042B7] font-bold hover:underline" (click)="establishments()">ESTABLECIMIENTOS</button>
-    <button class="text-[#9042B7] font-bold hover:underline" (click)="see()">CITAS</button>
-    <button class="text-[#9042B7] font-bold hover:underline" (click)="userSee()">CAMPAÑAS</button>
+
+  <!-- Contenedor del menú y el botón de cerrar sesión para pantallas pequeñas -->
+  <div class="flex items-center space-x-4 md:space-x-10">
+    <!-- Menú hamburguesa para pantallas pequeñas -->
+    <button class="md:hidden flex items-center justify-center w-14 h-14 bg-[#E7D6F3] rounded-full text-[#9042B7] font-bold text-2xl mx-auto" (click)="toggleMobileMenu()">
+      ☰
+    </button>
+
+    <!-- Botón de cerrar sesión para pantallas pequeñas -->
+    <button class="md:hidden bg-[#BE6DD7] text-white font-medium text-xs py-1 px-2 rounded hover:bg-purple-700 transition-colors" (click)="endSesion()">Cerrar Sesión</button>
+  </div>
+
+  <!-- Navegación para pantallas grandes -->
+  <nav class="hidden md:flex flex-grow justify-center space-x-10 md:space-x-20">
+    <button class="text-[#9042B7] font-bold text-lg md:text-xl hover:underline" (click)="welcome()">SOBRE NOSOTROS</button>
+    <button class="text-[#9042B7] font-bold text-lg md:text-xl hover:underline" (click)="establishments()">ESTABLECIMIENTOS</button>
+    <button class="text-[#9042B7] font-bold text-lg md:text-xl hover:underline" (click)="see()">CITAS</button>
+    <button class="text-[#9042B7] font-bold text-lg md:text-xl hover:underline" (click)="userSee()">CAMPAÑAS</button>
   </nav>
-  <button class="bg-[#BE6DD7] text-white font-medium py-2 px-6 rounded hover:bg-purple-700 transition-colors" (click)="endSesion()">Cerrar Sesion</button>
+
+  <!-- Botón de cerrar sesión para pantallas grandes -->
+  <button class="hidden md:block bg-[#BE6DD7] text-white font-medium text-lg py-3 px-6 rounded hover:bg-purple-700 transition-colors" (click)="endSesion()">Cerrar Sesión</button>
+
+  <!-- Navegación para pantallas pequeñas (oculta inicialmente) -->
+  <nav *ngIf="isMobileMenuOpen" class="w-full flex flex-col space-y-1 items-center mt-4 md:hidden">
+    <button class="text-[#9042B7] font-bold text-xs hover:underline py-1 px-2" (click)="welcome()">SOBRE NOSOTROS</button>
+    <button class="text-[#9042B7] font-bold text-xs hover:underline py-1 px-2" (click)="establishments()">ESTABLECIMIENTOS</button>
+    <button class="text-[#9042B7] font-bold text-xs hover:underline py-1 px-2" (click)="see()">CITAS</button>
+    <button class="text-[#9042B7] font-bold text-xs hover:underline py-1 px-2" (click)="userSee()">CAMPAÑAS</button>
+  </nav>
 </header>

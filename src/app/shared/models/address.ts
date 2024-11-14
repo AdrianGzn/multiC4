@@ -1,9 +1,9 @@
 export interface Address {
-    id_address: string;
-    street: string;
-    city: string;
-    state: string;
-    zipCode: string;
-    country: string;
+    id_address: number;
+    latitud: number
+    longitud: number
+    descripcion: string
+    calle: string
+    colonia: string
+    numero: number
 }
-  

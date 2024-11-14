@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { CardData } from '../models/card-data';
+import { EstablishmentShortResponse } from '../../shared/models/establishment-short-response';
 
 @Component({
   selector: 'app-card-establishment',
@@ -7,8 +7,10 @@ import { CardData } from '../models/card-data';
   styleUrls: ['./card-establishment.component.css']
 })
 export class CardEstablishmentComponent {
-  @Input() card: CardData = { 
-    nombre: '' 
+  @Input() card: EstablishmentShortResponse = { 
+    id_establishment: 0,
+    name: '',
+    direccion:  '',
   };
 
   details(id: number):void {

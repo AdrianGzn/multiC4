@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { GeneralServices } from '../../shared/services/general-services.service';
-import { User } from '../../shared/models/user';
 import { UserService } from '../../shared/services/user.service';
 
 @Component({
@@ -44,5 +42,8 @@ export class LoginComponent {
   }
   signPatient(): void {
     this.router.navigate(['/sign-patient']);
+  }
+  signEmployee(): void {
+    this.router.navigate(['/sign-employee']); 
   }
 }

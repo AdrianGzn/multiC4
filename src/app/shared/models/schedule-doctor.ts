@@ -1,8 +1,6 @@
 export interface ScheduleDoctor {
-    id_schedule: string;
-    doctorId: string;
-    patientId: string;
-    appointmentDate: string;
-    status: 'scheduled' | 'completed' | 'cancelled';
+    id_horario: number;
+    dia: string;
+    entrada: string;
+    salida: string;
 }
-  

@@ -1,11 +1,11 @@
-<div class="flex items-center justify-center min-h-screen bg-cover bg-center" style="background-image: url('assets/register.jpg')">
-  <div class="bg-white/50 py-16 px-10 rounded-lg shadow-lg max-w-sm w-full">
+<div class="flex items-center justify-center min-h-screen bg-cover bg-center" style="background-image: url('assets/register.png')">
+  <div class="bg-white/70 py-14 px-10 rounded-lg shadow-lg max-w-sm w-full">
     <h2 class="text-2xl font-bold mb-4 text-center">SIGNIN EMPLEADOS</h2>
     
     <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
       
       <div formGroupName="usernameGroup" class="mb-4">
-        <label class="block text-gray-700">Nombre de Usuario:</label>
+        <label class="block text-black">Nombre de Usuario:</label>
         <input
           formControlName="username"
           type="text"
@@ -20,7 +20,7 @@
       </a>
 
       <div formGroupName="roleGroup" class="mb-4">
-        <label class="block text-gray-700">Rol:</label>
+        <label class="block text-black">Rol:</label>
         <div class="relative">
           <select
             formControlName="role"
@@ -37,7 +37,7 @@
       </div>
       
       <div formGroupName="passwordGroup" class="mb-4">
-        <label class="block text-gray-700">Contraseña:</label>
+        <label class="block text-black">Contraseña:</label>
         <input
           formControlName="password"
           type="password"
@@ -46,7 +46,7 @@
       </div>
       
       <div formGroupName="confirmPasswordGroup" class="mb-4">
-        <label class="block text-gray-700">Confirmar Contraseña:</label>
+        <label class="block text-black">Confirmar Contraseña:</label>
         <input
           formControlName="confirmPassword"
           type="password"
