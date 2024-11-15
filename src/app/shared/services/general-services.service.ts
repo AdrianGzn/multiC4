@@ -175,5 +175,13 @@ export class GeneralServices {
     return this.http.delete<TypeEstablishmentResponse>(`${this.baseUrl}/type_establishment/${idTypeEstablishment}`);
   }
 
+  //campaigns
+  getCampaigns(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/campaigns/`)
+  }
 
+  //services
+  getServices(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/services/`)
+  }
 }

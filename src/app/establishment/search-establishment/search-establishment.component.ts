@@ -52,7 +52,19 @@ export class SearchEstablishmentComponent implements OnInit {
   }
 
   submitTipoCategoria(): void {
-      
+    const formTypeCategory = {
+      type: this.formEstablishment.value.tipo,
+      category: this.formEstablishment.value.categoria
+    }
+    console.log(formTypeCategory)
+      this.generalService.getEstablishmentByTypeCategory(formTypeCategory.type, formTypeCategory.category).pipe().subscribe(
+        data => {
+          console.log(data)
+        },
+        error => {
+          console.log(error)
+        }
+      )
   }
 
   submitNombre(): void {
@@ -79,7 +91,7 @@ export class SearchEstablishmentComponent implements OnInit {
               let direccion = `${tempAddress.calle}, ${tempAddress.colonia}, #${tempAddress.numero}. ${tempAddress.descripcion}`
               estabishmentResponse.direccion = direccion;
             }
-
+            console.log(estabishmentResponse)
             this.establishmentFinded = [];
             this.establishmentFinded.push(estabishmentResponse);
 
