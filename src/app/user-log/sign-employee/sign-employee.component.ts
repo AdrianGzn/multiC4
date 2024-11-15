@@ -45,20 +45,24 @@ export class SignEmployeeComponent {
     let role = 0;
     let userCreated = false;
 
-    if (this.signInForm.value.role === 'Doctor') {
-      role = 3;
-    } else if (this.signInForm.value.role === 'Recepcionista') {
-      role = 2;
-    }
-
     const newPatient = {
-      id_rol: role,
+      id_rol: 0,
       nombre: this.signInForm.value.username,
       contraseña: this.signInForm.value.password
     }
-    console.log(newPatient);
+    
 
     if(this.signInForm.valid){
+      if (this.signInForm.value.role === 'Doctor') {
+        newPatient.id_rol = 3;
+      } else if (this.signInForm.value.role === 'Recepcionista') {
+        newPatient.id_rol = 2;
+      }
+  
+      
+      console.log(newPatient);
+
+
       if (this.signInForm.value.password === this.signInForm.value.confirmPassword) {
         this.userService.register(newPatient).subscribe({
           next: (data: User) => {
@@ -125,7 +129,7 @@ export class SignEmployeeComponent {
                           this.userService.updateUser(myUser).subscribe({
                             next: (item: User) => {
                               console.log('Id de establecimiento asignada correctamente a recepcionista: ' + item);
-                              
+                              console.log('Hola mundo')
                             },
                             error: () => {
                     

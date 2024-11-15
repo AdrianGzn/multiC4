@@ -11,6 +11,7 @@ import { catchError, tap } from 'rxjs';
   templateUrl: './search-establishment.component.html',
   styleUrl: './search-establishment.component.css'
 })
+
 export class SearchEstablishmentComponent implements OnInit {
 
   formEstablishment: FormGroup;
