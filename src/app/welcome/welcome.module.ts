@@ -21,14 +21,11 @@ import { HeaderPatientComponent } from '../shared/header-patient/header-patient.
     SitiosComponent,
     FooterpatientComponent,
     HeaderPatientComponent
-    
- 
-  
   ],
   imports: [
     CommonModule,
     WelcomeRoutingModule,
-    
+    SharedModule
   ]
 })
 export class WelcomeModule { }

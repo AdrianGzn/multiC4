@@ -17,7 +17,8 @@ import { GoogleMapsModule } from '@angular/google-maps'
   imports: [
     CommonModule,
     SharedRoutingModule,
-    GoogleMapsModule
+    GoogleMapsModule,
+    SharedModule
   ],
   exports: [
     HeaderPatientComponent,
