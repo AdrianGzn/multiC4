@@ -11,6 +11,7 @@ import { Schedule } from '../../shared/models/schedule';
 import { ScheduleResponse } from '../../shared/models/schedule-response';
 import { AddressResponse } from '../../shared/models/address-response';
 import { Establishment } from '../../shared/models/establishment';
+import { error } from 'console';
 
 
 @Component({
@@ -91,6 +92,8 @@ export class SignEmployeeComponent {
               this.router.navigate(['/welcome/patient']);
 
             }else if (role == 2) {
+              console.log('Si llega a la condicional para recepcionista');
+              
               let tempSchedule: ScheduleResponse = {
                 entrada: '',
                 salida: '' 
@@ -116,39 +119,42 @@ export class SignEmployeeComponent {
 
               this.generalService.createSchedule(tempSchedule).subscribe({
                 next: (itemSchedule: Schedule) => {
+                  console.log('Si llega a la peticion para el horario');
                   tempEstablishment.id_horario = itemSchedule.id_horario;
 
                   this.generalService.createAddress(tempAddress).subscribe({
                     next: (itemAddress) => {
+                      console.log('Si llega a la peticion para la dirección');
                       tempEstablishment.id_dirección = itemAddress.id_address;
                       
                       this.generalService.createEstablishment(tempEstablishment).subscribe({
                         next: (itemEstablishment: Establishment) => {
+                          console.log('Si llega a la peticion para el establecimiento');
                           myUser.id_establecimiento = itemEstablishment.id_establishment;
                           
                           this.userService.updateUser(myUser).subscribe({
                             next: (item: User) => {
-                              console.log('Id de establecimiento asignada correctamente a recepcionista: ' + item);
-                              console.log('Hola mundo')
+                              console.log('Id de establecimiento asignada correctamente a recepcionista: ');
+                              console.log(item);
                             },
                             error: () => {
-                    
+                              console.log('No se ha podido editar el perfil de recepcionista: ' + error);
                             }
                           })
                         },
                         error: (error) => {
-                          alert('No se ha podido crear el perfil para recepcionista: ' + error);
+                          console.log('No se ha podido crear el perfil para recepcionista: ' + error);
                         }
                       })
 
                     },
                     error: (error) => {
-                      alert('No se ha podido crear la dirección para recepcionista: ' + error);
+                      console.log('No se ha podido crear la dirección para recepcionista: ' + error);
                     }
                   })
                 },
                 error: (error) => {
-                  alert('No se ha podido crear el horario para recepcionista: ' + error);
+                  console.log('No se ha podido crear el horario para recepcionista: ' + error);
                 }
               })
 
