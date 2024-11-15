@@ -9,7 +9,7 @@ import { CartpatientComponent } from './cartpatient/cartpatient.component';
 import { CartpatientcampanisComponent } from './cartpatientcampanis/cartpatientcampanis.component';
 import { SitiosComponent } from './sitios/sitios.component';
 import { FooterpatientComponent } from './footerpatient/footerpatient.component';
-
+import { HeaderPatientComponent } from '../shared/header-patient/header-patient.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +20,7 @@ import { FooterpatientComponent } from './footerpatient/footerpatient.component'
     CartpatientcampanisComponent,
     SitiosComponent,
     FooterpatientComponent,
-    
+    HeaderPatientComponent
     
  
   
@@ -28,7 +28,6 @@ import { FooterpatientComponent } from './footerpatient/footerpatient.component'
   imports: [
     CommonModule,
     WelcomeRoutingModule,
-    SharedModule,
     
   ]
 })
