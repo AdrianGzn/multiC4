@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap, catchError } from 'rxjs';
 import { User } from '../models/user';
+import { loadStripe } from '@stripe/stripe-js';
 
 @Injectable({
   providedIn: 'root'
@@ -72,6 +73,18 @@ export class UserService {
         console.log(error)
         throw error
       })
+    )
+  }
+
+
+  onCheckout(quote: any): void {
+    this.http.post(`${this.baseUrl}/quote/`, quote).subscribe(
+      async(res: any) => {
+        let stripe = await loadStripe('pk_test_51QA1JN04GnkleiMSULPFvf7K29JgGAwupkaVMMVYVJFOc4Rvo2HTY8PYWZzGSXkxYIOjpXTXPoT4QQ2I3CIv4nqp00sOEe4GOp');
+        stripe?.redirectToCheckout({
+          sessionId: res.id_usuario
+        })
+      }
     )
   }
 }

@@ -110,7 +110,7 @@ export class GenerateEstablishmentComponent implements OnInit{
       next: (data: EstablishmentResponse) => {
 
       },
-      error: () => {
+      error: (error) => {
         console.log('No se ha podido crear el horario.');
         console.log(error);
       }
