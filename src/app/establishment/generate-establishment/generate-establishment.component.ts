@@ -108,7 +108,8 @@ export class GenerateEstablishmentComponent implements OnInit{
 
     this.generalService.createEstablishment(tempEstablishment).subscribe({
       next: (data: EstablishmentResponse) => {
-
+        console.log('establecimiento creado');
+        console.log(this.myEstablishment);
       },
       error: (error) => {
         console.log('No se ha podido crear el horario.');
