@@ -83,7 +83,7 @@ export class SignEmployeeComponent {
                     this.newSchedule.push(dataSchedule)
                   },
                   error: (error) => {
-                    console.log('No se ha podido crear el horario para el doctor con id ' + data.id_usuario + ' con error: ' + error);
+                    console.log('No se ha podido crear el horario para el doctor con id ' + data.id_usuario + ' con error: ');
                   }
                 })
               });
@@ -135,9 +135,8 @@ export class SignEmployeeComponent {
                           this.userService.updateUser(myUser).subscribe({
                             next: (item: User) => {
                               console.log('Id de establecimiento asignada correctamente a recepcionista: ');
-                              console.log(item);
                             },
-                            error: () => {
+                            error: (error) => {
                               console.log('No se ha podido editar el perfil de recepcionista: ' + error);
                             }
                           })

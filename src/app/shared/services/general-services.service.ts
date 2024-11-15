@@ -99,6 +99,10 @@ export class GeneralServices {
     return this.http.get<Quote[]>(`${this.baseUrl}/quotes/`);
   }
 
+  getQuoteByIdStatus(status: string, id: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/quotesById/${id}/${status}`)
+  }
+
   changeQuote(idQuote: number, quotesData: QuoteResponse): Observable<AddressResponse> {
     return this.http.put<AddressResponse>(`${this.baseUrl}/quotes/${idQuote}`, quotesData);
   }
