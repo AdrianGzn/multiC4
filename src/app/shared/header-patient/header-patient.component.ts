@@ -5,16 +5,16 @@ import { UserService } from '../services/user.service';
 @Component({
   selector: 'app-header-patient',
   templateUrl: './header-patient.component.html',
-  styleUrl: './header-patient.component.css'
+  styleUrls: ['./header-patient.component.css']
 })
 export class HeaderPatientComponent {
   isMobileMenuOpen = false;
 
+  constructor(private router: Router, private userService: UserService) {}
+
   toggleMobileMenu() {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
   }
-
-  constructor(private router: Router, private userService: UserService) { }
 
   welcome(): void {
     this.router.navigate(['/welcome/patient']);
@@ -27,6 +27,7 @@ export class HeaderPatientComponent {
   appointments(): void {
     this.router.navigate(['/appointments/patient']);
   }
+
   see(): void {
     this.router.navigate(['/appointments/see']);
   }
@@ -34,10 +35,9 @@ export class HeaderPatientComponent {
   userSee(): void {
     this.router.navigate(['/campaigns/userSee']);
   }
- 
-  endSesion(): void {
-    this.userService.logOut;
-    this.router.navigate(['/sign-login'])
-  }
 
+  endSesion(): void {
+    this.userService.logOut();
+    this.router.navigate(['/sign-login']);
+  }
 }

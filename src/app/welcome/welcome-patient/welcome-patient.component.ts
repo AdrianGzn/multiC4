@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GeneralServices } from '../../shared/services/general-services.service';
 import { UserService } from '../../shared/services/user.service';
+
 @Component({
   selector: 'app-welcome-patient',
   templateUrl: './welcome-patient.component.html',
