@@ -131,16 +131,7 @@ export class SignEmployeeComponent {
                         next: (itemEstablishment: Establishment) => {
                           console.log('Si llega a la peticion para el establecimiento');
                           myUser.id_establecimiento = itemEstablishment.id_establishment;
-                          
-                          this.userService.updateUser(myUser).subscribe({
-                            next: (item: User) => {
-                              console.log('Id de establecimiento asignada correctamente a recepcionista: ');
-                              console.log(item);
-                            },
-                            error: () => {
-                              console.log('No se ha podido editar el perfil de recepcionista: ' + error);
-                            }
-                          })
+                          userCreated = true;
                         },
                         error: (error) => {
                           console.log('No se ha podido crear el perfil para recepcionista: ' + error);
@@ -165,6 +156,19 @@ export class SignEmployeeComponent {
             console.log(error)
           }
         });
+
+        if (userCreated) {
+          this.userService.updateUser(myUser).subscribe({
+            next: (item: User) => {
+              console.log('Id de establecimiento asignada correctamente a recepcionista: ');
+              console.log(item);
+              
+            },
+            error: (error) => {
+              console.log('No se ha podido editar el perfil de recepcionista: ' + error);
+            }
+          })
+        }
       } else {
         alert('Las contraseñas no corresponden');
       };
