@@ -32,7 +32,6 @@ export class SignEmployeeComponent {
       id_usuario: 0,
       id_rol: 0,
       nombre: '',
-      horario: [],
       id_establecimiento: 0,
       id_servicio: 0
     };

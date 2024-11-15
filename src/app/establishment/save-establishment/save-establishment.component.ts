@@ -5,7 +5,7 @@ import { GeneralServices } from '../../shared/services/general-services.service'
 @Component({
   selector: 'app-save-establishment',
   templateUrl: './save-establishment.component.html',
-  styleUrls: ['./save-establishment.component.css']
+  styleUrl: './save-establishment.component.css'
 })
 export class SaveEstablishmentComponent {
   formData: FormGroup;

@@ -16,7 +16,6 @@ export class ScheduleEmployeeComponent implements OnInit {
     id_usuario: 0,
     id_rol: 0,
     nombre: '',
-    horario: [],
     id_establecimiento: 0,
     id_servicio: 0
   };
@@ -59,7 +58,7 @@ export class ScheduleEmployeeComponent implements OnInit {
 
     //this.user.horario = dias;
 
-    
+
     /*this.userService.changeEmployee(`${this.user.id_usuario}`, this.user).subscribe({
       next: (response) => {
         console.log("Niceee: " + response);
