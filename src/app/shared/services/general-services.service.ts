@@ -180,8 +180,12 @@ export class GeneralServices {
   }
 
   //campaigns
-  getCampaigns(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/campaigns/`)
+  getCampaigns(id_establishment: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/campaigns/${id_establishment}`)
+  }
+
+  deleteCampaign(id_campaign: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/campaign/${id_campaign}`)
   }
 
   //services

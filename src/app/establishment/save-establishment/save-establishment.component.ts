@@ -1,13 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { GeneralServices } from '../../shared/services/general-services.service';
+import { catchError } from 'rxjs';
 
 @Component({
   selector: 'app-save-establishment',
   templateUrl: './save-establishment.component.html',
   styleUrl: './save-establishment.component.css'
 })
-export class SaveEstablishmentComponent {
+export class SaveEstablishmentComponent implements OnInit{
+  type_options: any[] = [];
   formData: FormGroup;
   formUbication: FormGroup;
   formSchedule: FormGroup;
@@ -49,6 +51,14 @@ export class SaveEstablishmentComponent {
       })
   }
 
+  ngOnInit(): void {
+    this.generalServices.getTypeEstablishment().subscribe(
+      (next) => {
+        this.type_options =  next;
+        console.log(next) 
+      }
+    )
+  }
   onSubmit() {
 
     

@@ -43,6 +43,7 @@ export class SearchEstablishmentComponent implements OnInit {
       (next) => {
         this.establishmentFinded = next;
         console.log(next)
+        console.log(this.establishmentFinded)
       },
 
       error => {
@@ -59,6 +60,7 @@ export class SearchEstablishmentComponent implements OnInit {
     console.log(formTypeCategory)
       this.generalService.getEstablishmentByTypeCategory(formTypeCategory.type, formTypeCategory.category).pipe().subscribe(
         data => {
+          this.establishmentFinded = data; 
           console.log(data)
         },
         error => {
@@ -69,38 +71,13 @@ export class SearchEstablishmentComponent implements OnInit {
 
   submitNombre(): void {
     let nombre = this.formEstablishmentByName.value;
-    let idAddress = 0;
 
-    let estabishmentResponse: EstablishmentShortResponse = {
-      id_establishment: 0,
-      nombre: nombre,
-      direccion:  ''
-    }
+
     console.log(nombre)
-    this.generalService.getEstablishmentByName("string").subscribe({
-      next: (data: Establishment) => {
+    this.generalService.getEstablishmentByName(this.formEstablishmentByName.value.nombre).subscribe({
+      next: (data) => {
         console.log(data)
-        estabishmentResponse.id_establishment = data.id_establishment;
-        idAddress = data.id_dirección;
-
-
-        this.generalService.getAddress().subscribe({
-          next: (data: Address[]) => {
-            let tempAddress: Address | undefined = data.find((item: Address) => item.id_address === idAddress) //Como lo que se evalua es un id quiero que almacene una única instancia de Addres en tempAddres
-            if (tempAddress) {
-              let direccion = `${tempAddress.calle}, ${tempAddress.colonia}, #${tempAddress.numero}. ${tempAddress.descripcion}`
-              estabishmentResponse.direccion = direccion;
-            }
-            console.log(estabishmentResponse)
-            this.establishmentFinded = [];
-            this.establishmentFinded.push(estabishmentResponse);
-
-          },
-          error: (error) => {    
-            alert("No se pudo encontrar el horario: " + error)
-          }
-        });
-        
+            this.establishmentFinded = data
       },
       error: (error) => {    
         alert("No se pudo encontrar al establecimiento: " + error)
@@ -111,6 +88,7 @@ export class SearchEstablishmentComponent implements OnInit {
   submitServicio(): void {
     console.log(this.formEstablishmentByService.value.servicio)
     let myService = this.formEstablishmentByService.value.servicio;
+    console.log(myService)
     this.generalService.getEstablishmentByService(myService).subscribe({
       next: (data: EstablishmentShortResponse[]) => {
         console.log(data)

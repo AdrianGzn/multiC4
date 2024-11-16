@@ -21,8 +21,10 @@
                     
                     <div class="w-[calc(48%)] min-w-[210px]">
                         <label class="form-child-label">Tipo:</label>
-                        <select class="form-child border-fuchsia-800 w-full" formControlName="tipo">
-
+                        <select class="form-child border-fuchsia-800 w-full" *ngFor="let option of type_options" formControlName="tipo">
+                            <option value={{option}}>
+                                {{option}}
+                            </option>
                         </select>
                     </div>
 

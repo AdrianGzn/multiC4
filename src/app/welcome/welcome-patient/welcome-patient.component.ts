@@ -17,7 +17,7 @@ export class WelcomePatientComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.generalService.getCampaigns().subscribe(
+    this.generalService.getCampaigns(3).subscribe(
       data => {
         console.log(data)
       },
