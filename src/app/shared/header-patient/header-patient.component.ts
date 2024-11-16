@@ -5,7 +5,7 @@ import { UserService } from '../services/user.service';
 @Component({
   selector: 'app-header-patient',
   templateUrl: './header-patient.component.html',
-  styleUrls: ['./header-patient.component.css']
+  styleUrls: ['./header-patient.component.css'] // Cambiado de `styleUrl` a `styleUrls`
 })
 export class HeaderPatientComponent {
   isMobileMenuOpen = false;

@@ -20,7 +20,6 @@ import { HeaderPatientComponent } from '../shared/header-patient/header-patient.
     CartpatientcampanisComponent,
     SitiosComponent,
     FooterpatientComponent,
-    HeaderPatientComponent
   ],
   imports: [
     CommonModule,
