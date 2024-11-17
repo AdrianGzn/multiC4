@@ -3,6 +3,7 @@ import { GeneralServices } from '../services/general-services.service';
 import { UserService } from '../services/user.service';
 import { GeolocationService } from '../services/geolacation.service';
 import { Location } from '../models/location';
+import { StripeService } from '../services/stripe.service';
 
 @Component({
   selector: 'app-tests',
@@ -10,7 +11,7 @@ import { Location } from '../models/location';
   styleUrl: './tests.component.css'
 })
 export class TestsComponent {
-  constructor(private generalServices: GeneralServices, private userService: UserService, private locationService: GeolocationService) {}
+  constructor(private generalServices: GeneralServices, private userService: UserService, private locationService: GeolocationService, private stripeService: StripeService) {}
 
   center = { lat: 40.730610, lng: -73.935242 };
   zoom = 12; 
@@ -26,14 +27,12 @@ export class TestsComponent {
   }
 
   getLocation(): void {
-    this.locationService.getPosition().subscribe({
-      next: (position: Location) => {
-        this.latitud = position.latitud;
-        this.longitud = position.longitud;
-      },
-      error: (err) => {
-        this.error = err;
-      }
-    });
+    const quote = {
+      product: 'Producto de prueba',
+      amount: 1000,
+      currency: 'usd',
+      quantity: 1,
+    };
+    this.stripeService.onCheckout(quote);
   }
 }
