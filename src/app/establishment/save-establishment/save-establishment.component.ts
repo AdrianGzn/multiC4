@@ -13,15 +13,15 @@ export class SaveEstablishmentComponent implements OnInit{
   formData: FormGroup;
   formUbication: FormGroup;
   formSchedule: FormGroup;
-  formImage: FormGroup;
   formServices: FormGroup;
   formDoctors: FormGroup;
+  selectedImage: File | null = null; 
 
   constructor(private generalServices: GeneralServices) {
       this.formData = new FormGroup({
         nombre: new FormControl(null, [Validators.required]),
-        descripcion: new FormControl(null, [Validators.required]),
-        tipo: new FormControl(null, [Validators.required]),
+        descripción: new FormControl(null, [Validators.required]),
+        id_tipo_establecimiento: new FormControl(null, [Validators.required]),
         categoria: new FormControl(null, [Validators.required])
       }),
       this.formUbication = new FormGroup({
@@ -34,9 +34,6 @@ export class SaveEstablishmentComponent implements OnInit{
       this.formSchedule = new FormGroup({
         entrada: new FormControl(null, [Validators.required]),
         salida: new FormControl(null, [Validators.required]),
-      }),
-      this.formImage = new FormGroup({
-        imagen: new FormControl(null, [Validators.required]),
       }),
       this.formServices = new FormGroup({
         servicio: new FormControl(null, [Validators.required, Validators.min(1), Validators.max(100)]),
@@ -56,19 +53,50 @@ export class SaveEstablishmentComponent implements OnInit{
       }
     )
   }
+
+  onChangeSelectedImage(file: any): void {
+    if(file.target.files.length > 0 ) {
+      this.selectedImage = file.target.files[0]; 
+    }
+  }
+  
   onSubmit() {
     this.generalServices.createSchedule(this.formSchedule.value).subscribe(
       (nextSchedule) => {
         if(nextSchedule) {
           console.log(nextSchedule)
+          console.log(nextSchedule)
           this.generalServices.createAddress(this.formUbication.value).subscribe(
-            (next) => {
-              console.log(next)
-              if(next) {
-                const newEstablishment = {
-                  
+            (direccion) => {
+              console.log(direccion)
+              if(direccion) {
+                console.log(direccion)
+                const formDatEstablishment = new FormData(); 
+                Object.keys(this.formData.value).forEach(element => {
+                   formDatEstablishment.append(element, this.formData.value[element])
+                });
+                formDatEstablishment.append("id_dirección", direccion.id_dirección.toString())
+                formDatEstablishment.append("id_horario", nextSchedule.id_horario.toString())
+                if (this.selectedImage) {
+                  formDatEstablishment.append('file', this.selectedImage, this.selectedImage.name);
                 }
-              }
+
+                if(this.formData.valid) {
+                  this.generalServices.createEstablishment(formDatEstablishment).subscribe(
+                    data => {
+                      localStorage.setItem("establecimiento", JSON.stringify(data));
+                      const editPerson = {
+                        "id_establecimiento": data.id_establishment
+                      }
+                      this.generalServices.editRecepcionist(editPerson).subscribe( 
+                        data => {
+                          alert("se logro")
+                        }
+                      )
+                    }
+                  )
+                }
+             }
             }
           )
         }

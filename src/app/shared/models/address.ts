@@ -1,5 +1,5 @@
 export interface Address {
-    id_address: number;
+    id_dirección: number;
     latitud: number
     longitud: number
     descripcion: string

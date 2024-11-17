@@ -79,7 +79,7 @@ export class GeneralServices {
     return this.http.get<EstablishmentShortResponse[]>(`${this.baseUrl}/findEstablishmentByTypeCategory/${type}/${category}`);
   }
 
-  createEstablishment(establishmentData: EstablishmentResponse): Observable<Establishment> {
+  createEstablishment(establishmentData: any): Observable<Establishment> {
     return this.http.post<Establishment>(`${this.baseUrl}/establishment/`, establishmentData);
   }
 
@@ -203,6 +203,9 @@ export class GeneralServices {
 
 
   //get images S3
+  editRecepcionist(userModify: any): Observable<any> {
+    return this.http.put(`${this.baseUrl}/user/`, userModify)
+  }
 
   getImages(): Observable<any> {
     return this.http.get(`${this.baseUrl}/allImagesEstablishment/`)
