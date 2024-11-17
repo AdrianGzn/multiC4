@@ -33,7 +33,12 @@ export class DeleteComponent implements OnInit {
 
   submit(): void {
     this.generalService.deleteCampaign(this.myFormDelete.value.selectedCampaign).subscribe(
-
+      data => {
+        console.log("ok")
+      },
+      error => {
+        console.log("error")
+      }
     )
   }
 

@@ -6,38 +6,35 @@
             <h2 class="text-2xl font-bold text-purple-700 mr-2">CAMPAÑAS Y BRIGADAS</h2>
             <span class="text-purple-500 text-3xl">📢</span>
         </div>
-        <form [formGroup]="campaniaForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="campaniaForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
             <label class="block text-black font-extralight text-lg mb-2">Nombre de la Campaña:</label>
-            <input type="text" formControlName="nombreCampania" class="w-full p-1 mb-2 border border-purple-300 rounded-md focus:outline-none focus:border-purple-700 text-black">
+            <input type="text" formControlName="nombre" class="w-full p-1 mb-2 border border-purple-300 rounded-md focus:outline-none focus:border-purple-700 text-black">
             
             <label class="block text-black font-extralight text-lg mb-2">Descripción:</label>
-            <input type="text" formControlName="descripcion" class="w-full p-1 mb-2 border border-purple-300 rounded-md focus:outline-none focus:border-purple-700 text-black">
+            <input type="text" formControlName="descripción" class="w-full p-1 mb-2 border border-purple-300 rounded-md focus:outline-none focus:border-purple-700 text-black">
             
             <label class="block text-black font-extralight text-lg mb-2">Imagen:</label>
-            <input type="text" formControlName="imagen" class="w-full p-1 mb-2 border border-purple-300 rounded-md focus:outline-none focus:border-purple-700 text-black">
+            <input type="file" id="file" (change)="onChangeSelectedOption($event)" class="w-full p-1 mb-2 border border-purple-300 rounded-md focus:outline-none focus:border-purple-700 text-black">
             
             <label class="block text-black font-extralight text-lg mb-2">Dirección de la Campaña:</label>
             <div class="flex items-center border border-purple-300 rounded-md mb-2">
                 <span class="p-1 text-purple-500">📍</span>
-                <input type="text" formControlName="direccionCampania" class="w-full p-1 focus:outline-none focus:border-purple-700 text-black">
+                <input type="text" formControlName="dirección" class="w-full p-1 focus:outline-none focus:border-purple-700 text-black">
             </div>
             
             <label class="block text-black font-extralight text-lg mb-2">Público Dirigido:</label>
             <div class="flex items-center border border-purple-300 rounded-md mb-2">
                 <span class="p-1 text-purple-500">👥</span>
-                <select formControlName="publicoDirigido" class="w-full py-1 pr-2 pl-2 focus:outline-none focus:border-purple-700 text-black">
-                    <option value="" class="text-gray-500">Seleccione una opción</option>
-               
-                </select>
+                <input type="text" formControlName="público" class="w-full p-1 focus:outline-none focus:border-purple-700 text-black">
             </div>
             
             <label class="block text-black font-extralight text-lg mb-2">Fecha de Inicio:</label>
             <div class="flex items-center border border-purple-300 rounded-md mb-2">
                 <span class="p-1 text-purple-500">📅</span>
-                <input type="date" formControlName="fechaInicio" class="w-full p-1 focus:outline-none focus:border-purple-700 placeholder-gray-500">
+                <input type="date" formControlName="fecha_inicio" class="w-full p-1 focus:outline-none focus:border-purple-700 placeholder-gray-500">
             </div>
             
-            <button type="submit" class="w-full bg-purple-700 text-white font-bold py-1 rounded-md hover:bg-purple-800" [disabled]="!campaniaForm.valid">
+            <button (click)="onSubmit()" type="submit" class="w-full bg-purple-700 text-white font-bold py-1 rounded-md hover:bg-purple-800" [disabled]="!campaniaForm.valid">
                 Agregar Campaña
             </button>
             

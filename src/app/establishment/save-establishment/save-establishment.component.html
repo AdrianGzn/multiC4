@@ -21,18 +21,16 @@
                     
                     <div class="w-[calc(48%)] min-w-[210px]">
                         <label class="form-child-label">Tipo:</label>
-                        <select class="form-child border-fuchsia-800 w-full" *ngFor="let option of type_options" formControlName="tipo">
-                            <option value={{option}}>
-                                {{option}}
+                        <select class="form-child border-fuchsia-800 w-full" id="tipo" formControlName="tipo">
+                            <option *ngFor="let option of type_options" value={{option.id_tipo_establecimiento}}>
+                                {{option.tipo}}
                             </option>
                         </select>
                     </div>
 
                     <div class="w-[calc(48%)] min-w-[210px]">
                         <label class="form-child-label">Categoría:</label>
-                        <select class="form-child border-fuchsia-800 w-full" formControlName="categoria">
-
-                        </select>
+                        <input class="form-child border-fuchsia-800 w-full" formControlName="categoria">
                     </div>
                 </div>
             </div>
@@ -164,6 +162,6 @@
             </div>
         </form>
            
-            <button type="submit" class="bg-fuchsia-700 text-white p-2 rounded w-[82%]">Guardar</button>
+            <button (click)="onSubmit()" type="submit" class="bg-fuchsia-700 text-white p-2 rounded w-[82%]">Guardar</button>
     </div>
 </div>

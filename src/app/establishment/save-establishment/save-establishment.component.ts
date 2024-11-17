@@ -60,8 +60,6 @@ export class SaveEstablishmentComponent implements OnInit{
     )
   }
   onSubmit() {
-
-    
-    
+    console.log(this.formData.value.tipo)
   }
 }
