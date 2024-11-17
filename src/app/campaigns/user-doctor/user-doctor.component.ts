@@ -2,13 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { GeneralServices } from '../../shared/services/general-services.service';
 
-
 @Component({
-  selector: 'app-receptionist-see',
-  templateUrl: './receptionist-see.component.html',
-  styleUrl: './receptionist-see.component.css'
+  selector: 'app-user-doctor',
+  templateUrl: './user-doctor.component.html',
+  styleUrl: './user-doctor.component.css'
 })
-export class ReceptionistSeeComponent implements OnInit {
+export class UserDoctorComponent implements OnInit {
   campaigns: any[] = [];
   myFormDelete: FormGroup; 
   constructor(private generalService: GeneralServices) {

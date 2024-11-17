@@ -1,23 +1,26 @@
 <header class="h-32 w-full flex flex-wrap justify-between items-center bg-slate-50 shadow-lg px-6 sm:px-12 relative z-10">
   <!-- Logo -->
   <button (click)="welcome()" class="mb-4 md:mb-0">
-    <img src="./assets/icon-vital.png" alt="Vital SH Logo" class="h-24 w-auto">
+    <img src="./assets/icon-vital.png" alt="Vital SH Logo" class="h-28 w-auto">
   </button>
+  
+  <!-- Menú hamburguesa para pantallas pequeñas -->
   <div class="flex items-center space-x-3 md:hidden">
     <button class="flex items-center justify-center w-8 h-8 bg-[#E7D6F3] rounded-full text-[#9042B7] font-bold text-xl" (click)="toggleMobileMenu()">
       ☰
     </button>
-
     <button class="bg-[#BE6DD7] text-white font-medium text-xs py-1 px-3 rounded hover:bg-purple-700 transition-colors" (click)="endSesion()">Cerrar Sesión</button>
   </div>
+  
+  <!-- Menú principal para pantallas grandes -->
   <nav class="hidden md:flex flex-wrap justify-center md:space-x-10 space-y-4 md:space-y-0 w-full md:w-auto">
     <button class="text-[#9042B7] font-bold hover:underline text-xl w-full md:w-auto text-center" (click)="establishments()">ESTABLECIMIENTOS</button>
-    <button class="text-[#9042B7] font-bold hover:underline text-xl w-full md:w-auto text-center" (click)="see()">CITAS</button>
+    <button class="text-[#9042B7] font-bold hover:underline text-xl w-full md:w-auto text-center" (click)="seereceptionist()">CITAS</button>
     
     <div class="relative">
       <button class="text-[#9042B7] font-bold hover:underline text-xl w-full md:w-auto text-center flex items-center" (click)="toggleCampaignMenu()">
         CAMPAÑAS
-        <span class="ml-1">&#9660;</span> 
+        <span class="ml-1">&#9660;</span>
       </button>
       <div *ngIf="isCampaignMenuOpen" class="absolute top-4 w-36 bg-white border border-gray-300 rounded shadow-lg text-xs sm:text-sm">
         <button class="block px-2 py-1 text-[#9042B7] hover:bg-gray-200 w-full text-left" (click)="receptionistSee()">Ver</button>
@@ -27,11 +30,15 @@
       </div>
     </div>
   </nav>
+  
+  <!-- Botón de cerrar sesión para pantallas grandes -->
   <button class="hidden md:block bg-[#BE6DD7] text-white font-medium py-2 px-6 rounded hover:bg-purple-700 transition-colors mt-4 md:mt-0 w-full md:w-auto" (click)="endSesion()">Cerrar Sesión</button>
+  
+  <!-- Menú desplegable para pantallas pequeñas -->
   <nav *ngIf="isMobileMenuOpen" class="w-[200px] flex flex-col space-y-1 items-center mt-12 md:hidden absolute top-0 left-0 bg-white z-10 rounded-md shadow-md">
     <button class="text-[#9042B7] font-bold text-sm hover:underline py-1 px-3 w-full text-center" (click)="establishments()">ESTABLECIMIENTOS</button>
-    <button class="text-[#9042B7] font-bold text-sm hover:underline py-1 px-3 w-full text-center" (click)="see()">CITAS</button>
-  
+    <button class="text-[#9042B7] font-bold text-sm hover:underline py-1 px-3 w-full text-center" (click)="seereceptionist()">CITAS</button>
+    
     <div class="relative">
       <button class="block text-[#9042B7] font-bold text-sm hover:underline py-1 px-3 w-full text-center flex items-center" (click)="toggleCampaignMenuMobile()">
         CAMPAÑAS

@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-cartpatient',
   templateUrl: './cartpatient.component.html',
@@ -24,6 +25,13 @@ export class CartpatientComponent {
   visibleCards = 3;
   modalVisible = false;
   servicioSeleccionado: any = null;
+
+  windowWidth: number = window.innerWidth;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.windowWidth = event.target.innerWidth;
+  }
 
   get visibleServicios() {
     return this.servicios.slice(this.serviciosIndex, this.serviciosIndex + this.visibleCards);

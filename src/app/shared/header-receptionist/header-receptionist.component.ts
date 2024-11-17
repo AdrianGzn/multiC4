@@ -45,8 +45,8 @@ export class HeaderReceptionistComponent {
   establishments(): void {
     this.router.navigate(['/establishment/save']);
   }
-  see(): void {
-    this.router.navigate(['/appointments/see']);
+  seereceptionist(): void {
+    this.router.navigate(['/appointments/seereceptionist']);
   }
   horarios(): void {
     this.router.navigate(['/schedules/scheduleEmployee']);

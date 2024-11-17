@@ -5,7 +5,7 @@ import { HeaderDoctorComponent } from './header-doctor/header-doctor.component';
 import { HeaderReceptionistComponent } from './header-receptionist/header-receptionist.component';
 import { TestsComponent } from './tests/tests.component';
 import { SharedRoutingModule } from './shared-routing.module';
-import { GoogleMapsModule } from '@angular/google-maps'
+import { GoogleMapsModule } from '@angular/google-maps';
 
 @NgModule({
   declarations: [
@@ -17,7 +17,7 @@ import { GoogleMapsModule } from '@angular/google-maps'
   imports: [
     CommonModule,
     SharedRoutingModule,
-    GoogleMapsModule
+    GoogleMapsModule,
   ],
   exports: [
     HeaderPatientComponent,
