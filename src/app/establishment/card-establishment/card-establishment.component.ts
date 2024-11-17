@@ -20,6 +20,7 @@ export class CardEstablishmentComponent {
       longitud: 0,
       numero: 0
     },
+    image: ''
   };
 
   @Output() emitCardId = new EventEmitter<number>(); 

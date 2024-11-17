@@ -10,4 +10,5 @@ export interface EstablishmentShortResponse {
         longitud: number
         numero: number
     }
+    image: string
 }
