@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, DoCheck, OnInit } from '@angular/core';
 import { GeneralServices } from '../services/general-services.service';
 import { UserService } from '../services/user.service';
 import { GeolocationService } from '../services/geolacation.service';
@@ -10,7 +10,7 @@ import { StripeService } from '../services/stripe.service';
   templateUrl: './tests.component.html',
   styleUrl: './tests.component.css'
 })
-export class TestsComponent {
+export class TestsComponent  {
   constructor(private generalServices: GeneralServices, private userService: UserService, private locationService: GeolocationService, private stripeService: StripeService) {}
 
   center = { lat: 40.730610, lng: -73.935242 };
@@ -28,11 +28,22 @@ export class TestsComponent {
 
   getLocation(): void {
     const quote = {
-      product: 'Producto de prueba',
-      amount: 1000,
-      currency: 'usd',
-      quantity: 1,
-    };
+      "items": [
+        {
+          "name": "Producto 1",
+          "product": "https://via.placeholder.com/150",
+          "price": 500,
+          "quantity": 2
+        },
+        {
+          "name": "Producto 2",
+          "product": "https://via.placeholder.com/150",
+          "price": 300,
+          "quantity": 1
+        }
+      ]
+    }
+    
     this.stripeService.onCheckout(quote);
   }
 }

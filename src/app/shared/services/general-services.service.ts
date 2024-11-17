@@ -112,7 +112,7 @@ export class GeneralServices {
   }
   
   establishmentInformation(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/establishmentInformation/`)
+    return this.http.get(`${this.baseUrl}/allImagesEstablishment/`)
   }
 
   createSchedule(scheduleData: ScheduleResponse): Observable<Schedule> {

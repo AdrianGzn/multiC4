@@ -29,14 +29,11 @@ export class SaveEstablishmentComponent implements OnInit{
         colonia: new FormControl(null, [Validators.required]),
         numero: new FormControl(null),
         latitud: new FormControl(null),
-        longitud: new FormControl(null),
-        thisUbication: new FormControl(false),
+        longitud: new FormControl(null)
       }),
       this.formSchedule = new FormGroup({
-        horaInicio: new FormControl(null, [Validators.required]),
-        diaInicio: new FormControl(null, [Validators.required]),
-        horaCierre: new FormControl(null, [Validators.required]),
-        diaCierre: new FormControl(null, [Validators.required]),
+        entrada: new FormControl(null, [Validators.required]),
+        salida: new FormControl(null, [Validators.required]),
       }),
       this.formImage = new FormGroup({
         imagen: new FormControl(null, [Validators.required]),
@@ -60,6 +57,22 @@ export class SaveEstablishmentComponent implements OnInit{
     )
   }
   onSubmit() {
-    console.log(this.formData.value.tipo)
+    this.generalServices.createSchedule(this.formSchedule.value).subscribe(
+      (nextSchedule) => {
+        if(nextSchedule) {
+          console.log(nextSchedule)
+          this.generalServices.createAddress(this.formUbication.value).subscribe(
+            (next) => {
+              console.log(next)
+              if(next) {
+                const newEstablishment = {
+                  
+                }
+              }
+            }
+          )
+        }
+      }
+    )
   }
 }
