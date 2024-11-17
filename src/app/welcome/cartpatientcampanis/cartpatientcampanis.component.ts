@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-cartpatientcampanis',
@@ -15,27 +15,35 @@ export class CartpatientcampanisComponent {
     { image: '/assets/nutricionaaa.jpeg', title: 'Nutrición' },
     { image: '/assets/nutricionwww.jpeg', title: 'Nutrición' },
   ];
-
-  serviciosIndex = 0;
   campaignsIndex = 0;
   visibleCards = 3;
-  currentButton: 'prev' | 'next' | null = null;
+  windowWidth: number = window.innerWidth;
 
+  // Actualiza el tamaño de la ventana
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.windowWidth = event.target.innerWidth;
+    // Cambiar la cantidad de cards visibles dependiendo del tamaño de la ventana
+    if (this.windowWidth < 768) {
+      this.visibleCards = 1; // Muestra solo una card a la vez en pantallas pequeñas
+    } else {
+      this.visibleCards = 3; // Muestra tres cards en pantallas grandes
+    }
+  }
 
   get visibleCampaigns() {
     return this.campaigns.slice(this.campaignsIndex, this.campaignsIndex + this.visibleCards);
   }
+
   prevCampaigns() {
     if (this.campaignsIndex > 0) {
       this.campaignsIndex--;
-      this.currentButton = 'prev';
     }
   }
 
   nextCampaigns() {
     if (this.campaignsIndex < this.campaigns.length - this.visibleCards) {
       this.campaignsIndex++;
-      this.currentButton = 'next';
     }
   }
 }

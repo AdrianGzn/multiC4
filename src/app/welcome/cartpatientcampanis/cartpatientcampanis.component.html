@@ -3,8 +3,9 @@
 
   <div class="flex justify-center gap-8 flex-wrap">
     <div
+      *ngFor="let campaign of visibleCampaigns; let i = index"
       class="bg-[#EAE2F5] text-black rounded-lg shadow-lg w-64 h-72 p-4 flex flex-col items-center transform transition-transform duration-200 hover:scale-105 hover:shadow-2xl"
-      *ngFor="let campaign of visibleCampaigns"
+      [class.hidden]="i >= 1 && windowWidth < 768"
     >
       <img [src]="campaign.image" [alt]="campaign.title" class="rounded-lg mb-4 w-40 h-40 object-cover" />
       <h3 class="text-lg font-medium mb-3 text-center truncate w-full">{{ campaign.title }}</h3>
@@ -15,10 +16,10 @@
   </div>
 
   <div class="flex justify-center mt-8 gap-6">
-    <button (click)="prevCampaigns()" class="text-white border border-white rounded-full w-14 h-14 flex items-center justify-center" style="background-color: #812B8A;">
+    <button (click)="prevCampaigns()" class="text-white border border-white rounded-full w-14 h-14 flex items-center justify-center" style="background-color: #812B8A;" [disabled]="campaignsIndex === 0">
       &#8249;
     </button>
-    <button (click)="nextCampaigns()" class="text-white border border-white rounded-full w-14 h-14 flex items-center justify-center" style="background-color: #812B8A;">
+    <button (click)="nextCampaigns()" class="text-white border border-white rounded-full w-14 h-14 flex items-center justify-center" style="background-color: #812B8A;" [disabled]="campaignsIndex >= campaigns.length - visibleCards">
       &#8250;
     </button>
   </div>
