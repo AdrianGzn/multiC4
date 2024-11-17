@@ -5,11 +5,15 @@ import { SeeComponent } from './see/see.component';
 import { AppointmentsRoutingModule } from './appointments-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SeedoctorComponent } from './seedoctor/seedoctor.component';
+import { SeereceptionistComponent } from './seereceptionist/seereceptionist.component';
 
 @NgModule({
   declarations: [
     GenerateComponent,
-    SeeComponent
+    SeeComponent,
+    SeedoctorComponent,
+    SeereceptionistComponent
   ],
   imports: [
     CommonModule,

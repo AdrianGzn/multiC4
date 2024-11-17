@@ -7,8 +7,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./details-establishment.component.css']
 })
 export class DetailsEstablishmentComponent {
-  center = { lat:16.617901807301678, lng: -93.09724099999998 };
-  zoom = 15; 
   
 
   constructor(private router: Router) {}

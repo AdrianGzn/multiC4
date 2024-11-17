@@ -9,6 +9,8 @@ import { GeneralsComponent } from './generals/generals.component';
 import { CampaignsRoutingModule } from './campaigns-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UserDoctorComponent } from './user-doctor/user-doctor.component';
+
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     DetailsComponent,
     DeleteComponent,
     UpdateComponent,
-    GeneralsComponent
+    GeneralsComponent,
+    UserDoctorComponent,
+   
   ],
   imports: [
     CommonModule,

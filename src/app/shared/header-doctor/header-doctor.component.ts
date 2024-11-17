@@ -22,15 +22,15 @@ export class HeaderDoctorComponent {
     this.router.navigate(['/schedules/scheduleEmployee']);
   }
 
-  see(): void {
-    this.router.navigate(['/appointments/see']);
+  seedoctor(): void {
+    this.router.navigate(['/appointments/seedoctor']);
   }
 
   appointments(): void {
     this.router.navigate(['/appointments/doctor']);
   }
-  userSee(): void {
-    this.router.navigate(['/campaigns/userSee']);
+  userDoctor(): void {
+    this.router.navigate(['/campaigns/userDoctor']);
   }
   login(): void {
     this.router.navigate(['/sign-login']);

@@ -1,1 +1,65 @@
-<p>user-see works!</p>
+<app-header-patient></app-header-patient>
+
+<div class="bg-purple-100 min-h-screen flex flex-col items-center px-4 py-8">
+  <!-- Título principal -->
+  <h1 class="text-5xl font-bold text-[#9042B7] mb-8 flex items-center">
+    CAMPAÑAS Y BRIGADAS
+    <img
+      src="assets/promocion.png"
+      alt="Icono campañas"
+      class="w-24 h-24 ml-4"
+    />
+  </h1>
+
+
+  <!-- Sección de búsqueda y subtítulo -->
+  <div class="flex flex-col md:flex-row md:justify-between w-full max-w-4xl items-center mb-8">
+    <h2 class="text-xl font-semibold text-black mb-4 md:mb-0">
+      Campañas Disponibles:
+    </h2>
+    <div class="relative">
+      <input
+        type="text"
+        placeholder="Buscar Campaña"
+        class="border border-purple-400 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-300 w-full md:w-64"
+      />
+      <button
+        class="absolute right-2 top-2 text-purple-600 hover:text-purple-800"
+      >
+        🔍
+      </button>
+    </div>
+  </div>
+
+  <!-- Mensaje si no hay campañas -->
+  <div *ngIf="campaigns.length === 0" class="text-gray-600 text-lg">
+    No hay campañas disponibles.
+  </div>
+
+  <!-- Lista de campañas -->
+  <div *ngIf="campaigns.length > 0" class="w-full max-w-4xl">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div
+        *ngFor="let campaign of campaigns"
+        class="bg-white shadow-md border border-purple-200 rounded-lg p-4 text-center"
+      >
+        <img
+          [src]="'https://via.placeholder.com/150'" Cambia esta URL por la imagen real si está disponible -->
+          [alt]="campaign.nombre"
+          class="rounded-lg mb-4"
+        />
+        <h3 class="text-purple-600 font-semibold">{{ campaign.nombre }}</h3>
+        <p class="text-gray-600 text-sm mb-2">{{ campaign.descripcion }}</p>
+        <p class="text-gray-500 text-xs">
+          Fecha de inicio: {{ campaign.fecha_inicio }}
+        </p>
+        <button
+          class="mt-2 bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-700"
+          (click)="myFormDelete.patchValue({ selectedCampaign: campaign.id_campania }); submit();"
+        >
+          Eliminar Campaña
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CardEstablishmentComponent } from './card-establishment/card-establishment.component';
 import { GenerateEstablishmentComponent } from './generate-establishment/generate-establishment.component';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { MapComponent } from './map/map.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { GoogleMapsModule } from '@angular/google-maps';
     DetailsEstablishmentComponent,
     SaveEstablishmentComponent,
     CardEstablishmentComponent,
-    GenerateEstablishmentComponent
+    GenerateEstablishmentComponent,
+    MapComponent
 
   ],
   imports: [

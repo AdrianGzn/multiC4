@@ -6,6 +6,7 @@ import { GeneralsComponent } from './generals/generals.component';
 import { ReceptionistSeeComponent } from './receptionist-see/receptionist-see.component';
 import { UpdateComponent } from './update/update.component';
 import { UserSeeComponent } from './user-see/user-see.component';
+import { UserDoctorComponent } from './user-doctor/user-doctor.component';
 
 const routes: Routes = [
   { path: 'delete', component: DeleteComponent },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'receptionistSee', component: ReceptionistSeeComponent },
   { path: 'update', component: UpdateComponent },
   { path: 'userSee', component: UserSeeComponent },
+  { path: 'userDoctor', component: UserDoctorComponent },
 ];
 
 @NgModule({
