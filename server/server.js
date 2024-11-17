@@ -9,7 +9,7 @@ app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
 app.use(cors({ origin: true, credentials: true }));
 
-const secretKey = process.env.SECRET_KEY;
+const secretKey = "sk_test_51QA1JN04GnkleiMSMJ7YtRIuEaTzBVTgiCl240P8xaYn2C8THVFoNKXOLIvKLOwjQBnEakPW99RPUWN3VwuGspqQ00niz02sTT"
 
 if (!secretKey) {
   console.error("SECRET_KEY no configurada");
@@ -85,8 +85,8 @@ app.post("/quotes", async (req, res, next) => {
         quantity: item.quantity,
       })),
       mode: "payment",
-      success_url: "http://localhost:4242/success.html",
-      cancel_url: "http://localhost:4242/cancel.html",
+      success_url: "http://localhost:4100/success.html",
+      cancel_url: "http://localhost:4100/cancel.html",
     });
 
     res.status(200).json(session);
@@ -96,4 +96,4 @@ app.post("/quotes", async (req, res, next) => {
   }
 });
 
-app.listen(4242, () => console.log("API corriendo en el puerto 4242"));
+app.listen(4100, () => console.log("API corriendo en el puerto 4242"));
