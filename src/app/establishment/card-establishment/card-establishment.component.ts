@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { EstablishmentShortResponse } from '../../shared/models/establishment-short-response';
+
 
 @Component({
   selector: 'app-card-establishment',
@@ -10,11 +11,20 @@ export class CardEstablishmentComponent {
   @Input() card: EstablishmentShortResponse = { 
     id_establishment: 0,
     nombre: '',
-    direccion:  '',
+    direccion:  {
+      calle: '',
+      colonia: '',
+      descripción: '',
+      id_dirección: 0,
+      latitud: 0,
+      longitud: 0,
+      numero: 0
+    },
   };
 
+  @Output() emitCardId = new EventEmitter<number>(); 
+  
   details(id: number):void {
-    console.log(id);
-    
+    this.emitCardId.emit(this.card.id_establishment)
   }
 }

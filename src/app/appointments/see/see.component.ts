@@ -9,7 +9,7 @@ import { GeneralServices } from '../../shared/services/general-services.service'
 export class SeeComponent implements OnInit {
   isOpen: boolean = false;
   selectedOption: string = 'Atendidos';  
-  options: string[] = ['Atendidos', 'No Atendidos', 'En Espera', 'Cancelados']
+  options: string[] = ['Atendidos', 'No Atendidos']
   quotes: any[] = []; 
 
   constructor(private generalService: GeneralServices) {}
@@ -18,15 +18,22 @@ export class SeeComponent implements OnInit {
     let user = localStorage.getItem("userData")
     const finalUser = user ? JSON.parse(user): null;
     console.log(finalUser)
-    this.generalService.getQuoteByIdStatus("atendidos", finalUser.id_usuario).subscribe()
+    this.generalService.getQuoteByIdStatus(this.selectedOption, finalUser.id_usuario).subscribe(
+    )
   }
 
   toggleSelect() {
     this.isOpen = !this.isOpen;  
+
   }
 
   selectOption(option: string) {
     this.selectedOption = option;  
-    this.isOpen = false;  
+    this.isOpen = false;      
+    let user = localStorage.getItem("userData")
+    const finalUser = user ? JSON.parse(user): null;
+    console.log(finalUser)
+    this.generalService.getQuoteByIdStatus(this.selectedOption, finalUser.id_usuario).subscribe(
+    )
   }
 }

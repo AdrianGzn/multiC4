@@ -180,12 +180,31 @@ export class GeneralServices {
   }
 
   //campaigns
-  getCampaigns(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/campaigns/`)
+  getCampaigns(id_establishment: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/campaigns/${id_establishment}`)
+  }
+
+  changeCampaign(id_campaign: number,campaign: any): Observable<any> {
+    return this.http.put(`${this.baseUrl}/campaigns/${id_campaign}`, campaign)
+  }
+
+  createCampaign(campaign: FormData): Observable<any> {
+    return this.http.post(`${this.baseUrl}/campaigns/`, campaign)
+  }
+
+  deleteCampaign(id_campaign: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/campaignDelete/${id_campaign}`)
   }
 
   //services
   getServices(): Observable<any> {
     return this.http.get(`${this.baseUrl}/services/`)
+  }
+
+
+  //get images S3
+
+  getImages(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/allImagesEstablishment/`)
   }
 }
