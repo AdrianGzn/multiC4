@@ -8,6 +8,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CardEstablishmentComponent } from './card-establishment/card-establishment.component';
 import { GenerateEstablishmentComponent } from './generate-establishment/generate-establishment.component';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 @NgModule({
   declarations: [
@@ -16,12 +17,14 @@ import { GenerateEstablishmentComponent } from './generate-establishment/generat
     SaveEstablishmentComponent,
     CardEstablishmentComponent,
     GenerateEstablishmentComponent
+
   ],
   imports: [
     CommonModule,
     EstablishmentRoutingModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    GoogleMapsModule
   ]
 })
 export class EstablishmentModule { }

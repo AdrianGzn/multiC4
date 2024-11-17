@@ -23,8 +23,13 @@
       </p>
     </div>
   </div>
-  <div class="mt-6">
-    <img src="assets/ubic.jpeg" alt="Mapa de ubicación" class="w-[96%] h-[250px] object-cover rounded-md mx-auto" />
+  <div class="mx-4 h-[200px] overflow-hidden rounded-lg border border-gray-300">
+    <google-map
+      width="100%"
+      height="100%"
+      [center]="center"
+      [zoom]="zoom">
+    </google-map>
   </div>
   <div class="p-6 mt-6">
     <p class="text-[#A526CB] text-xl font-semibold">
@@ -34,7 +39,10 @@
     <p class="text-[#A526CB] mt-1 text-xl font-semibold">
       Horario: De 00:00 a 24:00 Lunes a Domingo
     </p>
-    <button class="w-[80%] bg-[#A526CB] text-white text-xl font-semibold py-2 mt-4 rounded hover:bg-purple-600 transition-colors mx-auto block text-[#9042B7] font-bold hover:underline" (click)="generate()">Agendar Cita</button>
-
+    <button
+      class="w-[80%] bg-[#A526CB] text-white text-xl font-semibold py-2 mt-4 rounded hover:bg-purple-600 transition-colors mx-auto block text-[#9042B7] font-bold hover:underline"
+      (click)="generate()">
+      Agendar Cita
+    </button>
   </div>
 </div>
