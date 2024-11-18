@@ -9,31 +9,39 @@ import { GeneralServices } from '../../shared/services/general-services.service'
 export class SeeComponent implements OnInit {
   isOpen: boolean = false;
   selectedOption: string = 'Atendidos';  
-  options: string[] = ['Atendidos', 'No Atendidos']
+  options: string[] = ['Atendidos', 'No Atendidos'];
   quotes: any[] = []; 
 
   constructor(private generalService: GeneralServices) {}
 
   ngOnInit(): void {
-    let user = localStorage.getItem("userData")
-    const finalUser = user ? JSON.parse(user): null;
-    console.log(finalUser)
-    this.generalService.getQuoteByIdStatus(this.selectedOption, finalUser.id_usuario).subscribe(
-    )
+    this.fetchQuotes(); 
   }
 
   toggleSelect() {
     this.isOpen = !this.isOpen;  
-
   }
 
   selectOption(option: string) {
     this.selectedOption = option;  
     this.isOpen = false;      
-    let user = localStorage.getItem("userData")
-    const finalUser = user ? JSON.parse(user): null;
-    console.log(finalUser)
-    this.generalService.getQuoteByIdStatus(this.selectedOption, finalUser.id_usuario).subscribe(
-    )
+    this.fetchQuotes(); 
+  }
+
+  private fetchQuotes() {
+    let user = localStorage.getItem("userData");
+    const finalUser = user ? JSON.parse(user) : null;
+
+    if (finalUser) {
+      this.generalService.getQuoteByIdStatus(this.selectedOption, finalUser.id_usuario).subscribe((response: any[]) => {
+        this.quotes = response.map(quote => ({
+          id: quote.id,
+          date: quote.date,
+          status: quote.status,
+          doctor: quote.doctor,
+          description: quote.description
+        }));
+      });
+    }
   }
 }

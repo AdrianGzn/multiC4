@@ -3,11 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { DetailsEstablishmentComponent } from './details-establishment/details-establishment.component';
 import { SaveEstablishmentComponent } from './save-establishment/save-establishment.component';
 import { SearchEstablishmentComponent } from './search-establishment/search-establishment.component';
-import { authGuard } from '../welcome/guards/auth.guard';
+import { authGuard } from '../shared/guards/auth.guard';
 const routes: Routes = [
-    { path: 'details', component: DetailsEstablishmentComponent,canActivate: [authGuard]  },
-    { path: 'save', component: SaveEstablishmentComponent,canActivate: [authGuard]  },
-    { path: 'search', component: SearchEstablishmentComponent,canActivate: [authGuard]  },
+    { path: 'details', component: DetailsEstablishmentComponent,  },
+    { path: 'save', component: SaveEstablishmentComponent, },
+    { path: 'search', component: SearchEstablishmentComponent,  },
   ];
   
   @NgModule({
