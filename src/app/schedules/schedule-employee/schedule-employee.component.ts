@@ -12,6 +12,7 @@ import { ScheduleDoctor } from '../../shared/models/schedule-doctor';
   styleUrl: './schedule-employee.component.css'
 })
 export class ScheduleEmployeeComponent implements OnInit {
+  schedulesFiltered: ScheduleDoctor[] = [];
   user: User = {
     id_usuario: 0,
     id_rol: 0,
@@ -21,15 +22,28 @@ export class ScheduleEmployeeComponent implements OnInit {
   };
 
   ngOnInit(): void {
-      /*const data = localStorage.getItem('userData');
-      
-      if (data) {
-        const dataUser: User = JSON.parse(data);
-        this.user = dataUser;
-        console.log(this.user);
-      } else {
-        console.log("No se encontró 'userData' en el localStorage");
-      }*/
+    let díasOrdenados = ['domingo', 'lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado'];
+    this.user = this.userService.getUser();
+
+    this.generalServices.getScheduleDoctor().subscribe({
+      next: (item: ScheduleDoctor[]) => {
+        console.log('Se han obtenido los horarios del doctor exitosamente');
+        
+        item.map((schedule: ScheduleDoctor) => {
+          if (schedule.id_doctor === this.user.id_usuario) {
+            this.schedulesFiltered.push(schedule);
+          }
+        })
+      },
+      error: (error) => {
+        console.log('Ha habido un error al obtener los horarios.');
+        console.log(error);
+      }
+    });
+
+    this.schedulesFiltered.sort((a, b) => {
+      return díasOrdenados.indexOf(a.dia.toLowerCase()) - díasOrdenados.indexOf(b.dia.toLowerCase());
+    });
   }
   
 
@@ -55,18 +69,58 @@ export class ScheduleEmployeeComponent implements OnInit {
   }
 
   onSubmit(): void {
-
-    //this.user.horario = dias;
-
-
-    /*this.userService.changeEmployee(`${this.user.id_usuario}`, this.user).subscribe({
-      next: (response) => {
-        console.log("Niceee: " + response);
+    let diasSemana = [
+      { 
+        dia: 'domingo', 
+        entrada: this.formSchedules.value.domingoE, 
+        salida: this.formSchedules.value.domingoS 
+      },{ 
+        dia: 'lunes', 
+        entrada: this.formSchedules.value.lunesE, 
+        salida: this.formSchedules.value.lunesS 
+      },{ 
+        dia: 'martes', 
+        entrada: this.formSchedules.value.martesE, 
+        salida: this.formSchedules.value.martesS 
+      },{ 
+        dia: 'miercoles', 
+        entrada: this.formSchedules.value.miercolesE, 
+        salida: this.formSchedules.value.miercolesS 
+      },{ 
+        dia: 'jueves', 
+        entrada: this.formSchedules.value.juevesE, 
+        salida: this.formSchedules.value.juevesS
+      },{ 
+        dia: 'viernes', 
+        entrada: this.formSchedules.value.viernesE, 
+        salida: this.formSchedules.value.viernesS 
+      },{ 
+        dia: 'sabado', 
+        entrada: this.formSchedules.value.sabadoE, 
+        salida: this.formSchedules.value.sabadoS 
       },
-      error: (error) => {
-        console.log("Not nice: " + error);        
+    ];
+
+    this.schedulesFiltered.forEach((item: ScheduleDoctor) => {
+      const diaConfig = diasSemana.find(d => d.dia === item.dia.toLowerCase());
+
+      if (diaConfig) {
+        item.entrada = diaConfig.entrada;
+        item.salida = diaConfig.salida;
       }
-    })*/
+    });
+
+    this.schedulesFiltered.forEach((item: ScheduleDoctor) => {
+      this.generalServices.changeScheduleDoctor(item.id_horario, item).subscribe({
+        next: (item) => {
+          console.log('Se ha guardado correctamente el item con día: ' + item.dia)
+        },
+        error: (error) => {
+          console.log('Ha ocurrido un error');
+          console.log(error);
+        }
+      })
+    })
     
   }
 }

@@ -5,6 +5,7 @@ import { UserService } from '../../shared/services/user.service';
 import { GeneralServices } from '../../shared/services/general-services.service';
 import { ScheduleDoctor } from '../../shared/models/schedule-doctor';
 import { User } from '../../shared/models/user';
+import { ScheduleDoctorResponse } from '../../shared/models/schedule-doctor-response';
 
 
 @Component({
@@ -36,7 +37,7 @@ export class SignEmployeeComponent {
       id_servicio: 0
     };
 
-    const newPatient = {
+    const newEmployee = {
       id_rol: 0,
       nombre: this.signInForm.value.username,
       contraseña: this.signInForm.value.password
@@ -45,15 +46,16 @@ export class SignEmployeeComponent {
 
     if(this.signInForm.valid){
       if (this.signInForm.value.role === 'Doctor') {
-        newPatient.id_rol = 3;
+        newEmployee.id_rol = 3;
       } else if (this.signInForm.value.role === 'Recepcionista') {
-        newPatient.id_rol = 2;
+        newEmployee.id_rol = 2;
       }
 
       if (this.signInForm.value.password === this.signInForm.value.confirmPassword) {
-        this.userService.register(newPatient).subscribe({
+        this.userService.register(newEmployee).subscribe({
           next: (data: User) => {
             myUser = data;
+            this.createSchedulesForDoctor(myUser.id_usuario);
           },
           error: (error) => {
             console.log(error)
@@ -69,5 +71,30 @@ export class SignEmployeeComponent {
 
   signRegresar(): void {
     this.router.navigate(['/sign-regresar']);
+  }
+
+  createSchedulesForDoctor(idDoctor: number): void {
+    let dias = ['domingo', 'lunes', 'martes', 'miercoles', 'jeves', 'viernes', 'sabado'];
+
+    dias.forEach((itemDia) => {
+
+      let tempSchedule: ScheduleDoctorResponse = {
+        id_doctor: idDoctor,
+        dia: itemDia,
+        entrada: '',
+        salida: ''
+      } 
+
+      this.generalService.createScheduleDoctor(tempSchedule).subscribe({
+        next: (item) => {
+          console.log('horario con día ' + itemDia + ' creado correctamente');
+          console.log(item);          
+        },
+        error: (error) => {
+          console.log('Ha ocurrido un error al generar el horario');
+          console.log(error);
+        }
+      })
+    })
   }
 }
