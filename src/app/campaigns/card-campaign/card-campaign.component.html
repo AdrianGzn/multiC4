@@ -1,0 +1,13 @@
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="bg-white shadow-md border border-purple-200 rounded-lg p-4 text-center">
+        <img src={{campaign.image}} >
+        <h3 class="text-purple-600 font-semibold">{{ campaign.nombre }}</h3>
+        <p class="text-gray-600 text-sm mb-2">{{ campaign.descripcion }}</p>
+        <p class="text-gray-500 text-xs">
+            Fecha de inicio: {{ campaign.fecha_inicio }}
+        </p>
+        <button class="mt-2 bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-700">
+            Eliminar Campaña
+        </button>
+    </div>
+</div>

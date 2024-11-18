@@ -8,13 +8,13 @@ import { EstablishmentShortResponse } from '../../shared/models/establishment-sh
   styleUrls: ['./card-establishment.component.css']
 })
 export class CardEstablishmentComponent {
-  @Input() card: EstablishmentShortResponse = { 
+  @Input() card = { 
     id_establishment: 0,
     nombre: '',
     direccion:  {
       calle: '',
       colonia: '',
-      descripción: '',
+      descripcion: '',
       id_dirección: 0,
       latitud: 0,
       longitud: 0,
@@ -25,7 +25,7 @@ export class CardEstablishmentComponent {
 
   @Output() emitCardId = new EventEmitter<number>(); 
   
-  details(id: number):void {
-    this.emitCardId.emit(this.card.id_establishment)
+  details():void {
+    console.log(this.card.nombre)
   }
 }

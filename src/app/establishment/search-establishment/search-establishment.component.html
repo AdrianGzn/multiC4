@@ -48,8 +48,8 @@
         <div id="showData" class="w-full md:w-[55%] lg:w-[65%] bg-purple-100 p-4 md:p-6 rounded-lg shadow-lg mb-6 flex flex-col justify-between">
             <p class="text-lg font-semibold text-purple-800 mb-4">Resultados</p>
 
-            <div *ngFor="let item of establishmentFinded" class="mb-4">
-                <app-card-establishment [card]="item"></app-card-establishment>
+            <div class="mb-4">
+                <app-card-establishment *ngFor="let item of establishmentFinded" [card]="item"></app-card-establishment>
             </div>
         </div>
     </div>

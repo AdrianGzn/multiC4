@@ -21,7 +21,7 @@ export class SearchEstablishmentComponent implements OnInit {
   tipo: string[] = ['Hospital', 'Clínica', 'Consultorio']; //lista de todos lo que va en formularios
   categoria: string[] = ['Público', 'Privado'];
 
-  establishmentFinded: EstablishmentShortResponse[] = [];
+  establishmentFinded: any[] = [];
 
   constructor(private generalService: GeneralServices, private formBuilder: FormBuilder) {
     this.formEstablishment = this.formBuilder.group({
@@ -42,8 +42,6 @@ export class SearchEstablishmentComponent implements OnInit {
     this.generalService.establishmentInformation().subscribe(
       (next) => {
         this.establishmentFinded = next;
-        console.log(next)
-        console.log(this.establishmentFinded)
       },
 
       error => {
@@ -60,8 +58,21 @@ export class SearchEstablishmentComponent implements OnInit {
     console.log(formTypeCategory)
       this.generalService.getEstablishmentByTypeCategory(formTypeCategory.type, formTypeCategory.category).pipe().subscribe(
         data => {
-          this.establishmentFinded = data; 
-          console.log(data)
+          this.establishmentFinded = data.map((establishment: any) => ({
+            id_establishment: establishment.id_establishment,
+            nombre: establishment.nombre,
+            direccion:  {
+                calle: establishment.dirección.calle,
+                colonia: establishment.dirección.colonia,
+                descripcion: establishment.dirección.descripción,
+                id_dirección: establishment.dirección.id_dirección,
+                latitud: establishment.dirección.latitud,
+                longitud: establishment.dirección.longitud,
+                numero: establishment.dirección.numero
+            },
+            image: establishment.image
+          })); 
+          console.log(this.establishmentFinded)
         },
         error => {
           console.log(error)

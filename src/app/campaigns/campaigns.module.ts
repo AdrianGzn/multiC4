@@ -9,6 +9,7 @@ import { GeneralsComponent } from './generals/generals.component';
 import { CampaignsRoutingModule } from './campaigns-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CardCampaignComponent } from './card-campaign/card-campaign.component';
 import { UserDoctorComponent } from './user-doctor/user-doctor.component';
 
 
@@ -21,7 +22,7 @@ import { UserDoctorComponent } from './user-doctor/user-doctor.component';
     UpdateComponent,
     GeneralsComponent,
     UserDoctorComponent,
-   
+    CardCampaignComponent
   ],
   imports: [
     CommonModule,
