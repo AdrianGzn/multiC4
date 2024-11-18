@@ -8,22 +8,27 @@ import { catchError } from 'rxjs';
   templateUrl: './save-establishment.component.html',
   styleUrl: './save-establishment.component.css'
 })
-export class SaveEstablishmentComponent implements OnInit{
+export class SaveEstablishmentComponent implements OnInit {
   type_options: any[] = [];
   formData: FormGroup;
   formUbication: FormGroup;
   formSchedule: FormGroup;
   formServices: FormGroup;
   formDoctors: FormGroup;
-  selectedImage: File | null = null; 
-
+  selectedImage: File | null = null;
+  userFinal: any | null = {}
   constructor(private generalServices: GeneralServices) {
-      this.formData = new FormGroup({
-        nombre: new FormControl(null, [Validators.required]),
-        descripción: new FormControl(null, [Validators.required]),
-        id_tipo_establecimiento: new FormControl(null, [Validators.required]),
-        categoria: new FormControl(null, [Validators.required])
-      }),
+    let userCurrent = localStorage.getItem("user"); 
+    if(userCurrent) {
+      this.userFinal = JSON.parse(userCurrent);
+    }
+
+    this.formData = new FormGroup({
+      nombre: new FormControl(null, [Validators.required]),
+      descripción: new FormControl(null, [Validators.required]),
+      id_tipo_establecimiento: new FormControl(null, [Validators.required]),
+      categoria: new FormControl(null, [Validators.required])
+    }),
       this.formUbication = new FormGroup({
         calle: new FormControl(null, [Validators.required]),
         colonia: new FormControl(null, [Validators.required]),
@@ -48,32 +53,32 @@ export class SaveEstablishmentComponent implements OnInit{
   ngOnInit(): void {
     this.generalServices.getTypeEstablishment().subscribe(
       (next) => {
-        this.type_options =  next;
-        console.log(next) 
+        this.type_options = next;
+        console.log(next)
       }
     )
   }
 
   onChangeSelectedImage(file: any): void {
-    if(file.target.files.length > 0 ) {
-      this.selectedImage = file.target.files[0]; 
+    if (file.target.files.length > 0) {
+      this.selectedImage = file.target.files[0];
     }
   }
-  
+
   onSubmit() {
     this.generalServices.createSchedule(this.formSchedule.value).subscribe(
       (nextSchedule) => {
-        if(nextSchedule) {
+        if (nextSchedule) {
           console.log(nextSchedule)
           console.log(nextSchedule)
           this.generalServices.createAddress(this.formUbication.value).subscribe(
             (direccion) => {
               console.log(direccion)
-              if(direccion) {
+              if (direccion) {
                 console.log(direccion)
-                const formDatEstablishment = new FormData(); 
+                const formDatEstablishment = new FormData();
                 Object.keys(this.formData.value).forEach(element => {
-                   formDatEstablishment.append(element, this.formData.value[element])
+                  formDatEstablishment.append(element, this.formData.value[element])
                 });
                 formDatEstablishment.append("id_dirección", direccion.id_dirección.toString())
                 formDatEstablishment.append("id_horario", nextSchedule.id_horario.toString())
@@ -81,14 +86,14 @@ export class SaveEstablishmentComponent implements OnInit{
                   formDatEstablishment.append('file', this.selectedImage, this.selectedImage.name);
                 }
 
-                if(this.formData.valid) {
+                if (this.formData.valid) {
                   this.generalServices.createEstablishment(formDatEstablishment).subscribe(
                     data => {
                       localStorage.setItem("establecimiento", JSON.stringify(data));
                       const editPerson = {
                         "id_establecimiento": data.id_establishment
                       }
-                      this.generalServices.editRecepcionist(editPerson).subscribe( 
+                      this.generalServices.editRecepcionist(this.userFinal.id_usuario, editPerson).subscribe(
                         data => {
                           alert("se logro")
                         }
@@ -96,7 +101,7 @@ export class SaveEstablishmentComponent implements OnInit{
                     }
                   )
                 }
-             }
+              }
             }
           )
         }

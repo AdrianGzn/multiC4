@@ -203,8 +203,8 @@ export class GeneralServices {
 
 
   //get images S3
-  editRecepcionist(userModify: any): Observable<any> {
-    return this.http.put(`${this.baseUrl}/user/`, userModify)
+  editRecepcionist(id_recepcionist: number, userModify: any): Observable<any> {
+    return this.http.put(`${this.baseUrl}/user/${id_recepcionist}`, userModify)
   }
 
   getImages(): Observable<any> {
