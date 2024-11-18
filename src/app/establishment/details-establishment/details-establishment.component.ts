@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ServiceAndEstablishmentDataService } from '../../shared/services/service-and-establishment-data.service';
 import { Establishment } from '../../shared/models/establishment';
