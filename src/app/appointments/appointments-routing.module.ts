@@ -4,12 +4,12 @@ import { SeeComponent } from './see/see.component';
 import { GenerateComponent } from './generate/generate.component';
 import { SeedoctorComponent } from './seedoctor/seedoctor.component';
 import { SeereceptionistComponent } from './seereceptionist/seereceptionist.component';
-import { authGuard } from '../welcome/guards/auth.guard';
+import { authGuard } from '../shared/guards/auth.guard';
 const routes: Routes = [
-  { path: 'see', component: SeeComponent,canActivate: [authGuard]  },
-  { path: 'seedoctor', component: SeedoctorComponent,canActivate: [authGuard] },
-  { path: 'seereceptionist', component: SeereceptionistComponent,canActivate: [authGuard]  },
-  { path: 'generate', component: GenerateComponent,canActivate: [authGuard]  },
+  { path: 'see', component: SeeComponent,  },
+  { path: 'seedoctor', component: SeedoctorComponent, },
+  { path: 'seereceptionist', component: SeereceptionistComponent,  },
+  { path: 'generate', component: GenerateComponent, },
 ];
 
 @NgModule({

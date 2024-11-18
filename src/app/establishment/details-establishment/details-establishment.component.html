@@ -6,17 +6,11 @@
       <img src="/assets/centro.jpeg" alt="Centro de Salud Suchiapa" class="w-full h-[495px] object-cover" />
     </div>
 
-    <div class="w-1/2 p-6">
-      <h2 class="text-4xl font-bold text-[#A526CB]">Centro de Salud Suchiapa</h2>
+    <div class="w-1/2 p-6" *ngFor="let service of serviceEstablishment">
+      <h2 class="text-4xl font-bold text-[#A526CB]">{{service.nameEstablishment}}</h2>
       <h3 class="text-3xl font-semibold text-[#A526CB] mt-4">Servicios</h3>
-      <ul class="list-disc list-inside text-gray-700 mt-2 space-y-1">
-        <li class="text-xl">Medicina general</li>
-        <li class="text-xl">Odontología</li>
-        <li class="text-xl">Nutrición</li>
-        <li class="text-xl">Medicina preventiva</li>
-        <li class="text-xl">Vacunación</li>
-        <li class="text-xl">Farmacia</li>
-        <li class="text-xl">Estimulación temprana</li>
+      <ul class="list-disc list-inside text-gray-700 mt-2 space-y-1" >
+        <li class="text-xl">{{service.service}}</li>
       </ul>
       <h3 class="text-3xl font-semibold text-[#A526CB] mt-4">Descripción:</h3>
       <p class="text-xl text-gray-700 mt-1">

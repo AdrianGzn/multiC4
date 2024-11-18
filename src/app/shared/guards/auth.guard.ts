@@ -1,6 +1,6 @@
 import { CanActivateFn } from '@angular/router';
 import { inject } from '@angular/core';
-import { UserService } from '../../shared/services/user.service';
+import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 
 export const authGuard: CanActivateFn = (route, state) => {
@@ -15,11 +15,17 @@ export const authGuard: CanActivateFn = (route, state) => {
     return false;
   }
 
-  const expectedRoles = route.data?.['roles'] as Array<string>;
-  if (expectedRoles && !expectedRoles.includes(getRoleName(user.id_rol))) {
+  const userLocoal = JSON.parse(localStorage.getItem("userData") || '{}')
+  console.log(userLocoal)
 
-    router.navigate(['/login']);
-    return false;
+  if(userLocoal && userLocoal.rol) {
+    switch(userLocoal) {
+      case 'patient': 
+        router.navigate(["./welcome/patient"])
+        console.log("paciente")
+        return true; 
+      
+    }
   }
 
   return true; 
