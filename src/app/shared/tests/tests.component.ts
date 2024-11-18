@@ -1,8 +1,7 @@
-import { Component, DoCheck, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { GeneralServices } from '../services/general-services.service';
 import { UserService } from '../services/user.service';
 import { GeolocationService } from '../services/geolacation.service';
-import { Location } from '../models/location';
 import { StripeService } from '../services/stripe.service';
 
 @Component({
@@ -30,15 +29,9 @@ export class TestsComponent  {
     const quote = {
       "items": [
         {
-          "name": "Producto 1",
+          "name": "Cita",
           "product": "https://via.placeholder.com/150",
-          "price": 500,
-          "quantity": 2
-        },
-        {
-          "name": "Producto 2",
-          "product": "https://via.placeholder.com/150",
-          "price": 300,
+          "price": 100000,
           "quantity": 1
         }
       ]

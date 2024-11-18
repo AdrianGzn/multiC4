@@ -2,7 +2,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #242d60;
+  background-color: rgb(243 232 255);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
   'Helvetica Neue', 'Ubuntu', sans-serif;
   height: 100vh;
@@ -63,7 +63,7 @@ h5 {
 }
 button {
   height: 36px;
-  background: #556cd6;
+  background-color: rgb(134 25 143);
   color: white;
   width: 100%;
   font-size: 14px;
@@ -77,4 +77,23 @@ button {
 }
 button:hover {
   opacity: 0.8;
+}
+
+#regresar{
+  color: white;
+  background-color: rgb(134 25 143);
+  width: 70%;
+  height: 70px;
+  margin-bottom: 15px;
+}
+
+#mySection{
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 400px;
+  height: 122px;
+  border-radius: 6px;
 }

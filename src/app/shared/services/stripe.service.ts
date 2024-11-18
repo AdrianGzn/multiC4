@@ -12,13 +12,13 @@ export class StripeService {
 
   constructor(private http: HttpClient) {}
 
-  onCheckout(quote: any): void {
-    
+  onCheckout(quote: any): boolean {
+    let status = false;
     this.http.post(this.baseUrl, quote).subscribe(async (res: any) => {
       const stripe = await this.stripePromise;
-      stripe?.redirectToCheckout({
-        sessionId: res.id
-      });
+      stripe?.redirectToCheckout({sessionId: res.id});
+      status = true;
     });
+    return status;
   }
 }

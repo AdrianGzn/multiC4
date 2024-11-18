@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const bodyparser = require("body-parser");
-require("dotenv").config(); // Asegúrate de cargar las variables de entorno
+require("dotenv").config();
 
 const app = express();
 app.use(express.static("public"));
