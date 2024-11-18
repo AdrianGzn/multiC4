@@ -16,12 +16,12 @@
                     
                     <div class="w-[calc(48%)] min-w-[210px]">
                         <label class="form-child-label">Descripción:</label>
-                        <input class="form-child border-fuchsia-800 w-full" type="text" formControlName="descripcion">
+                        <input class="form-child border-fuchsia-800 w-full" type="text" formControlName="descripción">
                     </div>
                     
                     <div class="w-[calc(48%)] min-w-[210px]">
                         <label class="form-child-label">Tipo:</label>
-                        <select class="form-child border-fuchsia-800 w-full" id="tipo" formControlName="tipo">
+                        <select class="form-child border-fuchsia-800 w-full" id="id_tipo_establecimiento" formControlName="id_tipo_establecimiento">
                             <option *ngFor="let option of type_options" value={{option.id_tipo_establecimiento}}>
                                 {{option.tipo}}
                             </option>
@@ -87,17 +87,17 @@
                 </div>
             </div>
         </form>
-        <form [formGroup]="formImage" class="w-[90%] lg:px-10">
+        <div class="w-[90%] lg:px-10">
             <div class="w-full mb-6">
                 <p class="font-semibold text-purple-600 mb-2">IMAGEN</p>
                 
                 <label class="form-child-label">Agregar Imagen:</label>
                 <div class="flex justify-between">
-                    <input class="bg-white form-child w-[48%]" type="file" formControlName="imagen">
+                    <input class="bg-white form-child w-[48%]" type="file" id="selectImage" (change)="onChangeSelectedImage($event)">
                     <button type="button" class="w-[48%] bg-purple-700 text-white p-1 ml-2 rounded">Eliminar imágen</button>
                 </div>
             </div>
-        </form>
+        </div>
         <form [formGroup]="formServices" class="w-[90%] lg:px-10">
             <div class="w-full mb-6">
                 <p class="font-semibold text-purple-600 mb-2">SERVICIOS</p>

@@ -43,7 +43,7 @@ export class GenerateEstablishmentComponent implements OnInit{
   }
 
   myAddress: Address = {
-    id_address: 0,
+    id_dirección: 0,
     latitud: 0,
     longitud: 0,
     descripcion: '',
@@ -101,7 +101,7 @@ export class GenerateEstablishmentComponent implements OnInit{
       id_tipo_establecimiento: 1,
       descripción: '',
       categoria: '',
-      id_dirección: this.myAddress.id_address,
+      id_dirección: this.myAddress.id_dirección,
       id_horario: this.mySchedule.id_horario,
       nombre: ''
     }
