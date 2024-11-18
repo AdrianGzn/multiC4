@@ -1,98 +1,99 @@
 <app-header-doctor></app-header-doctor>
 
 <div class="w-full min-h-[calc(100vh-128px)] flex items-center justify-center bg-gray-200">
-    <div class="w-[70%] min-h-[calc(70vh)] mt-8 mb-12 bg-purple-100 flex flex-col items-center">
+    <div class="w-[90%] lg:w-[70%] min-h-[calc(70vh)] mt-8 mb-12 bg-purple-100 flex flex-col items-center">
         
         <p class="text-3xl font-semibold text-purple-800 mt-6 mb-2">Horarios</p>
 
-        <form class="form lg:w-5/6 flex flex-wrap justify-evenly" [formGroup]="formSchedules">
-            <div class="w-40 m-5">
-                <div class="h-16 rounded-t-md flex justify-center items-center bg-purple-800 text-white"><p>Domingo</p></div>
-                <div class="h-20 flex flex-col justify-center items-center bg-white border-2 border-purple-800">
+        <form class="form w-full lg:w-5/6 h-full flex flex-wrap justify-center" [formGroup]="formSchedules">
+
+            <div class="w-[90%] min-h-20 flex flex-wrap rounded-md mb-20 lg:mb-2 shadow-lg">
+                <div class="w-full lg:w-[24%] h-[75%] lg:h-full rounded-t-md lg:rounded-md flex justify-center items-center bg-purple-200 text-purple-800"><p>Domingo</p></div>
+                <div class="w-[50%] lg:w-[38%] h-full flex flex-col justify-center items-center bg-purple-100 shadow-md lg:shadow-none">
                     <label class="form-child-label">Entrada:</label>
-                    <input class="form-child border-2 border-fuchsia-700" type="time" formControlName="domingoE">
+                    <input class="form-child border-2 w-[70%]" type="time" formControlName="domingoE">
                 </div>
-                <div class="h-20 rounded-b-md flex flex-col justify-center items-center bg-white border-2 border-purple-800">
+                <div class="w-[50%] lg:w-[38%] h-full flex flex-col justify-center items-center bg-purple-100 shadow-md lg:shadow-none">
                     <label class="form-child-label">Salida:</label>
-                    <input class="form-child border-2 border-fuchsia-700" type="time" formControlName="domingoS">
+                    <input class="form-child border-2 w-[70%]" type="time" formControlName="domingoS">
                 </div>
             </div>
 
-            <div class="w-40 m-5">
-                <div class="h-16 rounded-t-md flex justify-center items-center bg-purple-800 text-white"><p>Lunes</p></div>
-                <div class="h-20 flex flex-col justify-center items-center bg-white border-2 border-purple-800">
+            <div class="w-[90%] min-h-20 flex flex-wrap rounded-md mb-20 lg:mb-2 shadow-lg">
+                <div class="w-full lg:w-[24%] h-[75%] lg:h-full rounded-t-md lg:rounded-md flex justify-center items-center bg-purple-200 text-purple-800"><p>Lunes</p></div>
+                <div class="w-[50%] lg:w-[38%] h-full flex flex-col justify-center items-center bg-purple-100 shadow-md lg:shadow-none">
                     <label class="form-child-label">Entrada:</label>
-                    <input class="form-child border-2 border-fuchsia-700" type="time" formControlName="lunesE">
+                    <input class="form-child border-2 w-[70%]" type="time" formControlName="lunesE">
                 </div>
-                <div class="h-20 rounded-b-md flex flex-col justify-center items-center bg-white border-2 border-purple-800">
+                <div class="w-[50%] lg:w-[38%] h-full flex flex-col justify-center items-center bg-purple-100 shadow-md lg:shadow-none">
                     <label class="form-child-label">Salida:</label>
-                    <input class="form-child border-2 border-fuchsia-700" type="time" formControlName="lunesS">
+                    <input class="form-child border-2 w-[70%]" type="time" formControlName="lunesS">
                 </div>
             </div>
 
-            <div class="w-40 m-5">
-                <div class="h-16 rounded-t-md flex justify-center items-center bg-purple-800 text-white"><p>Martes</p></div>
-                <div class="h-20 flex flex-col justify-center items-center bg-white border-2 border-purple-800">
+            <div class="w-[90%] min-h-20 flex flex-wrap rounded-md mb-20 lg:mb-2 shadow-lg">
+                <div class="w-full lg:w-[24%] h-[75%] lg:h-full rounded-t-md lg:rounded-md flex justify-center items-center bg-purple-200 text-purple-800"><p>Martes</p></div>
+                <div class="w-[50%] lg:w-[38%] h-full flex flex-col justify-center items-center bg-purple-100 shadow-md lg:shadow-none">
                     <label class="form-child-label">Entrada:</label>
-                    <input class="form-child border-2 border-fuchsia-700" type="time" formControlName="martesE">
+                    <input class="form-child border-2 w-[70%]" type="time" formControlName="martesE">
                 </div>
-                <div class="h-20 rounded-b-md flex flex-col justify-center items-center bg-white border-2 border-purple-800">
+                <div class="w-[50%] lg:w-[38%] h-full flex flex-col justify-center items-center bg-purple-100 shadow-md lg:shadow-none">
                     <label class="form-child-label">Salida:</label>
-                    <input class="form-child border-2 border-fuchsia-700" type="time" formControlName="martesS">
+                    <input class="form-child border-2 w-[70%]" type="time" formControlName="martesS">
                 </div>
             </div>
             
-            <div class="w-40 m-5">
-                <div class="h-16 rounded-t-md flex justify-center items-center bg-purple-800 text-white"><p>Miercoles</p></div>
-                <div class="h-20 flex flex-col justify-center items-center bg-white border-2 border-purple-800">
+            <div class="w-[90%] min-h-20 flex flex-wrap rounded-md mb-20 lg:mb-2 shadow-lg">
+                <div class="w-full lg:w-[24%] h-[75%] lg:h-full rounded-t-md lg:rounded-md flex justify-center items-center bg-purple-200 text-purple-800"><p>Miercoles</p></div>
+                <div class="w-[50%] lg:w-[38%] h-full flex flex-col justify-center items-center bg-purple-100 shadow-md lg:shadow-none">
                     <label class="form-child-label">Entrada:</label>
-                    <input class="form-child border-2 border-fuchsia-700" type="time" formControlName="miercolesE">
+                    <input class="form-child border-2 w-[70%]" type="time" formControlName="miercolesE">
                 </div>
-                <div class="h-20 rounded-b-md flex flex-col justify-center items-center bg-white border-2 border-purple-800">
+                <div class="w-[50%] lg:w-[38%] h-full flex flex-col justify-center items-center bg-purple-100 shadow-md lg:shadow-none">
                     <label class="form-child-label">Salida:</label>
-                    <input class="form-child border-2 border-fuchsia-700" type="time" formControlName="miercolesS">
+                    <input class="form-child border-2 w-[70%]" type="time" formControlName="miercolesS">
                 </div>
             </div>
 
-            <div class="w-40 m-5">
-                <div class="h-16 rounded-t-md flex justify-center items-center bg-purple-800 text-white"><p>Jueves</p></div>
-                <div class="h-20 flex flex-col justify-center items-center bg-white border-2 border-purple-800">
+            <div class="w-[90%] min-h-20 flex flex-wrap rounded-md mb-20 lg:mb-2 shadow-lg">
+                <div class="w-full lg:w-[24%] h-[75%] lg:h-full rounded-t-md lg:rounded-md flex justify-center items-center bg-purple-200 text-purple-800"><p>Jueves</p></div>
+                <div class="w-[50%] lg:w-[38%] h-full flex flex-col justify-center items-center bg-purple-100 shadow-md lg:shadow-none">
                     <label class="form-child-label">Entrada:</label>
-                    <input class="form-child border-2 border-fuchsia-700" type="time" formControlName="juevesE">
+                    <input class="form-child border-2 w-[70%]" type="time" formControlName="juevesE">
                 </div>
-                <div class="h-20 rounded-b-md flex flex-col justify-center items-center bg-white border-2 border-purple-800">
+                <div class="w-[50%] lg:w-[38%] h-full flex flex-col justify-center items-center bg-purple-100 shadow-md lg:shadow-none">
                     <label class="form-child-label">Salida:</label>
-                    <input class="form-child border-2 border-fuchsia-700" type="time" formControlName="juevesS">
+                    <input class="form-child border-2 w-[70%]" type="time" formControlName="juevesS">
                 </div>
             </div>
             
-            <div class="w-40 m-5">
-                <div class="h-16 rounded-t-md flex justify-center items-center bg-purple-800 text-white"><p>Viernes</p></div>
-                <div class="h-20 flex flex-col justify-center items-center bg-white border-2 border-purple-800">
+            <div class="w-[90%] min-h-20 flex flex-wrap rounded-md mb-20 lg:mb-2 shadow-lg">
+                <div class="w-full lg:w-[24%] h-[75%] lg:h-full rounded-t-md lg:rounded-md flex justify-center items-center bg-purple-200 text-purple-800"><p>Viernes</p></div>
+                <div class="w-[50%] lg:w-[38%] h-full flex flex-col justify-center items-center bg-purple-100 shadow-md lg:shadow-none">
                     <label class="form-child-label">Entrada:</label>
-                    <input class="form-child border-2 border-fuchsia-700" type="time" formControlName="viernesE">
+                    <input class="form-child border-2 w-[70%]" type="time" formControlName="viernesE">
                 </div>
-                <div class="h-20 rounded-b-md flex flex-col justify-center items-center bg-white border-2 border-purple-800">
+                <div class="w-[50%] lg:w-[38%] h-full flex flex-col justify-center items-center bg-purple-100 shadow-md lg:shadow-none">
                     <label class="form-child-label">Salida:</label>
-                    <input class="form-child border-2 border-fuchsia-700" type="time" formControlName="viernesS">
+                    <input class="form-child border-2 w-[70%]" type="time" formControlName="viernesS">
                 </div>
             </div>
             
-            <div class="w-40 m-5">
-                <div class="h-16 rounded-t-md flex justify-center items-center bg-purple-800 text-white"><p>Sábado</p></div>
-                <div class="h-20 flex flex-col justify-center items-center bg-white border-2 border-purple-800">
+            <div class="w-[90%] min-h-20 flex flex-wrap rounded-md mb-20 lg:mb-2 shadow-lg">
+                <div class="w-full lg:w-[24%] h-[75%] lg:h-full rounded-t-md lg:rounded-md flex justify-center items-center bg-purple-200 text-purple-800"><p>Sábado</p></div>
+                <div class="w-[50%] lg:w-[38%] h-full flex flex-col justify-center items-center bg-purple-100 shadow-md lg:shadow-none">
                     <label class="form-child-label">Entrada:</label>
-                    <input class="form-child border-2 border-fuchsia-700" type="time" formControlName="sabadoE">
+                    <input class="form-child border-2 w-[70%]" type="time" formControlName="sabadoE">
                 </div>
-                <div class="h-20 rounded-b-md flex flex-col justify-center items-center bg-white border-2 border-purple-800">
+                <div class="w-[50%] lg:w-[38%] h-full flex flex-col justify-center items-center bg-purple-100 shadow-md lg:shadow-none">
                     <label class="form-child-label">Salida:</label>
-                    <input class="form-child border-2 border-fuchsia-700" type="time" formControlName="sabadoS">
+                    <input class="form-child border-2 w-[70%]" type="time" formControlName="sabadoS">
                 </div>
             </div>
             
         </form>
         
-        <button (click)="onSubmit()" class=" w-40 mb-5 bg-purple-800 text-white px-6 py-3 rounded-md font-semibold transition-all duration-300 transform hover:bg-purple-900 hover:scale-105">Guardar</button>
+        <button (click)="onSubmit()" class="w-40 lg:w-[40%] lg:mt-3 mb-5 bg-purple-800 text-white px-6 py-3 rounded-md font-semibold transition-all duration-300 transform hover:bg-purple-900 hover:scale-105">Guardar</button>
 
     </div>
 </div>
