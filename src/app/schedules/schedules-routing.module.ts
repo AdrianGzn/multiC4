@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ScheduleEmployeeComponent } from './schedule-employee/schedule-employee.component';
-import { authGuard } from '../welcome/guards/auth.guard';
+import { authGuard } from '../shared/guards/auth.guard';
 const routes: Routes = [
-    { path: 'scheduleEmployee', component: ScheduleEmployeeComponent,canActivate: [authGuard]  },
+    { path: 'scheduleEmployee', component: ScheduleEmployeeComponent,  },
   ];
   
   @NgModule({

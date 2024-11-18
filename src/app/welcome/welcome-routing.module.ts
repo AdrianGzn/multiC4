@@ -3,12 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { WelcomeDoctorComponent } from './welcome-doctor/welcome-doctor.component';
 import { WelcomePatientComponent } from './welcome-patient/welcome-patient.component';
 import { WelcomeReceptionistComponent } from './welcome-receptionist/welcome-receptionist.component';
-import { authGuard } from './guards/auth.guard';
+import { authGuard } from '../shared/guards/auth.guard';
 
 const routes: Routes = [
-  { path: 'patient', component: WelcomePatientComponent, canActivate: [authGuard] },
-  { path: 'receptionist', component: WelcomeReceptionistComponent,canActivate: [authGuard] },
-  { path: 'doctor', component: WelcomeDoctorComponent,canActivate: [authGuard] },
+  { path: 'patient', component: WelcomePatientComponent, },
+  { path: 'receptionist', component: WelcomeReceptionistComponent, },
+  { path: 'doctor', component: WelcomeDoctorComponent, },
   { path: '**', redirectTo: '/login' },
 
 
