@@ -210,4 +210,9 @@ export class GeneralServices {
   getImages(): Observable<any> {
     return this.http.get(`${this.baseUrl}/allImagesEstablishment/`)
   }
+
+
+  getServiceEstablishemnt(id_establishment: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/allInformationServiceById/${id_establishment}`)
+  }
 }

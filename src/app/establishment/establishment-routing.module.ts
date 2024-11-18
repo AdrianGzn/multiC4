@@ -5,7 +5,7 @@ import { SaveEstablishmentComponent } from './save-establishment/save-establishm
 import { SearchEstablishmentComponent } from './search-establishment/search-establishment.component';
 import { authGuard } from '../welcome/guards/auth.guard';
 const routes: Routes = [
-    { path: 'details', component: DetailsEstablishmentComponent,canActivate: [authGuard]  },
+    { path: 'details', component: DetailsEstablishmentComponent,  },
     { path: 'save', component: SaveEstablishmentComponent,canActivate: [authGuard]  },
     { path: 'search', component: SearchEstablishmentComponent,canActivate: [authGuard]  },
   ];
