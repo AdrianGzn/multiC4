@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ServiceAndEstablishmentDataService } from '../../shared/services/service-and-establishment-data.service';
 import { Establishment } from '../../shared/models/establishment';
+import { serviceEstablishment } from '../../shared/models/serviceEstablishment';
+import { GeneralServices } from '../../shared/services/general-services.service';
 
 @Component({
   selector: 'app-details-establishment',
@@ -18,11 +20,23 @@ export class DetailsEstablishmentComponent implements OnInit{
     id_horario: 0,
     nombre: ''
   }
+  serviceEstablishment: serviceEstablishment[] = [];
 
-  constructor(private router: Router, private serviceAndEstablishmentData: ServiceAndEstablishmentDataService) {}
+  constructor(private router: Router, private generalServices: GeneralServices, private serviceAndEstablishmentData: ServiceAndEstablishmentDataService) {}
 
   ngOnInit(): void {
-    //Aquí se obtiene la data del establecimiento
+    this.dataEstablishment = this.serviceAndEstablishmentData.getEstablishment();
+    
+    this.generalServices.getServiceEstablishemnt(this.dataEstablishment.id_establishment).subscribe({
+      next: (item) => {
+        this.serviceEstablishment = item;
+        console.log(this.serviceEstablishment);
+      },
+      error: (error) => {
+        console.log('Ha ocurrido un error al obtener los servicos del establecimiento');
+        console.log(error);
+      }
+    })
   }
 
   generate(): void {

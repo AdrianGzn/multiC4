@@ -1,5 +1,3 @@
-import { ScheduleDoctor } from "./schedule-doctor"
-
 export interface User {
     id_usuario: number,
     id_rol: number,

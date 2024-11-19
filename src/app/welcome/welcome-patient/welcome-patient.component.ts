@@ -41,17 +41,17 @@ export class WelcomePatientComponent implements OnInit {
 
     this.generalService.getService().subscribe(
       data => {
-        console.log(data)
+        console.log(data);
       },
 
       error => {
-        console.log(error)
+        console.log(error);
       }
     )
   }
 
   checkout(): void {
-    this.userService.onCheckout("ae")
+    //this.userService.
   }
  
 }

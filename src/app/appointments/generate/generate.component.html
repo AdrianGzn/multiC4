@@ -8,13 +8,19 @@
 
     <form [formGroup]="agendarCitaForm" (ngSubmit)="onSubmit()">
         <label class="block text-purple-700 font-light text-xs">Servicios:</label>
-        <select formControlName="servicio" class="w-full p-2 mb-3 border border-purple-300 rounded-md">
+        <select formControlName="servicio" class="w-full p-2 mb-3 border border-purple-300 rounded-md" (change)="onSelectService()">
             <option value="">Seleccione un servicio</option>
+            <option *ngFor="let service of services" [value]="service">
+                {{ service }}
+            </option>
         </select>
 
         <label class="block text-purple-700 font-light text-xs">Doctor:</label>
         <select formControlName="doctor" class="w-full p-2 mb-3 border border-purple-300 rounded-md">
             <option value="">Seleccione un doctor</option>
+            <option *ngFor="let doctor of doctorsByService" [value]="doctor">
+                {{ doctor }}
+            </option>
         </select>
 
         <label class="block text-purple-700 font-light text-xs">Fecha:</label>

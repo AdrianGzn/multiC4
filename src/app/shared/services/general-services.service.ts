@@ -20,7 +20,6 @@ import { Service } from '../models/service';
 import { ServiceResponse } from '../models/service-response';
 import { TypeEstablishment } from '../models/type-establishment';
 import { TypeEstablishmentResponse } from '../models/type-establishment-response';
-import { Scheduler } from 'timers/promises';
 
 @Injectable({
   providedIn: 'root'
@@ -214,5 +213,9 @@ export class GeneralServices {
 
   getServiceEstablishemnt(id_establishment: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/allInformationServiceById/${id_establishment}`)
+  }
+
+  getDoctorByService(id_service: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/allSerivcesDoctor/${id_service}`)
   }
 }
