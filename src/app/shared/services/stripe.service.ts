@@ -7,7 +7,7 @@ import { Quote } from '../models/quote';
   providedIn: 'root'
 })
 export class StripeService {
-  private baseUrl: string = 'http://localhost:4100/quotes';
+  private baseUrl: string = 'http://localhost:8000/stripeQuotes';
   private stripePromise = loadStripe('pk_test_51QA1JN04GnkleiMSULPFvf7K29JgGAwupkaVMMVYVJFOc4Rvo2HTY8PYWZzGSXkxYIOjpXTXPoT4QQ2I3CIv4nqp00sOEe4GOp');
 
   constructor(private http: HttpClient) {}
@@ -16,7 +16,7 @@ export class StripeService {
     let status = false;
     this.http.post(this.baseUrl, quote).subscribe(async (res: any) => {
       const stripe = await this.stripePromise;
-      stripe?.redirectToCheckout({sessionId: res.id});
+      stripe?.redirectToCheckout({sessionId: res.session_id});
       status = true;
     });
     return status;

@@ -14,7 +14,7 @@ export class UpdateComponent  {
   constructor(private generalService: GeneralServices) {}
   ngOnInit(): void {
     this.campaniaForm = new FormGroup({
-      id_establecimiento: new FormControl(3, []),
+      id_establecimiento: new FormControl(31, []),
       nombre: new FormControl('', Validators.required),
       descripción: new FormControl(''),
       dirección: new FormControl(''),

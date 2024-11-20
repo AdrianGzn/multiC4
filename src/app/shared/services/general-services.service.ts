@@ -158,10 +158,6 @@ export class GeneralServices {
     return this.http.put<ServiceResponse>(`${this.baseUrl}/services/${idService}`, serviceData);
   }
 
-  deleteService(idService: number): Observable<ServiceResponse> {
-    return this.http.delete<ServiceResponse>(`${this.baseUrl}/service/${idService}`);
-  }
-
   createTypeEstablishment(typeEstablishmentData: TypeEstablishmentResponse): Observable<TypeEstablishment> {
     return this.http.post<TypeEstablishment>(`${this.baseUrl}/type_establishment/`, typeEstablishmentData);
   }
@@ -210,12 +206,24 @@ export class GeneralServices {
     return this.http.get(`${this.baseUrl}/allImagesEstablishment/`)
   }
 
+  getAllHorsById(id_medic: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/getAllDataHours/${id_medic}`)
+  }
+
 
   getServiceEstablishemnt(id_establishment: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/allInformationServiceById/${id_establishment}`)
+    return this.http.get(`${this.baseUrl}/allInformationIdEstablish/${id_establishment}`)
   }
 
   getDoctorByService(id_service: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/allSerivcesDoctor/${id_service}`)
+  }
+
+  getAllQuotesByIdDoctor(id: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/allQuoteDoctor/${id}`)
+  }
+
+  getServiceDoctorById_establishment(id_establishment: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/allServiceDoctorById_establishment/${id_establishment}`)
   }
 }

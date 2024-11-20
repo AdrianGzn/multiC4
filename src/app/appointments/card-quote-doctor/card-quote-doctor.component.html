@@ -1,0 +1,25 @@
+<div class="w-full max-w-sm mx-auto bg-white p-6 shadow-lg rounded-lg space-y-4 flex flex-col items-center">
+    <!-- Icono de Estetoscopio (Cita Médica) -->
+    <div class="flex items-center space-x-2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 1v5m0 0l3 3m-3-3l-3 3m6 8a2 2 0 11-4 0V9m-4 10a2 2 0 104 0m0 0V9m0 10h3a3 3 0 003-3v-4a3 3 0 00-3-3h-6a3 3 0 00-3 3v4a3 3 0 003 3h3z" />
+      </svg>
+      <div class="font-semibold text-lg text-gray-800 text-center">
+        {{quote.cita}}
+      </div>
+    </div>
+  
+    <div class="text-sm text-gray-600 text-center">
+      {{quote.fecha}}
+    </div>
+    <div class="text-sm text-gray-500 text-center">
+      {{quote.estatus}}
+    </div>
+  
+    <div class="text-center w-full">
+      <button class="bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-700" (click)="sendQuoteId()">
+        Eliminar cita
+      </button>
+    </div>
+  </div>
+  

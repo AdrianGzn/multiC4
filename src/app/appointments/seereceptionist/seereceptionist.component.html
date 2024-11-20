@@ -31,6 +31,6 @@
 
     </div>       
     <div class="w-100 h-100">
-      
+      <app-card-quote-doctor *ngFor="let quote of quotesDoctor" [quote]="quote" (emitId)="deleteQuote($event)"/>      
     </div>
 </div>

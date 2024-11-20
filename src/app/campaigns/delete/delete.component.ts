@@ -16,7 +16,7 @@ export class DeleteComponent implements OnInit {
   });
   }
   ngOnInit(): void {
-    this.generalService.getCampaigns(3).subscribe(
+    this.generalService.getCampaigns(31).subscribe(
       (next) => {
         console.log(next)
         this.campaigns = next.map((campaign: any) => ({

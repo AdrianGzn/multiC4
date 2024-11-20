@@ -17,16 +17,17 @@ export class ReceptionistSeeComponent implements OnInit {
   });
   }
   ngOnInit(): void {
-    this.generalService.getCampaigns(3).subscribe(
+    this.generalService.getCampaigns(31).subscribe(
       (next) => {
         this.campaigns = next.map((campaign: any) => ({
           id_campania: campaign["id_campañas"],
-          descripción: campaign.descripcion,
-          dirección: campaign.dirección,
-          fecha_inicio: campaign.fecha_inicio,
-          id_establecimiento: campaign.id_establecimiento,
-          nombre: campaign.nombre,
-          público: campaign.púlico
+          descripción: campaign.campaign.descripcion,
+          dirección: campaign.campaign.dirección,
+          fecha_inicio: campaign.campaign.fecha_inicio,
+          id_establecimiento: campaign.campaign.id_establecimiento,
+          nombre: campaign.campaign.nombre,
+          público: campaign.campaign.púlico,
+          image: campaign.image
         }))
       }
     )

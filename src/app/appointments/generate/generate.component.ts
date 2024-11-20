@@ -10,6 +10,7 @@ import { Service } from '../../shared/models/service';
 import { GeneralServices } from '../../shared/services/general-services.service';
 import { ServiceAndEstablishmentDataService } from '../../shared/services/service-and-establishment-data.service';
 import { DoctorResponse } from '../../shared/models/doctor-response';
+import { SharedDataService } from '../../shared/services/shared-data.service';
 
 @Component({
   selector: 'app-generate',
@@ -27,10 +28,10 @@ export class GenerateComponent  {
     id_horario: 0,
     nombre: ''
   }
-  services: string[] = [];
-  doctorsByService: string[] = [];
-
-  constructor(private fb: FormBuilder, private stripeService: StripeService, private userService: UserService, private generalServices: GeneralServices, private servicesAndEstablishmentData: ServiceAndEstablishmentDataService) {
+  services: any[] = [];
+  doctorsByService: any[] = [ ];
+  id: number = 0
+  constructor(private fb: FormBuilder, private stripeService: StripeService, private userService: UserService, private generalServices: GeneralServices, private servicesAndEstablishmentData: ServiceAndEstablishmentDataService, private sharedId: SharedDataService ) {
     this.agendarCitaForm = this.fb.group({
       servicio: ['', Validators.required],
       doctor: ['', Validators.required],
@@ -40,24 +41,30 @@ export class GenerateComponent  {
   }
 
   ngOnInit(): void {
-    this.establishmentData = this.servicesAndEstablishmentData.getEstablishment();
-    this.generalServices.getServices().subscribe({
-      next: (item) => {
-        console.log('Servicios obtenidos correctamente');
-
-        item.forEach((service: Service) => {
-          if (service.id_stablishment === this.establishmentData.id_establishment) {
-            this.services.push(service.tipo);
-          }
-        });
-
-        console.log(item);
-      },
-      error: (error) => {
-        console.log('No se ha podido obtener los servicios');
-        console.log(error);
+    this.sharedId.id$.subscribe(
+      id => {
+        this.id = id;
+        console.log(id)
       }
-    })
+    )
+
+    this.generalServices.getServiceDoctorById_establishment(this.id).subscribe(
+      (next) => {
+        next.map((item: any) => {
+          this.services.push({
+            id_service: item.id_service,
+            service: item.service
+          })
+          this.doctorsByService.push({
+            id_medic: item.id_doctor,
+            name: item.name
+          })
+        }) 
+        console.log(this.services)
+        console.log(this.doctorsByService)
+      }
+
+    )
   }
 
   onSelectService(): void {
@@ -75,23 +82,37 @@ export class GenerateComponent  {
   }
 
   onSubmit(): void {
-    if (this.agendarCitaForm.valid) {
+
       console.log(this.agendarCitaForm.value);
  
       let quote: any = {
-        "items": [
-          {
-            "name": 'Cita',
-            "product": "https://via.placeholder.com/150",
-            "precio": this.servicesAndEstablishmentData.getService().costo,
-            "quantity": 1
-          }
-        ]
+        "quote_request": {
+          "items": [
+            {
+              "name": "string",
+              "product": "string",
+              "price": 10,
+              "quantity": 10
+            }
+          ]
+        },
+        "quote_data": {
+          "id_usuario": 0,
+          "fecha": "string",
+          "horario": "string",
+          "estatus": "string",
+          "id_doctor": 0,
+          "id_servicio": 0
+        }
       }
 
       this.stripeService.onCheckout(quote);
-    } else {
-      console.log("Formulario inválido");
-    }
+
+  }
+
+  agendQuote(): void {
+    this.generalServices.createQuote(this.agendarCitaForm.value).subscribe(
+
+    )
   }
 }

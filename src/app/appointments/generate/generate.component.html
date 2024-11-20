@@ -10,16 +10,16 @@
         <label class="block text-purple-700 font-light text-xs">Servicios:</label>
         <select formControlName="servicio" class="w-full p-2 mb-3 border border-purple-300 rounded-md" (change)="onSelectService()">
             <option value="">Seleccione un servicio</option>
-            <option *ngFor="let service of services" [value]="service">
-                {{ service }}
+            <option *ngFor="let service of services" [value]="service.id_service">
+                {{ service.service }}
             </option>
         </select>
 
         <label class="block text-purple-700 font-light text-xs">Doctor:</label>
         <select formControlName="doctor" class="w-full p-2 mb-3 border border-purple-300 rounded-md">
             <option value="">Seleccione un doctor</option>
-            <option *ngFor="let doctor of doctorsByService" [value]="doctor">
-                {{ doctor }}
+            <option *ngFor="let doctor of doctorsByService" [value]="doctor.id_doctor">
+                {{ doctor.name }}
             </option>
         </select>
 
@@ -29,7 +29,7 @@
         <label class="block text-purple-700 font-light text-xs">Hora:</label>
         <input type="time" formControlName="hora" class="w-full p-2 mb-4 border border-purple-300 rounded-md" />
 
-        <button type="submit" class="w-full bg-purple-700 text-white font-bold py-2 rounded-md hover:bg-purple-800">
+        <button type="submit" class="w-full bg-purple-700 text-white font-bold py-2 rounded-md hover:bg-purple-800" >
             Agendar Cita
         </button>
     </form>

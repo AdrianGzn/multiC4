@@ -41,6 +41,7 @@ export class SearchEstablishmentComponent implements OnInit {
   ngOnInit(): void {
     this.generalService.establishmentInformation().subscribe(
       (next) => {
+        console.log(next)
         this.establishmentFinded = next;
       },
 

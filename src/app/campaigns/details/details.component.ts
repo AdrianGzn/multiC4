@@ -19,7 +19,7 @@ export class DetailsComponent {
   });
   }
   ngOnInit(): void {
-    this.generalService.getCampaigns(3).subscribe(
+    this.generalService.getCampaigns(31).subscribe(
       (next) => {
         this.campaigns = next.map((campaign: any) => ({
           id_campania: campaign.campaign["id_campañas"],
