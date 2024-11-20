@@ -14,8 +14,20 @@ export class SeeComponent implements OnInit {
 
   constructor(private generalService: GeneralServices) {}
 
+  quotesDoctor: any [] = [];
+
+
   ngOnInit(): void {
-    this.fetchQuotes(); 
+    this.generalService.getAllQuotesByIdDoctor(1).subscribe(
+      data => {
+        this.quotesDoctor = data; 
+      }
+    )
+    let user = localStorage.getItem("userData")
+    const finalUser = user ? JSON.parse(user): null;
+    console.log(finalUser)
+    this.generalService.getQuoteByIdStatus(this.selectedOption, finalUser.id_usuario).subscribe(
+    )
   }
 
   toggleSelect() {

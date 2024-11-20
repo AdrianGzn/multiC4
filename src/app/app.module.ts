@@ -4,6 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { CardQuoteComponent } from './welcome/card-quote/card-quote.component';
+import { QuotePatientComponent } from './appointments/quote-patient/quote-patient.component';
 
 
 @NgModule({

@@ -8,14 +8,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SeedoctorComponent } from './seedoctor/seedoctor.component';
 import { SeereceptionistComponent } from './seereceptionist/seereceptionist.component';
 import { CardQuoteDoctorComponent } from './card-quote-doctor/card-quote-doctor.component';
-
+import { QuotePatientComponent } from './quote-patient/quote-patient.component';
 @NgModule({
   declarations: [
     GenerateComponent,
     SeeComponent,
     SeedoctorComponent,
     SeereceptionistComponent,
-    CardQuoteDoctorComponent
+    CardQuoteDoctorComponent,
+    QuotePatientComponent
   ],
   imports: [
     CommonModule,

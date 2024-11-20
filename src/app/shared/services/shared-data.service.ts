@@ -18,4 +18,14 @@ export class SharedDataService {
   getId(): number {
     return this.idSubject.getValue();
   }
+
+
+  setIdEstablishment(id: number): void {
+    this.idSubject.next(id);
+  }
+
+
+  getIdEstablishment(): number {
+    return this.idSubject.getValue();
+  }
 }

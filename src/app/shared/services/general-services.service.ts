@@ -212,7 +212,7 @@ export class GeneralServices {
 
 
   getServiceEstablishemnt(id_establishment: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/allInformationServiceById/${id_establishment}`)
+    return this.http.get(`${this.baseUrl}/allInformationIdEstablish/${id_establishment}`)
   }
 
   getDoctorByService(id_service: number): Observable<any> {
@@ -221,5 +221,9 @@ export class GeneralServices {
 
   getAllQuotesByIdDoctor(id: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/allQuoteDoctor/${id}`)
+  }
+
+  getServiceDoctorById_establishment(id_establishment: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/allServiceDoctorById_establishment/${id_establishment}`)
   }
 }

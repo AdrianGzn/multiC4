@@ -51,6 +51,6 @@ export class CardEstablishmentComponent implements OnInit{
   details():void {
     console.log(this.card.id_establecimiento)
     this.idSent.setId(this.card.id_establecimiento)
-    this.router.navigate(['/establishment/details']);
+    this.router.navigate(['./establishment/details']);
   }
 }

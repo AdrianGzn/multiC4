@@ -5,6 +5,7 @@ import { Establishment } from '../../shared/models/establishment';
 import { serviceEstablishment } from '../../shared/models/serviceEstablishment';
 import { GeneralServices } from '../../shared/services/general-services.service';
 import { SharedDataService } from '../../shared/services/shared-data.service';
+import { establishmentResponseWith } from '../../shared/models/establishmentResponseWith';
 
 @Component({
   selector: 'app-details-establishment',
@@ -22,8 +23,26 @@ export class DetailsEstablishmentComponent implements OnInit{
     id_horario: 0,
     nombre: ''
   }
-  serviceEstablishment: serviceEstablishment[] = [];
 
+  serviceEstablishment: establishmentResponseWith = {
+    id_establishment: 0,
+    nameEstablishment: '',
+    descripcion: '',
+    horario: {
+      entrada:'',
+      salida: ''
+    },
+    direccion: {
+      calle: '',
+      colonia: '',
+      numero: ''
+    },
+    servicios: [{
+      id_service: 0,
+      service: '',
+      costo: 0
+    }],
+  };
   constructor(private router: Router, private generalServices: GeneralServices, private serviceAndEstablishmentData: ServiceAndEstablishmentDataService, private getId: SharedDataService) {}
 
   ngOnInit(): void {
@@ -35,11 +54,11 @@ export class DetailsEstablishmentComponent implements OnInit{
     )
     this.dataEstablishment = this.serviceAndEstablishmentData.getEstablishment();
     
-    this.generalServices.getServiceEstablishemnt(29).subscribe({
+    this.generalServices.getServiceEstablishemnt(this.idEstablishment).subscribe({
       next: (item) => {
         console.log(item)
         this.serviceEstablishment = item;
-        console.log(this.serviceEstablishment);
+
       },
       error: (error) => {
         console.log('Ha ocurrido un error al obtener los servicos del establecimiento');
@@ -50,10 +69,6 @@ export class DetailsEstablishmentComponent implements OnInit{
 
   generate(): void {
     this.router.navigate(['/appointments/generate']);
-    if (this.serviceAndEstablishmentData.selectEstablishment(this.dataEstablishment)) {
-      console.log('Datos del establecimiento guardados correctamente en el servicio.');
-    } else {
-      console.log('No se han podido guardar los datos en el servicio correctamente.');
-    }
+    this.getId.setId(this.serviceEstablishment.id_establishment)
   }
 }
