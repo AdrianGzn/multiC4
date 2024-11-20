@@ -1,4 +1,5 @@
 <app-header-receptionist></app-header-receptionist>
+
 <div class="w-full min-h-[calc(100vh-128px)] flex items-center justify-center bg-gray-200">
 
     <div class="w-[85%] min-h-[calc(70vh)] my-8 bg-purple-100 flex flex-col items-center p-5 lg:w-[70%]">
@@ -22,8 +23,8 @@
                     <div class="w-[calc(48%)] min-w-[210px]">
                         <label class="form-child-label">Tipo:</label>
                         <select class="form-child border-fuchsia-800 w-full" id="id_tipo_establecimiento" formControlName="id_tipo_establecimiento">
-                            <option *ngFor="let option of type_options" value={{option.id_tipo_establecimiento}}>
-                                {{option.tipo}}
+                            <option *ngFor="let option of type_options" value={{option}}>
+                                {{option}}
                             </option>
                         </select>
                     </div>
@@ -118,7 +119,7 @@
                 </div>
 
                 <div class="w-full flex flex-wrap justify-between mt-2">
-                    <button type="button" class="w-[48%] bg-fuchsia-700 text-white p-1 rounded">Añadir</button>
+                    <button type="button" class="w-[48%] bg-fuchsia-700 text-white p-1 rounded" (click)="addService()">Añadir</button>
                     <button type="button" class="w-[48%] bg-purple-700 text-white p-1 rounded">Eliminar servicio</button>
                 </div>
 

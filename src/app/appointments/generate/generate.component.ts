@@ -77,7 +77,7 @@ export class GenerateComponent  {
   onSubmit(): void {
     if (this.agendarCitaForm.valid) {
       console.log(this.agendarCitaForm.value);
-
+ 
       let quote: any = {
         "items": [
           {
