@@ -43,6 +43,7 @@ export class GenerateEstablishmentComponent implements OnInit {
 
   myAddress: Address = {
     id_dirección: 0,
+    id_establecimiento: 0,
     latitud: 0,
     longitud: 0,
     descripcion: '',
@@ -60,12 +61,14 @@ export class GenerateEstablishmentComponent implements OnInit {
   generateAll(): void {
     if (!this.haveEstablishment()) {
       const tempSchedule: ScheduleResponse = {
-        entrada: '',
-        salida: ''
+        "entrada": '19:52:03.991Z',
+        "salida": '19:52:03.991Z'
       };
 
       this.generalService.createSchedule(tempSchedule).subscribe({
         next: (nextSchedule: Schedule) => {
+          
+          
           this.mySchedule = nextSchedule;
           console.log('Horario creado:', nextSchedule);
 

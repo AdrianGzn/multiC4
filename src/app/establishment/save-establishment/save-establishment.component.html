@@ -31,7 +31,11 @@
 
                     <div class="w-[calc(48%)] min-w-[210px]">
                         <label class="form-child-label">Categoría:</label>
-                        <input class="form-child border-fuchsia-800 w-full" formControlName="categoria">
+                        <select class="form-child border-fuchsia-800 w-full" id="id_categoria_establecimiento" formControlName="id_categoria_establecimiento">
+                            <option *ngFor="let option of category_options" value={{option}}>
+                                {{option}}
+                            </option>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -104,60 +108,71 @@
                 <p class="font-semibold text-purple-600 mb-2">SERVICIOS</p>
                 
                 <div class="w-full flex flex-wrap justify-between">
+                    <!-- Select para servicios -->
                     <div class="w-[48%]">
                         <label class="form-child-label">Servicio:</label>
-                        <div class="">
-                            <select class="form-child w-full" formControlName="servicio">
-                                <!-- Opciones de servicios -->
-                            </select>
-                        </div>
+                        <select class="form-child w-full" formControlName="servicio">
+                            <option *ngFor="let service of nameServices" [value]="service">
+                                {{ service }}
+                            </option>
+                        </select>
                     </div>
+                    
+                    <!-- Input para costo -->
                     <div class="w-[48%]">
                         <label class="form-child-label">Costo:</label>
                         <input class="form-child border-fuchsia-800 w-full" type="text" formControlName="costo">
                     </div>
                 </div>
-
+        
                 <div class="w-full flex flex-wrap justify-between mt-2">
                     <button type="button" class="w-[48%] bg-fuchsia-700 text-white p-1 rounded" (click)="addService()">Añadir</button>
                     <button type="button" class="w-[48%] bg-purple-700 text-white p-1 rounded">Eliminar servicio</button>
                 </div>
-
+        
                 <div class="w-full min-h-[50px] bg-white mt-2">
-                    
+                    <!-- Aquí se mostrarán servicios añadidos -->
                 </div>
             </div>
         </form>
+        
         <form [formGroup]="formDoctors" class="w-[90%] lg:px-10">
-            <div class="w-full mb-6 ">
+            <div class="w-full mb-6">
                 <p class="font-semibold text-purple-600 mb-2">DOCTORES</p>
                 
                 <div class="w-full flex flex-wrap justify-between">
+                    <!-- Select para doctores -->
                     <div class="w-[48%]">
                         <label class="form-child-label">Doctor:</label>
                         <select class="form-child w-full" formControlName="doctor">
-                            <!-- Opciones de doctor -->
+                            <option *ngFor="let doctor of doctors" [value]="doctor.id_usuario">
+                                {{ doctor.nombre }}
+                            </option>
                         </select>
                     </div>
                     
+                    <!-- Select para servicios -->
                     <div class="w-[48%]">
                         <label class="form-child-label mt-2">Servicio:</label>
                         <select class="form-child w-full" formControlName="servicioDoctor">
-    
+                            <option *ngFor="let service of services" [value]="service.id_servicio">
+                                {{ service.tipo }}
+                            </option>
                         </select>
                     </div>
                 </div>
-
+        
                 <div class="w-full flex flex-wrap justify-between">
                     <button type="button" class="w-[48%] bg-fuchsia-700 text-white p-1 mt-2 rounded">Añadir</button>
                     <button type="button" class="w-[48%] bg-purple-700 text-white p-1 mt-2 rounded">Eliminar doctor</button>
                 </div>
-
+        
                 <div class="w-full min-h-[50px] bg-white mt-2">
-                    
+                    <!-- Aquí se mostrarán doctores añadidos -->
                 </div>
             </div>
         </form>
+        
            
             <button (click)="onSubmit()" type="submit" class="bg-fuchsia-700 text-white p-2 rounded w-[82%]">Guardar</button>
     </div>

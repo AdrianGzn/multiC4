@@ -8,7 +8,7 @@ import { loadStripe } from '@stripe/stripe-js';
   providedIn: 'root'
 })
 export class UserService {
-  private baseUrl: string = 'http://127.0.0.1:8000';  
+  private baseUrl: string = 'http://3.227.141.174:8000';  
 
   private user: User = {
     id_usuario: 0,
@@ -60,7 +60,7 @@ export class UserService {
   }
 
   updateUser(updatedUser: User): Observable<User> {
-    return this.http.put<User>(`${this.baseUrl}/user/`, updatedUser).pipe(
+    return this.http.put<User>(`${this.baseUrl}/user/${updatedUser.id_usuario}`, updatedUser).pipe(
       tap((data: User) => {
         console.log(data);
         this.user = data;
@@ -70,6 +70,10 @@ export class UserService {
         throw error
       })
     )
+  }
+
+  getUsers(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.baseUrl}/users/`);
   }
   
 }
