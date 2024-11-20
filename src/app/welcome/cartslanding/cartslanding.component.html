@@ -1,0 +1,33 @@
+<div class="relative w-full h-120 overflow-hidden">
+    <div
+      class="flex transition-transform duration-700 ease-in-out"
+      [ngStyle]="{ transform: 'translateX(' + currentIndex * -100 + '%' }"
+    >
+      <div
+        class="w-full flex-shrink-0 h-112 flex items-center justify-center"
+        *ngFor="let campaign of campaigns"
+      >
+        <!-- Contenido de cada diapositiva -->
+        <div
+          class="w-4/5 h-full flex flex-col items-center justify-center p-4 text-center mx-auto"
+          [ngStyle]="{ backgroundColor: '#ffffff' }"
+        >
+          <img
+            [src]="campaign.image"
+            alt="Imagen de {{ campaign.title }}"
+            class="w-1/2 h-72 object-cover rounded-md mb-7"
+          />
+          <h2 class="text-lg font-bold mb-2">{{ campaign.title }}</h2>
+          <p class="text-gray-600 mb-4">{{ campaign.description }}</p>
+          <button
+            class="text-white px-4 py-2 rounded"
+            [ngStyle]="{ backgroundColor: '#9042B7' }"
+            (click)="moreInfo(campaign)"
+          >
+            Más información
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
