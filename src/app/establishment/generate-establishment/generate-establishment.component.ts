@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { GeneralServices } from '../../shared/services/general-services.service';
 import { ScheduleResponse } from '../../shared/models/schedule-response';
 import { Schedule } from '../../shared/models/schedule';
-import { error, log } from 'console';
 import { User } from '../../shared/models/user';
 import { UserService } from '../../shared/services/user.service';
 import { Establishment } from '../../shared/models/establishment';
@@ -13,9 +12,9 @@ import { AddressResponse } from '../../shared/models/address-response';
 @Component({
   selector: 'app-generate-establishment',
   templateUrl: './generate-establishment.component.html',
-  styleUrl: './generate-establishment.component.css'
+  styleUrls: ['./generate-establishment.component.css']
 })
-export class GenerateEstablishmentComponent implements OnInit{
+export class GenerateEstablishmentComponent implements OnInit {
   constructor(private generalService: GeneralServices, private userService: UserService) {}
 
   myUser: User = {
@@ -24,7 +23,7 @@ export class GenerateEstablishmentComponent implements OnInit{
     nombre: '',
     id_establecimiento: 0,
     id_servicio: 0
-  }
+  };
 
   myEstablishment: Establishment = {
     id_establishment: 0,
@@ -34,88 +33,116 @@ export class GenerateEstablishmentComponent implements OnInit{
     id_dirección: 0,
     id_horario: 0,
     nombre: ''
-  }
+  };
 
   mySchedule: Schedule = {
     id_horario: 0,
     entrada: '',
-    salida: '',
-  }
+    salida: ''
+  };
 
   myAddress: Address = {
     id_dirección: 0,
+    id_establecimiento: 0,
     latitud: 0,
     longitud: 0,
     descripcion: '',
     calle: '',
     colonia: '',
     numero: 0
-  }
+  };
+
+  selectedImage: File | null = null;
 
   ngOnInit(): void {
     this.myUser = this.userService.getUser();
   }
 
-  generateSchedule(): void {
-    let tempSchedule: ScheduleResponse = {
-      entrada: '',
-      salida: ''
+  generateAll(): void {
+    if (!this.haveEstablishment()) {
+      const tempSchedule: ScheduleResponse = {
+        "entrada": '19:52:03.991Z',
+        "salida": '19:52:03.991Z'
+      };
+
+      this.generalService.createSchedule(tempSchedule).subscribe({
+        next: (nextSchedule: Schedule) => {
+          
+          
+          this.mySchedule = nextSchedule;
+          console.log('Horario creado:', nextSchedule);
+
+          const tempAddress: AddressResponse = {
+            latitud: 0,
+            longitud: 0,
+            descripcion: '',
+            calle: '',
+            colonia: '',
+            numero: 0
+          };
+
+          this.generalService.createAddress(tempAddress).subscribe({
+            next: (address: Address) => {
+              this.myAddress = address;
+              console.log('Dirección creada:', address);
+
+              const formData = new FormData();
+              formData.append('id_dirección', address.id_dirección.toString());
+              formData.append('id_horario', nextSchedule.id_horario.toString());
+              formData.append('id_tipo_establecimiento', '1');
+              formData.append('descripción', '');
+              formData.append('categoria', '');
+              formData.append('nombre', '');
+
+              if (this.selectedImage) {
+                formData.append('file', this.selectedImage, this.selectedImage.name);
+              }
+
+              this.generalService.createEstablishment(formData).subscribe({
+                next: (establishment: Establishment) => {
+                  this.myEstablishment = establishment;
+                  console.log('Establecimiento creado:', establishment);
+
+                  const editPerson = {
+                    id_establecimiento: establishment.id_establishment
+                  };
+
+                  this.generalService.editRecepcionist(this.myUser.id_usuario, editPerson).subscribe({
+                    next: () => {
+                      console.log('Recepcionista actualizada correctamente');
+                      alert('Se logró completar el registro');
+                    },
+                    error: (err) => {
+                      console.log('Error al actualizar la recepcionista:', err);
+                    }
+                  });
+                },
+                error: (err) => {
+                  console.log('Error al crear el establecimiento:', err);
+                }
+              });
+            },
+            error: (err) => {
+              console.log('Error al crear la dirección:', err);
+            }
+          });
+        },
+        error: (err) => {
+          console.log('Error al crear el horario:', err);
+        }
+      });
+    } else {
+      console.log('La recepcionista ya tiene un establecimiento asignado');
     }
-
-    this.generalService.createSchedule(tempSchedule).subscribe({
-      next: (response: Schedule) => {
-        this.mySchedule = response;
-        console.log('Horario creado con éxito');
-        
-      },
-      error: (error) => {
-        console.log('No se ha podido crear el horario.');
-        console.log(error);
-      }
-    })
-
   }
-  
-  generateAddress(): void {
-    let tempAddress: AddressResponse = {
-      latitud: 0,
-      longitud: 0,
-      descripcion: '',
-      calle: '',
-      colonia: '',
-      numero: 0
+
+  onChangeSelectedImage(file: any): void {
+    if (file.target.files.length > 0) {
+      this.selectedImage = file.target.files[0];
     }
-    this.generalService.createAddress(tempAddress).subscribe({
-      next: (data: Address) => {
-        this.myAddress = data;
-      },
-      error: (error) => {
-        console.log('No se ha podido crear una dirección.');
-        console.log(error);
-      }
-    })
   }
 
-  generateEstablishment(): void {
-    let tempEstablishment: EstablishmentResponse = {
-      id_tipo_establecimiento: 1,
-      descripción: '',
-      categoria: '',
-      id_dirección: this.myAddress.id_dirección,
-      id_horario: this.mySchedule.id_horario,
-      nombre: ''
-    }
-
-    this.generalService.createEstablishment(tempEstablishment).subscribe({
-      next: (data: EstablishmentResponse) => {
-        console.log('establecimiento creado');
-        console.log(this.myEstablishment);
-      },
-      error: (error) => {
-        console.log('No se ha podido crear el horario.');
-        console.log(error);
-      }
-    })
+  haveEstablishment(): boolean {
+    return this.myUser.id_establecimiento !== null && this.myUser.id_establecimiento !== 0;
   }
-
 }

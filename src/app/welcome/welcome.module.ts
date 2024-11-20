@@ -10,6 +10,9 @@ import { CartpatientcampanisComponent } from './cartpatientcampanis/cartpatientc
 import { SitiosComponent } from './sitios/sitios.component';
 import { FooterpatientComponent } from './footerpatient/footerpatient.component';
 import { HeaderPatientComponent } from '../shared/header-patient/header-patient.component';
+import { LandingComponent } from './landing/landing.component';
+import { CartslandingComponent } from './cartslanding/cartslanding.component';
+import { CartspatientComponent } from './cartspatient/cartspatient.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +23,9 @@ import { HeaderPatientComponent } from '../shared/header-patient/header-patient.
     CartpatientcampanisComponent,
     SitiosComponent,
     FooterpatientComponent,
+    LandingComponent,
+    CartslandingComponent,
+    CartspatientComponent,
   ],
   imports: [
     CommonModule,

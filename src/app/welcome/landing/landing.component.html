@@ -1,0 +1,45 @@
+<div class="max-w-screen-lg mx-auto px-4 py-6 relative">
+    <header class="flex justify-between items-center mb-6 relative z-10">
+      <img
+        src="./assets/icon-vital.png"
+        alt="Vital SH Logo"
+        class="w-24 relative -top-2"
+      />
+      <button
+        style="margin-left: auto; position: relative; right: -20px;"
+        class="bg-[#A526CB] text-white font-semibold px-6 py-3 rounded-md text-lg z-20 hover:bg-[#8D1F9C]"
+        (click)="login()"
+      >
+        LOGIN
+      </button>
+    </header>
+  
+    <!-- Main Content -->
+    <div class="flex flex-col md:flex-row items-center gap-8">
+      <!-- Text Section -->
+      <div class="text-center md:text-left md:max-w-md relative" style="top: -61px;">
+        <h1 class="text-3xl md:text-4xl font-bold mb-4" style="color: #812B8A;">
+          Tu salud en manos expertas, con atención que marca la diferencia.
+        </h1>
+        <p class="text-xl mb-6" style="color: #A526CB;">
+          En Vital Suchiapa contamos con diversos servicios para cuidar tu salud
+          y la de tu familia.
+        </p>
+        <button
+          class="bg-[#A526CB] text-white font-bold px-14 py-2 rounded-lg shadow-lg hover:bg-[#8D1F9C] mt-6"
+          (click)="login()"
+        >
+          Agenda ya!
+        </button>
+      </div>
+  
+      <!-- Image Section -->
+      <div class="w-full md:w-1/2 -mt-16 relative">
+        <img src="assets/landing.jpeg" alt="Atención médica" class="w-full" />
+      </div>
+    </div>
+  </div>
+  <app-cartslanding></app-cartslanding>
+  <app-cartpatient></app-cartpatient>
+  <app-footerpatient></app-footerpatient>
+  

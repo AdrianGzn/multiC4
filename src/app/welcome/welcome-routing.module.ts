@@ -4,11 +4,13 @@ import { WelcomeDoctorComponent } from './welcome-doctor/welcome-doctor.componen
 import { WelcomePatientComponent } from './welcome-patient/welcome-patient.component';
 import { WelcomeReceptionistComponent } from './welcome-receptionist/welcome-receptionist.component';
 import { authGuard } from '../shared/guards/auth.guard';
+import { LandingComponent } from './landing/landing.component';
 
 const routes: Routes = [
   { path: 'patient', component: WelcomePatientComponent, },
   { path: 'receptionist', component: WelcomeReceptionistComponent, },
   { path: 'doctor', component: WelcomeDoctorComponent, },
+  { path: 'landing', component: LandingComponent, },
   { path: '**', redirectTo: '/login' },
 
 

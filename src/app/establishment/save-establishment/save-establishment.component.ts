@@ -1,7 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { GeneralServices } from '../../shared/services/general-services.service';
-import { catchError } from 'rxjs';
+import { serviceEstablishment } from '../../shared/models/serviceEstablishment';
+import { User } from '../../shared/models/user';
+import { ServiceAndEstablishmentDataService } from '../../shared/services/service-and-establishment-data.service';
+import { ServiceResponse } from '../../shared/models/service-response';
+import { error } from 'console';
+import { Establishment } from '../../shared/models/establishment';
+import { UserService } from '../../shared/services/user.service';
+import { AddressResponse } from '../../shared/models/address-response';
+import { Address } from '../../shared/models/address';
+import { Service } from '../../shared/models/service';
 
 @Component({
   selector: 'app-save-establishment',
@@ -9,29 +18,33 @@ import { catchError } from 'rxjs';
   styleUrl: './save-establishment.component.css'
 })
 export class SaveEstablishmentComponent implements OnInit {
-  type_options: any[] = [];
+  userFinal = {};
+
   formData: FormGroup;
   formUbication: FormGroup;
   formSchedule: FormGroup;
   formServices: FormGroup;
   formDoctors: FormGroup;
-  selectedImage: File | null = null;
-  userFinal: any | null = {}
-  constructor(private generalServices: GeneralServices) {
-    let userCurrent = localStorage.getItem("user"); 
-    if(userCurrent) {
-      this.userFinal = JSON.parse(userCurrent);
-    }
 
+  type_options: string[] = [];
+  category_options: string[] = [];
+
+  nameServices: string[] = [];
+  services: Service[] = []
+  doctors: User[] = [];
+
+
+
+  constructor(private generalServices: GeneralServices, private serviceAndEstablishmentData: ServiceAndEstablishmentDataService, private userService: UserService) {
     this.formData = new FormGroup({
-      nombre: new FormControl(null, [Validators.required]),
-      descripción: new FormControl(null, [Validators.required]),
+      nombre: new FormControl('', [Validators.required]),
+      descripción: new FormControl('', [Validators.required]),
       id_tipo_establecimiento: new FormControl(null, [Validators.required]),
-      categoria: new FormControl(null, [Validators.required])
+      id_categoria_establecimiento: new FormControl(null, [Validators.required])
     }),
       this.formUbication = new FormGroup({
-        calle: new FormControl(null, [Validators.required]),
-        colonia: new FormControl(null, [Validators.required]),
+        calle: new FormControl('', [Validators.required]),
+        colonia: new FormControl('', [Validators.required]),
         numero: new FormControl(null),
         latitud: new FormControl(null),
         longitud: new FormControl(null)
@@ -41,7 +54,7 @@ export class SaveEstablishmentComponent implements OnInit {
         salida: new FormControl(null, [Validators.required]),
       }),
       this.formServices = new FormGroup({
-        servicio: new FormControl(null, [Validators.required, Validators.min(1), Validators.max(100)]),
+        servicio: new FormControl('', [Validators.required, Validators.min(1), Validators.max(100)]),
         costo: new FormControl(null, [Validators.required, Validators.min(10), Validators.max(250)]),
       }),
       this.formDoctors = new FormGroup({
@@ -51,61 +64,36 @@ export class SaveEstablishmentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.generalServices.getTypeEstablishment().subscribe(
-      (next) => {
-        this.type_options = next;
-        console.log(next)
-      }
-    )
+    let userCurrent = localStorage.getItem("userData"); 
+    if(userCurrent) {
+      this.userFinal = JSON.parse(userCurrent);
+    } 
   }
 
-  onChangeSelectedImage(file: any): void {
-    if (file.target.files.length > 0) {
-      this.selectedImage = file.target.files[0];
+  onSubmit(): void {
+    let tempAddress: AddressResponse = {
+      latitud: 0,
+      longitud: 0,
+      descripcion: '',
+      calle: '',
+      colonia: '',
+      numero: 0
     }
+    this.generalServices.createAddress(tempAddress).subscribe({
+      next: (item) => {
+        console.log(item);
+      },
+      error: (error) => {
+        console.log('No se pudo crear la dirección');
+      }
+    })
   }
 
-  onSubmit() {
-    this.generalServices.createSchedule(this.formSchedule.value).subscribe(
-      (nextSchedule) => {
-        if (nextSchedule) {
-          console.log(nextSchedule)
-          console.log(nextSchedule)
-          this.generalServices.createAddress(this.formUbication.value).subscribe(
-            (direccion) => {
-              console.log(direccion)
-              if (direccion) {
-                console.log(direccion)
-                const formDatEstablishment = new FormData();
-                Object.keys(this.formData.value).forEach(element => {
-                  formDatEstablishment.append(element, this.formData.value[element])
-                });
-                formDatEstablishment.append("id_dirección", direccion.id_dirección.toString())
-                formDatEstablishment.append("id_horario", nextSchedule.id_horario.toString())
-                if (this.selectedImage) {
-                  formDatEstablishment.append('file', this.selectedImage, this.selectedImage.name);
-                }
+  onChangeSelectedImage(event: Event): void {
 
-                if (this.formData.valid) {
-                  this.generalServices.createEstablishment(formDatEstablishment).subscribe(
-                    data => {
-                      localStorage.setItem("establecimiento", JSON.stringify(data));
-                      const editPerson = {
-                        "id_establecimiento": data.id_establishment
-                      }
-                      this.generalServices.editRecepcionist(this.userFinal.id_usuario, editPerson).subscribe(
-                        data => {
-                          alert("se logro")
-                        }
-                      )
-                    }
-                  )
-                }
-              }
-            }
-          )
-        }
-      }
-    )
+  }
+
+  addService():void {
+
   }
 }

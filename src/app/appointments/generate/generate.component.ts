@@ -84,7 +84,7 @@ export class GenerateComponent  {
   onSubmit(): void {
 
       console.log(this.agendarCitaForm.value);
-
+ 
       let quote: any = {
         "quote_request": {
           "items": [
