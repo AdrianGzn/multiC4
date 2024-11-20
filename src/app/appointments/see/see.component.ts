@@ -34,6 +34,7 @@ export class SeeComponent implements OnInit {
 
     if (finalUser) {
       this.generalService.getQuoteByIdStatus(this.selectedOption, finalUser.id_usuario).subscribe((response: any[]) => {
+        console.log(response)
         this.quotes = response.map(quote => ({
           id: quote.id,
           date: quote.date,

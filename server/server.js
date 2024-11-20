@@ -9,7 +9,7 @@ app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
 app.use(cors({ origin: true, credentials: true }));
 
-const secretKey = process.env.SECRET_KEY
+const secretKey = "sk_test_51QA1JN04GnkleiMSMJ7YtRIuEaTzBVTgiCl240P8xaYn2C8THVFoNKXOLIvKLOwjQBnEakPW99RPUWN3VwuGspqQ00niz02sTT"
 
 if (!secretKey) {
   console.error("SECRET_KEY no configurada");

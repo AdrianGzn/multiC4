@@ -10,10 +10,16 @@ export class SeedoctorComponent {
   selectedOption: string = 'Atendidos';  
   options: string[] = ['Atendidos', 'No Atendidos']
   quotes: any[] = []; 
+  quotesDoctor: any [] = [];
 
   constructor(private generalService: GeneralServices) {}
 
   ngOnInit(): void {
+    this.generalService.getAllQuotesByIdDoctor(1).subscribe(
+      data => {
+        this.quotesDoctor = data; 
+      }
+    )
     let user = localStorage.getItem("userData")
     const finalUser = user ? JSON.parse(user): null;
     console.log(finalUser)
@@ -26,8 +32,17 @@ export class SeedoctorComponent {
 
   }
 
+  deleteQuote($event: number): void  {
+    this.generalService.deleteQuote($event).subscribe(
+      data => {
+        console.log(data)
+      }
+    )
+  }
+
   selectOption(option: string) {
     this.selectedOption = option;  
+    console.log(this.selectOption)
     this.isOpen = false;      
     let user = localStorage.getItem("userData")
     const finalUser = user ? JSON.parse(user): null;
@@ -35,4 +50,4 @@ export class SeedoctorComponent {
     this.generalService.getQuoteByIdStatus(this.selectedOption, finalUser.id_usuario).subscribe(
     )
   }
-}
+} 

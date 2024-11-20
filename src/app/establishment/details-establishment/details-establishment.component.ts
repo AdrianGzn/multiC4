@@ -4,6 +4,7 @@ import { ServiceAndEstablishmentDataService } from '../../shared/services/servic
 import { Establishment } from '../../shared/models/establishment';
 import { serviceEstablishment } from '../../shared/models/serviceEstablishment';
 import { GeneralServices } from '../../shared/services/general-services.service';
+import { SharedDataService } from '../../shared/services/shared-data.service';
 
 @Component({
   selector: 'app-details-establishment',
@@ -11,6 +12,7 @@ import { GeneralServices } from '../../shared/services/general-services.service'
   styleUrls: ['./details-establishment.component.css']
 })
 export class DetailsEstablishmentComponent implements OnInit{
+  idEstablishment: number = 0
   dataEstablishment: Establishment = {
     id_establishment: 0,
     id_tipo_establecimiento: 0,
@@ -22,13 +24,20 @@ export class DetailsEstablishmentComponent implements OnInit{
   }
   serviceEstablishment: serviceEstablishment[] = [];
 
-  constructor(private router: Router, private generalServices: GeneralServices, private serviceAndEstablishmentData: ServiceAndEstablishmentDataService) {}
+  constructor(private router: Router, private generalServices: GeneralServices, private serviceAndEstablishmentData: ServiceAndEstablishmentDataService, private getId: SharedDataService) {}
 
   ngOnInit(): void {
+    this.getId.id$.subscribe(
+      id => {
+        this.idEstablishment = id;
+        console.log(id)
+      }
+    )
     this.dataEstablishment = this.serviceAndEstablishmentData.getEstablishment();
     
-    this.generalServices.getServiceEstablishemnt(this.dataEstablishment.id_establishment).subscribe({
+    this.generalServices.getServiceEstablishemnt(29).subscribe({
       next: (item) => {
+        console.log(item)
         this.serviceEstablishment = item;
         console.log(this.serviceEstablishment);
       },

@@ -10,6 +10,7 @@ import { CardQuoteComponent } from './welcome/card-quote/card-quote.component';
   declarations: [
     AppComponent,
     CardQuoteComponent,
+
   ],
   imports: [
     BrowserModule,

@@ -7,13 +7,15 @@ import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SeedoctorComponent } from './seedoctor/seedoctor.component';
 import { SeereceptionistComponent } from './seereceptionist/seereceptionist.component';
+import { CardQuoteDoctorComponent } from './card-quote-doctor/card-quote-doctor.component';
 
 @NgModule({
   declarations: [
     GenerateComponent,
     SeeComponent,
     SeedoctorComponent,
-    SeereceptionistComponent
+    SeereceptionistComponent,
+    CardQuoteDoctorComponent
   ],
   imports: [
     CommonModule,

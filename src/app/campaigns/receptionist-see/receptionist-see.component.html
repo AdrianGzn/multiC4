@@ -36,28 +36,12 @@
     </div>
   
     <!-- Lista de campañas -->
-    <div *ngIf="campaigns.length > 0" class="w-full max-w-4xl">
+    <div class="w-full max-w-4xl">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div
           *ngFor="let campaign of campaigns"
-          class="bg-white shadow-md border border-purple-200 rounded-lg p-4 text-center"
-        >
-          <img
-            [src]="'https://via.placeholder.com/150'" Cambia esta URL por la imagen real si está disponible -->
-            [alt]="campaign.nombre"
-            class="rounded-lg mb-4"
-          />
-          <h3 class="text-purple-600 font-semibold">{{ campaign.nombre }}</h3>
-          <p class="text-gray-600 text-sm mb-2">{{ campaign.descripcion }}</p>
-          <p class="text-gray-500 text-xs">
-            Fecha de inicio: {{ campaign.fecha_inicio }}
-          </p>
-          <button
-            class="mt-2 bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-700"
-            (click)="myFormDelete.patchValue({ selectedCampaign: campaign.id_campania }); submit();"
-          >
-            Eliminar Campaña
-          </button>
+          class="bg-white shadow-md border border-purple-200 rounded-lg p-4 text-center">
+          <app-card-campaign [campaign]="campaign"/>
         </div>
       </div>
     </div>

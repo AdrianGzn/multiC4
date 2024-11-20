@@ -11,7 +11,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CardCampaignComponent } from './card-campaign/card-campaign.component';
 import { UserDoctorComponent } from './user-doctor/user-doctor.component';
-
+import { CardCampaignPatientComponent } from '../card-campaign-patient/card-campaign-patient.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +22,8 @@ import { UserDoctorComponent } from './user-doctor/user-doctor.component';
     UpdateComponent,
     GeneralsComponent,
     UserDoctorComponent,
-    CardCampaignComponent
+    CardCampaignComponent,
+    CardCampaignPatientComponent
   ],
   imports: [
     CommonModule,

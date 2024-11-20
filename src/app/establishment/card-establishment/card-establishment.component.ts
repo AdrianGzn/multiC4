@@ -2,6 +2,8 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { ServiceAndEstablishmentDataService } from '../../shared/services/service-and-establishment-data.service';
 import { GeneralServices } from '../../shared/services/general-services.service';
 import { Establishment } from '../../shared/models/establishment';
+import { SharedDataService } from '../../shared/services/shared-data.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -10,10 +12,10 @@ import { Establishment } from '../../shared/models/establishment';
   styleUrls: ['./card-establishment.component.css']
 })
 export class CardEstablishmentComponent implements OnInit{
-  constructor(private serviceAndEstablishmentData: ServiceAndEstablishmentDataService, private generalServices: GeneralServices) {}
+  constructor(private router: Router,private serviceAndEstablishmentData: ServiceAndEstablishmentDataService, private generalServices: GeneralServices, private idSent: SharedDataService) {}
 
   @Input() card = { 
-    id_establishment: 0,
+    id_establecimiento: 0,
     nombre: '',
     direccion:  {
       calle: '',
@@ -34,7 +36,7 @@ export class CardEstablishmentComponent implements OnInit{
     this.generalServices.getEstablishment().subscribe({
       next: (item: Establishment[]) => {
         item.forEach((item: Establishment) => {
-          if (item.id_establishment === this.card.id_establishment) {
+          if (item.id_establishment === this.card.id_establecimiento) {
             this.serviceAndEstablishmentData.selectEstablishment(item);
           }
         });
@@ -47,6 +49,8 @@ export class CardEstablishmentComponent implements OnInit{
   }
   
   details():void {
-    console.log(this.card.nombre)
+    console.log(this.card.id_establecimiento)
+    this.idSent.setId(this.card.id_establecimiento)
+    this.router.navigate(['/establishment/details']);
   }
 }
