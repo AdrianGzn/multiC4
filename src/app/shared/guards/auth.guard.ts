@@ -15,19 +15,11 @@ export const authGuard: CanActivateFn = (route, state) => {
     return false;
   }
 
-  const userLocoal = JSON.parse(localStorage.getItem("userData") || '{}')
-  console.log(userLocoal)
+  const getRole = getRoleName(user.id_rol)
 
-  if(userLocoal && userLocoal.rol) {
-    switch(userLocoal) {
-      case 'patient': 
-        router.navigate(["./welcome/patient"])
-        console.log("paciente")
-        return true; 
-      
-    }
+  if(!getRole) {
+    return false; 
   }
-
   return true; 
 };
 

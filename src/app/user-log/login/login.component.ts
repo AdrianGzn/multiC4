@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { UserService } from '../../shared/services/user.service';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -28,7 +29,17 @@ export class LoginComponent {
       this.userService.loginEmployee(person).subscribe({
         next: (data: any) => {
           console.log(data)
-          localStorage.setItem('userData', JSON.stringify(data.data_user));
+          localStorage.setItem('userData', JSON.stringify(data.data_user));          
+          if(data.data_user.rol === 'patient') {
+            this.router.navigate(["./welcome/patient"])
+          }else if(data.data_user.rol === "medic") {
+            this.router.navigate(["./welcome/doctor"])
+          }else if(data.data_user.rol){
+            this.router.navigate(["./welcome/recepcionist"])
+          }
+
+          console.log(data)
+
         },
         error: (erro) => {
           console.log('Ha ocurrido un error: ' + erro);

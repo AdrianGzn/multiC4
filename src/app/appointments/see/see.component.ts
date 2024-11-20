@@ -27,6 +27,13 @@ export class SeeComponent implements OnInit {
     const finalUser = user ? JSON.parse(user): null;
     console.log(finalUser)
     this.generalService.getQuoteByIdStatus(this.selectedOption, finalUser.id_usuario).subscribe(
+      data => {
+        this.quotesDoctor = data;
+      },
+
+      error => {
+        console.log(error)
+      }
     )
   }
 
@@ -44,7 +51,7 @@ export class SeeComponent implements OnInit {
     let user = localStorage.getItem("userData");
     const finalUser = user ? JSON.parse(user) : null;
 
-    if (finalUser) {
+    console.log(this.selectOption)
       this.generalService.getQuoteByIdStatus(this.selectedOption, finalUser.id_usuario).subscribe((response: any[]) => {
         console.log(response)
         this.quotes = response.map(quote => ({
@@ -55,6 +62,6 @@ export class SeeComponent implements OnInit {
           description: quote.description
         }));
       });
-    }
+    
   }
 }
