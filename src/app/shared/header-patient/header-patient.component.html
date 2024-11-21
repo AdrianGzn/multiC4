@@ -17,7 +17,6 @@
       *ngIf="isMobileMenuOpen" 
       class="absolute top-full right-0 w-48 bg-white shadow-lg rounded-md mt-2 border border-gray-200 z-20">
       <nav class="flex flex-col items-center">
-        <button class="text-[#9042B7] font-bold text-sm hover:underline py-2 px-4 w-full text-left" (click)="welcome()">SOBRE NOSOTROS</button>
         <button class="text-[#9042B7] font-bold text-sm hover:underline py-2 px-4 w-full text-left" (click)="establishments()">ESTABLECIMIENTOS</button>
         <button class="text-[#9042B7] font-bold text-sm hover:underline py-2 px-4 w-full text-left" (click)="see()">CITAS</button>
         <button class="text-[#9042B7] font-bold text-sm hover:underline py-2 px-4 w-full text-left" (click)="userSee()">CAMPAÑAS</button>
@@ -29,7 +28,6 @@
 
   <!-- Navegación para pantallas grandes -->
   <nav class="hidden md:flex flex-grow justify-center space-x-10 md:space-x-20">
-    <button class="text-[#9042B7] font-bold text-lg md:text-xl hover:underline" (click)="welcome()">SOBRE NOSOTROS</button>
     <button class="text-[#9042B7] font-bold text-lg md:text-xl hover:underline" (click)="establishments()">ESTABLECIMIENTOS</button>
     <button class="text-[#9042B7] font-bold text-lg md:text-xl hover:underline" (click)="see()">CITAS</button>
     <button class="text-[#9042B7] font-bold text-lg md:text-xl hover:underline" (click)="userSee()">CAMPAÑAS</button>

@@ -1,4 +1,5 @@
 import { Component, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cartpatientcampanis',
@@ -6,44 +7,54 @@ import { Component, HostListener } from '@angular/core';
   styleUrl: './cartpatientcampanis.component.css'
 })
 export class CartpatientcampanisComponent {
-  campaigns = [
-    { image: '/assets/vacunacion.jpeg', title: 'Vacunación' },
-    { image: '/assets/sexuales.jpeg', title: 'Educación Sexual' },
-    { image: '/assets/nutricion.jpeg', title: 'Nutrición' },
-    { image: '/assets/nutricion.jpeg', title: 'Nutrición' },
-    { image: '/assets/nutricionsss.jpeg', title: 'Nutrición' },
-    { image: '/assets/nutricionaaa.jpeg', title: 'Nutrición' },
-    { image: '/assets/nutricionwww.jpeg', title: 'Nutrición' },
+  constructor(private router: Router) { }
+
+  servicios = [
+    { nombre: 'Odontologia', img: '/assets/odontologia.jpeg' },
+    { nombre: 'Nutricion', img: '/assets/nutrision.jpeg' },
+    { nombre: 'Ultrasonido', img: '/assets/ultrasonido.jpeg' },
+    { nombre: 'Podologia', img: '/assets/podologia.jpeg' },
+    { nombre: 'Pedatria', img: '/assets/pediatria.jpeg' },
+    { nombre: 'Ginecologia', img: '/assets/ginecologia.jpeg' },
+    { nombre: 'Dermatologia', img: '/assets/dermatologia.jpeg' },
+    { nombre: 'Cardiologia', img: '/assets/cardiologia.jpeg' },
+    { nombre: 'Fisiatria', img: '/assets/fisiatria.jpeg' },
   ];
-  campaignsIndex = 0;
+
+  serviciosIndex = 0;
   visibleCards = 3;
+  modalVisible = false;
+  servicioSeleccionado: any = null;
+
   windowWidth: number = window.innerWidth;
 
-  // Actualiza el tamaño de la ventana
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.windowWidth = event.target.innerWidth;
-    // Cambiar la cantidad de cards visibles dependiendo del tamaño de la ventana
-    if (this.windowWidth < 768) {
-      this.visibleCards = 1; // Muestra solo una card a la vez en pantallas pequeñas
-    } else {
-      this.visibleCards = 3; // Muestra tres cards en pantallas grandes
+  }
+
+  get visibleServicios() {
+    return this.servicios.slice(this.serviciosIndex, this.serviciosIndex + this.visibleCards);
+  }
+
+  prev() {
+    if (this.serviciosIndex > 0) {
+      this.serviciosIndex--;
     }
   }
 
-  get visibleCampaigns() {
-    return this.campaigns.slice(this.campaignsIndex, this.campaignsIndex + this.visibleCards);
-  }
-
-  prevCampaigns() {
-    if (this.campaignsIndex > 0) {
-      this.campaignsIndex--;
+  next() {
+    if (this.serviciosIndex < this.servicios.length - this.visibleCards) {
+      this.serviciosIndex++;
     }
   }
 
-  nextCampaigns() {
-    if (this.campaignsIndex < this.campaigns.length - this.visibleCards) {
-      this.campaignsIndex++;
-    }
+  abrirModal(servicio: any) {
+    this.servicioSeleccionado = servicio;
+    this.modalVisible = true;
+  }
+
+  cerrarModal() {
+    this.modalVisible = false;
   }
 }
