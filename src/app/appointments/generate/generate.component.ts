@@ -53,7 +53,8 @@ export class GenerateComponent  {
         next.map((item: any) => {
           this.services.push({
             id_service: item.id_service,
-            service: item.service
+            service: item.service,
+            cost: item.cost
           })
           this.doctorsByService.push({
             id_medic: item.id_doctor,
@@ -82,37 +83,45 @@ export class GenerateComponent  {
   }
 
   onSubmit(): void {
-
-      console.log(this.agendarCitaForm.value);
- 
-      let quote: any = {
-        "quote_request": {
-          "items": [
-            {
-              "name": "string",
-              "product": "string",
-              "price": 10,
-              "quantity": 10
-            }
-          ]
-        },
-        "quote_data": {
-          "id_usuario": 0,
-          "fecha": "string",
-          "horario": "string",
-          "estatus": "string",
-          "id_doctor": 0,
-          "id_servicio": 0
-        }
+    console.log(this.agendarCitaForm.value); 
+    const { servicio, doctor, fecha, hora } = this.agendarCitaForm.value;
+    console.log(this.agendarCitaForm.value); // Log the form values to ensure they're correct
+  
+    const quote = {
+      quote_request: {
+        items: [
+          {
+            name: "Servicio médico",
+            product: servicio, // Esto será el valor de servicio seleccionado
+            price: 100, // Precio fijo o calculado
+            quantity: 10 // Cantidad de unidades
+          }
+        ]
+      },
+      quote_data: {
+        id_usuario: 0, // Este es el ID del usuario, probablemente lo deberías obtener del usuario autenticado
+        fecha: fecha,   // Fecha seleccionada
+        horario: hora,  // Hora seleccionada
+        estatus: "pendiente", // Estado de la cita
+        id_doctor: 1,  // ID del doctor
+        id_servicio: 1 // ID del servicio
       }
-
-      this.stripeService.onCheckout(quote);
-
+    };
+    
+    console.log(quote)
+    this.stripeService.onCheckout(quote)
   }
+  
 
   agendQuote(): void {
     this.generalServices.createQuote(this.agendarCitaForm.value).subscribe(
+      (next) => {
+        console.log(next)
+      },
 
+      error => {
+        console.log(error)
+      }
     )
   }
 }

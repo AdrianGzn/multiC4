@@ -11,9 +11,10 @@
         <select formControlName="servicio" class="w-full p-2 mb-3 border border-purple-300 rounded-md" (change)="onSelectService()">
             <option value="">Seleccione un servicio</option>
             <option *ngFor="let service of services" [value]="service.id_service">
-                {{ service.service }}
+                {{ service.service }} / {{service.costo}}
             </option>
         </select>
+        
 
         <label class="block text-purple-700 font-light text-xs">Doctor:</label>
         <select formControlName="doctor" class="w-full p-2 mb-3 border border-purple-300 rounded-md">

@@ -15,7 +15,7 @@ export class WelcomePatientComponent implements OnInit {
   services: any[] = []
   imageName: string = ""
   establishments(): void {
-    this.router.navigate(['/establishment/search']);
+    this.router.navigate(["./establishment/search"]);
   }
 
   ngOnInit(): void {
