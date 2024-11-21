@@ -31,7 +31,7 @@
 
                     <div class="w-[calc(48%)] min-w-[210px]">
                         <label class="form-child-label">Categoría:</label>
-                        <select class="form-child border-fuchsia-800 w-full" id="id_categoria_establecimiento" formControlName="id_categoria_establecimiento">
+                        <select class="form-child border-fuchsia-800 w-full" id="id_categoria_establecimiento" formControlName="categoria">
                             <option *ngFor="let option of category_options" value={{option}}>
                                 {{option}}
                             </option>
@@ -55,6 +55,11 @@
                         <input class="form-child w-full" type="text" formControlName="colonia">
                     </div>
                     
+                    <div class="w-[calc(31%)] min-w-[210px]">
+                        <label class="form-child-label">Descripción:</label>
+                        <input class="form-child w-full" type="text" formControlName="descripcion">
+                    </div>
+
                     <div class="w-[calc(31%)] min-w-[210px]">
                         <label class="form-child-label">Número:</label>
                         <input class="form-child w-full" type="text" formControlName="numero">
@@ -83,7 +88,8 @@
                             <label class="form-child-label">Hora de inicio:</label>
                             <input class="form-child w-full" type="time" formControlName="entrada">
                         </div>
-    
+                    </div>
+                    <div class="w-[calc(48%)] min-w-[260px]">
                         <div class="w-full">
                             <label class="form-child-label">Hora de cierre:</label>
                             <input class="form-child w-full" type="time" formControlName="salida">

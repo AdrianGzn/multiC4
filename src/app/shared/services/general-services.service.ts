@@ -5,7 +5,6 @@ import { Address } from '../models/address';
 import { AddressResponse } from '../models/address-response';
 import { Bill } from '../models/bill';
 import { BillResponse } from '../models/bill-response';
-import { Establishment } from '../models/establishment';
 import { EstablishmentResponse } from '../models/establishment-response';
 import { EstablishmentShortResponse } from '../models/establishment-short-response';
 import { Quote } from '../models/quote';
@@ -18,6 +17,7 @@ import { Service } from '../models/service';
 import { ServiceResponse } from '../models/service-response';
 import { TypeEstablishment } from '../models/type-establishment';
 import { TypeEstablishmentResponse } from '../models/type-establishment-response';
+import { EstablishmentGetResponse } from '../models/establishment-get-response';
 
 @Injectable({
   providedIn: 'root'
@@ -60,8 +60,8 @@ export class GeneralServices {
     return this.http.delete<AddressResponse>(`${this.baseUrl}/billDelete/${idAddress}`);
   }
 
-  getEstablishment(): Observable<Establishment[]> {
-    return this.http.get<Establishment[]>(`${this.baseUrl}/establishment/`);
+  getEstablishment(): Observable<EstablishmentGetResponse[]> {
+    return this.http.get<EstablishmentGetResponse[]>(`${this.baseUrl}/establishment/`);
   }
 
   getEstablishmentByName(name_establishment: string): Observable<any> {
@@ -76,8 +76,8 @@ export class GeneralServices {
     return this.http.get<EstablishmentShortResponse[]>(`${this.baseUrl}/findEstablishmentByTypeCategory/${type}/${category}`);
   }
 
-  createEstablishment(establishmentData: any): Observable<Establishment> {
-    return this.http.post<Establishment>(`${this.baseUrl}/establishment/`, establishmentData);
+  createEstablishment(establishmentData: any): Observable<EstablishmentShortResponse> {
+    return this.http.post<EstablishmentShortResponse>(`${this.baseUrl}/establishment/`, establishmentData);
   }
 
   changeEstablishment(idEstablishment: number, estabishmentData: EstablishmentResponse): Observable<EstablishmentResponse> {

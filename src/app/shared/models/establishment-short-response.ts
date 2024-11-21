@@ -1,14 +1,9 @@
 export interface EstablishmentShortResponse {
-    id_establishment: number,
-    nombre: string,
-    dirección:  {
-        calle: string,
-        colonia: string,
-        descripción: string,
-        id_dirección: number,
-        latitud: number,
-        longitud: number
-        numero: number
-    }
-    image: string
+    nombre: string
+    file: File | null
+    id_type_establishment: number
+    descripción: string
+    categoria: string
+    id_dirección: number
+    id_horario: number
 }
