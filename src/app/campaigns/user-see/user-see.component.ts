@@ -17,7 +17,7 @@ export class UserSeeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.generalService.getCampaigns(31).subscribe(
+    this.generalService.getCampaignsWithOut().subscribe(
       (next) => {
         console.log(next)
         // Verifica si la respuesta tiene la estructura correcta antes de mapear

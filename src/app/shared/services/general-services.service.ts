@@ -100,6 +100,14 @@ export class GeneralServices {
     return this.http.get(`${this.baseUrl}/quotesById/${id}/${status}`)
   }
 
+  getQuoteByIdStatusDoctor(status: string, id: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/quotesByIdDoctor/${id}/${status}`)
+  }
+
+  getQuoteByIdStatusRecepcionist(status: string, id_establishment: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/quotesByIdRecepcionist/${id_establishment}/${status}`)
+  }
+
   changeQuote(idQuote: number, quotesData: QuoteResponse): Observable<AddressResponse> {
     return this.http.put<AddressResponse>(`${this.baseUrl}/quotes/${idQuote}`, quotesData);
   }
@@ -175,6 +183,10 @@ export class GeneralServices {
   //campaigns
   getCampaigns(id_establishment: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/campaigns/${id_establishment}`)
+  }
+
+  getCampaignsWithOut(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/campaignsWithOut/`)
   }
 
   changeCampaign(id_campaign: number,campaign: any): Observable<any> {
