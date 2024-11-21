@@ -4,6 +4,7 @@ import { GeneralServices } from '../../shared/services/general-services.service'
 import { Establishment } from '../../shared/models/establishment';
 import { SharedDataService } from '../../shared/services/shared-data.service';
 import { Router } from '@angular/router';
+import { EstablishmentGetResponse } from '../../shared/models/establishment-get-response';
 
 
 @Component({
@@ -34,10 +35,10 @@ export class CardEstablishmentComponent implements OnInit{
   ngOnInit(): void {
 
     this.generalServices.getEstablishment().subscribe({
-      next: (item: Establishment[]) => {
-        item.forEach((item: Establishment) => {
-          if (item.id_establishment === this.card.id_establecimiento) {
-            this.serviceAndEstablishmentData.selectEstablishment(item);
+      next: (item: any[]) => {
+        item.forEach((itemEstablishment: any) => {
+          if (itemEstablishment.id_establecimiento === this.card.id_establecimiento) {
+            this.serviceAndEstablishmentData.selectEstablishment(itemEstablishment);
           }
         });
       },
