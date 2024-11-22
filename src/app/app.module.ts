@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { CardQuoteComponent } from './welcome/card-quote/card-quote.component';
 import { QuotePatientComponent } from './appointments/quote-patient/quote-patient.component';
-
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 @NgModule({
   declarations: [
@@ -13,11 +13,13 @@ import { QuotePatientComponent } from './appointments/quote-patient/quote-patien
     CardQuoteComponent,
 
   ],
-  imports: [
+  imports: [   
+    SweetAlert2Module.forRoot(),
     BrowserModule,
     AppRoutingModule,
   ],
   providers: [
+ 
     provideClientHydration(),
     provideHttpClient(withFetch())
   ],

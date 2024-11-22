@@ -11,13 +11,20 @@ import { GeneralServices } from '../../shared/services/general-services.service'
 export class ReceptionistSeeComponent implements OnInit {
   campaigns: any[] = [];
   myFormDelete: FormGroup; 
+  establishmentData: any = {}
   constructor(private generalService: GeneralServices) {
     this.myFormDelete = new FormGroup({
       selectedCampaign: new FormControl(0, [])
   });
   }
   ngOnInit(): void {
-    this.generalService.getCampaigns(31).subscribe(
+    let currentEstablishment = localStorage.getItem("establishmentData")
+
+    if(currentEstablishment) {
+       this.establishmentData = JSON.parse(currentEstablishment)
+    }
+    console.log(this.establishmentData)
+    this.generalService.getCampaigns(this.establishmentData.id_establecimiento).subscribe(
       (next) => {
         this.campaigns = next.map((campaign: any) => ({
           id_campania: campaign["id_campañas"],

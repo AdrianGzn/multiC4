@@ -10,9 +10,8 @@ import { Address } from '../../shared/models/address';
 import { Service } from '../../shared/models/service';
 import { Schedule } from '../../shared/models/schedule';
 import { ScheduleResponse } from '../../shared/models/schedule-response';
-import { EstablishmentResponse } from '../../shared/models/establishment-response';
-import { EstablishmentShortResponse } from '../../shared/models/establishment-short-response';
-import { EstablishmentGetResponse } from '../../shared/models/establishment-get-response';
+import Swal from 'sweetalert2';
+import { error } from 'console';
 
 @Component({
   selector: 'app-save-establishment',
@@ -27,13 +26,11 @@ export class SaveEstablishmentComponent implements OnInit {
   formSchedule: FormGroup;
   formServices: FormGroup;
   formDoctors: FormGroup;
-
+  user: any = {}
   type_options: string[] = [];
   category_options: string[] = [];
-
   nameServices: string[] = [];
   services: Service[] = [];
-
   doctors: User[] = [];
 
   selectedImage: File | null = null;
@@ -47,29 +44,35 @@ export class SaveEstablishmentComponent implements OnInit {
     this.formData = new FormGroup({
       nombre: new FormControl('', [Validators.required]),
       descripción: new FormControl('', [Validators.required]),
-      id_tipo_establecimiento: new FormControl(null, [Validators.required]),
-      categoria: new FormControl(null, [Validators.required])
-    }),
-      this.formUbication = new FormGroup({
-        calle: new FormControl('', [Validators.required]),
-        colonia: new FormControl('', [Validators.required]),
-        descripcion: new FormControl('', [Validators.required]),
-        numero: new FormControl(null, [Validators.required]),
-        latitud: new FormControl(null, [Validators.required]),
-        longitud: new FormControl(null, [Validators.required])
-      }),
-      this.formSchedule = new FormGroup({
-        entrada: new FormControl(null, [Validators.required]),
-        salida: new FormControl(null, [Validators.required]),
-      }),
-      this.formServices = new FormGroup({
-        servicio: new FormControl('', [Validators.required, Validators.min(1), Validators.max(100)]),
-        costo: new FormControl(null, [Validators.required, Validators.min(10), Validators.max(250)]),
-      }),
-      this.formDoctors = new FormGroup({
-        doctor: new FormControl(null, [Validators.required, Validators.min(1), Validators.max(100)]),
-        servicioDoctor: new FormControl(null, [Validators.required, Validators.min(10), Validators.max(250)]),
-      })
+      id_type_establishment: new FormControl(1, [Validators.required]),
+      categoria: new FormControl('', [Validators.required]),
+      id_dirección: new FormControl(0),
+      id_horario: new FormControl(0)
+    });
+
+    this.formUbication = new FormGroup({
+      calle: new FormControl('', [Validators.required]),
+      colonia: new FormControl('', [Validators.required]),
+      descripcion: new FormControl('', [Validators.required]),
+      numero: new FormControl(null, [Validators.required]),
+      latitud: new FormControl(null, [Validators.required]),
+      longitud: new FormControl(null, [Validators.required])
+    });
+
+    this.formSchedule = new FormGroup({
+      entrada: new FormControl(null, [Validators.required]),
+      salida: new FormControl(null, [Validators.required]),
+    });
+
+    this.formServices = new FormGroup({
+      servicio: new FormControl('', [Validators.required, Validators.min(1), Validators.max(100)]),
+      costo: new FormControl(null, [Validators.required, Validators.min(10), Validators.max(250)]),
+    });
+
+    this.formDoctors = new FormGroup({
+      doctor: new FormControl(null, [Validators.required, Validators.min(1), Validators.max(100)]),
+      servicioDoctor: new FormControl(null, [Validators.required, Validators.min(10), Validators.max(250)]),
+    });
   }
 
   ngOnInit(): void {
@@ -80,6 +83,8 @@ export class SaveEstablishmentComponent implements OnInit {
   }
 
   onSubmit(): void {
+    const formData = new FormData();
+  
     let tempAddress: AddressResponse = {
       latitud: this.formUbication.value.latitud,
       longitud: this.formUbication.value.longitud,
@@ -87,71 +92,82 @@ export class SaveEstablishmentComponent implements OnInit {
       calle: this.formUbication.value.calle,
       colonia: this.formUbication.value.colonia,
       numero: this.formUbication.value.numero
-    }
-
+    };
+  
     this.generalServices.createAddress(tempAddress).subscribe({
       next: (item: Address) => {
         this.id_address = item.id_dirección;
-        console.log(item);
-      },
-      error: (error) => {
-        console.log('No se pudo crear la dirección');
-      }
-    })
+        console.log('Dirección creada:', item);
 
-    let tempSchedule: ScheduleResponse = {
-      entrada: this.formSchedule.value.entrada,
-      salida: this.formSchedule.value.salida
-    }
+        this.formData.patchValue({
+          id_dirección: this.id_address
+        });
 
-    this.generalServices.createSchedule(tempSchedule).subscribe({
-      next: (item: Schedule) => {
-        console.log(item);
-        this.id_schedule = item.id_horario;
-      },
-      error: (error) => {
-        console.log('No se pudo crear la dirección');
-      }
-    });
+        let tempSchedule: ScheduleResponse = {
+          entrada: this.formSchedule.value.entrada,
+          salida: this.formSchedule.value.salida
+        };
 
-    let tempEstablishment: EstablishmentResponse = {
-      id_tipo_establecimiento: 0,
-      descripción: this.formData.value.descripción,
-      categoria: this.formData.value.categoria,
-      id_dirección: this.id_address,
-      id_horario: this.id_schedule,
-      nombre: this.formData.value.nombre,
-      file: this.selectedImage
-    }
+        this.generalServices.createSchedule(tempSchedule).subscribe({
+          next: (item: Schedule) => {
+            console.log('Horario creado:', item);
+            this.id_schedule = item.id_horario;
+            console.log(this.id_schedule)
 
-    console.log(tempEstablishment);
-    
+            this.formData.patchValue({
+              id_horario: this.id_schedule
+            });
 
-    this.generalServices.createEstablishment(tempEstablishment).subscribe({
-      next: (item: EstablishmentShortResponse) => {
-        
-        this.generalServices.getEstablishment().subscribe({
-          next: (itemEstablishments: EstablishmentGetResponse[]) => {
-            itemEstablishments.forEach((establishment: EstablishmentGetResponse) => {
-              if (item.nombre == establishment.nombre && item.categoria === establishment.categoria && item.id_dirección ===establishment.id_dirección && item.id_horario == establishment.id_horario) {
-                this.id_establishment = establishment.id_establecimiento;
-                localStorage.setItem('establishment_id', JSON.stringify(this.id_establishment));
-                console.log(this.id_establishment);
-                
+
+            Object.keys(this.formData.value).forEach(key => {
+              formData.append(key, this.formData.value[key]);
+            });
+
+            if (this.selectedImage) {
+              formData.append('file', this.selectedImage, this.selectedImage.name);
+            }
+
+            formData.forEach((value, key) => {
+              console.log(key, value);
+            });
+
+            this.generalServices.createEstablishment(formData).subscribe({
+              next: (item) => {
+                if(item) {
+                  let currentUser = localStorage.getItem("userData")
+                  if(currentUser) {
+                    this.user = currentUser; 
+                  }
+                  const modifyUser = {
+                    "id_establecimiento": item.id_establecimiento
+                  }
+                  this.generalServices.changeRecepcionist(modifyUser, this.user.id_usuario).subscribe({
+                    next: (item) => {
+                      Swal.fire("Generar establecimiento", "Se logro generar el establecimiento", "success")
+                    },
+                    error: (error) => {
+                      Swal.fire("Generar establecimiento", "No se logro generar el establecimiento", "error")
+                    }
+                  }
+                  )
+                }
+                localStorage.setItem("establishmentData", JSON.stringify(item.establishment))
+                console.log('Establecimiento creado:', item);
+              },
+              error: (error) => {
+                console.log('Error al crear el establecimiento:', error);
               }
             });
           },
           error: (error) => {
-            console.log('No se han podido obtener los establecimientos');
+            console.log('No se pudo crear el horario:', error);
           }
-        })
-
+        });
       },
       error: (error) => {
-        console.log('No se ha podido crear el establecimiento');
+        console.log('No se pudo crear la dirección:', error);
       }
-    })
-    
+    });
   }
 
   onChangeSelectedImage(file: any): void {
@@ -160,13 +176,12 @@ export class SaveEstablishmentComponent implements OnInit {
     }
   }
 
-  addService():void {
+  // Agregar servicio (solo ejemplo, aún no implementado completamente)
+  addService(): void {
     let tempService: ServiceResponse = {
       id_establecimiento: 0,
       tipo: '',
       costo: 0
-    }
+    };
   }
-
-  
 }

@@ -10,19 +10,19 @@ export class SeereceptionistComponent {
   selectedOption: string = 'Atendidos';  
   options: string[] = ['Atendidos', 'No Atendidos']
   quotesDoctor: any [] = [];
-
+  establishmentData: any = {}
   constructor(private generalService: GeneralServices) {}
 
   ngOnInit(): void {
-    this.generalService.getAllQuotesByIdDoctor(1).subscribe(
+    let currentEstablishment = localStorage.getItem("establishmentData")
+
+    if(currentEstablishment) {
+       this.establishmentData = JSON.parse(currentEstablishment)
+    }
+    this.generalService.getAllQuotesByIdEstablishmentStatus(this.establishmentData.id_establecimiento, this.selectedOption).subscribe(
       data => {
         this.quotesDoctor = data; 
       }
-    )
-    let user = localStorage.getItem("userData")
-    const finalUser = user ? JSON.parse(user): null;
-    console.log(finalUser)
-    this.generalService.getQuoteByIdStatus(this.selectedOption, finalUser.id_usuario).subscribe(
     )
   }
   toggleSelect() {
@@ -33,10 +33,8 @@ export class SeereceptionistComponent {
   selectOption(option: string) {
     this.selectedOption = option;  
     this.isOpen = false;      
-    let user = localStorage.getItem("userData")
-    const finalUser = user ? JSON.parse(user): null;
-    console.log(finalUser)
-    this.generalService.getQuoteByIdStatus(this.selectedOption, finalUser.id_usuario).subscribe(
+    this.generalService.getAllQuotesByIdEstablishmentStatus(this.establishmentData.id_establecimiento, this.selectedOption).subscribe(
+      
     )
   }
 
