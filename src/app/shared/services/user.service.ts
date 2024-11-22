@@ -11,7 +11,7 @@ export class UserService {
   private baseUrl: string = 'http://3.227.141.174:8000';  
 
   private user: User = {
-    id_usuario: 0,
+    id_usuario: 1,
     id_rol: 0,
     nombre: '',
     id_establecimiento: 0,
