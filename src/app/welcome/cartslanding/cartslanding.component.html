@@ -29,5 +29,17 @@
         </div>
       </div>
     </div>
+  
+    <!-- Indicadores (puntos) -->
+    <div class="flex justify-center mt-4 space-x-3"> <!-- Añadido space-x-3 para más separación -->
+      <div
+        *ngFor="let campaign of campaigns; let i = index"
+        (click)="currentIndex = i"
+        [ngClass]="{
+          'w-3 h-3 bg-gray-400 rounded-full cursor-pointer': true,
+          'bg-indigo-600': currentIndex === i
+        }"
+      ></div>
+    </div>
   </div>
   
