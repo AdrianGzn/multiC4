@@ -79,8 +79,8 @@ export class SignEmployeeComponent {
     dias.forEach((itemDia) => {
 
       let tempSchedule: ScheduleDoctorResponse = {
-        id_doctor: idDoctor,
-        dia: itemDia,
+        día: itemDia,
+        id_usuario: idDoctor,
         entrada: '',
         salida: ''
       } 

@@ -1,6 +1,6 @@
 export interface ScheduleDoctorResponse {
-    id_doctor: number
-    dia: string;
+    día: string
+    id_usuario: number
     entrada: string;
     salida: string;
 }
