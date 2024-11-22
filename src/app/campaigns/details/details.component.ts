@@ -10,6 +10,7 @@ import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 export class DetailsComponent {
   campaigns: any[] = [];
   myFormUpdate: FormGroup; 
+  dataEstablishment: any  = {}
   constructor(private generalService: GeneralServices) {
     this.myFormUpdate = new FormGroup({
       selectedCampaign: new FormControl(0, []),
@@ -19,7 +20,12 @@ export class DetailsComponent {
   });
   }
   ngOnInit(): void {
-    this.generalService.getCampaigns(31).subscribe(
+    let currentDataEstablishment = localStorage.getItem("establishmentData")
+
+    if(currentDataEstablishment) {
+      this.dataEstablishment = JSON.parse(currentDataEstablishment)
+    }
+    this.generalService.getCampaigns(this.dataEstablishment.id_establecimiento).subscribe(
       (next) => {
         this.campaigns = next.map((campaign: any) => ({
           id_campania: campaign.campaign["id_campañas"],

@@ -11,10 +11,16 @@ import { GeneralServices } from '../../shared/services/general-services.service'
 export class UpdateComponent  {
   campaniaForm: FormGroup = new FormGroup({});
   selectedFile: File | null = null;
+  dataEstablishment: any = {}
   constructor(private generalService: GeneralServices) {}
   ngOnInit(): void {
+    let currentDataEstablishment = localStorage.getItem("establishmentData")
+
+    if(currentDataEstablishment) {
+      this.dataEstablishment = JSON.parse(currentDataEstablishment)
+    }
     this.campaniaForm = new FormGroup({
-      id_establecimiento: new FormControl(31, []),
+      id_establecimiento: new FormControl(this.dataEstablishment.id_establecimiento, []),
       nombre: new FormControl('', Validators.required),
       descripción: new FormControl(''),
       dirección: new FormControl(''),

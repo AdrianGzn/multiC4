@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 })
 export class DeleteComponent implements OnInit {
   campaigns: any[] = [];
+  dataEstablishment: any = {}
   myFormDelete: FormGroup; 
   constructor(private generalService: GeneralServices) {
     this.myFormDelete = new FormGroup({
@@ -16,7 +17,12 @@ export class DeleteComponent implements OnInit {
   });
   }
   ngOnInit(): void {
-    this.generalService.getCampaigns(31).subscribe(
+    let currentDataEstablishment = localStorage.getItem("establishmentData")
+
+    if(currentDataEstablishment) {
+      this.dataEstablishment = JSON.parse(currentDataEstablishment)
+    }
+    this.generalService.getCampaigns(this.dataEstablishment.id_establecimiento).subscribe(
       (next) => {
         console.log(next)
         this.campaigns = next.map((campaign: any) => ({
