@@ -28,14 +28,14 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       this.userService.loginEmployee(person).subscribe({
         next: (data: any) => {
-          console.log(data)
+          console.log(data.data_user.id_establecimiento)
           localStorage.setItem('userData', JSON.stringify(data.data_user));          
           if(data.data_user.rol === 'patient') {
-            this.router.navigate(["./welcome/patient"])
+            this.router.navigate(["./establishment/search"])
           }else if(data.data_user.rol === "medic") {
             this.router.navigate(["./welcome/doctor"])
           }else if(data.data_user.rol){
-            this.router.navigate(["./welcome/recepcionist"])
+            this.router.navigate(["./establishment/save"])
           }
 
           console.log(data)

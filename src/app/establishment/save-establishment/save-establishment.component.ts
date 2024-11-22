@@ -19,14 +19,19 @@ import { error } from 'console';
   styleUrl: './save-establishment.component.css'
 })
 export class SaveEstablishmentComponent implements OnInit {
-  userFinal = {};
 
   formData: FormGroup;
   formUbication: FormGroup;
   formSchedule: FormGroup;
   formServices: FormGroup;
   formDoctors: FormGroup;
-  user: any = {}
+  userFinal = {
+    id_establecimiento:  0, 
+    id_rol: 0,
+    id_usuario: 0,
+    nombre: '',
+    rol: ''  
+  }
   type_options: string[] = [];
   category_options: string[] = [];
   nameServices: string[] = [];
@@ -38,7 +43,7 @@ export class SaveEstablishmentComponent implements OnInit {
   id_schedule: number = 0;
   id_address: number = 0;
   id_establishment: number = 0;
-  
+
 
   constructor(private generalServices: GeneralServices, private serviceAndEstablishmentData: ServiceAndEstablishmentDataService, private userService: UserService) {
     this.formData = new FormGroup({
@@ -76,15 +81,15 @@ export class SaveEstablishmentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let userCurrent = localStorage.getItem("userData"); 
-    if(userCurrent) {
+    let userCurrent = localStorage.getItem("userData");
+    if (userCurrent) {
       this.userFinal = JSON.parse(userCurrent);
-    } 
+    }
   }
 
   onSubmit(): void {
     const formData = new FormData();
-  
+
     let tempAddress: AddressResponse = {
       latitud: this.formUbication.value.latitud,
       longitud: this.formUbication.value.longitud,
@@ -93,7 +98,7 @@ export class SaveEstablishmentComponent implements OnInit {
       colonia: this.formUbication.value.colonia,
       numero: this.formUbication.value.numero
     };
-  
+
     this.generalServices.createAddress(tempAddress).subscribe({
       next: (item: Address) => {
         this.id_address = item.id_dirección;
@@ -133,16 +138,17 @@ export class SaveEstablishmentComponent implements OnInit {
 
             this.generalServices.createEstablishment(formData).subscribe({
               next: (item) => {
-                if(item) {
+                if (item) {
                   let currentUser = localStorage.getItem("userData")
-                  if(currentUser) {
-                    this.user = currentUser; 
+                  if (currentUser) {
+                    this.userFinal = JSON.parse(currentUser);
                   }
                   const modifyUser = {
-                    "id_establecimiento": item.id_establecimiento
+                    "id_establecimiento": item.establishment.id_establecimiento
                   }
-                  this.generalServices.changeRecepcionist(modifyUser, this.user.id_usuario).subscribe({
+                  this.generalServices.changeRecepcionist(modifyUser, this.userFinal.id_usuario).subscribe({
                     next: (item) => {
+                      localStorage.setItem("userData", item)
                       Swal.fire("Generar establecimiento", "Se logro generar el establecimiento", "success")
                     },
                     error: (error) => {
