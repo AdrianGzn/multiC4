@@ -1,52 +1,52 @@
 <app-header-patient></app-header-patient>
-
 <app-cartspatient></app-cartspatient>
 
-  
-<div class="flex justify-center items-center p-8 md:p-20">
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 w-full max-w-5xl border-4 border-[#812B8A] rounded-lg p-8 bg-gray-50">
-    
-    <!-- Establecimientos -->
-    <div class="flex flex-col items-center">
-      <div class="w-20 h-20 flex justify-center items-center bg-white border-4 border-[#812B8A] rounded-full transition-transform duration-300 transform hover:bg-[#BE6DD7] hover:-translate-y-2 hover:shadow-lg">
-        <img src="./assets/establecimientos.png" alt="Establecimientos" class="h-12 w-12">
+<!-- Sección que se oculta en pantallas pequeñas -->
+<div class="hidden sm:block">
+  <div class="flex justify-center items-center p-4 sm:p-6 md:p-20">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 w-full max-w-5xl border-4 border-[#812B8A] rounded-lg p-8 bg-gray-50">
+      
+      <!-- Establecimientos -->
+      <div class="flex flex-col items-center">
+        <div class="w-20 h-20 flex justify-center items-center bg-white border-4 border-[#812B8A] rounded-full transition-transform duration-300 transform hover:bg-[#BE6DD7] hover:-translate-y-2 hover:shadow-lg">
+          <img src="./assets/establecimientos.png" alt="Establecimientos" class="h-12 w-12">
+        </div>
+        <p class="text-[#9042B7] font-semibold mt-2">Establecimientos</p>
+        <p class="text-center text-gray-600">los mejores establecimientos</p>
       </div>
-      <p class="text-[#9042B7] font-semibold mt-2">Establecimientos</p>
-      <p class="text-center text-gray-600">los mejores establecimientos</p>
-    </div>
-    
-    <!-- Citas -->
-    <div class="flex flex-col items-center">
-      <div class="w-20 h-20 flex justify-center items-center bg-white border-4 border-[#812B8A] rounded-full transition-transform duration-300 transform hover:bg-[#BE6DD7] hover:-translate-y-2 hover:shadow-lg">
-        <img src="./assets/cita.png" alt="Citas" class="h-12 w-12">
+      
+      <!-- Citas -->
+      <div class="flex flex-col items-center">
+        <div class="w-20 h-20 flex justify-center items-center bg-white border-4 border-[#812B8A] rounded-full transition-transform duration-300 transform hover:bg-[#BE6DD7] hover:-translate-y-2 hover:shadow-lg">
+          <img src="./assets/cita.png" alt="Citas" class="h-12 w-12">
+        </div>
+        <p class="text-[#9042B7] font-semibold mt-2">Citas</p>
+        <p class="text-center text-gray-600">agenda tus citas fácilmente</p>
       </div>
-      <p class="text-[#9042B7] font-semibold mt-2">Citas</p>
-      <p class="text-center text-gray-600">agenda tus citas fácilmente</p>
-    </div>
-    
-    <!-- Doctores -->
-    <div class="flex flex-col items-center">
-      <div class="w-20 h-20 flex justify-center items-center bg-white border-4 border-[#812B8A] rounded-full transition-transform duration-300 transform hover:bg-[#BE6DD7] hover:-translate-y-2 hover:shadow-lg">
-        <img src="./assets/medico.png" alt="Doctores" class="h-12 w-12">
+      
+      <!-- Doctores -->
+      <div class="flex flex-col items-center">
+        <div class="w-20 h-20 flex justify-center items-center bg-white border-4 border-[#812B8A] rounded-full transition-transform duration-300 transform hover:bg-[#BE6DD7] hover:-translate-y-2 hover:shadow-lg">
+          <img src="./assets/medico.png" alt="Doctores" class="h-12 w-12">
+        </div>
+        <p class="text-[#9042B7] font-semibold mt-2">Doctores</p>
+        <p class="text-center text-gray-600">los mejores doctores</p>
       </div>
-      <p class="text-[#9042B7] font-semibold mt-2">Doctores</p>
-      <p class="text-center text-gray-600">los mejores doctores</p>
-    </div>
-    
-    <!-- Confiable -->
-    <div class="flex flex-col items-center">
-      <div class="w-20 h-20 flex justify-center items-center bg-white border-4 border-[#812B8A] rounded-full transition-transform duration-300 transform hover:bg-[#BE6DD7] hover:-translate-y-2 hover:shadow-lg">
-        <img src="./assets/confiable.png" alt="Confiable" class="h-12 w-12">
+      
+      <!-- Confiable -->
+      <div class="flex flex-col items-center">
+        <div class="w-20 h-20 flex justify-center items-center bg-white border-4 border-[#812B8A] rounded-full transition-transform duration-300 transform hover:bg-[#BE6DD7] hover:-translate-y-2 hover:shadow-lg">
+          <img src="./assets/confiable.png" alt="Confiable" class="h-12 w-12">
+        </div>
+        <p class="text-[#9042B7] font-semibold mt-2">Confiable</p>
+        <p class="text-center text-gray-600">100% confiables</p>
       </div>
-      <p class="text-[#9042B7] font-semibold mt-2">Confiable</p>
-      <p class="text-center text-gray-600">100% confiables</p>
-    </div>
 
+    </div>
   </div>
 </div>
 
-
-
+<!-- Sección visible para todas las pantallas -->
 <div class="flex flex-col md:flex-row items-center justify-center p-12 bg-white rounded-lg shadow-lg max-w-4xl mx-auto my-8">
   <div class="w-full md:w-1/2 mb-6 md:mb-0">
     <img src="assets/citas.jpg" alt="Agenda tus citas" class="rounded-lg shadow-md w-full h-auto object-cover" />
@@ -61,10 +61,8 @@
     <button class="bg-[#9042B7] text-white font-bold rounded-md py-3 px-6 hover:bg-[#7d3486] transition-colors w-full mt-2 text-lg" (click)="establishments()">
       Agenda ya!
     </button>
-    
   </div>
 </div>
-
 
 <app-cartpatientcampanis></app-cartpatientcampanis>
 <app-footerpatient></app-footerpatient>
