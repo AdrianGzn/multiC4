@@ -12,9 +12,8 @@ import { ScheduleDoctorResponse } from '../../shared/models/schedule-doctor-resp
   styleUrls: ['./schedule-employee.component.css']
 })
 export class ScheduleEmployeeComponent implements OnInit, AfterViewInit {
-  schedulesFiltered: ScheduleDoctor[] = [];
   user: User = {
-    id_usuario: 0,
+    id_usuario: 1,
     id_rol: 0,
     nombre: '',
     id_establecimiento: 0,
@@ -47,7 +46,7 @@ export class ScheduleEmployeeComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.user = this.userService.getUser();
-  
+    
     this.generalServices.getAllHorsById(this.user.id_usuario).subscribe({
       next: (item: ScheduleDoctor[]) => {
         console.log(item);
@@ -78,24 +77,26 @@ export class ScheduleEmployeeComponent implements OnInit, AfterViewInit {
       this.persona_dia.forEach(itemDay => {
         const entradaControl = this.formSchedules.get(itemDay.dia + 'E');
         const salidaControl = this.formSchedules.get(itemDay.dia + 'S');
+        
         if (entradaControl) {
-          entradaControl.setValue(itemDay.entrada);
+          entradaControl.setValue(itemDay.entrada.slice(0, 5));
         }
         if (salidaControl) {
-          salidaControl.setValue(itemDay.salida);
+          salidaControl.setValue(itemDay.salida.slice(0, 5));
         }
       });
     }, 0);
   }
+  
 
-  onSubmit(): void {
+  onSubmit(): void {    
     let diasSemana = this.diasSemana.map(dia => ({
       dia: dia,
       entrada: this.formSchedules.value[`${dia}E`],
       salida: this.formSchedules.value[`${dia}S`]
     }));
 
-    this.schedulesFiltered.forEach((item: ScheduleDoctor) => {
+    this.persona_dia.forEach((item: ScheduleDoctor) => {
       const diaConfig = diasSemana.find(d => d.dia === item.dia.toLowerCase());
       if (diaConfig) {
         item.entrada = diaConfig.entrada;
@@ -103,15 +104,16 @@ export class ScheduleEmployeeComponent implements OnInit, AfterViewInit {
       }
     });
 
-    this.schedulesFiltered.forEach((item: ScheduleDoctor) => {
+    this.persona_dia.forEach((item: ScheduleDoctor) => {      
       let temp: ScheduleDoctorResponse = {
         día: item.dia,
         id_usuario: item.id_doctor,
         entrada: item.entrada,
         salida: item.salida
       }
+      console.log(temp);
 
-      this.generalServices.changeScheduleDoctor(item.id_horario, temp).subscribe({
+      this.generalServices.changeScheduleDoctor(this.user.id_usuario, temp).subscribe({
         next: (changeResponse: ScheduleDoctorResponse) => {
           console.log('Se ha guardado correctamente el item con día: ' + changeResponse.día);
         },

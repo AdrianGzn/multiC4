@@ -1,49 +1,53 @@
-<app-header-patient></app-header-patient>
-
-<div class="bg-purple-100 min-h-screen flex flex-col items-center px-4 py-8">
-  <!-- Título principal -->
-  <h1 class="text-5xl font-bold text-[#9042B7] mb-8 flex items-center">
-    CAMPAÑAS Y BRIGADAS
-    <img
-      src="assets/promocion.png"
-      alt="Icono campañas"
-      class="w-24 h-24 ml-4"
-    />
-  </h1>
-
-
-  <!-- Sección de búsqueda y subtítulo -->
-  <div class="flex flex-col md:flex-row md:justify-between w-full max-w-4xl items-center mb-8">
-    <h2 class="text-xl font-semibold text-black mb-4 md:mb-0">
-      Campañas Disponibles:
-    </h2>
-    <div class="relative">
-      <input
-        type="text"
-        placeholder="Buscar Campaña"
-        class="border border-purple-400 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-300 w-full md:w-64"
-      />
-      <button
-        class="absolute right-2 top-2 text-purple-600 hover:text-purple-800"
-      >
-        🔍
-      </button>
-    </div>
-  </div>
-
-  <!-- Mensaje si no hay campañas -->
-  <div *ngIf="campaigns.length === 0" class="text-gray-600 text-lg">
-    No hay campañas disponibles.
-  </div>
-
-  <!-- Lista de campañas -->
-  <div class="w-full max-w-4xl">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-      <div
-        *ngFor="let campaign of campaigns"
-        class="bg-white shadow-md border border-purple-200 rounded-lg p-4 text-center">
-        <app-card-campaign-patient [campaign]="campaign"/>
+<div class="bg-gray-200 min-h-screen">
+    <app-header-patient></app-header-patient>
+  
+    <div class="bg-purple-100 p-6 sm:p-8 lg:p-12 pb-20 lg:pb-40 rounded-md mx-auto max-w-xl sm:max-w-4xl lg:max-w-6xl mt-4 sm:mt-6 lg:mt-8">
+      <!-- Título principal centrado horizontalmente -->
+      <div class="flex flex-col sm:flex-row items-center justify-center text-center sm:text-left mb-6 lg:mb-8">
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#9042B7]">
+          CAMPAÑAS Y BRIGADAS
+        </h1>
+        <img
+          src="assets/promocion.png"
+          alt="Icono campañas"
+          class="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 mt-4 sm:mt-0 sm:ml-4"
+        />
+      </div>
+  
+      <!-- Sección de búsqueda y subtítulo -->
+      <div class="flex flex-col lg:flex-row lg:justify-between w-full items-center mb-6 lg:mb-8">
+        <h2 class="text-base sm:text-lg lg:text-xl font-semibold text-black mb-4 lg:mb-0">
+          Campañas Disponibles:
+        </h2>
+        <div class="relative w-full sm:w-auto">
+          <input
+            type="text"
+            placeholder="Buscar Campaña"
+            class="border border-purple-400 rounded-lg px-4 py-2 w-full sm:w-64 focus:outline-none focus:ring-2 focus:ring-purple-300"
+          />
+          <button
+            class="absolute right-2 top-2 text-purple-600 hover:text-purple-800"
+          >
+            🔍
+          </button>
+        </div>
+      </div>
+  
+      <!-- Mensaje si no hay campañas -->
+      <div *ngIf="campaigns.length === 0" class="text-gray-600 text-sm sm:text-base lg:text-lg">
+        No hay campañas disponibles.
+      </div>
+  
+      <!-- Lista de campañas -->
+      <div class="w-full">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div
+            *ngFor="let campaign of campaigns"
+            class="bg-white shadow-md border border-purple-200 rounded-lg p-4 text-center">
+            <app-card-campaign-patient [campaign]="campaign"></app-card-campaign-patient>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
+  

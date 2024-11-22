@@ -37,6 +37,14 @@ export class SignEmployeeComponent {
       id_servicio: 0
     };
 
+    let idRole: number = 0;
+
+    if (this.signInForm.value.role === "Doctor") {
+      idRole = 2;
+    }else if (this.signInForm.value.role === "Recepcionista") {
+      idRole = 3;
+    }
+
     const newEmployee = {
       id_rol: 0,
       nombre: this.signInForm.value.username,
