@@ -11,23 +11,30 @@ import { UserService } from '../../shared/services/user.service';
 export class SignPatientComponent {
   signInForm: FormGroup;
 
-  constructor(private fb: FormBuilder,private router: Router, private userService: UserService) {
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private userService: UserService
+  ) {
     this.signInForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
-      confirmPassword: ['', Validators.required]
+      confirmPassword: ['', Validators.required],
+      locality: ['', Validators.required] // Campo de localidad añadido
     });
   }
 
-  onSubmit(): void {    
+  onSubmit(): void {
     const newPatient = {
       id_rol: 1,
       nombre: this.signInForm.value.username,
-      contraseña: this.signInForm.value.password
-    }
+      contraseña: this.signInForm.value.password,
+      localidad: this.signInForm.value.locality // Agregamos la localidad al objeto
+    };
+
     console.log(newPatient);
 
-    if(this.signInForm.valid){
+    if (this.signInForm.valid) {
       if (this.signInForm.value.password === this.signInForm.value.confirmPassword) {
         this.userService.register(newPatient).subscribe({
           next: (data) => {
@@ -35,15 +42,15 @@ export class SignPatientComponent {
             this.router.navigate(['/welcome/patient']);
           },
           error: (error) => {
-            console.log(error)
+            console.log(error);
           }
         });
       } else {
-        alert('Las contraseñas no corresponden');
-      };
-    }else {
-      alert('Formulario no válido')
-    };
+        alert('Las contraseñas no coinciden');
+      }
+    } else {
+      alert('Formulario no válido');
+    }
   }
 
   signRegresar(): void {
