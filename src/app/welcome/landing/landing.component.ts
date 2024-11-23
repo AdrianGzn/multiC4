@@ -12,5 +12,7 @@ export class LandingComponent {
  login(): void {
     this.router.navigate(['/sign-login']);
   }
-
+  signPatient(): void {
+    this.router.navigate(['/sign-patient']);
+  }
 }

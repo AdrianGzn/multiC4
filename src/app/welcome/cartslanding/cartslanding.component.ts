@@ -1,36 +1,19 @@
 import { Component,OnInit, OnDestroy } from '@angular/core';
-
+import { GeneralServices } from '../../shared/services/general-services.service';
 @Component({
   selector: 'app-cartslanding',
   templateUrl: './cartslanding.component.html',
   styleUrl: './cartslanding.component.css'
 })
 export class CartslandingComponent implements OnInit, OnDestroy {
-  campaigns = [
-    {
-      image: 'assets/vac.jpeg',
-      title: 'Vacunacion',
-      description: 'Descripción de la campaña 1.',
-      url: 'https://www.example.com/campana1',
-    },
-    {
-      image: 'assets/nutr.jpeg',
-      title: 'Nutricion',
-      description: 'Descripción de la campaña 2.',
-      url: 'https://www.example.com/campana2',
-    },
-    {
-      image: 'assets/sex.jpeg',
-      title: 'Educacion Sexual',
-      description: 'Descripción de la campaña 3.',
-      url: 'https://www.example.com/campana3',
-    },
-  ];
-
+  campaigns: any[] = [];  
   currentIndex = 0;
   intervalId: any;
 
+  constructor(private GeneralServices: GeneralServices) {}
+
   ngOnInit() {
+    this.fetchCampaigns();
     this.startAutoSlide();
   }
 
@@ -38,10 +21,22 @@ export class CartslandingComponent implements OnInit, OnDestroy {
     this.stopAutoSlide();
   }
 
+  fetchCampaigns() {
+    const id_establishment = 1;  
+    this.GeneralServices.getCampaigns(id_establishment).subscribe(
+      (data: any) => {
+        this.campaigns = data; 
+      },
+      (error) => {
+        console.error('Error al obtener campañas', error);
+      }
+    );
+  }
+
   startAutoSlide() {
     this.intervalId = setInterval(() => {
       this.nextSlide();
-    }, 5000); // Cambia cada 5 segundos
+    }, 5000);
   }
 
   stopAutoSlide() {
