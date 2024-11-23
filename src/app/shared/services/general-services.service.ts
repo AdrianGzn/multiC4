@@ -18,6 +18,7 @@ import { ServiceResponse } from '../models/service-response';
 import { TypeEstablishment } from '../models/type-establishment';
 import { TypeEstablishmentResponse } from '../models/type-establishment-response';
 import { EstablishmentGetResponse } from '../models/establishment-get-response';
+import { ScheduleDoctorToPut } from '../models/schedule-doctor-to-put';
 
 @Injectable({
   providedIn: 'root'
@@ -148,8 +149,8 @@ export class GeneralServices {
     return this.http.get<ScheduleDoctor[]>(`${this.baseUrl}/scheduleDoctor/`);
   }
 
-  changeScheduleDoctor(idSchedule: number, scheduleData: ScheduleDoctorResponse): Observable<ScheduleDoctorResponse> {
-    return this.http.put<ScheduleDoctorResponse>(`${this.baseUrl}/scheduleDoctor/${idSchedule}`, scheduleData);
+  changeScheduleDoctor(idSchedule: number, scheduleData: ScheduleDoctorToPut): Observable<ScheduleDoctorToPut> {
+    return this.http.put<ScheduleDoctorToPut>(`${this.baseUrl}/scheduleDoctor/${idSchedule}`, scheduleData);
   }
 
   deleteScheduleDoctor(idSchedule: number): Observable<ScheduleDoctorResponse> {

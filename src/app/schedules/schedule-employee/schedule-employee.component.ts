@@ -5,6 +5,8 @@ import { UserService } from '../../shared/services/user.service';
 import { ScheduleDoctor } from '../../shared/models/schedule-doctor';
 import { User } from '../../shared/models/user';
 import { ScheduleDoctorResponse } from '../../shared/models/schedule-doctor-response';
+import { ScheduleDoctorToPut } from '../../shared/models/schedule-doctor-to-put';
+import { SchedulesFromUserId } from '../../shared/models/schedules-from-user-id';
 
 @Component({
   selector: 'app-schedule-employee',
@@ -20,7 +22,7 @@ export class ScheduleEmployeeComponent implements OnInit, AfterViewInit {
     id_servicio: 0
   };
 
-  persona_dia: ScheduleDoctor[] = [];
+  persona_dia: SchedulesFromUserId[] = [];
   diasSemana: string[] = ['domingo', 'lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado'];
 
   formSchedules: FormGroup;
@@ -48,14 +50,15 @@ export class ScheduleEmployeeComponent implements OnInit, AfterViewInit {
     this.user = this.userService.getUser();
     
     this.generalServices.getAllHorsById(this.user.id_usuario).subscribe({
-      next: (item: ScheduleDoctor[]) => {
+      next: (item: SchedulesFromUserId[]) => {
         console.log(item);
         console.log('Se han obtenido los horarios del doctor exitosamente');
         
-        item.forEach((schedule: ScheduleDoctor) => {
+        item.forEach((schedule: SchedulesFromUserId) => {
           if (this.diasSemana.includes(schedule.dia)) {
             this.persona_dia.push({
-              id_horario: schedule.id_horario,
+              id_schedule_doctor: schedule.id_schedule_doctor,
+              name: schedule.name,
               id_doctor: schedule.id_doctor,
               dia: schedule.dia,
               entrada: schedule.entrada,
@@ -96,7 +99,7 @@ export class ScheduleEmployeeComponent implements OnInit, AfterViewInit {
       salida: this.formSchedules.value[`${dia}S`]
     }));
 
-    this.persona_dia.forEach((item: ScheduleDoctor) => {
+    this.persona_dia.forEach((item: SchedulesFromUserId) => {
       const diaConfig = diasSemana.find(d => d.dia === item.dia.toLowerCase());
       if (diaConfig) {
         item.entrada = diaConfig.entrada;
@@ -104,17 +107,19 @@ export class ScheduleEmployeeComponent implements OnInit, AfterViewInit {
       }
     });
 
-    this.persona_dia.forEach((item: ScheduleDoctor) => {      
-      let temp: ScheduleDoctorResponse = {
+    this.persona_dia.forEach((item: SchedulesFromUserId) => {
+      let tempSchedule: ScheduleDoctorToPut = {
+        id_horario: item.id_schedule_doctor,
         día: item.dia,
         id_usuario: item.id_doctor,
         entrada: item.entrada,
         salida: item.salida
-      }
-      console.log(temp);
+      }      
+      console.log(tempSchedule);
+      this.user.id_usuario = 1;
 
-      this.generalServices.changeScheduleDoctor(this.user.id_usuario, temp).subscribe({
-        next: (changeResponse: ScheduleDoctorResponse) => {
+      this.generalServices.changeScheduleDoctor(this.user.id_usuario, tempSchedule).subscribe({
+        next: (changeResponse: ScheduleDoctorToPut) => {
           console.log('Se ha guardado correctamente el item con día: ' + changeResponse.día);
         },
         error: (error) => {
@@ -124,4 +129,37 @@ export class ScheduleEmployeeComponent implements OnInit, AfterViewInit {
       });
     });
   }
+
+  onSome(): void {
+    // Conversión de las horas al formato HH:MM:SS
+    const entrada = this.formatToTimeString('15:44');
+    const salida = this.formatToTimeString('18:30');
+  
+    let tempSchedule: ScheduleDoctorToPut = {
+      id_horario: 1,
+      día: 'domingo',
+      id_usuario: 1,
+      entrada: entrada,
+      salida: salida
+    };
+    
+    console.log(tempSchedule);
+  
+    this.generalServices.changeScheduleDoctor(1, tempSchedule).subscribe({
+      next: (changeResponse: ScheduleDoctorToPut) => {
+        console.log('Se ha guardado correctamente el item con día: ' + changeResponse.día);
+      },
+      error: (error) => {
+        console.log('Ha ocurrido un error');
+        console.log(error);
+      }
+    });
+  }
+  
+
+  formatToTimeString(time: string): string {
+    const [hours, minutes] = time.split(':');
+    return `${hours}:${minutes}:00`;
+  }
+  
 }
