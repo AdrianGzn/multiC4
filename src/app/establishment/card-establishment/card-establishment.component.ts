@@ -30,27 +30,33 @@ export class CardEstablishmentComponent implements OnInit {
 
   totalStars = 5;
   starsArray: number[] = [];
+  establishments: any[] = []; 
 
-  constructor(private router: Router,
-              private serviceAndEstablishmentData: ServiceAndEstablishmentDataService,
-              private generalServices: GeneralServices,
-              private idSent: SharedDataService) {}
+  constructor(
+    private router: Router,
+    private serviceAndEstablishmentData: ServiceAndEstablishmentDataService,
+    private generalServices: GeneralServices,
+    private idSent: SharedDataService
+  ) {}
 
   ngOnInit(): void {
-
     this.starsArray = Array(this.totalStars).fill(0);
 
-    
     if (this.card.promedio_calificacion >= 0 && this.card.promedio_calificacion <= this.totalStars) {
-
       this.card.promedio_calificacion = Math.round(this.card.promedio_calificacion); 
     } else {
       this.card.promedio_calificacion = 0; 
     }
 
+    // Obtener y ordenar los establecimientos por promedio_calificacion
     this.generalServices.getEstablishment().subscribe({
-      next: (item: any[]) => {
-        item.forEach((itemEstablishment: any) => {
+      next: (items: any[]) => {
+        // Ordenar por calificación de mayor a menor
+        this.establishments = items.sort(
+          (a, b) => b.promedio_calificacion - a.promedio_calificacion
+        );
+
+        this.establishments.forEach((itemEstablishment: any) => {
           if (itemEstablishment.id_establecimiento === this.card.id_establecimiento) {
             this.serviceAndEstablishmentData.selectEstablishment(itemEstablishment);
           }
@@ -58,7 +64,7 @@ export class CardEstablishmentComponent implements OnInit {
       },
       error: (error) => {
         console.log('Ha ocurrido un error al obtener los establecimientos');
-        console.log(error);  
+        console.log(error);
       }
     });
   }
