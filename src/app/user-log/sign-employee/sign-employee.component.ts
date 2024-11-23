@@ -63,7 +63,9 @@ export class SignEmployeeComponent {
         this.userService.register(newEmployee).subscribe({
           next: (data: User) => {
             myUser = data;
-            this.createSchedulesForDoctor(myUser.id_usuario);
+            if (data.id_rol === 2) {
+              this.createSchedulesForDoctor(myUser.id_usuario);
+            }
           },
           error: (error) => {
             console.log(error)

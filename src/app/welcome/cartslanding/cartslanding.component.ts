@@ -21,9 +21,8 @@ export class CartslandingComponent implements OnInit, OnDestroy {
     this.stopAutoSlide();
   }
 
-  fetchCampaigns() {
-    const id_establishment = 1;  
-    this.GeneralServices.getCampaigns(id_establishment).subscribe(
+  fetchCampaigns() {  
+    this.GeneralServices.getCampaigns(3).subscribe(
       (data: any) => {
         this.campaigns = data; 
       },
