@@ -11,12 +11,18 @@ export class SeedoctorComponent {
   options: string[] = ['Atendidos', 'No Atendidos']
   quotes: any[] = []; 
   quotesDoctor: any [] = [];
+  doctorData: any = {}
 
   constructor(private generalService: GeneralServices) {}
 
   ngOnInit(): void {
-    this.generalService.getAllQuotesByIdDoctor(1).subscribe(
+    let currentUser = localStorage.getItem("userData")
+    if(currentUser) {
+      this.doctorData = JSON.parse(currentUser)
+    }
+    this.generalService.getAllQuotesByIdDoctor(this.doctorData.id_establecimiento).subscribe(
       data => {
+        console.log(data)
         this.quotesDoctor = data; 
       }
     )

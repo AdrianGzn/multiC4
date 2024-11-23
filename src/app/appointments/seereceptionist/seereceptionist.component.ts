@@ -14,7 +14,7 @@ export class SeereceptionistComponent {
   constructor(private generalService: GeneralServices) {}
 
   ngOnInit(): void {
-    let currentEstablishment = localStorage.getItem("establishmentData")
+    let currentEstablishment = localStorage.getItem("userData")
 
     if(currentEstablishment) {
        this.establishmentData = JSON.parse(currentEstablishment)

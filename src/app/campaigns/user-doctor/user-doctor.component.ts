@@ -10,7 +10,7 @@ import { GeneralServices } from '../../shared/services/general-services.service'
 export class UserDoctorComponent implements OnInit {
   campaigns: any[] = [];
   myFormDelete: FormGroup;
-
+  campaignDoctor: any = {}
   constructor(private generalService: GeneralServices) {
     this.myFormDelete = new FormGroup({
       selectedCampaign: new FormControl(0) 
@@ -18,9 +18,14 @@ export class UserDoctorComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.generalService.getCampaigns(31).subscribe(
+    let currentDoctor = localStorage.getItem("userData")
+    if(currentDoctor) {
+      this.campaignDoctor = JSON.parse(currentDoctor)
+    }
+    this.generalService.getCampaigns(this.campaignDoctor.id_establecimiento).subscribe(
       (next) => {
         // Verifica si la respuesta tiene la estructura correcta antes de mapear
+        console.log(next)
         if (Array.isArray(next)) {
           this.campaigns = next.map((campaign: any) => ({
             id_campania: campaign.campaign?.id_campañas,   // Usa el operador de encadenamiento opcional

@@ -17,7 +17,7 @@ export class DeleteComponent implements OnInit {
   });
   }
   ngOnInit(): void {
-    let currentDataEstablishment = localStorage.getItem("establishmentData")
+    let currentDataEstablishment = localStorage.getItem("userData")
 
     if(currentDataEstablishment) {
       this.dataEstablishment = JSON.parse(currentDataEstablishment)

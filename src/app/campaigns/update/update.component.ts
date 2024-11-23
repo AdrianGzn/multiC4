@@ -14,7 +14,7 @@ export class UpdateComponent  {
   dataEstablishment: any = {}
   constructor(private generalService: GeneralServices) {}
   ngOnInit(): void {
-    let currentDataEstablishment = localStorage.getItem("establishmentData")
+    let currentDataEstablishment = localStorage.getItem("userData")
 
     if(currentDataEstablishment) {
       this.dataEstablishment = JSON.parse(currentDataEstablishment)
