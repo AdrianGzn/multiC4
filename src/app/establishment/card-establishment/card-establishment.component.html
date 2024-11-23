@@ -5,13 +5,18 @@
     <div id="content-data" class="flex flex-col justify-between p-4 md:w-2/3">
         <p id="title" class="text-xl font-semibold text-purple-800 mb-2">{{card.nombre}}</p>
         <p id="title" class="text-xl font-sm text-purple-600 mb-2">{{card.direccion.calle}}/{{card.direccion.colonia}}  #{{card.direccion.numero}}</p>
-        
+
+        <div class="flex items-center">
+            <ng-container *ngFor="let star of starsArray; let i = index">
+                <i class="fas fa-star" [ngClass]="{'text-yellow-500': i < card.promedio_calificacion, 'text-gray-300': i >= card.promedio_calificacion}"></i>
+            </ng-container>
+        </div>
+
         <!-- Botón con mejoras en el diseño -->
         <div class="w-full flex justify-end">
             <button class="h-12 px-6 py-3 m-4 bg-purple-600 text-white rounded-lg shadow-md hover:bg-purple-700 hover:shadow-xl transition-all duration-300 transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-purple-500" (click)="details()">
                 Detalles
             </button>
-            
         </div>
     </div>
 </div>
