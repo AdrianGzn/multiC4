@@ -139,8 +139,8 @@ export class ScheduleEmployeeComponent implements OnInit, AfterViewInit {
       id_horario: 1,
       día: 'domingo',
       id_usuario: 1,
-      entrada: entrada,
-      salida: salida
+      entrada: '02:29:52.054Z',
+      salida: '02:29:52.054Z'
     };
     
     console.log(tempSchedule);

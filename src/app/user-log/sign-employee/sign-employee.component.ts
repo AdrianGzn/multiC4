@@ -54,9 +54,9 @@ export class SignEmployeeComponent {
 
     if(this.signInForm.valid){
       if (this.signInForm.value.role === 'Doctor') {
-        newEmployee.id_rol = 3;
-      } else if (this.signInForm.value.role === 'Recepcionista') {
         newEmployee.id_rol = 2;
+      } else if (this.signInForm.value.role === 'Recepcionista') {
+        newEmployee.id_rol = 3;
       }
 
       if (this.signInForm.value.password === this.signInForm.value.confirmPassword) {
@@ -89,8 +89,8 @@ export class SignEmployeeComponent {
       let tempSchedule: ScheduleDoctorResponse = {
         día: itemDia,
         id_usuario: idDoctor,
-        entrada: '',
-        salida: ''
+        entrada: '03:19:43.598Z',
+        salida: '03:19:43.598Z'
       } 
 
       this.generalService.createScheduleDoctor(tempSchedule).subscribe({
