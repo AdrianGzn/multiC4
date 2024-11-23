@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { GeneralServices } from '../../shared/services/general-services.service';
-
+import { error } from 'console';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-user-doctor',
   templateUrl: './user-doctor.component.html',
@@ -13,7 +14,7 @@ export class UserDoctorComponent implements OnInit {
   campaignDoctor: any = {}
   constructor(private generalService: GeneralServices) {
     this.myFormDelete = new FormGroup({
-      selectedCampaign: new FormControl(0) 
+      selectedCampaign: new FormControl('') 
     });
   }
 
@@ -62,5 +63,21 @@ export class UserDoctorComponent implements OnInit {
     } else {
       console.error("No se ha seleccionado ninguna campaña para eliminar");
     }
+  }
+
+  searchByName(): void {
+    this.generalService.getCampignsByName(this.campaignDoctor.id_establecimiento,this.myFormDelete.value.selectedCampaign).subscribe({
+      next: (items) => {
+        this.campaignDoctor = items; 
+      },
+      error: (error) => {
+        console.log("No se lograron obtener las campañas del establecimiento")
+      }
+    })
+  }
+
+  getOut(): void {
+    this.campaignDoctor = []
+    this.ngOnInit()
   }
 }
