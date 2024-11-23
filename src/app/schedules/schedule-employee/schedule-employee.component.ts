@@ -15,7 +15,7 @@ import { SchedulesFromUserId } from '../../shared/models/schedules-from-user-id'
 })
 export class ScheduleEmployeeComponent implements OnInit, AfterViewInit {
   user: User = {
-    id_usuario: 1,
+    id_usuario: 0,
     id_rol: 0,
     nombre: '',
     id_establecimiento: 0,
@@ -116,7 +116,6 @@ export class ScheduleEmployeeComponent implements OnInit, AfterViewInit {
         salida: item.salida
       }      
       console.log(tempSchedule);
-      this.user.id_usuario = 1;
 
       this.generalServices.changeScheduleDoctor(this.user.id_usuario, tempSchedule).subscribe({
         next: (changeResponse: ScheduleDoctorToPut) => {
@@ -131,10 +130,6 @@ export class ScheduleEmployeeComponent implements OnInit, AfterViewInit {
   }
 
   onSome(): void {
-    // Conversión de las horas al formato HH:MM:SS
-    const entrada = this.formatToTimeString('15:44');
-    const salida = this.formatToTimeString('18:30');
-  
     let tempSchedule: ScheduleDoctorToPut = {
       id_horario: 1,
       día: 'domingo',
@@ -155,11 +150,4 @@ export class ScheduleEmployeeComponent implements OnInit, AfterViewInit {
       }
     });
   }
-  
-
-  formatToTimeString(time: string): string {
-    const [hours, minutes] = time.split(':');
-    return `${hours}:${minutes}:00`;
-  }
-  
 }
