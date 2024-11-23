@@ -3,21 +3,25 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-cartspatient',
   templateUrl: './cartspatient.component.html',
-  styleUrls: ['./cartspatient.component.css']
+  styleUrls: ['./cartspatient.component.css'] // Corregido el nombre de la propiedad
 })
-export class CartspatientComponent implements OnInit {
+export class CartspatientComponent implements OnInit { // Corregida la declaración de la clase
   slides = [
     {
-      image: 'assets/salud.jpeg',
-      title: 'Centro de Salud Central',
-      description: 'El Centro de Salud Central es una moderna institución médica situada en el corazón de la ciudad. Su objetivo es ofrecer atención integral a la comunidad, con un equipo de profesionales altamente capacitados. Este centro se especializa en diversas áreas, tales como medicina general, cirugía, pediatría, ginecología, cardiología y urgencias, entre otras.',
+      image: 'assets/vacu.jpeg',
+      title: 'Título 1',
+      description: 'Descripción de la primera imagen.',
     },
     {
-      image: 'assets/consul.jpg',
-      title: 'Centro de Salud Central',
-      description: 'El Centro de Salud Central es una institución médica moderna ubicada en el centro de la ciudad, diseñada para brindar atención integral a la comunidad. Con un equipo de profesionales altamente calificados, el hospital se especializa en una variedad de áreas, como medicina general, cirugía, pediatría, ginecología, cardiología y urgencias, entre otras.',
+      image: 'assets/budo.jpeg',
+      title: 'Título 2',
+      description: 'Descripción de la segunda imagen.',
     },
-    
+    {
+      image: 'assets/inf.jpeg',
+      title: 'Título 3',
+      description: 'Descripción de la tercera imagen.',
+    },
   ];
 
   currentSlide = 0;
@@ -29,6 +33,7 @@ export class CartspatientComponent implements OnInit {
   getTransform() {
     return `translateX(-${this.currentSlide * 100}%)`;
   }
+  
 
   startCarousel() {
     setInterval(() => {
