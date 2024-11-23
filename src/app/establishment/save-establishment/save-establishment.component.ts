@@ -32,10 +32,10 @@ export class SaveEstablishmentComponent implements OnInit {
     nombre: '',
     rol: ''  
   }
-  type_options: string[] = [];
+  type_options: any[] = [];
   category_options: string[] = [];
   nameServices: string[] = [];
-  services: Service[] = [];
+  services: Service[] = []
   doctors: User[] = [];
 
   selectedImage: File | null = null;
@@ -85,6 +85,15 @@ export class SaveEstablishmentComponent implements OnInit {
     if (userCurrent) {
       this.userFinal = JSON.parse(userCurrent);
     }
+    this.generalServices.getTypeEstablishment().subscribe({
+      next: (types) => {
+        this.type_options = types
+      },
+
+      error: (error) => {
+        console.log(error)
+      }
+    })
   }
 
   onSubmit(): void {
@@ -189,5 +198,8 @@ export class SaveEstablishmentComponent implements OnInit {
       tipo: '',
       costo: 0
     };
+  }
+
+  postDoctorOnEstablishment(): void {
   }
 }

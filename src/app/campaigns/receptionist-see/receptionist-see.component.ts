@@ -50,5 +50,19 @@ export class ReceptionistSeeComponent implements OnInit {
       }
     )
   }
+  searchByName(): void {
+    this.generalService.getCampignsByName(this.establishmentData.id_establecimiento,this.myFormDelete.value.selectedCampaign).subscribe({
+      next: (items) => {
+        this.campaigns = items; 
+      },
+      error: (error) => {
+        console.log("No se lograron obtener las campañas del establecimiento")
+      }
+    })
+  }
 
+  getOut(): void {
+    this.campaigns = []
+    this.ngOnInit()
+  }
 }

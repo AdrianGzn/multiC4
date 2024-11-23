@@ -189,6 +189,14 @@ export class GeneralServices {
     return this.http.get(`${this.baseUrl}/campaigns/${id_establishment}`)
   }
 
+  getCampignsByName(name: string, id_establecimiento: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/campaignsByName/${id_establecimiento}/${name}`)
+  }
+
+  getCampignsByNameWithOut(name: string) {
+    return this.http.get(`${this.baseUrl}/campaignsByNameWithOutId/${name}`)
+  }
+
   getCampaignsWithOut(): Observable<any> {
     return this.http.get(`${this.baseUrl}/campaignsWithOut/`)
   }
@@ -238,7 +246,7 @@ export class GeneralServices {
   }
 
   getAllQuotesByIdEstablishmentStatus(id_establishment: number, status:string): Observable<any> {
-    return this.http.get(`${this.baseUrl}/allQuoteDoctor/${id_establishment}/${status}`)
+    return this.http.get(`${this.baseUrl}/allQuoteDoctorEstablishment/${id_establishment}/${status}`)
   }
 
   getServiceDoctorById_establishment(id_establishment: number): Observable<any> {

@@ -42,4 +42,20 @@ export class UserSeeComponent implements OnInit {
     );
   }
 
+
+  searchByName(): void {
+    this.generalService.getCampignsByNameWithOut(this.myFormDelete.value.selectedCampaign).subscribe({
+      next: (items: any) => {
+        this.campaigns = items; 
+      },
+      error: (error) => {
+        console.log("No se lograron obtener las campañas del establecimiento")
+      }
+    })
+  }
+
+  getOut(): void {
+    this.campaigns = []
+    this.ngOnInit()
+  }
 }

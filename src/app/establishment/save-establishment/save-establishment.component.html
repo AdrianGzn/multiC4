@@ -23,19 +23,15 @@
                     <div class="w-[calc(48%)] min-w-[210px]">
                         <label class="form-child-label">Tipo:</label>
                         <select class="form-child border-fuchsia-800 w-full" id="id_tipo_establecimiento" formControlName="id_type_establishment">
-                            <option *ngFor="let option of type_options" value={{option}}>
-                                {{option}}
+                            <option *ngFor="let option of type_options" value={{option.id_tipo_establecimiento}}>
+                                {{option.tipo}}
                             </option>
                         </select>
                     </div>
 
                     <div class="w-[calc(48%)] min-w-[210px]">
                         <label class="form-child-label">Categoría:</label>
-                        <select class="form-child border-fuchsia-800 w-full" id="id_categoria_establecimiento" formControlName="categoria">
-                            <option *ngFor="let option of category_options" value={{option}}>
-                                {{option}}
-                            </option>
-                        </select>
+                        <input  class="form-child border-fuchsia-800 w-full" formControlName="categoría">
                     </div>
                 </div>
             </div>
