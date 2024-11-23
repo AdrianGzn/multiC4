@@ -27,6 +27,7 @@ export class DetailsEstablishmentComponent implements OnInit{
   serviceEstablishment: establishmentResponseWith = {
     id_establishment: 0,
     nameEstablishment: '',
+    image: '',
     descripcion: '',
     horario: {
       entrada:'',

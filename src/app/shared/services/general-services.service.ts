@@ -25,7 +25,7 @@ import { ScheduleDoctorToPut } from '../models/schedule-doctor-to-put';
 })
 export class GeneralServices {
 
-  private baseUrl: string = 'http://3.227.141.174:8000';  
+  private baseUrl: string = 'http://127.0.0.1:8000';  
 
   constructor(private http: HttpClient) {}
 
@@ -105,12 +105,12 @@ export class GeneralServices {
     return this.http.get(`${this.baseUrl}/quotesById/${id}/${status}`)
   }
 
-  getQuoteByIdStatusDoctor(status: string, id: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/quotesByIdDoctor/${id}/${status}`)
+  getQuoteByIdStatusDoctor(status: string, id: number, id_doctor: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/allQuoteDoctorEstablishment/${id}/${id_doctor}/${status}`)
   }
 
-  getQuoteByIdStatusRecepcionist(status: string, id_establishment: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/quotesByIdRecepcionist/${id_establishment}/${status}`)
+  getQuoteByIdStatusRecepcionist( id_establishment: number,status: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/allQuoteReceptioniestEstablishment/${id_establishment}/${status}`)
   }
 
   changeQuote(idQuote: number, quotesData: QuoteResponse): Observable<AddressResponse> {
@@ -168,6 +168,14 @@ export class GeneralServices {
   changeService(idService: number, serviceData: ServiceResponse): Observable<ServiceResponse> {
     return this.http.put<ServiceResponse>(`${this.baseUrl}/services/${idService}`, serviceData);
   }
+
+  changeServiceEstablishment(idService: number, serviceData: any): Observable<ServiceResponse> {
+    return this.http.put<ServiceResponse>(`${this.baseUrl}/services/${idService}`, serviceData);
+  }
+
+  deleteService(id_service: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/service/${id_service}`)
+  } 
 
   createTypeEstablishment(typeEstablishmentData: TypeEstablishmentResponse): Observable<TypeEstablishment> {
     return this.http.post<TypeEstablishment>(`${this.baseUrl}/type_establishment/`, typeEstablishmentData);
@@ -247,10 +255,19 @@ export class GeneralServices {
   }
 
   getAllQuotesByIdEstablishmentStatus(id_establishment: number, status:string): Observable<any> {
-    return this.http.get(`${this.baseUrl}/allQuoteDoctorEstablishment/${id_establishment}/${status}`)
+    return this.http.get(`${this.baseUrl}/allQuoteReceptioniestEstablishment/${id_establishment}/${status}`)
   }
+
+  getAllQuotesDoctorByIdEstablishmentStatus(id_establishment: number, status:string, id_doctor: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/allQuoteDoctorEstablishment/${id_establishment}/${id_doctor}/${status}`)
+  }
+
 
   getServiceDoctorById_establishment(id_establishment: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/allServiceDoctorById_establishment/${id_establishment}`)
+  }
+
+  getAllInformtaionServiceById(id_establishment: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/allInformationServiceById/${id_establishment}`)
   }
 }

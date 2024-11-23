@@ -1,6 +1,7 @@
 export interface establishmentResponseWith {
     id_establishment: number;
     nameEstablishment: string;
+    image: string,
     descripcion: string;
     direccion: {
       calle: string;

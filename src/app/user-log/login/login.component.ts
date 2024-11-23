@@ -34,7 +34,7 @@ export class LoginComponent {
             this.router.navigate(["./establishment/search"])
           }else if(data.data_user.rol === "medic") {
             this.router.navigate(["./welcome/doctor"])
-          }else if(data.data_user.rol){
+          }else if(data.data_user.rol === "receptionist"){
             this.router.navigate(["./establishment/save"])
           }
 

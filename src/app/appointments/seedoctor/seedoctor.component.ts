@@ -29,7 +29,7 @@ export class SeedoctorComponent {
     let user = localStorage.getItem("userData")
     const finalUser = user ? JSON.parse(user): null;
     console.log(finalUser)
-    this.generalService.getQuoteByIdStatusDoctor(this.selectedOption, finalUser.id_usuario).subscribe(
+    this.generalService.getQuoteByIdStatusDoctor(this.selectedOption, finalUser.id_establecimiento, finalUser.id_usuario).subscribe(
     )
   }
 

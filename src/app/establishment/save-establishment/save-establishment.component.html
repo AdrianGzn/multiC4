@@ -31,7 +31,7 @@
 
                     <div class="w-[calc(48%)] min-w-[210px]">
                         <label class="form-child-label">Categoría:</label>
-                        <input  class="form-child border-fuchsia-800 w-full" formControlName="categoría">
+                        <input  class="form-child border-fuchsia-800 w-full" formControlName="categoria">
                     </div>
                 </div>
             </div>
@@ -100,8 +100,8 @@
                 
                 <label class="form-child-label">Agregar Imagen:</label>
                 <div class="flex justify-between">
-                    <input class="bg-white form-child w-[48%]" type="file" id="selectImage" (change)="onChangeSelectedImage($event)">
-                    <button type="button" class="w-[48%] bg-purple-700 text-white p-1 ml-2 rounded">Eliminar imágen</button>
+                    <input class="bg-white form-child w-[48%]" type="file" id="selectImage" (change)="onChangeSelectedImage($event)" #fileinput>
+                    <button type="button" class="w-[48%] bg-purple-700 text-white p-1 ml-2 rounded" (click)="deleteSelectedImage(fileinput)">Eliminar imágen</button>
                 </div>
             </div>
         </div>
@@ -128,13 +128,14 @@
                 </div>
         
                 <div class="w-full flex flex-wrap justify-between mt-2">
-                    <button type="button" class="w-[48%] bg-fuchsia-700 text-white p-1 rounded" (click)="addService()">Añadir</button>
-                    <button type="button" class="w-[48%] bg-purple-700 text-white p-1 rounded">Eliminar servicio</button>
+                    <button type="button" class="w-[48%] bg-fuchsia-700 text-white p-1 rounded" (click)="postServiceOnEstablishment()">Añadir</button>
+                    <button type="button" class="w-[48%] bg-purple-700 text-white p-1 rounded" (click)="deleteService()">Eliminar servicio</button>
                 </div>
         
-                <div class="w-full min-h-[50px] bg-white mt-2">
-                    <!-- Aquí se mostrarán servicios añadidos -->
-                </div>
+                <div class="w-full min-h-[50px] bg-white mt-2" *ngFor="let service of services; let i = index" (click)="selectService(service)">
+                    <p *ngIf="services.length === 0">No hay servicios que mostrar</p>
+                    <p *ngIf="services.length > 0" [ngClass]="{'bg-blue-100': selectedService === service}">{{service.service}}</p>
+                  </div>
             </div>
         </form>
         
@@ -146,19 +147,15 @@
                     <!-- Select para doctores -->
                     <div class="w-[48%]">
                         <label class="form-child-label">Doctor:</label>
-                        <select class="form-child w-full" formControlName="doctor">
-                            <option *ngFor="let doctor of doctors" [value]="doctor.id_usuario">
-                                {{ doctor.nombre }}
-                            </option>
-                        </select>
+                        <input class="form-child w-full" formControlName="doctor">
                     </div>
                     
                     <!-- Select para servicios -->
                     <div class="w-[48%]">
                         <label class="form-child-label mt-2">Servicio:</label>
                         <select class="form-child w-full" formControlName="servicioDoctor">
-                            <option *ngFor="let service of services" [value]="service.id_servicio">
-                                {{ service.tipo }}
+                            <option *ngFor="let service of services" [value]="service.id_service">
+                                {{ service.service }}
                             </option>
                         </select>
                     </div>
@@ -169,8 +166,8 @@
                     <button type="button" class="w-[48%] bg-purple-700 text-white p-1 mt-2 rounded">Eliminar doctor</button>
                 </div>
         
-                <div class="w-full min-h-[50px] bg-white mt-2">
-                    <!-- Aquí se mostrarán doctores añadidos -->
+                <div class="w-full min-h-[50px] bg-white mt-2" *ngFor="let doctor of doctors">
+                    {{doctor.nombre}}
                 </div>
             </div>
         </form>

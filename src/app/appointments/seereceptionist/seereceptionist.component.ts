@@ -19,7 +19,7 @@ export class SeereceptionistComponent {
     if(currentEstablishment) {
        this.establishmentData = JSON.parse(currentEstablishment)
     }
-    this.generalService.getAllQuotesByIdEstablishmentStatus(this.establishmentData.id_establecimiento, this.selectedOption).subscribe(
+    this.generalService.getQuoteByIdStatusRecepcionist(this.establishmentData.id_establecimiento, this.selectedOption).subscribe(
       data => {
         this.quotesDoctor = data; 
       }

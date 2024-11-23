@@ -12,6 +12,7 @@ import { Schedule } from '../../shared/models/schedule';
 import { ScheduleResponse } from '../../shared/models/schedule-response';
 import Swal from 'sweetalert2';
 import { error } from 'console';
+import { serviceAllId } from '../../shared/models/serviceAlId';
 
 @Component({
   selector: 'app-save-establishment',
@@ -34,8 +35,8 @@ export class SaveEstablishmentComponent implements OnInit {
   }
   type_options: any[] = [];
   category_options: string[] = [];
-  nameServices: string[] = [];
-  services: Service[] = []
+  nameServices: string[] = ["Ortopedia"];
+  services: serviceAllId[] = []
   doctors: User[] = [];
 
   selectedImage: File | null = null;
@@ -43,6 +44,7 @@ export class SaveEstablishmentComponent implements OnInit {
   id_schedule: number = 0;
   id_address: number = 0;
   id_establishment: number = 0;
+    selectedService: any = null;
 
 
   constructor(private generalServices: GeneralServices, private serviceAndEstablishmentData: ServiceAndEstablishmentDataService, private userService: UserService) {
@@ -88,6 +90,16 @@ export class SaveEstablishmentComponent implements OnInit {
     this.generalServices.getTypeEstablishment().subscribe({
       next: (types) => {
         this.type_options = types
+      },
+
+      error: (error) => {
+        console.log(error)
+      }
+    })
+
+    this.generalServices.getAllInformtaionServiceById(this.userFinal.id_establecimiento).subscribe({
+      next: (service) => {
+        this.services = service
       },
 
       error: (error) => {
@@ -157,7 +169,7 @@ export class SaveEstablishmentComponent implements OnInit {
                   }
                   this.generalServices.changeRecepcionist(modifyUser, this.userFinal.id_usuario).subscribe({
                     next: (item) => {
-                      localStorage.setItem("userData", item)
+                      localStorage.setItem("userData", JSON.stringify(item))
                       Swal.fire("Generar establecimiento", "Se logro generar el establecimiento", "success")
                     },
                     error: (error) => {
@@ -185,6 +197,11 @@ export class SaveEstablishmentComponent implements OnInit {
     });
   }
 
+  selectService(service: any): void {
+    this.selectedService = service;
+    console.log('Servicio seleccionado:', service);
+  }
+
   onChangeSelectedImage(file: any): void {
     if (file.target.files.length > 0) {
       this.selectedImage = file.target.files[0];
@@ -200,6 +217,52 @@ export class SaveEstablishmentComponent implements OnInit {
     };
   }
 
+  deleteSelectedImage(input: HTMLInputElement): void {
+    this.selectedImage = null; 
+    input.value = '';  
+  }
+
   postDoctorOnEstablishment(): void {
+    this.generalServices.createService(this.formDoctors.value).subscribe({
+      next: (item) => {
+        Swal.fire("Generar servicio", "Se genero el servicio", "success")
+        this.ngOnInit()
+      },
+
+      error: (error) => {
+        Swal.fire("General servicio", "No se logro generar servicio", "error")
+      }
+    })
+  }
+
+  postServiceOnEstablishment(): void {
+    const service = {
+      id_establecimiento: this.userFinal.id_establecimiento,
+      tipo: this.formServices.value.servicio,
+      costo: this.formServices.value.costo
+    }
+    console.log(service)
+    this.generalServices.createService(service).subscribe({
+      next: (item) => {
+        console.log(item)
+        Swal.fire("Generar servicio", "se logro generar el servicio", "success")
+      },
+
+      error: (error) => {
+        Swal.fire("Generar servicio", "no se logor generar servicio", "error")
+      }
+    })
+  }
+
+  deleteService(): void {
+    this.generalServices.deleteService(this.selectedService.id_service).subscribe({
+      next: (item) => {
+        Swal.fire("Eliminar servico", "Se logro eliminar el sevicio", "success")
+      },
+
+      error: (error) => {
+        Swal.fire("Eliminar servicio", "No se logro elimnar el servicio", "error")
+      }
+    })
   }
 }
