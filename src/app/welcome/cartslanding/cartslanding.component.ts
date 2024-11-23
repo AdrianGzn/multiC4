@@ -24,7 +24,8 @@ export class CartslandingComponent implements OnInit, OnDestroy {
   fetchCampaigns() {  
     this.GeneralServices.getCampaigns(3).subscribe(
       (data: any) => {
-        this.campaigns = data; 
+        console.log(data);
+        
       },
       (error) => {
         console.error('Error al obtener campañas', error);

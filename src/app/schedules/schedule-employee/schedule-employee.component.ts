@@ -16,10 +16,12 @@ import { SchedulesFromUserId } from '../../shared/models/schedules-from-user-id'
 export class ScheduleEmployeeComponent implements OnInit, AfterViewInit {
   user: User = {
     id_usuario: 0,
-    id_rol: 0,
-    nombre: '',
-    id_establecimiento: 0,
-    id_servicio: 0
+      id_rol: 0,
+      nombre: '',
+      contraseña: '',
+      id_establecimiento: 0,
+      localidad: '',
+      id_servicio: 0
   };
 
   persona_dia: SchedulesFromUserId[] = [];
@@ -51,19 +53,11 @@ export class ScheduleEmployeeComponent implements OnInit, AfterViewInit {
     
     this.generalServices.getAllHorsById(this.user.id_usuario).subscribe({
       next: (item: SchedulesFromUserId[]) => {
-        console.log(item);
         console.log('Se han obtenido los horarios del doctor exitosamente');
         
         item.forEach((schedule: SchedulesFromUserId) => {
           if (this.diasSemana.includes(schedule.dia)) {
-            this.persona_dia.push({
-              id_schedule_doctor: schedule.id_schedule_doctor,
-              name: schedule.name,
-              id_doctor: schedule.id_doctor,
-              dia: schedule.dia,
-              entrada: schedule.entrada,
-              salida: schedule.salida
-            });
+            this.persona_dia.push(schedule);
           }
         });
       },
@@ -107,6 +101,7 @@ export class ScheduleEmployeeComponent implements OnInit, AfterViewInit {
       }
     });
 
+    console.log(this.persona_dia);
     this.persona_dia.forEach((item: SchedulesFromUserId) => {
       let tempSchedule: ScheduleDoctorToPut = {
         id_horario: item.id_schedule_doctor,
@@ -115,11 +110,10 @@ export class ScheduleEmployeeComponent implements OnInit, AfterViewInit {
         entrada: item.entrada,
         salida: item.salida
       }      
-      console.log(tempSchedule);
 
-      this.generalServices.changeScheduleDoctor(this.user.id_usuario, tempSchedule).subscribe({
+      this.generalServices.changeScheduleDoctor(tempSchedule.id_horario, tempSchedule).subscribe({
         next: (changeResponse: ScheduleDoctorToPut) => {
-          console.log('Se ha guardado correctamente el item con día: ' + changeResponse.día);
+          console.log(changeResponse);
         },
         error: (error) => {
           console.log('Ha ocurrido un error');
