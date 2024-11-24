@@ -1,7 +1,48 @@
 <app-header-patient></app-header-patient>
 <app-cartspatient></app-cartspatient>
-
-
-
 <app-cartpatientcampanis></app-cartpatientcampanis>
+
+<div class="container mx-auto py-16 px-4">
+    <div class="flex flex-col lg:flex-row items-center justify-between gap-12">
+      <!-- Columna de imagen (ahora a la izquierda, más pequeña en pantallas pequeñas) -->
+      <div class="w-full lg:w-1/2 mb-8 lg:mb-0">
+        <img src="assets/pregunta.jpeg" alt="Imagen FAQ" class="w-full sm:max-w-[150px] lg:max-w-full h-auto rounded-lg">
+      </div>
+    
+  
+    <!-- Columna de texto (ahora a la derecha) -->
+    <div class="w-full lg:w-1/2">
+      <h2 class="text-3xl lg:text-4xl font-semibold text-gray-800 mb-6">
+        Preguntas Frecuentes
+      </h2>
+      <div class="space-y-4">
+        <div class="p-4 bg-gray-100 rounded-lg shadow-md">
+          <h3 class="text-lg lg:text-xl font-semibold text-gray-700 cursor-pointer" (click)="toggleAnswer(0)">
+            ¿Cómo puedo contactarlos?
+          </h3>
+          <p *ngIf="answers[0]" class="text-gray-600">
+            Puedes contactarnos a través de nuestro formulario de contacto en la página de soporte o enviando un correo a soporteempresa.com.
+          </p>
+        </div>
+        <div class="p-4 bg-gray-100 rounded-lg shadow-md">
+          <h3 class="text-lg lg:text-xl font-semibold text-gray-700 cursor-pointer" (click)="toggleAnswer(1)">
+            ¿Cuánto tarda la entrega?
+          </h3>
+          <p *ngIf="answers[1]" class="text-gray-600">
+            Las entregas suelen tardar entre 3 a 5 días hábiles, dependiendo de la ubicación.
+          </p>
+        </div>
+        <div class="p-4 bg-gray-100 rounded-lg shadow-md">
+          <h3 class="text-lg lg:text-xl font-semibold text-gray-700 cursor-pointer" (click)="toggleAnswer(2)">
+            ¿Aceptan devoluciones?
+          </h3>
+          <p *ngIf="answers[2]" class="text-gray-600">
+            Sí, aceptamos devoluciones dentro de los 30 días posteriores a la compra, siempre que el producto esté en su estado original.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <app-footerpatient></app-footerpatient>
