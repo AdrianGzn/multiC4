@@ -198,8 +198,8 @@ export class GeneralServices {
     return this.http.get(`${this.baseUrl}/campaigns/${id_establishment}`)
   }
 
-  getCampignsByName(name: string, id_establecimiento: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/campaignsByName/${id_establecimiento}/${name}`)
+  getCampignsByName(location: string, id_establecimiento: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/campaignsByName/${id_establecimiento}/${location}`)
   }
 
   getCampignsByNameWithOut(name: string) {

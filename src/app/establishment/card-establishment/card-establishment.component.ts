@@ -1,14 +1,17 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { faIcons, faStar } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { ServiceAndEstablishmentDataService } from '../../shared/services/service-and-establishment-data.service';
 import { SharedDataService } from '../../shared/services/shared-data.service';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
+
 
 @Component({
   selector: 'app-card-establishment',
   templateUrl: './card-establishment.component.html',
   styleUrls: ['./card-establishment.component.css']
 })
-export class CardEstablishmentComponent {
+export class CardEstablishmentComponent implements OnInit {
   @Input() card = { 
     id_establecimiento: 0,
     nombre: '',
@@ -27,7 +30,10 @@ export class CardEstablishmentComponent {
 
   @Output() emitCardId = new EventEmitter<number>();
 
-  starsArray: boolean[] = [];  // Arreglo para almacenar el estado de las estrellas
+  starsArray: boolean[] = [];
+  faStar: IconProp = faStar;// Asignar el ícono de la estrella a una propiedad de la clase
+  fullStars = 0; // Número de estrellas completas
+  halfStar = 0;  // Número de estrellas medias
 
   constructor(
     private router: Router,
@@ -40,11 +46,20 @@ export class CardEstablishmentComponent {
   }
 
   updateStars() {
-    // Limpiar el arreglo de estrellas
+    // Si la calificación es 0, asignamos 1 estrella completa.
+    this.fullStars = Math.max(1, Math.floor(this.card.promedio_calificacion));  // Asegura al menos 1 estrella completa
+    this.halfStar = (this.card.promedio_calificacion - this.fullStars) >= 0.5 ? 1 : 0;  // Estrella media
+
     this.starsArray = [];
-    // Llenar el arreglo de estrellas basado en la calificación promedio
     for (let i = 0; i < 5; i++) {
-      this.starsArray.push(i < Math.round(this.card.promedio_calificacion));  // Redondeamos la calificación
+      if (i < this.fullStars) {
+        this.starsArray.push(true);  // Estrella llena
+      } else if (i === this.fullStars && this.halfStar === 1) {
+        this.starsArray.push(false);  // Estrella media
+        this.halfStar = 0;  // Solo una estrella media, no agregamos más
+      } else {
+        this.starsArray.push(false);  // Estrella vacía
+      }
     }
   }
 
