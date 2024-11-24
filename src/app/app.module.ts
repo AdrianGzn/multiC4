@@ -6,6 +6,8 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
 import { CardQuoteComponent } from './welcome/card-quote/card-quote.component';
 import { QuotePatientComponent } from './appointments/quote-patient/quote-patient.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 
 @NgModule({
   declarations: [
@@ -17,6 +19,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     SweetAlert2Module.forRoot(),
     BrowserModule,
     AppRoutingModule,
+    FontAwesomeModule
   ],
   providers: [
  

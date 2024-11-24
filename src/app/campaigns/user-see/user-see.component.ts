@@ -10,14 +10,21 @@ import { GeneralServices } from '../../shared/services/general-services.service'
 export class UserSeeComponent implements OnInit {
   campaigns: any[] = [];
   myFormDelete: FormGroup; 
+  userFinal: any = {}
   constructor(private generalService: GeneralServices) {
     this.myFormDelete = new FormGroup({
-      selectedCampaign: new FormControl(0)  // Asegúrate de que el valor predeterminado sea válido
+      selectedCampaign: new FormControl('')  // Asegúrate de que el valor predeterminado sea válido
     });
   }
 
   ngOnInit(): void {
-    this.generalService.getCampaignsWithOut().subscribe(
+    let currentUser = localStorage.getItem("userData")
+
+    if(currentUser) {
+      this.userFinal = JSON.parse(currentUser)
+    }
+
+    this.generalService.getCampaignsWithOut(this.userFinal.localidad).subscribe(
       (next) => {
         console.log(next)
         // Verifica si la respuesta tiene la estructura correcta antes de mapear
@@ -44,7 +51,7 @@ export class UserSeeComponent implements OnInit {
 
 
   searchByName(): void {
-    this.generalService.getCampignsByNameWithOut(this.myFormDelete.value.selectedCampaign).subscribe({
+    this.generalService.getCampignsByName(this.userFinal.localidad,this.myFormDelete.value.selectedCampaign).subscribe({
       next: (items: any) => {
         this.campaigns = items; 
       },

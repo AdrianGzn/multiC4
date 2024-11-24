@@ -1,8 +1,10 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { faIcons, faStar } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
-import { GeneralServices } from '../../shared/services/general-services.service';
 import { ServiceAndEstablishmentDataService } from '../../shared/services/service-and-establishment-data.service';
 import { SharedDataService } from '../../shared/services/shared-data.service';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
+
 
 @Component({
   selector: 'app-card-establishment',
@@ -26,47 +28,39 @@ export class CardEstablishmentComponent implements OnInit {
     promedio_calificacion: 0
   };
 
-  @Output() emitCardId = new EventEmitter<number>(); 
+  @Output() emitCardId = new EventEmitter<number>();
 
-  totalStars = 5;
-  starsArray: number[] = [];
-  establishments: any[] = []; 
+  starsArray: boolean[] = [];
+  faStar: IconProp = faStar;// Asignar el ícono de la estrella a una propiedad de la clase
+  fullStars = 0; // Número de estrellas completas
+  halfStar = 0;  // Número de estrellas medias
 
   constructor(
     private router: Router,
     private serviceAndEstablishmentData: ServiceAndEstablishmentDataService,
-    private generalServices: GeneralServices,
     private idSent: SharedDataService
   ) {}
 
-  ngOnInit(): void {
-    this.starsArray = Array(this.totalStars).fill(0);
+  ngOnInit() {
+    this.updateStars();  // Llamamos a la función para actualizar el arreglo de estrellas
+  }
 
-    if (this.card.promedio_calificacion >= 0 && this.card.promedio_calificacion <= this.totalStars) {
-      this.card.promedio_calificacion = Math.round(this.card.promedio_calificacion); 
-    } else {
-      this.card.promedio_calificacion = 0; 
-    }
+  updateStars() {
+    // Si la calificación es 0, asignamos 1 estrella completa.
+    this.fullStars = Math.max(1, Math.floor(this.card.promedio_calificacion));  // Asegura al menos 1 estrella completa
+    this.halfStar = (this.card.promedio_calificacion - this.fullStars) >= 0.5 ? 1 : 0;  // Estrella media
 
-    // Obtener y ordenar los establecimientos por promedio_calificacion
-    this.generalServices.getEstablishment().subscribe({
-      next: (items: any[]) => {
-        // Ordenar por calificación de mayor a menor
-        this.establishments = items.sort(
-          (a, b) => b.promedio_calificacion - a.promedio_calificacion
-        );
-
-        this.establishments.forEach((itemEstablishment: any) => {
-          if (itemEstablishment.id_establecimiento === this.card.id_establecimiento) {
-            this.serviceAndEstablishmentData.selectEstablishment(itemEstablishment);
-          }
-        });
-      },
-      error: (error) => {
-        console.log('Ha ocurrido un error al obtener los establecimientos');
-        console.log(error);
+    this.starsArray = [];
+    for (let i = 0; i < 5; i++) {
+      if (i < this.fullStars) {
+        this.starsArray.push(true);  // Estrella llena
+      } else if (i === this.fullStars && this.halfStar === 1) {
+        this.starsArray.push(false);  // Estrella media
+        this.halfStar = 0;  // Solo una estrella media, no agregamos más
+      } else {
+        this.starsArray.push(false);  // Estrella vacía
       }
-    });
+    }
   }
 
   details(): void {

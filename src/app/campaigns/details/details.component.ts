@@ -25,7 +25,7 @@ export class DetailsComponent {
     if(currentDataEstablishment) {
       this.dataEstablishment = JSON.parse(currentDataEstablishment)
     }
-    this.generalService.getCampaigns(this.dataEstablishment.id_establecimiento).subscribe(
+    this.generalService.getCampaigns(3).subscribe(
       (next) => {
         this.campaigns = next.map((campaign: any) => ({
           id_campania: campaign.campaign["id_campañas"],

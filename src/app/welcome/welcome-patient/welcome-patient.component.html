@@ -1,7 +1,104 @@
 <app-header-patient></app-header-patient>
 <app-cartspatient></app-cartspatient>
-
-
-
 <app-cartpatientcampanis></app-cartpatientcampanis>
+
+<div class="container mx-auto py-16 px-4">
+  <div class="flex flex-col lg:flex-row items-center justify-between gap-12">
+    <!-- Columna de imagen (ahora a la izquierda, más pequeña en pantallas pequeñas) -->
+    <div class="w-full lg:w-1/2 mb-8 lg:mb-0">
+      <img src="assets/pregunta.jpeg" alt="Imagen FAQ" class="w-full sm:max-w-[150px] lg:max-w-full h-auto rounded-lg">
+    </div>
+
+    <!-- Columna de texto (ahora a la derecha) -->
+    <div class="w-full lg:w-1/2">
+      <h2 class="text-3xl lg:text-4xl font-semibold text-gray-800 mb-6">
+        Preguntas Frecuentes
+      </h2>
+      <div class="space-y-6"> <!-- Se usa space-y-6 para mayor separación entre preguntas -->
+        
+        <!-- Primer grupo de preguntas -->
+        <div *ngIf="showFirstGroup">
+          <div class="p-4 bg-gray-100 rounded-lg shadow-md mb-4">
+            <h3 class="text-lg lg:text-xl font-semibold text-gray-700 cursor-pointer" (click)="toggleAnswer(0)">
+              ¿Cómo puedo agendar una cita?
+            </h3>
+            <p *ngIf="answers[0]" class="text-gray-600">
+              Puedes agendar una cita a través de nuestro sistema en línea, seleccionando el servicio que deseas y el horario disponible.
+            </p>
+          </div>
+          <div class="p-4 bg-gray-100 rounded-lg shadow-md mb-4">
+            <h3 class="text-lg lg:text-xl font-semibold text-gray-700 cursor-pointer" (click)="toggleAnswer(1)">
+              ¿Cómo puedo buscar una campaña?
+            </h3>
+            <p *ngIf="answers[1]" class="text-gray-600">
+              Para buscar una campaña, solo ingresa el nombre de la campaña o el tipo de servicio en el buscador de nuestra plataforma.
+            </p>
+          </div>
+          <div class="p-4 bg-gray-100 rounded-lg shadow-md mb-4">
+            <h3 class="text-lg lg:text-xl font-semibold text-gray-700 cursor-pointer" (click)="toggleAnswer(2)">
+              ¿Cómo puedo ver mis citas?
+            </h3>
+            <p *ngIf="answers[2]" class="text-gray-600">
+              Puedes ver todas tus citas accediendo a tu perfil y entrando en la sección "Mis Citas", donde aparecerán todas las programadas.
+            </p>
+          </div>
+          <div class="p-4 bg-gray-100 rounded-lg shadow-md mb-4">
+            <h3 class="text-lg lg:text-xl font-semibold text-gray-700 cursor-pointer" (click)="toggleAnswer(3)">
+              ¿Cómo buscar un establecimiento por servicio o por nombre?
+            </h3>
+            <p *ngIf="answers[3]" class="text-gray-600">
+              Puedes buscar un establecimiento ingresando su nombre o el servicio que ofrecen en la barra de búsqueda de nuestra página principal.
+            </p>
+          </div>
+        </div>
+
+        <!-- Flecha para cambiar las preguntas -->
+        <div class="text-center cursor-pointer" (click)="toggleQuestionGroup()">
+          <span class="text-blue-600">Ver más preguntas</span>
+          <span *ngIf="showFirstGroup" class="ml-2">&#8595;</span> <!-- Flecha hacia abajo -->
+          <span *ngIf="!showFirstGroup" class="ml-2">&#8593;</span> <!-- Flecha hacia arriba -->
+        </div>
+
+        <!-- Segundo grupo de preguntas (solo visible cuando `showFirstGroup` es false) -->
+        <div *ngIf="!showFirstGroup">
+          <div class="p-4 bg-gray-100 rounded-lg shadow-md mb-4">
+            <h3 class="text-lg lg:text-xl font-semibold text-gray-700 cursor-pointer" (click)="toggleAnswer(4)">
+              ¿Cuál es el horario de atención?
+            </h3>
+            <p *ngIf="answers[4]" class="text-gray-600">
+              Nuestro horario de atención es de lunes a viernes de 9:00 AM a 6:00 PM.
+            </p>
+          </div>
+          <div class="p-4 bg-gray-100 rounded-lg shadow-md mb-4">
+            <h3 class="text-lg lg:text-xl font-semibold text-gray-700 cursor-pointer" (click)="toggleAnswer(5)">
+              ¿Puedo cambiar mi cita después de agendarla?
+            </h3>
+            <p *ngIf="answers[5]" class="text-gray-600">
+              Sí, puedes cambiar la cita a través de nuestro sistema, siempre y cuando sea con al menos 24 horas de antelación.
+            </p>
+          </div>
+          <div class="p-4 bg-gray-100 rounded-lg shadow-md mb-4">
+            <h3 class="text-lg lg:text-xl font-semibold text-gray-700 cursor-pointer" (click)="toggleAnswer(6)">
+              ¿Qué métodos de pago aceptan?
+            </h3>
+            <p *ngIf="answers[6]" class="text-gray-600">
+              Aceptamos pagos con tarjeta de crédito, débito y pagos en efectivo en nuestras instalaciones.
+            </p>
+          </div>
+          <div class="p-4 bg-gray-100 rounded-lg shadow-md mb-4">
+            <h3 class="text-lg lg:text-xl font-semibold text-gray-700 cursor-pointer" (click)="toggleAnswer(7)">
+              ¿Tienen algún descuento para estudiantes?
+            </h3>
+            <p *ngIf="answers[7]" class="text-gray-600">
+              Sí, ofrecemos un descuento del 10% para estudiantes con presentación de su carnet vigente.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 <app-footerpatient></app-footerpatient>

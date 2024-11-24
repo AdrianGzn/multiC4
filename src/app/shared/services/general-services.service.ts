@@ -109,8 +109,8 @@ export class GeneralServices {
     return this.http.delete<QuoteResponse>(`${this.baseUrl}/quotes/${idQuote}`);
   }
   
-  establishmentInformation(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/allImagesEstablishment/`)
+  establishmentInformation(location: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/allImagesEstablishment/${location}`)
   }
 
   createSchedule(scheduleData: ScheduleResponse): Observable<Schedule> {
@@ -186,16 +186,16 @@ export class GeneralServices {
     return this.http.get(`${this.baseUrl}/campaigns/${id_establishment}`)
   }
 
-  getCampignsByName(name: string, id_establecimiento: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/campaignsByName/${id_establecimiento}/${name}`)
+  getCampignsByName(location: string, id_establecimiento: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/campaignsByName/${id_establecimiento}/${location}`)
   }
 
   getCampignsByNameWithOut(name: string) {
     return this.http.get(`${this.baseUrl}/campaignsByNameWithOutId/${name}`)
   }
 
-  getCampaignsWithOut(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/campaignsWithOut/`)
+  getCampaignsWithOut(location: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/campaignsAll/${location}`)
   }
 
   changeCampaign(id_campaign: number,campaign: any): Observable<any> {
@@ -243,6 +243,11 @@ export class GeneralServices {
   getQuotesByDoctorId(id_doctor: number): Observable<QuoteResponse[]> {
     return this.http.get<QuoteResponse[]>(`${this.baseUrl}/quotesDoctorById/${id_doctor}`)
   }
+
+  getAllQuotesByIdPatient(id_patient: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/allQuotePatient/${id_patient}`)
+  }
+
 
   getQuotesByPatientId(id_patient: number): Observable<QuoteResponse[]> {
     return this.http.get<QuoteResponse[]>(`${this.baseUrl}/allQuotePatient/${id_patient}`)
