@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GeneralServices } from '../../shared/services/general-services.service';
+import { error } from 'console';
 
 @Component({
   selector: 'app-see',
@@ -11,24 +12,22 @@ export class SeeComponent implements OnInit {
   selectedOption: string = 'Atendidos';  
   options: string[] = ['Atendidos', 'No Atendidos'];
   quotes: any[] = []; 
-
+  userFinal: any = {}
   constructor(private generalService: GeneralServices) {}
 
   quotesDoctor: any [] = [];
 
 
   ngOnInit(): void {
-    this.generalService.getAllQuotesByIdDoctor(1).subscribe(
+    let currentUser = localStorage.getItem("userData")
+    if(currentUser) {
+      this.userFinal = JSON.parse(currentUser)
+      console.log(this.userFinal)
+    }
+    this.generalService.getAllQuotesByIdPatient(this.userFinal.id_usuario).subscribe(
       data => {
+        console.log(data)
         this.quotesDoctor = data; 
-      }
-    )
-    let user = localStorage.getItem("userData")
-    const finalUser = user ? JSON.parse(user): null;
-    console.log(finalUser)
-    this.generalService.getQuoteByIdStatus(this.selectedOption, finalUser.id_usuario).subscribe(
-      data => {
-        this.quotesDoctor = data;
       },
 
       error => {
@@ -44,23 +43,16 @@ export class SeeComponent implements OnInit {
   selectOption(option: string) {
     this.selectedOption = option;  
     this.isOpen = false;      
-    this.fetchQuotes(); 
+    this.fetchQuotes()
   }
 
-  private fetchQuotes() {
+  fetchQuotes() {
     let user = localStorage.getItem("userData");
     const finalUser = user ? JSON.parse(user) : null;
 
     console.log(this.selectOption)
-      this.generalService.getQuoteByIdStatus(this.selectedOption, finalUser.id_usuario).subscribe((response: any[]) => {
-        console.log(response)
-        this.quotes = response.map(quote => ({
-          id: quote.id,
-          date: quote.date,
-          status: quote.status,
-          doctor: quote.doctor,
-          description: quote.description
-        }));
+      this.generalService.getQuoteByIdStatus(this.selectedOption, this.userFinal.id_usuario).subscribe((response: any[]) => {
+        this.quotes = response;
       });
     
   }
