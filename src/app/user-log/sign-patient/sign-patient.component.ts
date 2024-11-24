@@ -20,7 +20,7 @@ export class SignPatientComponent {
       username: ['', Validators.required],
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required],
-      locality: ['', Validators.required] // Campo de localidad añadido
+      localidad: ['', Validators.required] // Campo de localidad añadido
     });
   }
 
@@ -29,7 +29,7 @@ export class SignPatientComponent {
       id_rol: 1,
       nombre: this.signInForm.value.username,
       contraseña: this.signInForm.value.password,
-      localidad: this.signInForm.value.locality // Agregamos la localidad al objeto
+      localidad: this.signInForm.value.localidad // Agregamos la localidad al objeto
     };
 
     console.log(newPatient);

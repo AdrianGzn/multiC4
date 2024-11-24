@@ -13,7 +13,7 @@ export class UserSeeComponent implements OnInit {
   userFinal: any = {}
   constructor(private generalService: GeneralServices) {
     this.myFormDelete = new FormGroup({
-      selectedCampaign: new FormControl(0)  // Asegúrate de que el valor predeterminado sea válido
+      selectedCampaign: new FormControl('')  // Asegúrate de que el valor predeterminado sea válido
     });
   }
 

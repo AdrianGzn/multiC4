@@ -14,7 +14,7 @@ export class ReceptionistSeeComponent implements OnInit {
   establishmentData: any = {}
   constructor(private generalService: GeneralServices) {
     this.myFormDelete = new FormGroup({
-      selectedCampaign: new FormControl(0, [])
+      selectedCampaign: new FormControl('', [])
   });
   }
   ngOnInit(): void {
