@@ -20,7 +20,7 @@ export class SeedoctorComponent {
     if(currentUser) {
       this.doctorData = JSON.parse(currentUser)
     }
-    this.generalService.getAllQuotesByIdDoctor(this.doctorData.id_establecimiento).subscribe(
+    this.generalService.getQuotesByDoctorId(this.doctorData.id_doctor).subscribe(
       data => {
         console.log(data)
         this.quotesDoctor = data; 
@@ -29,7 +29,7 @@ export class SeedoctorComponent {
     let user = localStorage.getItem("userData")
     const finalUser = user ? JSON.parse(user): null;
     console.log(finalUser)
-    this.generalService.getQuoteByIdStatusDoctor(this.selectedOption, finalUser.id_establecimiento, finalUser.id_usuario).subscribe(
+    this.generalService.getQuotesByDoctorStatus(finalUser.id_usuario, this.selectedOption).subscribe(
     )
   }
 
@@ -53,7 +53,7 @@ export class SeedoctorComponent {
     let user = localStorage.getItem("userData")
     const finalUser = user ? JSON.parse(user): null;
     console.log(finalUser)
-    this.generalService.getQuoteByIdStatus(this.selectedOption, finalUser.id_usuario).subscribe(
+    this.generalService.getQuotesByDoctorStatus(finalUser.id_usuario, this.selectedOption).subscribe(
     )
   }
 } 
