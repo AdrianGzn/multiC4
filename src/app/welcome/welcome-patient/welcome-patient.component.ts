@@ -53,5 +53,11 @@ export class WelcomePatientComponent implements OnInit {
   checkout(): void {
     //this.userService.
   }
- 
+  answers = [false, false, false];
+
+  // Método para alternar las respuestas
+  toggleAnswer(index: number) {
+    // Cerrar todas las respuestas antes de abrir la seleccionada
+    this.answers = this.answers.map((answer, i) => i === index ? !answer : false);
+  }
 }
