@@ -53,11 +53,19 @@ export class WelcomePatientComponent implements OnInit {
   checkout(): void {
     //this.userService.
   }
-  answers = [false, false, false];
+  answers: boolean[] = [false, false, false, false, false, false, false, false];
 
-  // Método para alternar las respuestas
-  toggleAnswer(index: number) {
-    // Cerrar todas las respuestas antes de abrir la seleccionada
-    this.answers = this.answers.map((answer, i) => i === index ? !answer : false);
+  // Variable para controlar qué grupo de preguntas mostrar
+  showFirstGroup: boolean = true;
+
+  // Función para alternar entre los grupos de preguntas
+  toggleQuestionGroup() {
+    this.showFirstGroup = !this.showFirstGroup;
   }
+
+  // Función para mostrar u ocultar la respuesta de una pregunta específica
+  toggleAnswer(index: number) {
+    this.answers[index] = !this.answers[index];
+  }
+
 }
