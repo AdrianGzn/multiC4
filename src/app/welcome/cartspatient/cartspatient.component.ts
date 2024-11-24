@@ -24,14 +24,14 @@ export class CartspatientComponent implements OnInit {
   }
 
   fetchCampaigns() {
-    const location = this.userFinal.location || 'defaultLocation'; 
+    const location = this.userFinal.localidad || 'defaultLocation'; 
     this.generalService.getCampaignsWithOut(location).subscribe(
       (data: any) => {
         console.log(data);
-        this.slides = data.campaigns.map((campaign: any) => ({
+        this.slides = data.map((campaign: any) => ({
           image: campaign.image,  
-          title: campaign.title,
-          description: campaign.description,
+          title: campaign.nombre,
+          description: campaign.descripcion,
         }));
       },
       (error) => {
