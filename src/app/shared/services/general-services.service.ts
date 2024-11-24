@@ -101,18 +101,6 @@ export class GeneralServices {
     return this.http.put(`${this.baseUrl}/user/${id_recepcionist}`, userModify)
   }
 
-  getQuoteByIdStatus(status: string, id: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/quotesById/${id}/${status}`)
-  }
-
-  getQuoteByIdStatusDoctor(status: string, id: number, id_doctor: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/allQuoteDoctorEstablishment/${id}/${id_doctor}/${status}`)
-  }
-
-  getQuoteByIdStatusRecepcionist( id_establishment: number,status: string): Observable<any> {
-    return this.http.get(`${this.baseUrl}/allQuoteReceptioniestEstablishment/${id_establishment}/${status}`)
-  }
-
   changeQuote(idQuote: number, quotesData: QuoteResponse): Observable<AddressResponse> {
     return this.http.put<AddressResponse>(`${this.baseUrl}/quotes/${idQuote}`, quotesData);
   }
@@ -250,8 +238,10 @@ export class GeneralServices {
     return this.http.get(`${this.baseUrl}/allSerivcesDoctor/${id_service}`)
   }
 
-  getAllQuotesByIdDoctor(id: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/allQuoteDoctor/${id}`)
+  //Todos los get de Quotes
+
+  getQuotesByDoctorId(id_doctor: number): Observable<QuoteResponse[]> {
+    return this.http.get<QuoteResponse[]>(`${this.baseUrl}/quotesDoctorById/${id_doctor}`)
   }
 
   getAllQuotesByIdPatient(id_patient: number): Observable<any> {
@@ -259,14 +249,27 @@ export class GeneralServices {
   }
 
 
-  getAllQuotesByIdEstablishmentStatus(id_establishment: number, status:string): Observable<any> {
-    return this.http.get(`${this.baseUrl}/allQuoteReceptioniestEstablishment/${id_establishment}/${status}`)
+  getQuotesByPatientId(id_patient: number): Observable<QuoteResponse[]> {
+    return this.http.get<QuoteResponse[]>(`${this.baseUrl}/allQuotePatient/${id_patient}`)
   }
 
-  getAllQuotesDoctorByIdEstablishmentStatus(id_establishment: number, status:string, id_doctor: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/allQuoteDoctorEstablishment/${id_establishment}/${id_doctor}/${status}`)
+  getQuotesByReceptionistId(id_recepcionist: number): Observable<QuoteResponse[]> {
+    return this.http.get<QuoteResponse[]>(`${this.baseUrl}/quotesByIdReceptionist/${id_recepcionist}`)
+  }  
+
+  getQuotesByDoctorStatus(id_doctor: number, status: string): Observable<QuoteResponse[]> {
+    return this.http.get<QuoteResponse[]>(`${this.baseUrl}/quotesByIdDoctorWith/${id_doctor}/${status}`)
+  }  
+
+  getQuotesByPatientStatus(id_patient: number, status: string): Observable<QuoteResponse[]> {
+    return this.http.get<QuoteResponse[]>(`${this.baseUrl}/quotesByIdPatientWith/${id_patient}/${status}`)
   }
 
+  getQuotesByEstablishmentStatus(id_establishment: number, status: string): Observable<QuoteResponse[]> {
+    return this.http.get<QuoteResponse[]>(`${this.baseUrl}/quotesByIdReceptionist/${id_establishment}/${status}`)
+  }
+
+  //Se terminan los gets de Quotes
 
   getServiceDoctorById_establishment(id_establishment: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/allServiceDoctorById_establishment/${id_establishment}`)

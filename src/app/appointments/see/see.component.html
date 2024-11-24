@@ -2,7 +2,6 @@
     <app-header-patient></app-header-patient>
   
     <div class="bg-purple-100 p-12 pb-80 rounded-md mx-auto max-w-6xl mt-8">
-      <!-- Selector de opciones -->
       <div class="relative inline-flex items-center border-2 border-[#9042B7] px-4 py-2 rounded-md w-auto">
         <div class="relative w-auto">
           <button 
@@ -28,9 +27,8 @@
         </div>
       </div>
       
-      <!-- Contenido dinámico -->
       <div class="w-100 h-100">
-        <app-quote-patient *ngFor="let quote of quotesDoctor" [quote]="quote"></app-quote-patient>
+        <app-quote-patient *ngFor="let quote of quotes" [quote]="quote"></app-quote-patient>
       </div>
     </div>
   </div>
