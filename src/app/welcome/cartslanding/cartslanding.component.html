@@ -2,12 +2,12 @@
   Campañas Actuales
 </h1>
 <div class="relative w-full h-120 overflow-hidden">
-  <!-- Contenedor del carrusel -->
+
   <div
     class="flex transition-transform duration-700 ease-in-out"
     [ngStyle]="{ transform: getTransform() }"
   >
-    <!-- Iteración sobre las campañas (slides) -->
+   
     <div
       class="w-full flex-shrink-0 h-112 flex items-center justify-center"
       *ngFor="let slide of slides"
@@ -35,8 +35,6 @@
       </div>
     </div>
   </div>
-
-  <!-- Indicadores del carrusel -->
   <div class="flex justify-center mt-4 space-x-3">
     <div
       *ngFor="let slide of slides; let i = index"
@@ -46,5 +44,27 @@
         'bg-indigo-600': currentSlide === i
       }"
     ></div>
+  </div>
+</div>
+
+<div
+  *ngIf="isModalOpen"
+  class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+>
+  <div class="bg-white p-6 rounded-lg shadow-lg max-w-lg w-full relative">
+ 
+    <button
+      class="absolute top-2 right-2 text-gray-600 hover:text-gray-900"
+      (click)="closeModal()"
+    >
+      ✖
+    </button>
+    <h2 class="text-2xl font-bold mb-4">{{ selectedCampaign.title }}</h2>
+    <img
+      [src]="selectedCampaign.image"
+      alt="Imagen de {{ selectedCampaign.title }}"
+      class="w-full h-auto object-contain mb-4"
+    />
+    <p class="text-gray-700">{{ selectedCampaign.description }}</p>
   </div>
 </div>
