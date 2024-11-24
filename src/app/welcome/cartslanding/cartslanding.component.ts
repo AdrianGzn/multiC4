@@ -27,7 +27,7 @@ export class CartslandingComponent implements OnInit {
 
   fetchCampaigns() {
     const name = this.userFinal?.nombre || 'defaultName'; 
-    this.generalService.getCampignsByNameWithOut(name).subscribe(
+    this.generalService.getCampignsByNameWithOut().subscribe(
       (data: any) => {
         console.log(data);
         this.slides = data.map((campaign: any) => ({

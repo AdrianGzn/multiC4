@@ -25,7 +25,7 @@ export class CartspatientComponent implements OnInit {
 
   fetchCampaigns() {
     const location = this.userFinal.localidad || 'defaultLocation'; 
-    this.generalService.getCampaignsWithOut(location).subscribe(
+    this.generalService.getCampaignsWithOut("General").subscribe(
       (data: any) => {
         console.log(data);
         this.slides = data.map((campaign: any) => ({

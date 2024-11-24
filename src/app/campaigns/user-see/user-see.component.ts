@@ -51,7 +51,7 @@ export class UserSeeComponent implements OnInit {
 
 
   searchByName(): void {
-    this.generalService.getCampignsByName(this.userFinal.localidad,this.myFormDelete.value.selectedCampaign).subscribe({
+    this.generalService.getCampignsByName("Campaña de vacunación", "General").subscribe({
       next: (items: any) => {
         this.campaigns = items; 
       },

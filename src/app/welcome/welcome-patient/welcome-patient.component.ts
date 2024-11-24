@@ -29,7 +29,7 @@ export class WelcomePatientComponent implements OnInit {
       }
     )
 
-    this.generalService.getCampaigns(3).subscribe(
+    this.generalService.getCampaigns(4).subscribe(
       data => {
         console.log(data)
       },
