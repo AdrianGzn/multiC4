@@ -6,6 +6,7 @@ import { GeneralServices } from '../../shared/services/general-services.service'
 import { ScheduleDoctor } from '../../shared/models/schedule-doctor';
 import { User } from '../../shared/models/user';
 import { ScheduleDoctorResponse } from '../../shared/models/schedule-doctor-response';
+import { UserToPost } from '../../shared/models/user-to-post';
 
 
 @Component({
@@ -17,7 +18,6 @@ export class SignEmployeeComponent {
   signInForm: FormGroup;
 
   newSchedule: ScheduleDoctor[] = [];
-  days: string[] = ['domingo', 'lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado'];
 
   constructor(private fb: FormBuilder, private router: Router, private userService: UserService, private generalService: GeneralServices) {
     this.signInForm = this.fb.group({
@@ -33,7 +33,9 @@ export class SignEmployeeComponent {
       id_usuario: 0,
       id_rol: 0,
       nombre: '',
+      contraseña: '',
       id_establecimiento: 0,
+      localidad: '',
       id_servicio: 0
     };
 
@@ -45,10 +47,11 @@ export class SignEmployeeComponent {
       idRole = 3;
     }
 
-    const newEmployee = {
-      id_rol: 0,
+    const newEmployee: UserToPost = {
+      id_rol: 2,
       nombre: this.signInForm.value.username,
-      contraseña: this.signInForm.value.password
+      contraseña: this.signInForm.value.password,
+      localidad: 'nothing'
     }
     
 
@@ -63,10 +66,14 @@ export class SignEmployeeComponent {
         this.userService.register(newEmployee).subscribe({
           next: (data: User) => {
             myUser = data;
-            this.createSchedulesForDoctor(myUser.id_usuario);
+            this.userService.saveUser(myUser);
+            if (data.id_rol === 2) {
+              this.createSchedulesForDoctor(myUser.id_usuario);
+            }
+            this.router.navigate(['/welcome/doctor']); 
           },
           error: (error) => {
-            console.log(error)
+            console.log('Ha ocurrido un error al crear el rol del usuario');
           }
         });
       } else {
@@ -82,15 +89,15 @@ export class SignEmployeeComponent {
   }
 
   createSchedulesForDoctor(idDoctor: number): void {
-    let dias = ['domingo', 'lunes', 'martes', 'miercoles', 'jeves', 'viernes', 'sabado'];
+    let dias = ['domingo', 'lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado'];
 
     dias.forEach((itemDia) => {
 
       let tempSchedule: ScheduleDoctorResponse = {
         día: itemDia,
         id_usuario: idDoctor,
-        entrada: '03:19:43.598Z',
-        salida: '03:19:43.598Z'
+        entrada: '00:00:00.000Z',
+        salida: '00:00:00.000Z'
       } 
 
       this.generalService.createScheduleDoctor(tempSchedule).subscribe({
