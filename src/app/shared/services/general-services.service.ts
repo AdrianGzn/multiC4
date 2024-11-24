@@ -121,8 +121,8 @@ export class GeneralServices {
     return this.http.delete<QuoteResponse>(`${this.baseUrl}/quotes/${idQuote}`);
   }
   
-  establishmentInformation(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/allImagesEstablishment/`)
+  establishmentInformation(location: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/allImagesEstablishment/${location}`)
   }
 
   createSchedule(scheduleData: ScheduleResponse): Observable<Schedule> {

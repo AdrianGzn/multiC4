@@ -1,6 +1,5 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
-import { GeneralServices } from '../../shared/services/general-services.service';
 import { ServiceAndEstablishmentDataService } from '../../shared/services/service-and-establishment-data.service';
 import { SharedDataService } from '../../shared/services/shared-data.service';
 
@@ -9,7 +8,7 @@ import { SharedDataService } from '../../shared/services/shared-data.service';
   templateUrl: './card-establishment.component.html',
   styleUrls: ['./card-establishment.component.css']
 })
-export class CardEstablishmentComponent implements OnInit {
+export class CardEstablishmentComponent {
   @Input() card = { 
     id_establecimiento: 0,
     nombre: '',
@@ -26,47 +25,27 @@ export class CardEstablishmentComponent implements OnInit {
     promedio_calificacion: 0
   };
 
-  @Output() emitCardId = new EventEmitter<number>(); 
+  @Output() emitCardId = new EventEmitter<number>();
 
-  totalStars = 5;
-  starsArray: number[] = [];
-  establishments: any[] = []; 
+  starsArray: boolean[] = [];  // Arreglo para almacenar el estado de las estrellas
 
   constructor(
     private router: Router,
     private serviceAndEstablishmentData: ServiceAndEstablishmentDataService,
-    private generalServices: GeneralServices,
     private idSent: SharedDataService
   ) {}
 
-  ngOnInit(): void {
-    this.starsArray = Array(this.totalStars).fill(0);
+  ngOnInit() {
+    this.updateStars();  // Llamamos a la función para actualizar el arreglo de estrellas
+  }
 
-    if (this.card.promedio_calificacion >= 0 && this.card.promedio_calificacion <= this.totalStars) {
-      this.card.promedio_calificacion = Math.round(this.card.promedio_calificacion); 
-    } else {
-      this.card.promedio_calificacion = 0; 
+  updateStars() {
+    // Limpiar el arreglo de estrellas
+    this.starsArray = [];
+    // Llenar el arreglo de estrellas basado en la calificación promedio
+    for (let i = 0; i < 5; i++) {
+      this.starsArray.push(i < Math.round(this.card.promedio_calificacion));  // Redondeamos la calificación
     }
-
-    // Obtener y ordenar los establecimientos por promedio_calificacion
-    this.generalServices.getEstablishment().subscribe({
-      next: (items: any[]) => {
-        // Ordenar por calificación de mayor a menor
-        this.establishments = items.sort(
-          (a, b) => b.promedio_calificacion - a.promedio_calificacion
-        );
-
-        this.establishments.forEach((itemEstablishment: any) => {
-          if (itemEstablishment.id_establecimiento === this.card.id_establecimiento) {
-            this.serviceAndEstablishmentData.selectEstablishment(itemEstablishment);
-          }
-        });
-      },
-      error: (error) => {
-        console.log('Ha ocurrido un error al obtener los establecimientos');
-        console.log(error);
-      }
-    });
   }
 
   details(): void {

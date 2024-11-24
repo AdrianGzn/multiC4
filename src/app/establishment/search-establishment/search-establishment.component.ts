@@ -20,7 +20,7 @@ export class SearchEstablishmentComponent implements OnInit {
   services: string[] = ['General', 'Pediatría', 'Obstetricia', 'Odontología'];
   tipo: string[] = ['Hospital', 'Clínica', 'Consultorio']; //lista de todos lo que va en formularios
   categoria: string[] = ['Público', 'Privado'];
-
+  userFinal: any = {}
   establishmentFinded: any[] = [];
 
   constructor(private generalService: GeneralServices, private formBuilder: FormBuilder) {
@@ -39,10 +39,14 @@ export class SearchEstablishmentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.generalService.establishmentInformation().subscribe(
+    let currentUser = localStorage.getItem("userData")
+    if(currentUser) {
+      this.userFinal = JSON.parse(currentUser)
+    }
+    this.generalService.establishmentInformation("Tuxtla").subscribe(
       (next) => {
-        console.log(next)
         this.establishmentFinded = next;
+        console.log(this.establishmentFinded)
       },
 
       error => {
@@ -102,7 +106,7 @@ export class SearchEstablishmentComponent implements OnInit {
     let myService = this.formEstablishmentByService.value.servicio;
     console.log(myService)
     this.generalService.getEstablishmentByService(myService).subscribe({
-      next: (data: EstablishmentShortResponse[]) => {
+      next: (data: any[]) => {
         console.log(data)
         this.establishmentFinded = data;        
       },

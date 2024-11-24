@@ -53,6 +53,7 @@ export class SaveEstablishmentComponent implements OnInit {
       descripción: new FormControl('', [Validators.required]),
       id_type_establishment: new FormControl(1, [Validators.required]),
       categoria: new FormControl('', [Validators.required]),
+      localidad: new FormControl('', [Validators.required]),
       id_dirección: new FormControl(0),
       id_horario: new FormControl(0)
     });
