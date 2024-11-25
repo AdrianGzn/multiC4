@@ -39,7 +39,7 @@ export class SeeComponent implements OnInit {
     const finalUser = user ? JSON.parse(user) : null;
   
     if (finalUser && finalUser.id_usuario) {
-      this.generalService.getQuotesByPatientId(1).subscribe({
+      this.generalService.getQuotesByPatientId(finalUser.id_usuario).subscribe({
         next: (response: QuoteResponse[]) => {
           this.quotes = [];
   

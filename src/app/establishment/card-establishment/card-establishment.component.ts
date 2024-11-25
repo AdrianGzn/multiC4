@@ -31,8 +31,8 @@ export class CardEstablishmentComponent implements OnInit {
   @Output() emitCardId = new EventEmitter<number>();
 
   starsArray: boolean[] = [];
-  faStar: IconProp = faStar;// Asignar el ícono de la estrella a una propiedad de la clase
-  fullStars = 0; // Número de estrellas completas
+  faStar: IconProp = faStar;
+  fullStars = 0; 
   halfStar = 0;  // Número de estrellas medias
 
   constructor(
@@ -42,23 +42,22 @@ export class CardEstablishmentComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.updateStars();  // Llamamos a la función para actualizar el arreglo de estrellas
+    this.updateStars();
   }
 
   updateStars() {
-    // Si la calificación es 0, asignamos 1 estrella completa.
-    this.fullStars = Math.max(1, Math.floor(this.card.promedio_calificacion));  // Asegura al menos 1 estrella completa
-    this.halfStar = (this.card.promedio_calificacion - this.fullStars) >= 0.5 ? 1 : 0;  // Estrella media
+    this.fullStars = Math.max(1, Math.floor(this.card.promedio_calificacion));  
+    this.halfStar = (this.card.promedio_calificacion - this.fullStars) >= 0.5 ? 1 : 0; 
 
     this.starsArray = [];
     for (let i = 0; i < 5; i++) {
       if (i < this.fullStars) {
-        this.starsArray.push(true);  // Estrella llena
+        this.starsArray.push(true);
       } else if (i === this.fullStars && this.halfStar === 1) {
-        this.starsArray.push(false);  // Estrella media
-        this.halfStar = 0;  // Solo una estrella media, no agregamos más
+        this.starsArray.push(false);  
+        this.halfStar = 0;  
       } else {
-        this.starsArray.push(false);  // Estrella vacía
+        this.starsArray.push(false);
       }
     }
   }

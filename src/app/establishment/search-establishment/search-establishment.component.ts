@@ -43,7 +43,7 @@ export class SearchEstablishmentComponent implements OnInit {
     if(currentUser) {
       this.userFinal = JSON.parse(currentUser)
     }
-    this.generalService.establishmentInformation("Tuxtla").subscribe(
+    this.generalService.establishmentInformation(this.userFinal.localidad).subscribe(
       (next) => {
         this.establishmentFinded = next;
         console.log(this.establishmentFinded)
