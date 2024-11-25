@@ -11,6 +11,7 @@ import { GeneralServices } from '../../shared/services/general-services.service'
 import { ServiceAndEstablishmentDataService } from '../../shared/services/service-and-establishment-data.service';
 import { DoctorResponse } from '../../shared/models/doctor-response';
 import { SharedDataService } from '../../shared/services/shared-data.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-generate',
@@ -83,14 +84,32 @@ export class GenerateComponent  {
   }
 
   onSubmit(): void {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: '¿Quieres agendar esta cita?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, agendar',
+      cancelButtonText: 'No, cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Si el usuario confirma, se envía la cita
+        this.agendarCita();
+      }
+    });
+  }
+  
+  agendarCita(): void {
     console.log(this.agendarCitaForm.value);
     const { servicio, doctor, fecha, hora } = this.agendarCitaForm.value;
     
-    const quote ={
+    const quote = {
       "quote_request": {
         "items": [
           {
-            "name": `Servicio medico`,
+            "name": `Servicio médico`,
             "product": `${servicio}`,
             "price": 100,
             "quantity": 1
@@ -105,12 +124,11 @@ export class GenerateComponent  {
         "id_doctor": 1,
         "id_servicio": 1
       }
-    }
+    };
     
     console.log(quote);  
-    this.stripeService.onCheckout(quote)  // Call the service to pass the quote to the backend
+    this.stripeService.onCheckout(quote);  // Llamar al servicio para pasar la cotización al backend
   }
-  
 
   agendQuote(): void {
     this.generalServices.createQuote(this.agendarCitaForm.value).subscribe(
