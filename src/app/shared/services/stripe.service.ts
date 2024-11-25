@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { loadStripe, Stripe } from '@stripe/stripe-js';
 import { HttpClient } from '@angular/common/http';
 import { Quote } from '../models/quote';
+import jsPDF from 'jspdf';
 
 @Injectable({
   providedIn: 'root'
@@ -18,24 +19,22 @@ export class StripeService {
       const stripe = await this.stripePromise;
       stripe?.redirectToCheckout({sessionId: res.session_id});
       status = true;
+
+      const doc = new jsPDF();
+
+      doc.setFontSize(16);
+      doc.text("Detalles de la Cita Médica", 20, 20);
+  
+      doc.setFontSize(12);
+      doc.text(`Folio: ${quote.quote_data.id_servicio}`, 20, 40);
+      doc.text(`Servicio: ${quote.quote_request.items[0].product}`, 20, 50);
+      doc.text(`Fecha: ${quote.quote_data.fecha}`, 20, 60);
+      doc.text(`Hora: ${quote.quote_data.horario}`, 20, 70);
+      doc.text(`Doctor: ${quote.quote_data.id_doctor}`, 20, 80);
+      doc.text(`Costo: $${quote.quote_request.items[0].price}`, 20, 90);
+      doc.text("¡Descargar PDF!", 20, 100);
+      doc.save('cita_medica.pdf');
     });
     return status;
   }
-
-  generatePdf(paymentIntentId: string): void {
-    const payload = { paymentIntentId };
-    
-    this.http.post('http://localhost:8000/generate-pdf', payload, { responseType: 'blob' })
-      .subscribe((response: Blob) => {
-        const url = window.URL.createObjectURL(response);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = `factura_${paymentIntentId}.pdf`;
-        link.click();
-        window.URL.revokeObjectURL(url);
-      }, (error) => {
-        console.error('Error al generar el PDF:', error);
-      });
-  }
-  
 }

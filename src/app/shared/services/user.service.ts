@@ -7,7 +7,7 @@ import { User } from '../models/user';
   providedIn: 'root'
 })
 export class UserService {
-  private baseUrl: string = 'http://3.227.141.174:8000';  
+  private baseUrl: string = 'http://127.0.0.1:8000';  
 
   private user: User = {
     id_usuario: 16,
@@ -75,11 +75,10 @@ export class UserService {
     return this.user;
   }
 
-  updateUser(updatedUser: User): Observable<User> {
-    return this.http.put<User>(`${this.baseUrl}/user/${updatedUser.id_usuario}`, updatedUser).pipe(
-      tap((data: User) => {
+  updateUser(id_usuario: number, updatedAtribute: any): Observable<User> {
+    return this.http.put<User>(`${this.baseUrl}/user/${id_usuario}`, updatedAtribute).pipe(
+      tap((data: any) => {
         console.log(data);
-        this.user = data;
       }),
       catchError(error => {
         console.log(error)

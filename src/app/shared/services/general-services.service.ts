@@ -22,13 +22,14 @@ import { ScheduleDoctorToPut } from '../models/schedule-doctor-to-put';
 import { EstablishmentServiceInterface } from '../models/establishment-service-interface';
 import { QuoteToPut } from '../models/quote-to-put';
 import { QuoteToResponse } from '../models/quote-to-response';
+import { braiting } from '../models/braiting';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GeneralServices {
 
-  private baseUrl: string = 'http://3.227.141.174:8000';  
+  private baseUrl: string = 'http://127.0.0.1:8000';  
 
   constructor(private http: HttpClient) {}
 
@@ -96,8 +97,8 @@ export class GeneralServices {
     return this.http.delete<EstablishmentResponse>(`${this.baseUrl}/establishment/${idEstablishment}`);
   }
 
-  createQuote(quotaData: QuoteResponse): Observable<Quote> {
-    return this.http.post<Quote>(`${this.baseUrl}/quotes/`, quotaData);
+  createQuote(quotaData: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/quotes/`, quotaData);
   }
 
   getQuote(): Observable<Quote[]> {
@@ -108,7 +109,7 @@ export class GeneralServices {
     return this.http.put(`${this.baseUrl}/user/${id_recepcionist}`, userModify)
   }
 
-  changeQuote(idQuote: number, quotesData: QuoteToPut): Observable<QuoteToResponse> {
+  changeQuote(idQuote: number, quotesData: any): Observable<QuoteToResponse> {
     return this.http.put<QuoteToResponse>(`${this.baseUrl}/quotes/${idQuote}`, quotesData);
   }
 
@@ -292,5 +293,9 @@ export class GeneralServices {
 
   getAllInformtaionServiceById(id_establishment: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/allInformationServiceById/${id_establishment}`)
+  }
+
+  postStars(braiting: braiting): Observable<braiting> {
+    return this.http.post<braiting>(`${this.baseUrl}/braiting/`, braiting)
   }
 }
