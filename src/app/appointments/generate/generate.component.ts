@@ -11,6 +11,7 @@ import { GeneralServices } from '../../shared/services/general-services.service'
 import { ServiceAndEstablishmentDataService } from '../../shared/services/service-and-establishment-data.service';
 import { DoctorResponse } from '../../shared/models/doctor-response';
 import { SharedDataService } from '../../shared/services/shared-data.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-generate',
@@ -31,6 +32,7 @@ export class GenerateComponent  {
   services: any[] = [];
   doctorsByService: any[] = [ ];
   id: number = 0
+  userFinal: any = {}
   constructor(private fb: FormBuilder, private stripeService: StripeService, private userService: UserService, private generalServices: GeneralServices, private servicesAndEstablishmentData: ServiceAndEstablishmentDataService, private sharedId: SharedDataService ) {
     this.agendarCitaForm = this.fb.group({
       servicio: ['', Validators.required],
@@ -41,6 +43,11 @@ export class GenerateComponent  {
   }
 
   ngOnInit(): void {
+    let currentUser = localStorage.getItem("userData")
+
+    if(currentUser) {
+      this.userFinal = JSON.parse(currentUser)
+    }
     this.sharedId.id$.subscribe(
       id => {
         this.id = id;
@@ -50,6 +57,7 @@ export class GenerateComponent  {
 
     this.generalServices.getServiceDoctorById_establishment(3).subscribe(
       (next) => {
+        console.log(next)
         next.map((item: any) => {
           this.services.push({
             id_service: item.id_service,
@@ -57,12 +65,10 @@ export class GenerateComponent  {
             cost: item.cost
           })
           this.doctorsByService.push({
-            id_medic: item.id_doctor,
+            id_doctor: item.id_doctor,
             name: item.name
           })
         }) 
-        console.log(this.services)
-        console.log(this.doctorsByService)
       }
 
     )
@@ -84,14 +90,13 @@ export class GenerateComponent  {
 
   onSubmit(): void {
     console.log(this.agendarCitaForm.value);
-    const { servicio, doctor, fecha, hora } = this.agendarCitaForm.value;
     
     const quote ={
       "quote_request": {
         "items": [
           {
             "name": `Servicio medico`,
-            "product": `${servicio}`,
+            "product": `${this.agendarCitaForm.value.servicio}`,
             "price": 100,
             "quantity": 1
           }
@@ -99,28 +104,33 @@ export class GenerateComponent  {
       },
       "quote_data": {
         "id_usuario": 123,
-        "fecha": `${fecha}`,
-        "horario": `${hora}`,
+        "fecha": `${this.agendarCitaForm.value.fecha}`,
+        "horario": `${this.agendarCitaForm.value.hora}`,
         "estatus": "pendiente",
         "id_doctor": 1,
         "id_servicio": 1
       }
     }
-    
-    console.log(quote);  
-    this.stripeService.onCheckout(quote)  // Call the service to pass the quote to the backend
-  }
-  
 
-  agendQuote(): void {
-    this.generalServices.createQuote(this.agendarCitaForm.value).subscribe(
+    const newQuote = {
+      id_usuario: this.userFinal.id_usuario,
+      fecha: this.agendarCitaForm.value.fecha,
+      estatus: "No atendidos",
+      horario: this.agendarCitaForm.value.hora,
+      id_doctor: this.agendarCitaForm.value.doctor,
+      id_servicio: this.agendarCitaForm.value.servicio
+    }
+    console.log(newQuote)
+    this.generalServices.createQuote(newQuote).subscribe(
       (next) => {
-        console.log(next)
+        Swal.fire("Generar cita", "Se logor generar la cita", "success")
+        this.stripeService.onCheckout(quote)        
       },
 
       error => {
-        console.log(error)
+        Swal.fire("Generar cita", "No se logro generar la cita")
       }
-    )
+    );  
+  // Call the service to pass the quote to the backend
   }
 }
