@@ -48,7 +48,7 @@ export class GenerateComponent  {
       }
     )
 
-    this.generalServices.getServiceDoctorById_establishment(this.id).subscribe(
+    this.generalServices.getServiceDoctorById_establishment(3).subscribe(
       (next) => {
         next.map((item: any) => {
           this.services.push({
@@ -83,33 +83,32 @@ export class GenerateComponent  {
   }
 
   onSubmit(): void {
-    console.log(this.agendarCitaForm.value); 
+    console.log(this.agendarCitaForm.value);
     const { servicio, doctor, fecha, hora } = this.agendarCitaForm.value;
-    console.log(this.agendarCitaForm.value); // Log the form values to ensure they're correct
-  
-    const quote = {
-      quote_request: {
-        items: [
+    
+    const quote ={
+      "quote_request": {
+        "items": [
           {
-            name: "Servicio médico",
-            product: servicio, // Esto será el valor de servicio seleccionado
-            price: 100, // Precio fijo o calculado
-            quantity: 10 // Cantidad de unidades
+            "name": `Servicio medico`,
+            "product": `${servicio}`,
+            "price": 100,
+            "quantity": 1
           }
         ]
       },
-      quote_data: {
-        id_usuario: 0, // Este es el ID del usuario, probablemente lo deberías obtener del usuario autenticado
-        fecha: fecha,   // Fecha seleccionada
-        horario: hora,  // Hora seleccionada
-        estatus: "pendiente", // Estado de la cita
-        id_doctor: 1,  // ID del doctor
-        id_servicio: 1 // ID del servicio
+      "quote_data": {
+        "id_usuario": 123,
+        "fecha": `${fecha}`,
+        "horario": `${hora}`,
+        "estatus": "pendiente",
+        "id_doctor": 1,
+        "id_servicio": 1
       }
-    };
+    }
     
-    console.log(quote)
-    this.stripeService.onCheckout(quote)
+    console.log(quote);  
+    this.stripeService.onCheckout(quote)  // Call the service to pass the quote to the backend
   }
   
 

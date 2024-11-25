@@ -66,7 +66,7 @@ export class UserDoctorComponent implements OnInit {
   }
 
   searchByName(): void {
-    this.generalService.getCampignsByName(this.campaignDoctor.id_establecimiento,this.myFormDelete.value.selectedCampaign).subscribe({
+    this.generalService.getCampignsByIdEstablishmentName(this.campaignDoctor.id_establecimiento,this.myFormDelete.value.selectedCampaign).subscribe({
       next: (items) => {
         this.campaignDoctor = items; 
       },

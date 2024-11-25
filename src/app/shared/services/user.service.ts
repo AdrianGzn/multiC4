@@ -24,6 +24,7 @@ export class UserService {
   loginEmployee(loginData: any): Observable<any> {
     return this.http.post<User>(`${this.baseUrl}/login`, loginData).pipe(
       tap((data) => {
+        console.log(data)
         this.user = data;
       }),
       catchError(error => {

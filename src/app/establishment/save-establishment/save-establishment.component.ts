@@ -27,11 +27,11 @@ export class SaveEstablishmentComponent implements OnInit {
   formServices: FormGroup;
   formDoctors: FormGroup;
   userFinal = {
-    id_establecimiento:  0, 
+    id_establecimiento: 0,
     id_rol: 0,
     id_usuario: 0,
     nombre: '',
-    rol: ''  
+    rol: ''
   }
   type_options: any[] = [];
   category_options: string[] = [];
@@ -44,8 +44,8 @@ export class SaveEstablishmentComponent implements OnInit {
   id_schedule: number = 0;
   id_address: number = 0;
   id_establishment: number = 0;
-    selectedService: any = null;
-
+  selectedService: any = null;
+  selectedDoctor: any = null;
 
   constructor(private generalServices: GeneralServices, private serviceAndEstablishmentData: ServiceAndEstablishmentDataService, private userService: UserService) {
     this.formData = new FormGroup({
@@ -219,19 +219,52 @@ export class SaveEstablishmentComponent implements OnInit {
   }
 
   deleteSelectedImage(input: HTMLInputElement): void {
-    this.selectedImage = null; 
-    input.value = '';  
+    this.selectedImage = null;
+    input.value = '';
   }
 
   postDoctorOnEstablishment(): void {
-    this.generalServices.createService(this.formDoctors.value).subscribe({
+    this.generalServices.getUsers().subscribe({
+      next: (users) => {
+        users.forEach((user: any) => {
+          if (user.nombre === this.formDoctors.value.doctor) {
+            this.formDoctors.patchValue({
+              doctor: user.id_usuario
+            })
+            console.log(this.formDoctors.value)
+            const serviceDesign = {
+              id_establecimiento: this.userFinal.id_establecimiento,
+              id_servicio: this.formDoctors.value.servicioDoctor
+            }
+            this.generalServices.asignDoctorEstablishment(this.formDoctors.value.doctor, serviceDesign).subscribe({
+              next: (item) => {
+                Swal.fire("Generar servicio", "Se genero el servicio", "success")
+                this.ngOnInit()
+              },
+
+              error: (error) => {
+                Swal.fire("General servicio", "No se logro generar servicio", "error")
+              }
+            })
+
+          }
+        })
+      }
+    })
+  }
+
+  deleteDoctorFromEstablishment(): void {
+    const deleteFromEstablishment = {
+      id_establecimiento: null,
+      id_servicio: null
+    }
+    this.generalServices.asignDoctorEstablishment(this.selectedDoctor.id_usuario, deleteFromEstablishment).subscribe({
       next: (item) => {
-        Swal.fire("Generar servicio", "Se genero el servicio", "success")
-        this.ngOnInit()
+        Swal.fire("Elimnar doctor de el establecimiento", "Se elimino del establecimiento", "success")
       },
 
       error: (error) => {
-        Swal.fire("General servicio", "No se logro generar servicio", "error")
+        Swal.fire("Eliminar doctor de el establecimiento", "No se logro eliminar del establecimeinto", "error")
       }
     })
   }

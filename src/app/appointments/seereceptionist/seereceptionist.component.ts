@@ -38,8 +38,8 @@ export class SeereceptionistComponent implements OnInit {
   loadReceptionistQuotesByStatus(): void {
     this.generalService
       .getQuotesByEstablishmentStatus(
-        this.establishmentData.id_establecimiento,
-        this.selectedOption
+        4,
+        "string"
       )
       .subscribe({
         next: (data) => {

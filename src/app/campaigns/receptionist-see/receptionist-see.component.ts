@@ -51,7 +51,7 @@ export class ReceptionistSeeComponent implements OnInit {
     )
   }
   searchByName(): void {
-    this.generalService.getCampignsByName(this.establishmentData.id_establecimiento,this.myFormDelete.value.selectedCampaign).subscribe({
+    this.generalService.getCampignsByIdEstablishmentName(this.establishmentData.id_establecimiento,this.myFormDelete.value.selectedCampaign).subscribe({
       next: (items) => {
         this.campaigns = items; 
       },

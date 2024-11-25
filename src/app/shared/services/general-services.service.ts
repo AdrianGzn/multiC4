@@ -29,6 +29,10 @@ export class GeneralServices {
 
   constructor(private http: HttpClient) {}
 
+  getUsers(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/user/`)
+  }
+
   getAddress(): Observable<Address[]> {
     return this.http.get<Address[]>(`${this.baseUrl}/address/`);
   }
@@ -190,6 +194,10 @@ export class GeneralServices {
     return this.http.get(`${this.baseUrl}/campaignsByName/${name}/${location}`)
   }
 
+  getCampignsByIdEstablishmentName(id_establishment: number, name: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/campaignsByEstablishmentName/${id_establishment}/${name}`)
+  }
+
   getCampignsByNameWithOut() {
     return this.http.get(`${this.baseUrl}/campaignsWithOut/`)
   }
@@ -204,6 +212,10 @@ export class GeneralServices {
 
   createCampaign(campaign: FormData): Observable<any> {
     return this.http.post(`${this.baseUrl}/campaigns/`, campaign)
+  }
+
+  asignDoctorEstablishment(id_doctor: number, asignDoctor: any): Observable<any> {
+    return this.http.put(`${this.baseUrl}/user/${id_doctor}`, asignDoctor)
   }
 
   deleteCampaign(id_campaign: number): Observable<any> {
