@@ -8,15 +8,9 @@ import { ServiceAndEstablishmentDataService } from '../../shared/services/servic
 import { DoctorResponse } from '../../shared/models/doctor-response';
 import { SharedDataService } from '../../shared/services/shared-data.service';
 import Swal from 'sweetalert2';
-<<<<<<< HEAD
-
-import { jsPDF } from 'jspdf';
-import { Router } from '@angular/router';
-=======
 import { jsPDF } from 'jspdf';
 import { Router } from '@angular/router';
 
->>>>>>> 7ab24de7d5a1e1a9bffd989e2a3142c5947d6d73
 @Component({
   selector: 'app-generate',
   templateUrl: './generate.component.html',
@@ -109,11 +103,6 @@ export class GenerateComponent  {
   
   agendarCita(): void {
     console.log(this.agendarCitaForm.value);
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 7ab24de7d5a1e1a9bffd989e2a3142c5947d6d73
     const newQuote = {
       id_usuario: this.userFinal.id_usuario,
       fecha: this.agendarCitaForm.value.fecha,
@@ -123,7 +112,6 @@ export class GenerateComponent  {
       id_servicio: this.agendarCitaForm.value.servicio
     };
 
-    // Obtener el costo
     this.services.forEach((service) => {
       if(service.id_service === newQuote.id_servicio) {
         this.costo =  service.cost;
@@ -152,13 +140,7 @@ export class GenerateComponent  {
       }
     };
     console.log(quote);  
-    this.stripeService.onCheckout(quote);  // Llamar al servicio para pasar la cotización al backend
-<<<<<<< HEAD
-  }
-=======
-  
->>>>>>> 7ab24de7d5a1e1a9bffd989e2a3142c5947d6d73
-
+    this.stripeService.onCheckout(quote); 
     this.generalServices.createQuote(newQuote).subscribe(
       (next) => {
         Swal.fire("Generar cita", "Se logró generar la cita", "success");
@@ -189,5 +171,5 @@ export class GenerateComponent  {
     doc.text(`Costo: $${quote.quote_request.items[0].price}`, 20, 90);
     doc.text("¡Descargar PDF!", 20, 100);
     doc.save('cita_medica.pdf');
-  
+  }
 }
