@@ -37,7 +37,7 @@ export class QuotePatientComponent {
     this.emitId.emit(this.quote.id_cita);
   }
  saveRating(): void {
-  if (this.quote.estatus === 'Atendido') {
+  if (this.quote.estatus === 'Atendidos') {
     console.log(`Calificación guardada: ${this.rating[this.quote.id_cita]} estrellas para la cita ${this.quote.id_cita}`);
     this.closeRatingModal();
   
