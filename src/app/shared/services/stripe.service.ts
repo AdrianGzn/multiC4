@@ -8,7 +8,7 @@ import jsPDF from 'jspdf';
   providedIn: 'root'
 })
 export class StripeService {
-  private baseUrl: string = 'http://127.0.0.1:8000/stripeQuotes';
+  private baseUrl: string = 'http://3.227.141.174:8000/stripeQuotes';
   private stripePromise = loadStripe('pk_test_51QA1JN04GnkleiMSULPFvf7K29JgGAwupkaVMMVYVJFOc4Rvo2HTY8PYWZzGSXkxYIOjpXTXPoT4QQ2I3CIv4nqp00sOEe4GOp');
 
   constructor(private http: HttpClient) {}

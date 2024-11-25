@@ -8,6 +8,9 @@ import { ScheduleDoctorResponse } from '../../shared/models/schedule-doctor-resp
 import { ScheduleDoctorToPut } from '../../shared/models/schedule-doctor-to-put';
 import { SchedulesFromUserId } from '../../shared/models/schedules-from-user-id';
 import Swal from 'sweetalert2'; // Asegúrate de importar SweetAlert2
+import { Schedule } from '../../shared/models/schedule';
+import { EstablishmentGetResponse } from '../../shared/models/establishment-get-response';
+import { error } from 'console';
 
 @Component({
   selector: 'app-schedule-employee',
@@ -24,6 +27,12 @@ export class ScheduleEmployeeComponent implements OnInit, AfterViewInit {
     localidad: '',
     id_servicio: 0
   };
+
+  currentSchedule: Schedule = {
+    id_horario: 0,
+    entrada: '',
+    salida: ''
+  }
 
   persona_dia: SchedulesFromUserId[] = [];
   diasSemana: string[] = ['domingo', 'lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado'];
@@ -86,7 +95,40 @@ export class ScheduleEmployeeComponent implements OnInit, AfterViewInit {
   }
 
   onSubmit(): void {
-    // Mostrar la alerta de confirmación
+    this.generalServices.getEstablishment().subscribe({
+      next: (item: EstablishmentGetResponse[]) => {
+        item.forEach((elementEstablishment: EstablishmentGetResponse) => {
+          if (this.user.id_establecimiento === elementEstablishment.id_establecimiento) {
+
+            this.generalServices.getSchedule().subscribe({
+              next: (item: Schedule[]) => {
+
+                item.forEach((elementEschedule: Schedule) => {
+                  if (elementEschedule.id_horario === elementEstablishment.id_horario) {
+
+                    this.currentSchedule = elementEschedule;
+                    console.log(this.currentSchedule);
+                    
+                  }
+                });
+
+              },
+              error: (error) => {
+                console.log('Ha ocurrido un error al obtener los horarios');
+                console.log(error);
+              }
+            })
+
+          }
+        });
+      },
+      error: (error) => {
+        console.log('Ha ocurrido un error al obtener los horarios de los hospitales');
+        console.log(error);
+      }
+    });
+    
+
     Swal.fire({
       title: '¿Estás seguro?',
       text: '¿Deseas guardar los horarios?',
@@ -98,12 +140,17 @@ export class ScheduleEmployeeComponent implements OnInit, AfterViewInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.isConfirmed) {
-        // Si el usuario confirma, guardar los horarios
+        
         let diasSemana = this.diasSemana.map(dia => ({
           dia: dia,
           entrada: this.formSchedules.value[`${dia}E`],
           salida: this.formSchedules.value[`${dia}S`]
         }));
+
+        diasSemana.forEach(element => {
+          console.log(element);
+          
+        });
 
         this.persona_dia.forEach((item: SchedulesFromUserId) => {
           const diaConfig = diasSemana.find(d => d.dia === item.dia.toLowerCase());
