@@ -65,8 +65,9 @@ export class SignEmployeeComponent {
       if (this.signInForm.value.password === this.signInForm.value.confirmPassword) {
         this.userService.register(newEmployee).subscribe({
           next: (data: User) => {
-            myUser = data;
-            this.userService.saveUser(myUser);
+            localStorage.setItem('userData', JSON.stringify(data));  
+                        
+            this.userService.saveUser(data);
             if (data.id_rol === 2) {
               this.createSchedulesForDoctor(myUser.id_usuario);
             }
