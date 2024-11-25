@@ -1,4 +1,4 @@
-import { Component, Output } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { Input } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 
@@ -16,6 +16,6 @@ export class QuotePatientComponent {
    }
    @Output() emitId = new EventEmitter<number>();
    sendQuoteId(): void {
-    this.emitId.emit(this.quote.id_cita)
-   }
+    this.emitId.emit(this.quote.id_cita);
+  }
 }

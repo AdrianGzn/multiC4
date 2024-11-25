@@ -19,6 +19,9 @@ import { TypeEstablishment } from '../models/type-establishment';
 import { TypeEstablishmentResponse } from '../models/type-establishment-response';
 import { EstablishmentGetResponse } from '../models/establishment-get-response';
 import { ScheduleDoctorToPut } from '../models/schedule-doctor-to-put';
+import { EstablishmentServiceInterface } from '../models/establishment-service-interface';
+import { QuoteToPut } from '../models/quote-to-put';
+import { QuoteToResponse } from '../models/quote-to-response';
 
 @Injectable({
   providedIn: 'root'
@@ -101,8 +104,8 @@ export class GeneralServices {
     return this.http.put(`${this.baseUrl}/user/${id_recepcionist}`, userModify)
   }
 
-  changeQuote(idQuote: number, quotesData: QuoteResponse): Observable<AddressResponse> {
-    return this.http.put<AddressResponse>(`${this.baseUrl}/quotes/${idQuote}`, quotesData);
+  changeQuote(idQuote: number, quotesData: QuoteToPut): Observable<QuoteToResponse> {
+    return this.http.put<QuoteToResponse>(`${this.baseUrl}/quotes/${idQuote}`, quotesData);
   }
 
   deleteQuote(idQuote: number): Observable<QuoteResponse> {
@@ -211,8 +214,8 @@ export class GeneralServices {
   }
 
   //services
-  getServices(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/services/`)
+  getServices(): Observable<EstablishmentServiceInterface[]> {
+    return this.http.get<EstablishmentServiceInterface[]>(`${this.baseUrl}/allServices/`)
   }
 
 
