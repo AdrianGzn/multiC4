@@ -23,6 +23,7 @@ export class UserSeeComponent implements OnInit {
     if(currentUser) {
       this.userFinal = JSON.parse(currentUser)
     }
+    console.log(this.userFinal)
 
     this.generalService.getCampaignsWithOut(this.userFinal.localidad).subscribe(
       (next) => {

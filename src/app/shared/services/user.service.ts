@@ -10,7 +10,7 @@ export class UserService {
   private baseUrl: string = 'http://3.227.141.174:8000';  
 
   private user: User = {
-    id_usuario: 16,
+      id_usuario: 0,
       id_rol: 0,
       nombre: '',
       contraseña: '',
@@ -48,13 +48,9 @@ export class UserService {
 
   saveUser(newUser: User): boolean {
     let flag: boolean = false;
-    try {
-      this.user = newUser;
-      flag = true;
-    } catch (error) {
-      console.log('Fallo al guardar al usuario');
-      flag = false;
-    }
+
+    this.user = newUser;
+    flag = true;
 
     return flag;
   }

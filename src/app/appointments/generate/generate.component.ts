@@ -11,7 +11,6 @@ import Swal from 'sweetalert2';
 import { jsPDF } from 'jspdf';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-generate',
   templateUrl: './generate.component.html',
@@ -104,11 +103,6 @@ export class GenerateComponent  {
   
   agendarCita(): void {
     console.log(this.agendarCitaForm.value);
-
-
-
-
-
     const newQuote = {
       id_usuario: this.userFinal.id_usuario,
       fecha: this.agendarCitaForm.value.fecha,
@@ -118,7 +112,6 @@ export class GenerateComponent  {
       id_servicio: this.agendarCitaForm.value.servicio
     };
 
-    // Obtener el costo
     this.services.forEach((service) => {
       if(service.id_service === newQuote.id_servicio) {
         this.costo =  service.cost;
@@ -147,8 +140,7 @@ export class GenerateComponent  {
       }
     };
     console.log(quote);  
-    this.stripeService.onCheckout(quote);  // Llamar al servicio para pasar la cotización al backend
-
+    this.stripeService.onCheckout(quote); 
     this.generalServices.createQuote(newQuote).subscribe(
       (next) => {
         Swal.fire("Generar cita", "Se logró generar la cita", "success");
@@ -179,6 +171,5 @@ export class GenerateComponent  {
     doc.text(`Costo: $${quote.quote_request.items[0].price}`, 20, 90);
     doc.text("¡Descargar PDF!", 20, 100);
     doc.save('cita_medica.pdf');
-  
-}
+  }
 }
