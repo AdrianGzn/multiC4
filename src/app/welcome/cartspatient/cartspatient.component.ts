@@ -28,11 +28,14 @@ export class CartspatientComponent implements OnInit {
     this.generalService.getCampaignsWithOut("General").subscribe(
       (data: any) => {
         console.log(data);
+
         this.slides = data.map((campaign: any) => ({
+          
           image: campaign.image,  
-          title: campaign.nombre,
-          description: campaign.descripcion,
+          title: campaign.campaign.nombre,
+          description: campaign.campaign.descripción,
         }));
+        console.log(this.slides)
       },
       (error) => {
         console.log(error);

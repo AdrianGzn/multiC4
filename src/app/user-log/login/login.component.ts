@@ -31,7 +31,7 @@ export class LoginComponent {
           console.log(data.data_user.id_establecimiento)
           localStorage.setItem('userData', JSON.stringify(data.data_user));          
           if(data.data_user.rol === 'patient') {
-            this.router.navigate(["./establishment/search"])
+            this.router.navigate(["./welcome/patient"])
           }else if(data.data_user.rol === "medic") {
             this.router.navigate(["./welcome/doctor"])
           }else if(data.data_user.rol === "receptionist"){

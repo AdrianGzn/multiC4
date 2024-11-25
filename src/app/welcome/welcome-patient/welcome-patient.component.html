@@ -58,8 +58,6 @@
           <span *ngIf="showFirstGroup" class="ml-2">&#8595;</span> <!-- Flecha hacia abajo -->
           <span *ngIf="!showFirstGroup" class="ml-2">&#8593;</span> <!-- Flecha hacia arriba -->
         </div>
-
-        <!-- Segundo grupo de preguntas (solo visible cuando `showFirstGroup` es false) -->
         <div *ngIf="!showFirstGroup">
           <div class="p-4 bg-gray-100 rounded-lg shadow-md mb-4">
             <h3 class="text-lg lg:text-xl font-semibold text-gray-700 cursor-pointer" (click)="toggleAnswer(4)">

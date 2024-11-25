@@ -30,11 +30,12 @@ export class CartslandingComponent implements OnInit {
     const name = this.userFinal?.nombre || 'defaultName';
     this.generalService.getCampignsByNameWithOut().subscribe(
       (data: any) => {
+        console.log(data)
         console.log('Datos de las campañas:', data);
         this.slides = data.map((campaign: any) => ({
           image: campaign.image || 'defaultImage.jpg',
-          title: campaign.name || 'Sin título', 
-          description: campaign.description || 'Sin descripción',
+          title: campaign.campaign.nombre || 'Sin título', 
+          description: campaign.campaign.descripción || 'Sin descripción',
         }));
       },
       (error) => {
