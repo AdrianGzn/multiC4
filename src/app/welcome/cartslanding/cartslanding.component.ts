@@ -11,8 +11,8 @@ export class CartslandingComponent implements OnInit {
   userFinal: any = {};
   currentSlide: number = 0;
 
-  isModalOpen: boolean = false; // Controla la visibilidad del modal
-  selectedCampaign: any = null; // Almacena la campaña seleccionada
+  isModalOpen: boolean = false; 
+  selectedCampaign: any = null;
 
   constructor(private generalService: GeneralServices) {}
 
@@ -30,11 +30,11 @@ export class CartslandingComponent implements OnInit {
     const name = this.userFinal?.nombre || 'defaultName';
     this.generalService.getCampignsByNameWithOut().subscribe(
       (data: any) => {
-        console.log(data);
+        console.log('Datos de las campañas:', data);
         this.slides = data.map((campaign: any) => ({
           image: campaign.image || 'defaultImage.jpg',
-          title: campaign.nombre || 'Sin título',
-          description: campaign.descripcion || 'Sin descripción',
+          title: campaign.name || 'Sin título', 
+          description: campaign.description || 'Sin descripción',
         }));
       },
       (error) => {
@@ -56,8 +56,8 @@ export class CartslandingComponent implements OnInit {
   }
 
   moreInfo(slide: any) {
-    this.selectedCampaign = slide; // Guarda la campaña seleccionada
-    this.isModalOpen = true; // Muestra el modal
+    this.selectedCampaign = slide; 
+    this.isModalOpen = true; 
   }
 
   closeModal() {
@@ -65,4 +65,3 @@ export class CartslandingComponent implements OnInit {
     this.selectedCampaign = null; 
   }
 }
-0

@@ -1,24 +1,57 @@
 <div class="w-full max-w-sm mx-auto bg-white p-6 shadow-lg rounded-lg space-y-4 flex flex-col items-center">
-    <!-- Icono de Estetoscopio (Cita Médica) -->
-    <div class="flex items-center space-x-2">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 1v5m0 0l3 3m-3-3l-3 3m6 8a2 2 0 11-4 0V9m-4 10a2 2 0 104 0m0 0V9m0 10h3a3 3 0 003-3v-4a3 3 0 00-3-3h-6a3 3 0 00-3 3v4a3 3 0 003 3h3z" />
-      </svg>
-      <div class="font-semibold text-lg text-gray-800 text-center">
-        <p>Folio: {{quote.id_cita}}</p>
-        <p>{{quote.cita}}</p>
-      </div>
-    </div>
-  
-    <div class="text-sm text-gray-600 text-center">
-      <p>{{quote.fecha}}</p>
-    </div>
-    <div class="text-sm text-gray-500 text-center">
-      <p>{{quote.estatus}}</p>
-    </div>
-  
-    <div class="text-center w-full">
-      <button (click)="sendQuoteId()"  class="bg-blue-500 text-white px-4 py-2 rounded-md">Eliminar</button>
+  <!-- Icono de Estetoscopio (Cita Médica) -->
+  <div class="flex items-center space-x-2">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 1v5m0 0l3 3m-3-3l-3 3m6 8a2 2 0 11-4 0V9m-4 10a2 2 0 104 0m0 0V9m0 10h3a3 3 0 003-3v-4a3 3 0 00-3-3h-6a3 3 0 00-3 3v4a3 3 0 003 3h3z" />
+    </svg>
+    <div class="font-semibold text-lg text-gray-800 text-center">
+      <p>Folio: {{quote.id_cita}}</p>
+      <p>{{quote.cita}}</p>
     </div>
   </div>
+
+  <div class="text-sm text-gray-600 text-center">
+    <p>{{quote.fecha}}</p>
+  </div>
+  <div class="text-sm text-gray-500 text-center">
+    <p>{{quote.estatus}}</p>
+  </div>
+
+  <div class="text-center w-full flex justify-between space-x-2">
+    <!-- Botón de Eliminar -->
+    <button (click)="sendQuoteId()" class="bg-blue-500 text-white px-4 py-2 rounded-md">Eliminar</button>
+    
+    <button 
+    *ngIf="quote.estatus === 'Atendidos'" 
+    (click)="openRatingModal()" 
+    class="bg-green-500 text-white px-4 py-2 rounded-md">
+    Calificar
+  </button>
+</div>
+</div>
+<div *ngIf="showRatingModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+  <div class="bg-white p-6 rounded-lg w-80 relative">
   
+    <button (click)="closeRatingModal()" class="absolute top-2 right-2 text-gray-500 hover:text-gray-800">
+      ✕
+    </button>
+
+    <h3 class="text-lg font-semibold mb-4 text-center">Califica la cita</h3>
+
+
+    <div class="flex justify-center mb-4">
+      <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+        <span 
+          (click)="rateQuote(quote.id_cita, star)" 
+          [ngClass]="{'text-yellow-500': star <= rating[quote.id_cita], 'text-gray-300': star > rating[quote.id_cita]}" 
+          class="cursor-pointer text-3xl">
+          ★
+        </span>
+      </ng-container>
+    </div>
+
+    <div class="text-center">
+      <button (click)="saveRating()" class="bg-blue-500 text-white px-4 py-2 rounded-md">Guardar Calificación</button>
+    </div>
+  </div>
+</div>

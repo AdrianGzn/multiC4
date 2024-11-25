@@ -7,6 +7,7 @@ import { User } from '../../shared/models/user';
 import { ScheduleDoctorResponse } from '../../shared/models/schedule-doctor-response';
 import { ScheduleDoctorToPut } from '../../shared/models/schedule-doctor-to-put';
 import { SchedulesFromUserId } from '../../shared/models/schedules-from-user-id';
+import Swal from 'sweetalert2'; // Asegúrate de importar SweetAlert2
 
 @Component({
   selector: 'app-schedule-employee',
@@ -16,12 +17,12 @@ import { SchedulesFromUserId } from '../../shared/models/schedules-from-user-id'
 export class ScheduleEmployeeComponent implements OnInit, AfterViewInit {
   user: User = {
     id_usuario: 0,
-      id_rol: 0,
-      nombre: '',
-      contraseña: '',
-      id_establecimiento: 0,
-      localidad: '',
-      id_servicio: 0
+    id_rol: 0,
+    nombre: '',
+    contraseña: '',
+    id_establecimiento: 0,
+    localidad: '',
+    id_servicio: 0
   };
 
   persona_dia: SchedulesFromUserId[] = [];
@@ -68,7 +69,6 @@ export class ScheduleEmployeeComponent implements OnInit, AfterViewInit {
     });
   }
 
-
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.persona_dia.forEach(itemDay => {
@@ -84,63 +84,69 @@ export class ScheduleEmployeeComponent implements OnInit, AfterViewInit {
       });
     }, 0);
   }
-  
 
-  onSubmit(): void {    
-    let diasSemana = this.diasSemana.map(dia => ({
-      dia: dia,
-      entrada: this.formSchedules.value[`${dia}E`],
-      salida: this.formSchedules.value[`${dia}S`]
-    }));
+  onSubmit(): void {
+    // Mostrar la alerta de confirmación
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: '¿Deseas guardar los horarios?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, guardar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Si el usuario confirma, guardar los horarios
+        let diasSemana = this.diasSemana.map(dia => ({
+          dia: dia,
+          entrada: this.formSchedules.value[`${dia}E`],
+          salida: this.formSchedules.value[`${dia}S`]
+        }));
 
-    this.persona_dia.forEach((item: SchedulesFromUserId) => {
-      const diaConfig = diasSemana.find(d => d.dia === item.dia.toLowerCase());
-      if (diaConfig) {
-        item.entrada = diaConfig.entrada;
-        item.salida = diaConfig.salida;
-      }
-    });
+        this.persona_dia.forEach((item: SchedulesFromUserId) => {
+          const diaConfig = diasSemana.find(d => d.dia === item.dia.toLowerCase());
+          if (diaConfig) {
+            item.entrada = diaConfig.entrada;
+            item.salida = diaConfig.salida;
+          }
+        });
 
-    console.log(this.persona_dia);
-    this.persona_dia.forEach((item: SchedulesFromUserId) => {
-      let tempSchedule: ScheduleDoctorToPut = {
-        id_horario: item.id_schedule_doctor,
-        día: item.dia,
-        id_usuario: item.id_doctor,
-        entrada: item.entrada,
-        salida: item.salida
-      }      
+        console.log(this.persona_dia);
+        this.persona_dia.forEach((item: SchedulesFromUserId) => {
+          let tempSchedule: ScheduleDoctorToPut = {
+            id_horario: item.id_schedule_doctor,
+            día: item.dia,
+            id_usuario: item.id_doctor,
+            entrada: item.entrada,
+            salida: item.salida
+          }      
 
-      this.generalServices.changeScheduleDoctor(tempSchedule.id_horario, tempSchedule).subscribe({
-        next: (changeResponse: ScheduleDoctorToPut) => {
-          console.log(changeResponse);
-        },
-        error: (error) => {
-          console.log('Ha ocurrido un error');
-          console.log(error);
-        }
-      });
-    });
-  }
+          this.generalServices.changeScheduleDoctor(tempSchedule.id_horario, tempSchedule).subscribe({
+            next: (changeResponse: ScheduleDoctorToPut) => {
+              console.log(changeResponse);
+            },
+            error: (error) => {
+              console.log('Ha ocurrido un error');
+              console.log(error);
+            }
+          });
+        });
 
-  onSome(): void {
-    let tempSchedule: ScheduleDoctorToPut = {
-      id_horario: 1,
-      día: 'domingo',
-      id_usuario: 1,
-      entrada: '02:29:52.054Z',
-      salida: '02:29:52.054Z'
-    };
-    
-    console.log(tempSchedule);
-  
-    this.generalServices.changeScheduleDoctor(1, tempSchedule).subscribe({
-      next: (changeResponse: ScheduleDoctorToPut) => {
-        console.log('Se ha guardado correctamente el item con día: ' + changeResponse.día);
-      },
-      error: (error) => {
-        console.log('Ha ocurrido un error');
-        console.log(error);
+        // Mostrar mensaje de éxito
+        Swal.fire(
+          '¡Guardado!',
+          'Los horarios han sido guardados exitosamente.',
+          'success'
+        );
+      } else {
+        // Si el usuario cancela, mostrar mensaje de cancelación
+        Swal.fire(
+          'Cancelado',
+          'Los horarios no fueron guardados.',
+          'error'
+        );
       }
     });
   }
