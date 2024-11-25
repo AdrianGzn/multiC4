@@ -7,10 +7,12 @@ import { GeneralServices } from '../../shared/services/general-services.service'
   styleUrls: ['./cartslanding.component.css'],
 })
 export class CartslandingComponent implements OnInit {
-  isOpen: boolean = false;
   slides: any[] = [];
   userFinal: any = {};
-  currentSlide: number = 0; 
+  currentSlide: number = 0;
+
+  isModalOpen: boolean = false; // Controla la visibilidad del modal
+  selectedCampaign: any = null; // Almacena la campaña seleccionada
 
   constructor(private generalService: GeneralServices) {}
 
@@ -21,17 +23,16 @@ export class CartslandingComponent implements OnInit {
       console.log(this.userFinal);
     }
     this.fetchCampaigns();
-    this.startCarousel(); 
+    this.startCarousel();
   }
 
-
   fetchCampaigns() {
-    const name = this.userFinal?.nombre || 'defaultName'; 
+    const name = this.userFinal?.nombre || 'defaultName';
     this.generalService.getCampignsByNameWithOut().subscribe(
       (data: any) => {
         console.log(data);
         this.slides = data.map((campaign: any) => ({
-          image: campaign.image || 'defaultImage.jpg', 
+          image: campaign.image || 'defaultImage.jpg',
           title: campaign.nombre || 'Sin título',
           description: campaign.descripcion || 'Sin descripción',
         }));
@@ -42,7 +43,6 @@ export class CartslandingComponent implements OnInit {
     );
   }
 
- 
   getTransform() {
     return `translateX(-${this.currentSlide * 100}%)`;
   }
@@ -51,12 +51,18 @@ export class CartslandingComponent implements OnInit {
     if (this.slides.length > 0) {
       setInterval(() => {
         this.currentSlide = (this.currentSlide + 1) % this.slides.length;
-      }, 3000); 
+      }, 3000);
     }
   }
 
   moreInfo(slide: any) {
-    console.log('Más información sobre:', slide);
-    
+    this.selectedCampaign = slide; // Guarda la campaña seleccionada
+    this.isModalOpen = true; // Muestra el modal
+  }
+
+  closeModal() {
+    this.isModalOpen = false; 
+    this.selectedCampaign = null; 
   }
 }
+0
