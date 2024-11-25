@@ -108,7 +108,7 @@ export class GeneralServices {
     return this.http.put(`${this.baseUrl}/user/${id_recepcionist}`, userModify)
   }
 
-  changeQuote(idQuote: number, quotesData: QuoteToPut): Observable<QuoteToResponse> {
+  changeQuote(idQuote: number, quotesData: any): Observable<QuoteToResponse> {
     return this.http.put<QuoteToResponse>(`${this.baseUrl}/quotes/${idQuote}`, quotesData);
   }
 

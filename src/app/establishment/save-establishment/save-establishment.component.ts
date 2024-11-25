@@ -13,6 +13,7 @@ import { ScheduleResponse } from '../../shared/models/schedule-response';
 import Swal from 'sweetalert2';
 import { error } from 'console';
 import { serviceAllId } from '../../shared/models/serviceAlId';
+import { Quote } from '../../shared/models/quote';
 
 @Component({
   selector: 'app-save-establishment',
@@ -209,15 +210,6 @@ export class SaveEstablishmentComponent implements OnInit {
     }
   }
 
-  // Agregar servicio (solo ejemplo, aún no implementado completamente)
-  addService(): void {
-    let tempService: ServiceResponse = {
-      id_establecimiento: 0,
-      tipo: '',
-      costo: 0
-    };
-  }
-
   deleteSelectedImage(input: HTMLInputElement): void {
     this.selectedImage = null;
     input.value = '';
@@ -269,7 +261,7 @@ export class SaveEstablishmentComponent implements OnInit {
     })
   }
 
-  postServiceOnEstablishment(): void {
+  postServiceOnEstablishment(): void { //Lo hago en esta función
     const service = {
       id_establecimiento: this.userFinal.id_establecimiento,
       tipo: this.formServices.value.servicio,
@@ -289,14 +281,76 @@ export class SaveEstablishmentComponent implements OnInit {
   }
 
   deleteService(): void {
-    this.generalServices.deleteService(this.selectedService.id_service).subscribe({
-      next: (item) => {
-        Swal.fire("Eliminar servico", "Se logro eliminar el sevicio", "success")
-      },
+    let flag: boolean = false;
+    
+    let atributeNull: any = {
+      id_servicio: null
+    }
 
+    this.userService.getUsers().subscribe({
+      next: (item) => {
+
+        item.forEach((element: User) => {
+          if (element.id_servicio === this.selectedService.id_service) {
+            
+            this.userService.updateUser(element.id_usuario, atributeNull).subscribe({
+              next: (item) => {
+                console.log('IdServicio quitado del usuario exitosamente. Usuario :' + element.id_usuario);
+                console.log(item);
+              },
+              error: (error) => {
+                console.log('No se ha podido editar la data del usuario');
+                console.log(error);
+              }
+            })
+
+          }
+        });
+
+      },
       error: (error) => {
-        Swal.fire("Eliminar servicio", "No se logro elimnar el servicio", "error")
+        console.log('Ha ocurrido un error al obtener los usuarios');
+        console.log(error);
       }
     })
+
+    this.generalServices.getQuote().subscribe({
+      next: (item: Quote[]) => {
+        item.forEach((element: Quote) => {
+          if (element.id_servicio === this.selectedService.id_service) {
+            console.log(element.id_cita);
+            
+            this.generalServices.changeQuote(element.id_cita, atributeNull).subscribe({
+              next: (item) => {
+                console.log('Se ha modificado el id_servicio de la cita');
+                console.log(item);
+
+                this.generalServices.deleteService(this.selectedService.id_service).subscribe({
+                  next: (item) => {
+                    console.log(item);
+                    
+                    Swal.fire("Eliminar servico", "Se logro eliminar el sevicio", "success")
+                  },
+                  error: (error) => {
+                    Swal.fire("Eliminar servicio", "No se logro elimnar el servicio", "error")
+                  }
+                });
+
+              },
+              error: (error) => {
+                console.log('No se ha podido modificar el id_servicio de la cita');
+                console.log(error);
+              }
+            })
+
+          }
+        });
+      },
+      error: (error) => {
+        console.log('Error obteniendo las citas');
+        console.log(error);
+      }
+    });
+    
   }
 }
