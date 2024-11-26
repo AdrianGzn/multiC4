@@ -1,7 +1,10 @@
-<div class="bg-gray-200 min-h-screen">
-  <app-header-patient></app-header-patient>
+<app-header-patient></app-header-patient>
 
-  <div class="bg-purple-100 p-12 pb-80 rounded-md mx-auto max-w-6xl mt-8">
+<div class="w-full min-h-[calc(100vh-128px)] flex items-center justify-center bg-gray-200">
+  <div class="w-[85%] min-h-[calc(70vh)] my-8 bg-purple-100 flex flex-col items-center p-5 lg:w-[70%]">
+
+    <p class="text-4xl font-bold mb-4 text-purple-800">Agregar Establecimiento</p>
+
     <div class="relative inline-flex items-center border-2 border-[#9042B7] px-4 py-2 rounded-md w-auto">
       <div class="relative w-auto">
         <button (click)="toggleSelect()"
@@ -23,8 +26,10 @@
       </div>
     </div>
 
-    <div *ngFor="let quote of quotes; trackBy: trackByFn">
-      <app-quote-patient [quote]="quote" (emitId)="handleQuoteId($event)"></app-quote-patient>
+    <div class="b-1 border-slate-100">
+      <div *ngFor="let quote of quotes; trackBy: trackByFn">
+        <app-quote-patient [quote]="quote" (emitId)="handleQuoteId($event)"></app-quote-patient>
+      </div>
     </div>
     
   </div>
