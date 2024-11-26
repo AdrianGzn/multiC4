@@ -1,9 +1,7 @@
 export interface QuoteResponse {
-    horario: string
-    id_cita: number
-    id_usuario: number
-    fecha: string
-    estatus:string
-    id_doctor: number
-    id_servicio: number
+    id_cita: number;                 // ID de la cita
+    fecha: string;                   // Fecha de la cita
+    estatus: string;                 // Estado de la cita (Atendidos, No Atendidos, etc.)
+    horario: string | null;          // Horario de la cita (puede ser null si no existe)
+    id_establecimiento: number;
 }

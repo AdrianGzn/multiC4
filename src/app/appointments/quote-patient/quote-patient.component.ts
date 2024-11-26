@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import { braiting } from '../../shared/models/braiting';
 import jsPDF from 'jspdf';
 import { StripeService } from '../../shared/services/stripe.service';
+import { QuoteResponse } from '../../shared/models/quote-response';
 
 @Component({
   selector: 'app-quote-patient',
@@ -12,24 +13,26 @@ import { StripeService } from '../../shared/services/stripe.service';
 })
 export class QuotePatientComponent implements OnInit {
   @Input() quote = {
-    id_cita: 0,
-    cita: '',
-    fecha: '',
-    estatus: '',
-    id_establishment: 0
+    id_cita: 0,                 
+    fecha: '',                  
+    estatus: '',                 
+    horario: '',          
+    id_establecimiento: 0
   };
 
 
   constructor(private generalService: GeneralServices, private stripeService: StripeService) { }
 
   ngOnInit(): void {
-    console.log(this.quote)
-    let currentUser = localStorage.getItem("userData");
-
-    if (currentUser) {
-      this.userFinal = JSON.parse(currentUser);
+    if (this.quote && this.quote.id_cita) {
+      console.log(this.quote)
+      let currentUser = localStorage.getItem("userData");
+      if (currentUser) {
+        this.userFinal = JSON.parse(currentUser);
+      }
     }
   }
+  
 
   @Output() emitId = new EventEmitter<number>();
 
@@ -38,14 +41,12 @@ export class QuotePatientComponent implements OnInit {
   userFinal: any = {};
 
   openRatingModal(): void {
-    if (this.quote.estatus === 'Atendidos') {
       this.showRatingModal = true;
-    }
   }
 
   closeRatingModal(): void {
     const qualification: braiting = {
-      id_establecimiento: this.quote.id_establishment,
+      id_establecimiento: this.quote.id_establecimiento,
       id_usuario: this.userFinal.id_usuario,
       calificacion: this.rating[this.quote.id_cita]
     };
@@ -100,7 +101,7 @@ export class QuotePatientComponent implements OnInit {
       }
     };
     const newEstatus = {
-      estatus: "Pagado"
+      estatus: "Pagados"
     }
     this.generalService.changeQuote(this.quote.id_cita, newEstatus).subscribe({
       next: (quoteChange) => {

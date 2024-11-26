@@ -2,19 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { GeneralServices } from '../../shared/services/general-services.service';
 import { QuoteResponse } from '../../shared/models/quote-response';
 import { UserService } from '../../shared/services/user.service';
-import { EstablishmentServiceInterface } from '../../shared/models/establishment-service-interface';
 
 @Component({
   selector: 'app-see',
   templateUrl: './see.component.html',
-  styleUrl: './see.component.css'
+  styleUrls: ['./see.component.css']
 })
 export class SeeComponent implements OnInit {
   isOpen: boolean = false;
   selectedOption: string = 'Atendidos';  
-  options: string[] = ['Atendidos', 'No Atendidos'];
-  quotes: any[] = [];
-
+  options: string[] = ['Atendidos', 'No Atendidos', 'Pagados'];
+  quotes: any[] = [];  // Array que almacenará las citas
+  id_establishment: number = 0;
 
   constructor(private generalService: GeneralServices, private userService: UserService) {}
 
@@ -26,65 +25,32 @@ export class SeeComponent implements OnInit {
     this.isOpen = !this.isOpen;
   }
 
+  trackByFn(index: number, item: any): number {
+    return item.id_cita; // Usar un identificador único para cada cita
+  }
+  
+
   selectOption(option: string) {
     this.selectedOption = option;
     this.isOpen = false;
-    this.fetchQuotes();
+    this.fetchQuotes(); // Cargar las citas cuando se seleccione una opción
   }
 
-  private fetchQuotes() {
-    console.log(this.selectedOption);
-  
+  fetchQuotes() {
     const user = localStorage.getItem("userData");
     const finalUser = user ? JSON.parse(user) : null;
   
-    if (finalUser && finalUser.id_usuario) {
-      this.generalService.getQuotesByPatientId(finalUser.id_usuario).subscribe({
+    if (finalUser) {
+      this.generalService.getQuotesByPatientIdStatus(finalUser.id_usuario, this.selectedOption).subscribe({
         next: (response: QuoteResponse[]) => {
-          this.quotes = []
-  
-          this.generalService.getServices().subscribe({
-            next: (services: EstablishmentServiceInterface[]) => {
-  
-              response.forEach((element: QuoteResponse) => {
-                console.log(element)
-                if (element.estatus === this.selectedOption) {
-                  let nameService: string = '';
-                  let nameEstablishment: string = '';
-                  let id_establishment: number = 0;
-  
-                  const service = services.find(service => service.service.id_servicio == element.id_servicio);
-                  console.log(service)
-                  if (service) {
-                    nameService = service.service.tipo;
-                    nameEstablishment = service.establishment.nombre;
-                    id_establishment = service.establishment.id_establecimiento;
-                  }
-  
-                  this.quotes.push({
-                    id_cita: element.id_cita,
-                    cita: `Cita con el servicio ${nameService} del establecimiento ${nameEstablishment}`,
-                    id_establishment: id_establishment,
-                    fecha: element.fecha,
-                    estatus: element.estatus
-                  });
-                }
-              });
-  
-              console.log(this.quotes);
-            },
-            error: (error) => {
-              console.log('No se han podido obtener los servicios');
-              console.log(error);
-            }
-          });
+          // Asegúrate de que no haya duplicación de datos
+          this.quotes = response;
+          console.log(response); 
         },
         error: (err) => {
           console.error('Error al obtener las citas:', err);
         }
       });
-    } else {
-      console.error('No se encontró el usuario en localStorage');
     }
   }
   
@@ -95,8 +61,6 @@ export class SeeComponent implements OnInit {
     let tempQuote: any = {
       estatus: 'Eliminado',
     }
-
-    console.log(tempQuote);
     
     this.generalService.changeQuote(id, tempQuote).subscribe({
       next: (item) => {
@@ -108,8 +72,5 @@ export class SeeComponent implements OnInit {
         console.log(error);
       }
     })
-
-    this.fetchQuotes();
-      
   }
 }
