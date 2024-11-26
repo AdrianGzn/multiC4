@@ -106,7 +106,7 @@ export class GenerateComponent  {
     const newQuote = {
       id_usuario: this.userFinal.id_usuario,
       fecha: this.agendarCitaForm.value.fecha,
-      estatus: "No atendidos",
+      estatus: "No Atendidos",
       horario: this.agendarCitaForm.value.hora,
       id_doctor: this.agendarCitaForm.value.doctor,
       id_servicio: this.agendarCitaForm.value.servicio
@@ -119,36 +119,9 @@ export class GenerateComponent  {
       }
     });
 
-    const quote ={
-      "quote_request": {
-        "items": [
-          {
-            "name": `Servicio medico`,
-            "product": `${this.agendarCitaForm.value.servicio}`,
-            "price": `${this.costo}`,
-            "quantity": 1
-          }
-        ]
-      },
-      "quote_data": {
-        "id_usuario": this.userFinal.id_usuario,
-        "fecha": `${this.agendarCitaForm.value.fecha}`,
-        "horario": `${this.agendarCitaForm.value.hora}`,
-        "estatus": "pendiente",
-        "id_doctor": this.agendarCitaForm.value.doctor,
-        "id_servicio": this.agendarCitaForm.value.servicio
-      }
-    };
-    console.log(quote);  
-    this.stripeService.onCheckout(quote); 
     this.generalServices.createQuote(newQuote).subscribe(
       (next) => {
         Swal.fire("Generar cita", "Se logró generar la cita", "success");
-
-        let checkout = this.stripeService.onCheckout(quote);
-        if(checkout) {
-          this.generatePDF(newQuote);  
-        }
       },
       error => {
         Swal.fire("Generar cita", "No se logró generar la cita", "error");

@@ -60,8 +60,8 @@ export class SearchEstablishmentComponent implements OnInit {
       type: this.formEstablishment.value.tipo,
       category: this.formEstablishment.value.categoria
     }
-    console.log(formTypeCategory)
-      this.generalService.getEstablishmentByTypeCategory(formTypeCategory.type, formTypeCategory.category).pipe().subscribe(
+    console.log(formTypeCategory.type)
+      this.generalService.getEstablishmentByTypeCategory(formTypeCategory.type, formTypeCategory.category, this.userFinal.localidad).pipe().subscribe(
         data => {
           this.establishmentFinded = data.map((establishment: any) => ({
             id_establishment: establishment.id_establishment,
@@ -87,10 +87,9 @@ export class SearchEstablishmentComponent implements OnInit {
 
   submitNombre(): void {
     let nombre = this.formEstablishmentByName.value;
-
-
+    console.log(this.formEstablishmentByName.value)
     console.log(nombre)
-    this.generalService.getEstablishmentByName(this.formEstablishmentByName.value.nombre).subscribe({
+    this.generalService.getEstablishmentByName(this.formEstablishmentByName.value.nombre, this.userFinal.localidad).subscribe({
       next: (data) => {
         console.log(data)
             this.establishmentFinded = data
@@ -105,7 +104,7 @@ export class SearchEstablishmentComponent implements OnInit {
     console.log(this.formEstablishmentByService.value.servicio)
     let myService = this.formEstablishmentByService.value.servicio;
     console.log(myService)
-    this.generalService.getEstablishmentByService(myService).subscribe({
+    this.generalService.getEstablishmentByService(this.formEstablishmentByService.value, this.userFinal.localidad).subscribe({
       next: (data: any[]) => {
         console.log(data)
         this.establishmentFinded = data;        
