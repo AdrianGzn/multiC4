@@ -57,4 +57,8 @@ export class CartpatientcampanisComponent {
   cerrarModal() {
     this.modalVisible = false;
   }
+  
+  establishments(): void {
+    this.router.navigate(['/establishment/search']);
+  }
 }
