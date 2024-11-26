@@ -29,7 +29,7 @@ import { braiting } from '../models/braiting';
 })
 export class GeneralServices {
 
-  private baseUrl: string = 'http://3.227.141.174:8000';  
+  private baseUrl: string = 'http://54.205.244.43:8000';  
 
   constructor(private http: HttpClient) {}
 
