@@ -12,7 +12,7 @@ import { EstablishmentServiceInterface } from '../../shared/models/establishment
 export class SeeComponent implements OnInit {
   isOpen: boolean = false;
   selectedOption: string = 'Atendidos';  
-  options: string[] = ['Atendidos', 'No Atendidos'];
+  options: string[] = ['Atendidos', 'No Atendidos', 'Pasadas'];
   quotes: any[] = [];
 
 

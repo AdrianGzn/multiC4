@@ -31,7 +31,11 @@
 
                     <div class="w-[calc(48%)] min-w-[210px]">
                         <label class="form-child-label">Categoría:</label>
-                        <input  class="form-child border-fuchsia-800 w-full" formControlName="categoria">
+                        <select class="form-child border-fuchsia-800 w-full" id="categoria" formControlName="categoria">
+                            <option *ngFor="let option of categoria" value={{option}}>
+                                {{option}}
+                            </option>
+                        </select>
                     </div>
                     <div class="w-[calc(48%)] min-w-[210px]">
                         <label class="form-child-label">localidad:</label>
@@ -136,10 +140,10 @@
                     <button type="button" class="w-[48%] bg-purple-700 text-white p-1 rounded" (click)="deleteService()">Eliminar servicio</button>
                 </div>
         
+                <p *ngIf="services.length === 0">No hay servicios que mostrar</p>
                 <div class="w-full min-h-[50px] bg-white mt-2" *ngFor="let service of services; let i = index" (click)="selectService(service)">
-                    <p *ngIf="services.length === 0">No hay servicios que mostrar</p>
                     <p *ngIf="services.length > 0" [ngClass]="{'bg-blue-100': selectedService === service}">{{service.service}}</p>
-                  </div>
+                </div>
             </div>
         </form>
         
@@ -172,8 +176,8 @@
                     <button type="button" class="w-[48%] bg-purple-700 text-white p-1 mt-2 rounded" (click)="deleteDoctorFromEstablishment()">Eliminar doctor</button>
                 </div>
         
+                <p *ngIf="currentDoctors.length === 0">No hay medicos que mostrar que mostrar</p>
                 <div class="w-full min-h-[50px] bg-white mt-2" *ngFor="let doctor of currentDoctors" (click)="selectDoctor(doctor.id_usuario)">
-                    <p *ngIf="currentDoctors.length === 0">No hay medicos que mostrar que mostrar</p>
                     <p *ngIf="currentDoctors.length > 0" [ngClass]="{'bg-blue-100': selectedDoctor === doctor.id_usuario}">{{doctor.nombre}}</p>
                 </div>
             </div>

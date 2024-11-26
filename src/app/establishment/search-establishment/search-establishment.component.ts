@@ -17,7 +17,7 @@ export class SearchEstablishmentComponent implements OnInit {
   formEstablishment: FormGroup;
   formEstablishmentByName: FormGroup;
   formEstablishmentByService: FormGroup;
-  services: string[] = ['General', 'Pediatría', 'Obstetricia', 'Odontología'];
+  services: string[] = ["General", "Pediatría", "Obstetricia", "Odontología"];
   tipo: string[] = ['Hospital', 'Clínica', 'Consultorio']; //lista de todos lo que va en formularios
   categoria: string[] = ['Público', 'Privado'];
   userFinal: any = {}
@@ -42,6 +42,8 @@ export class SearchEstablishmentComponent implements OnInit {
     let currentUser = localStorage.getItem("userData")
     if(currentUser) {
       this.userFinal = JSON.parse(currentUser)
+      console.log(this.userFinal);
+      
     }
     this.generalService.establishmentInformation(this.userFinal.localidad).subscribe(
       (next) => {

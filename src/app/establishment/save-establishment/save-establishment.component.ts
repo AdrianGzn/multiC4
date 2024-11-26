@@ -11,7 +11,7 @@ import { Service } from '../../shared/models/service';
 import { Schedule } from '../../shared/models/schedule';
 import { ScheduleResponse } from '../../shared/models/schedule-response';
 import Swal from 'sweetalert2';
-import { error } from 'console';
+import { error, log } from 'console';
 import { serviceAllId } from '../../shared/models/serviceAlId';
 import { Quote } from '../../shared/models/quote';
 
@@ -36,7 +36,8 @@ export class SaveEstablishmentComponent implements OnInit {
   }
   type_options: any[] = [];
   category_options: string[] = [];
-  nameServices: string[] = ["Ortopedia"];
+  nameServices: string[] = ["General", "Pediatría", "Obstetricia", "Odontología"];
+  categoria: string[] = ['Público', 'Privado'];
   services: serviceAllId[] = [];
 
   doctors: User[] = [];
@@ -99,11 +100,12 @@ export class SaveEstablishmentComponent implements OnInit {
       error: (error) => {
         console.log(error)
       }
-    })
-
+    });
+    
     this.generalServices.getAllInformtaionServiceById(this.userFinal.id_establecimiento).subscribe({
       next: (service) => {
-        this.services = service
+        this.services = service;
+        console.log(service);
       },
 
       error: (error) => {
@@ -117,7 +119,6 @@ export class SaveEstablishmentComponent implements OnInit {
           if (element.id_rol === 2) {
             if (element.id_establecimiento === this.userFinal.id_establecimiento || element.id_establecimiento === null) {
               this.doctors.push(element);
-              console.log(element.nombre);
             }
 
             let tempService: string = '';
@@ -129,7 +130,6 @@ export class SaveEstablishmentComponent implements OnInit {
             });
 
             if (element.id_establecimiento === this.userFinal.id_establecimiento) {
-              element.nombre = 'Doctor: ' + element.nombre + ' - Servicio: ' + tempService;
               this.currentDoctors.push(element);
             }
           }
@@ -273,7 +273,8 @@ export class SaveEstablishmentComponent implements OnInit {
     }
     this.generalServices.asignDoctorEstablishment(this.selectedDoctor, deleteFromEstablishment).subscribe({
       next: (item) => {
-        Swal.fire("Elimnar doctor de el establecimiento", "Se elimino del establecimiento", "success")
+        this.ngOnInit();
+        Swal.fire("Elimnar doctor de el establecimiento", "Se elimino del establecimiento", "success");
       },
       error: (error) => {
         Swal.fire("Eliminar doctor de el establecimiento", "No se logro eliminar del establecimeinto", "error")
@@ -285,6 +286,8 @@ export class SaveEstablishmentComponent implements OnInit {
 
   selectDoctor(id_doctor_selected: number): void{
     this.selectedDoctor = id_doctor_selected;
+    console.log(id_doctor_selected);
+    
   }
 
   postServiceOnEstablishment(): void {
@@ -296,7 +299,7 @@ export class SaveEstablishmentComponent implements OnInit {
     console.log(service)
     this.generalServices.createService(service).subscribe({
       next: (item) => {
-        console.log(item)
+        this.ngOnInit();
         Swal.fire("Generar servicio", "se logro generar el servicio", "success")
       },
 
@@ -348,18 +351,6 @@ export class SaveEstablishmentComponent implements OnInit {
               next: (item) => {
                 console.log('Se ha modificado el id_servicio de la cita');
                 console.log(item);
-
-                this.generalServices.deleteService(this.selectedService.id_service).subscribe({
-                  next: (item) => {
-                    console.log(item);
-                    
-                    Swal.fire("Eliminar servico", "Se logro eliminar el sevicio", "success")
-                  },
-                  error: (error) => {
-                    Swal.fire("Eliminar servicio", "No se logro elimnar el servicio", "error")
-                  }
-                });
-
               },
               error: (error) => {
                 console.log('No se ha podido modificar el id_servicio de la cita');
@@ -373,6 +364,20 @@ export class SaveEstablishmentComponent implements OnInit {
       error: (error) => {
         console.log('Error obteniendo las citas');
         console.log(error);
+      }
+    });
+
+    console.log(this.selectedService.id_service);
+    
+
+    this.generalServices.deleteService(this.selectedService.id_service).subscribe({
+      next: (item) => {
+        this.ngOnInit();
+        
+        Swal.fire("Eliminar servico", "Se logro eliminar el sevicio", "success")
+      },
+      error: (error) => {
+        Swal.fire("Eliminar servicio", "No se logro elimnar el servicio", "error")
       }
     });
     
