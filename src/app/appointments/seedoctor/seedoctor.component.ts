@@ -3,6 +3,7 @@ import { GeneralServices } from '../../shared/services/general-services.service'
 import { UserService } from '../../shared/services/user.service';
 import { QuoteResponse } from '../../shared/models/quote-response';
 import { EstablishmentServiceInterface } from '../../shared/models/establishment-service-interface';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-seedoctor',
@@ -38,52 +39,13 @@ export class SeedoctorComponent implements OnInit {
     const user = localStorage.getItem("userData");
     const finalUser = user ? JSON.parse(user) : null;
 
-    if (finalUser && finalUser.id_usuario) {
-      this.generalService.getQuotesByPatientId(finalUser.id_usuario).subscribe({
-        next: (response: QuoteResponse[]) => {
-          this.quotesDoctor = [];
-          
-          response.forEach((element: QuoteResponse) => {
-            if (element.estatus === this.selectedOption) {
-              let nameService: string = '';
-              let nameEstablishment: string = '';
-
-              this.generalService.getServices().subscribe({
-                next: (item: EstablishmentServiceInterface[]) => {
-                  
-                  item.forEach((element2: EstablishmentServiceInterface) => {
-                    if (element.id_servicio === element2.service.id_servicio) {
-                      nameEstablishment = element2.establishment.nombre;
-                      nameService = element2.service.tipo;
-                    }
-                  });
-
-                },
-                error: (error) => {
-                  console.log('No se han podido obtener los servicios');
-                  console.log(error);
-                }
-              })
-
-              this.quotesDoctor.push({
-                id_cita: element.id_cita,
-                cita: `Cita con el servicio ${nameService} del establecimiento ${nameEstablishment}`,
-                fecha: element.fecha,
-                estatus: element.estatus 
-              })
-            }
-          });
-
-          console.log(this.quotesDoctor);
-          
-        },
-        error: (err) => {
-          console.error('Error al obtener las citas:', err);
+    this.generalService.getQuotesByDoctorStatus(finalUser.id_usuario, this.selectedOption).subscribe(
+      {
+        next: (next) => {
+          this.quotesDoctor = next; 
         }
-      });
-    } else {
-      console.error('No se encontró el usuario en localStorage');
-    }
+      }
+    )
   }
 
   deleteQuote(id: number) {
@@ -103,11 +65,11 @@ export class SeedoctorComponent implements OnInit {
     
     this.generalService.changeQuote(id, tempQuote).subscribe({
       next: (item) => {
-        console.log('Se ha cambiado exitosamente el estatus de la cita');
+        Swal.fire("Cambiar estatus de la cita", "Se cambio el estatus de la cita", "success")
         console.log(item);
       },
       error: (error) => {
-        console.log('Ha ocurrido un error al editar la cita');
+        Swal.fire("Cambiar estatus de la cita", "No se logro cambiar el estatus de la cita", "error")
         console.log(error);
       }
     })

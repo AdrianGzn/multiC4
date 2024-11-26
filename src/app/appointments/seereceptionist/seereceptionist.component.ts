@@ -38,52 +38,13 @@ export class SeereceptionistComponent implements OnInit {
     const user = localStorage.getItem("userData");
     const finalUser = user ? JSON.parse(user) : null;
 
-    if (finalUser && finalUser.id_usuario) {
-      this.generalService.getQuotesByPatientId(finalUser.id_usuario).subscribe({
-        next: (response: QuoteResponse[]) => {
-          this.quotesDoctor = [];
-          
-          response.forEach((element: QuoteResponse) => {
-            if (element.estatus === this.selectedOption) {
-              let nameService: string = '';
-              let nameEstablishment: string = '';
-
-              this.generalService.getServices().subscribe({
-                next: (item: EstablishmentServiceInterface[]) => {
-                  
-                  item.forEach((element2: EstablishmentServiceInterface) => {
-                    if (element.id_servicio === element2.service.id_servicio) {
-                      nameEstablishment = element2.establishment.nombre;
-                      nameService = element2.service.tipo;
-                    }
-                  });
-
-                },
-                error: (error) => {
-                  console.log('No se han podido obtener los servicios');
-                  console.log(error);
-                }
-              })
-
-              this.quotesDoctor.push({
-                id_cita: element.id_cita,
-                cita: `Cita con el servicio ${nameService} del establecimiento ${nameEstablishment}`,
-                fecha: element.fecha,
-                estatus: element.estatus 
-              })
-            }
-          });
-
-          console.log(this.quotesDoctor);
-          
-        },
-        error: (err) => {
-          console.error('Error al obtener las citas:', err);
+    this.generalService.getQuotesByReceptionisStatus(finalUser.id_usuario, this.selectedOption).subscribe(
+      {
+        next: (next) => {
+          console.log(next)
         }
-      });
-    } else {
-      console.error('No se encontró el usuario en localStorage');
-    }
+      }
+    )
   }
 
   deleteQuote(id: number) {

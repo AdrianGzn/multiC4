@@ -170,8 +170,8 @@ export class GeneralServices {
   }
 
   deleteService(id_service: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/service/${id_service}`)
-  } 
+    return this.http.delete<any>(`${this.baseUrl}/services/${id_service}`);
+  }
 
   createTypeEstablishment(typeEstablishmentData: TypeEstablishmentResponse): Observable<TypeEstablishment> {
     return this.http.post<TypeEstablishment>(`${this.baseUrl}/type_establishment/`, typeEstablishmentData);
@@ -265,9 +265,14 @@ export class GeneralServices {
   }
 
 
+  getQuotesByPatientIdStatus(id_patient: number, status: string): Observable<QuoteResponse[]> {
+    return this.http.get<QuoteResponse[]>(`${this.baseUrl}/quotesByIdPatientWith/${id_patient}/${status}`)
+  }
+
   getQuotesByPatientId(id_patient: number): Observable<QuoteResponse[]> {
     return this.http.get<QuoteResponse[]>(`${this.baseUrl}/allQuotePatient/${id_patient}`)
   }
+
 
   getQuotesByReceptionistId(id_recepcionist: number): Observable<QuoteResponse[]> {
     return this.http.get<QuoteResponse[]>(`${this.baseUrl}/quotesByIdReceptionist/${id_recepcionist}`)
@@ -275,6 +280,10 @@ export class GeneralServices {
 
   getQuotesByDoctorStatus(id_doctor: number, status: string): Observable<QuoteResponse[]> {
     return this.http.get<QuoteResponse[]>(`${this.baseUrl}/quotesByIdDoctorWith/${id_doctor}/${status}`)
+  }  
+
+  getQuotesByReceptionisStatus(id_doctor: number, status: string): Observable<QuoteResponse[]> {
+    return this.http.get<QuoteResponse[]>(`${this.baseUrl}/quotesByIdEstablishment/${id_doctor}/${status}`)
   }  
 
   getQuotesByPatientStatus(id_patient: number, status: string): Observable<QuoteResponse[]> {

@@ -6,11 +6,12 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./card-quote-doctor.component.css']
 })
 export class CardQuoteDoctorComponent {
-  @Input() quote: { id_cita: number; cita: string; fecha: string; estatus: string } = {
-    id_cita: 0,
-    cita: '',
-    fecha: '',
-    estatus: ''
+  @Input() quote = {
+    id_cita: 0,                 
+    fecha: '',                  
+    estatus: '',                 
+    horario: '',          
+    id_establecimiento: 0
   };
 
   @Output() emitId = new EventEmitter<number>();
