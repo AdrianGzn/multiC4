@@ -57,11 +57,18 @@
       <button (click)="sendQuoteId()" class="bg-blue-500 text-white px-4 py-2 rounded-md">Eliminar</button>
       
       <button 
-        *ngIf="quote.estatus === 'Atendidos'" 
+        *ngIf="quote.estatus === 'Pagado'" 
         (click)="openRatingModal()" 
         class="bg-green-500 text-white px-4 py-2 rounded-md">
         Calificar
       </button>
+
+      <button 
+      *ngIf="quote.estatus === 'Atendidos'" 
+      (click)="agendarCita()"
+      class="bg-blue-500 text-white px-4 py-2 rounded-md">
+      Generar pago
+    </button>
     </div>
   </div>
 </div>

@@ -73,16 +73,16 @@ export class GeneralServices {
     return this.http.get<EstablishmentGetResponse[]>(`${this.baseUrl}/establishment/`);
   }
 
-  getEstablishmentByName(name_establishment: string): Observable<any> {
-    return this.http.get(`${this.baseUrl}/searchEstablishment/${name_establishment}`);
+  getEstablishmentByName(name_establishment: string, location: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/searchEstablishment/${name_establishment}/${location}`);
   }
 
-  getEstablishmentByService(service: string): Observable<EstablishmentShortResponse[]> {
-    return this.http.get<EstablishmentShortResponse[]>(`${this.baseUrl}/findEstablishmentByService/${service}`);
+  getEstablishmentByService(service: string, location: string): Observable<EstablishmentShortResponse[]> {
+    return this.http.get<EstablishmentShortResponse[]>(`${this.baseUrl}/findEstablishmentByService/${service}/${location}`);
   }
 
-  getEstablishmentByTypeCategory(type: string, category: string): Observable<EstablishmentShortResponse[]> {
-    return this.http.get<EstablishmentShortResponse[]>(`${this.baseUrl}/findEstablishmentByTypeCategory/${type}/${category}`);
+  getEstablishmentByTypeCategory(type: string, category: string, location: string): Observable<EstablishmentShortResponse[]> {
+    return this.http.get<EstablishmentShortResponse[]>(`${this.baseUrl}/findEstablishmentByTypeCategory/${type}/${category}/${location}`);
   }
 
   createEstablishment(establishmentData: FormData): Observable<any> {

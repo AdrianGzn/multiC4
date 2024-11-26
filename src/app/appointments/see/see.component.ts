@@ -41,18 +41,20 @@ export class SeeComponent implements OnInit {
     if (finalUser && finalUser.id_usuario) {
       this.generalService.getQuotesByPatientId(finalUser.id_usuario).subscribe({
         next: (response: QuoteResponse[]) => {
-          this.quotes = [];
+          this.quotes = []
   
           this.generalService.getServices().subscribe({
             next: (services: EstablishmentServiceInterface[]) => {
   
               response.forEach((element: QuoteResponse) => {
+                console.log(element)
                 if (element.estatus === this.selectedOption) {
                   let nameService: string = '';
                   let nameEstablishment: string = '';
                   let id_establishment: number = 0;
   
-                  const service = services.find(service => service.service.id_servicio === element.id_servicio);
+                  const service = services.find(service => service.service.id_servicio == element.id_servicio);
+                  console.log(service)
                   if (service) {
                     nameService = service.service.tipo;
                     nameEstablishment = service.establishment.nombre;
