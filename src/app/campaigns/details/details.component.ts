@@ -29,7 +29,7 @@ export class DetailsComponent implements OnInit {
       this.dataEstablishment = JSON.parse(currentDataEstablishment);
     }
 
-    this.generalService.getCampaigns(3).subscribe(
+    this.generalService.getCampaigns(this.dataEstablishment.id_establecimiento).subscribe(
       (next) => {
         this.campaigns = next.map((campaign: any) => ({
           id_campania: campaign.campaign["id_campañas"],
