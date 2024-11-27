@@ -99,8 +99,8 @@ export class CartslandingComponent implements OnInit {
       (data: any) => {
         this.slides = data.map((campaign: any) => ({
           image: campaign.image || 'defaultImage.jpg', // Usar valor por defecto si no hay imagen
-          title: campaign.name || 'Sin título',        // Usar valor por defecto si no hay título
-          description: campaign.description || 'Sin descripción',  // Usar valor por defecto si no hay descripción
+          title: campaign.campaign.nombre || 'Sin título',        // Usar valor por defecto si no hay título
+          description: campaign.campaign.descripción || 'Sin descripción',  // Usar valor por defecto si no hay descripción
         }));
       },
       (error) => {

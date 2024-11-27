@@ -1,15 +1,18 @@
-<div class="max-w-[81%] mx-auto mt-2 mb-8 bg-white shadow-lg p-5 rounded-lg overflow-hidden flex gap-3 ml-32">
+<div class="w-[90%] mx-auto mt-2 mb-8 bg-white shadow-lg p-5 rounded-lg flex gap-3 flex flex-wrap">
   <!-- Contenedor para Campañas Actuales -->
-  <div class="bg-white rounded-lg shadow-lg p-12 shadow-lg flex-1 max-w-sm">
-    <h1 class="text-3xl font-bold text-center mb-6" [ngStyle]="{ color: '#A526CB', fontFamily: 'Arial, sans-serif' }">
-      Campañas Actuales
+  <div class="w-full min-w-[313px] lg:w-[30%] bg-white rounded-lg shadow-lg p-12 shadow-lg overflow-hidden	">
+    <h1 class="text-3xl font-bold text-center mb-2" [ngStyle]="{ color: '#A526CB', fontFamily: 'Arial, sans-serif' }">
+      Campañas
     </h1>
-    <div class="relative w-full h-60 overflow-hidden">
-      <div class="flex transition-transform duration-700 ease-in-out" [ngStyle]="{ transform: getTransform() }">
-        <div class="w-full flex-shrink-0 h-full flex items-center justify-center" *ngFor="let slide of slides">
-          <div class="max-w-md w-full h-auto flex flex-col items-center justify-center p-4 text-center mx-auto" [ngStyle]="{ backgroundColor: '#ffffff' }">
+    <h1 class="text-3xl font-bold text-center mb-2" [ngStyle]="{ color: '#FFFFFF', fontFamily: 'Arial, sans-serif' }">
+      Actuales
+    </h1>
+    <div class="relative w-full h-[300px]">
+      <div class="w-full flex h-[90%] transition-transform duration-700 " [ngStyle]="{ transform: getTransform() }">
+        <div class="w-full flex-shrink-0 h-[210px] flex items-center" *ngFor="let slide of slides">
+          <div class="max-w-md w-full h-full flex flex-col items-center justify-center p-4 text-center mx-auto" [ngStyle]="{ backgroundColor: '#ffffff' }">
             <!-- Imagen de la campaña -->
-            <div class="relative w-full max-w-xs aspect-square mb-4">
+            <div class="relative w-[95%] aspect-square mb-4">
               <img [src]="slide.image" alt="Imagen de {{ slide.title }}" class="w-full h-full object-cover rounded-md" />
             </div>
             <!-- Título de la campaña debajo de la imagen -->
@@ -45,12 +48,12 @@
 
 
   <!-- Contenedor para Servicios Médicos -->
-  <div class="bg-white rounded-lg shadow-lg p-5 flex-1 max-w-2xl shadow-lg mr-32 ">
+  <div class="w-full lg:w-[66%] min-w-[313px] bg-white rounded-lg shadow-lg p-5 shadow-lg ">
     <h2 class="text-3xl font-bold text-center mb-6" [ngStyle]="{ color: '#A526CB', fontFamily: 'Arial, sans-serif' }">
       Servicios Médicos
     </h2>
-    <div class="flex justify-between gap-8">
-      <div *ngFor="let servicio of visibleServicios; let i = index" class="bg-purple-100 text-black rounded-lg shadow-lg w-64 h-72 p-4 flex flex-col items-center transform transition-transform duration-200 hover:scale-105 hover:shadow-2xl">
+    <div class="flex justify-between gap-8 overflow-hidden">
+      <div *ngFor="let servicio of visibleServicios; let i = index" class="bg-purple-100 text-black rounded-lg shadow-lg w-64 min-w-[220px] h-[300px] p-4 flex flex-col items-center transform transition-transform duration-200 hover:scale-105 hover:shadow-2xl">
         <img [src]="servicio.img" [alt]="servicio.nombre" class="rounded-lg mb-3 w-40 h-40 object-cover" />
         <h3 class="text-lg font-medium mb-2 text-center truncate w-full">{{ servicio.nombre }}</h3>
         
