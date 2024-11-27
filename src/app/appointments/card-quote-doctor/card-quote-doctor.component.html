@@ -16,7 +16,7 @@
     <p>{{quote.estatus}}</p>
   </div>
 
-  <div class="text-center w-full">
+  <div class="text-center w-full" *ngIf="quote.estatus != 'Pagados'">
     <button (click)="sendQuoteId()"  class="bg-blue-500 text-white px-4 py-2 rounded-md">Cambiar de estatus</button>
   </div>
 </div>

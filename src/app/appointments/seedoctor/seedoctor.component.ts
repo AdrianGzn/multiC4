@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 export class SeedoctorComponent implements OnInit {
   isOpen: boolean = false;
   selectedOption: string = 'Atendidos';  
-  options: string[] = ['Atendidos', 'No Atendidos'];
+  options: string[] = ['Atendidos', 'No Atendidos', 'Pagados'];
   quotesDoctor: any[] = [];
 
 
@@ -43,6 +43,7 @@ export class SeedoctorComponent implements OnInit {
       {
         next: (next) => {
           this.quotesDoctor = next; 
+          console.log(this.quotesDoctor);
         }
       }
     )

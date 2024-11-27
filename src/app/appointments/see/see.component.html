@@ -1,35 +1,40 @@
 <app-header-patient></app-header-patient>
 
-<div class="w-full min-h-[calc(100vh-128px)] flex items-center justify-center bg-gray-200">
+<div class="w-full min-h-[calc(100vh-113px)] flex items-center justify-center bg-gray-200">
+
   <div class="w-[85%] min-h-[calc(70vh)] my-8 bg-purple-100 flex flex-col items-center p-5 lg:w-[70%]">
 
-    <p class="text-4xl font-bold mb-4 text-purple-800">Agregar Establecimiento</p>
+    <p class="sm:text-3xl text-4xl font-bold mb-4 text-purple-800" *ngIf="selectedOption == 'Atendidos'">Citas Atendidas</p>
+    <p class="sm:text-3xl text-4xl font-bold mb-4 text-purple-800" *ngIf="selectedOption == 'No Atendidos'">Citas No Atendidas</p>
+    <p class="sm:text-3xl text-4xl font-bold mb-4 text-purple-800" *ngIf="selectedOption == 'Pagados'">Citas Pagadas</p>
 
-    <div class="relative inline-flex items-center border-2 border-[#9042B7] px-4 py-2 rounded-md w-auto">
-      <div class="relative w-auto">
-        <button (click)="toggleSelect()"
-          class="appearance-none text-[#9042B7] font-semibold bg-transparent focus:outline-none pr-6 pl-2 w-auto text-left h-10">
-          {{ selectedOption }}
-          <svg [ngClass]="{'rotate-180': isOpen}"
-            class="w-5 h-5 text-[#9042B7] absolute right-1 top-1/2 transform -translate-y-1/2 pointer-events-auto transition-transform cursor-pointer"
-            xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M7 10l5 5 5-5H7z" />
-          </svg>
-        </button>
-
-        <ul *ngIf="isOpen" class="absolute bg-white border-2 border-[#9042B7] w-auto left-0 rounded-md mt-2">
-          <li *ngFor="let option of options" (click)="selectOption(option)"
-            class="p-2 cursor-pointer hover:bg-gray-100">
-            {{ option }}
-          </li>
-        </ul>
+    <div class="w-[calc(100%-15px)] lg:w-[93%] md:w-[93%]">
+      <div class="relative inline-flex items-center border-2 border-[#9042B7] px-4 py-2 rounded-md w-auto">
+        <div class="relative w-auto">
+          <button (click)="toggleSelect()"
+            class="appearance-none text-[#9042B7] font-semibold bg-transparent focus:outline-none pr-6 pl-2 w-auto text-left h-10">
+            {{ selectedOption }}
+            <svg [ngClass]="{'rotate-180': isOpen}"
+              class="w-5 h-5 text-[#9042B7] absolute right-1 top-1/2 transform -translate-y-1/2 pointer-events-auto transition-transform cursor-pointer"
+              xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M7 10l5 5 5-5H7z" />
+            </svg>
+          </button>
+  
+          <ul *ngIf="isOpen" class="absolute bg-white border-2 border-[#9042B7] w-auto left-0 rounded-md mt-2">
+            <li *ngFor="let option of options" (click)="selectOption(option)"
+              class="p-2 cursor-pointer hover:bg-gray-100">
+              {{ option }}
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
 
-    <div class="b-1 border-slate-100">
+    <div class="w-[calc(100%-15px)] lg:w-[93%] md:w-[93%] h-[200%] flex gap-5 flex-wrap py-5">
       <div *ngFor="let quote of quotes; trackBy: trackByFn">
         <app-quote-patient [quote]="quote" (emitId)="handleQuoteId($event)"></app-quote-patient>
-      </div>
+      </div>    
     </div>
     
   </div>

@@ -12,7 +12,7 @@ import { UserService } from '../../shared/services/user.service';
 export class SeereceptionistComponent implements OnInit {
   isOpen: boolean = false;
   selectedOption: string = 'Atendidos';  
-  options: string[] = ['Atendidos', 'No Atendidos'];
+  options: string[] = ['Atendidos', 'No Atendidos', 'Pagados'];
   quotesDoctor: any[] = [];
 
 
@@ -41,6 +41,7 @@ export class SeereceptionistComponent implements OnInit {
     this.generalService.getQuotesByReceptionisStatus(finalUser.id_usuario, this.selectedOption).subscribe(
       {
         next: (next) => {
+          console.log(this.quotesDoctor);
           console.log(next)
         }
       }

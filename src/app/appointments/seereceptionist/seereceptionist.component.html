@@ -1,8 +1,13 @@
-<div class="bg-gray-200 min-h-screen">
-    <app-header-receptionist></app-header-receptionist>
-  
-    <div class="bg-purple-100 p-12 pb-80 rounded-md mx-auto max-w-6xl mt-8">
-      <!-- Selector de opciones -->
+<app-header-receptionist></app-header-receptionist>
+<div class="w-full min-h-[calc(100vh-113px)] flex items-center justify-center bg-gray-200">
+
+  <div class="w-[85%] min-h-[calc(70vh)] my-8 bg-purple-100 flex flex-col items-center p-5 lg:w-[70%]">
+
+    <p class="sm:text-3xl text-4xl font-bold mb-4 text-purple-800" *ngIf="selectedOption == 'Atendidos'">Citas Atendidas</p>
+    <p class="sm:text-3xl text-4xl font-bold mb-4 text-purple-800" *ngIf="selectedOption == 'No Atendidos'">Citas No Atendidas</p>
+    <p class="sm:text-3xl text-4xl font-bold mb-4 text-purple-800" *ngIf="selectedOption == 'Pagados'">Citas Pagadas</p>
+
+    <div class="w-[calc(100%-15px)] lg:w-[93%] md:w-[93%]">
       <div class="relative inline-flex items-center border-2 border-[#9042B7] px-4 py-2 rounded-md w-auto">
         <div class="relative w-auto">
           <button 
@@ -27,10 +32,13 @@
           </ul>
         </div>
       </div>
-          
-
-    </div>       
-    <div class="w-100 h-100">
-      <app-card-quote-doctor *ngFor="let quote of quotesDoctor" [quote]="quote" (emitId)="deleteQuote($event)"/>      
+    </div>  
+    
+    <div class="w-[calc(100%-15px)] lg:w-[93%] md:w-[93%] h-[200%] flex gap-5 flex-wrap py-5">
+      <div class="w-100 h-100">
+        <app-card-quote-doctor *ngFor="let quote of quotesDoctor" [quote]="quote" (emitId)="deleteQuote($event)"/>      
+      </div>
     </div>
+    
+  </div>
 </div>
