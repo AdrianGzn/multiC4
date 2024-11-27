@@ -10,62 +10,49 @@ import { UserService } from '../../shared/services/user.service';
 })
 export class WelcomePatientComponent implements OnInit {
   constructor(private router: Router, private generalService: GeneralServices, private userService: UserService) { }
+
   images: any[] = []; 
   campaigns: any[] = []
   services: any[] = []
   imageName: string = ""
+  
+  // Variables para preguntas frecuentes
+  answers: boolean[] = [false, false, false, false, false, false, false, false];
+  showFirstGroup: boolean = true;
+
+  // Navegación
   establishments(): void {
     this.router.navigate(["./establishment/search"]);
   }
 
   ngOnInit(): void {
-
     this.generalService.getImages().subscribe(
-      data => {
-        console.log(data)
-      },
-      error => {
-        console.log(error)
-      }
-    )
+      data => console.log(data),
+      error => console.log(error)
+    );
 
     this.generalService.getCampaigns(4).subscribe(
-      data => {
-        console.log(data)
-      },
-
-      error => {
-        console.log(error)
-      }
-    )
+      data => console.log(data),
+      error => console.log(error)
+    );
 
     this.generalService.getService().subscribe(
-      data => {
-        console.log(data);
-      },
-
-      error => {
-        console.log(error);
-      }
-    )
+      data => console.log(data),
+      error => console.log(error)
+    );
   }
 
   checkout(): void {
-    //this.userService.
+    // Implementación futura
   }
-  answers: boolean[] = [false, false, false, false, false, false, false, false];
 
-  // Variable para controlar qué grupo de preguntas mostrar
-  showFirstGroup: boolean = true;
-
-  // Función para alternar entre los grupos de preguntas
+  // Alternar entre grupos de preguntas
   toggleQuestionGroup() {
     this.showFirstGroup = !this.showFirstGroup;
   }
 
-  // Función para mostrar u ocultar la respuesta de una pregunta específica
+  // Mostrar u ocultar respuestas, cerrando las demás
   toggleAnswer(index: number) {
-    this.answers[index] = !this.answers[index];
+    this.answers = this.answers.map((_, i) => i === index ? !this.answers[i] : false);
   }
-
 }
