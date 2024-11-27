@@ -11,6 +11,11 @@ import { UserService } from '../../shared/services/user.service';
 export class SignPatientComponent {
   signInForm: FormGroup;
 
+  localidades: string[] = ['Acacoyagua', 'Acala', 'Acapetahua', 'Altamirano', 'Ángel Albino Corzo', 'Arriaga',
+    'Berriozábal', 'Bochil', 'Comitán de Domínguez', '	Chamula', '	Chiapa de Corzo', '	Chicoasén', 'Huixtán', 
+    'Ocosingo', 'Osumacinta', 'Palenque', 'San Cristóbal de las Casas', 'Simojovel', 'Tonalá', 'Tuxtla Gutiérrez'
+  ];
+
   constructor(
     private fb: FormBuilder,
     private router: Router,

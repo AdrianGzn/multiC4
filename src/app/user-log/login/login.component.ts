@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { UserService } from '../../shared/services/user.service';
-
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -43,10 +43,12 @@ export class LoginComponent {
         },
         error: (erro) => {
           console.log('Ha ocurrido un error: ' + erro);
+          Swal.fire("Error", "Los datos no son correctos", "error");
         }
       });
     } else {
       console.log('Formulario no válido');
+      Swal.fire("Error", "El formulario está incompleto, vuelva a intentarlo.", "error");
     }
   }
   signPatient(): void {

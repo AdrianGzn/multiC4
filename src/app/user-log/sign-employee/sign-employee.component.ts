@@ -70,8 +70,12 @@ export class SignEmployeeComponent {
             this.userService.saveUser(data);
             if (data.id_rol === 2) {
               this.createSchedulesForDoctor(myUser.id_usuario);
+              this.router.navigate(['/welcome/doctor']); 
             }
-            this.router.navigate(['/welcome/doctor']); 
+            if (data.id_rol === 3) {
+              this.router.navigate(['/welcome/receptionist']); 
+            }
+            
           },
           error: (error) => {
             console.log('Ha ocurrido un error al crear el rol del usuario');

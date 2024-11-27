@@ -39,7 +39,11 @@
                     </div>
                     <div class="w-[calc(48%)] min-w-[210px]">
                         <label class="form-child-label">localidad:</label>
-                        <input  class="form-child border-fuchsia-800 w-full" formControlName="localidad">
+                        <select class="form-child w-full" formControlName="localidad">
+                            <option *ngFor="let localidad of localidades" [value]="localidad">
+                                {{ localidad }}
+                            </option>
+                        </select>
                     </div>
                 </div>
             </div>

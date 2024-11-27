@@ -39,6 +39,10 @@ export class SaveEstablishmentComponent implements OnInit {
   nameServices: string[] = ["General", "Pediatría", "Obstetricia", "Odontología"];
   categoria: string[] = ['Público', 'Privado'];
   services: serviceAllId[] = [];
+  localidades: string[] = ['Acacoyagua', 'Acala', 'Acapetahua', 'Altamirano', 'Ángel Albino Corzo', 'Arriaga',
+    'Berriozábal', 'Bochil', 'Comitán de Domínguez', '	Chamula', '	Chiapa de Corzo', '	Chicoasén', 'Huixtán', 
+    'Ocosingo', 'Osumacinta', 'Palenque', 'San Cristóbal de las Casas', 'Simojovel', 'Tonalá', 'Tuxtla Gutiérrez'
+  ];
 
   doctors: User[] = [];
   currentDoctors: User[] = [];
