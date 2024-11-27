@@ -38,11 +38,10 @@ export class SeereceptionistComponent implements OnInit {
     const user = localStorage.getItem("userData");
     const finalUser = user ? JSON.parse(user) : null;
 
-    this.generalService.getQuotesByReceptionisStatus(finalUser.id_usuario, this.selectedOption).subscribe(
+    this.generalService.getQuotesByReceptionisStatus(finalUser.id_establecimiento, this.selectedOption).subscribe(
       {
         next: (next) => {
-          console.log(this.quotesDoctor);
-          console.log(next)
+          this.quotesDoctor = next
         }
       }
     )
