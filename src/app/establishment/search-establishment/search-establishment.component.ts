@@ -62,24 +62,11 @@ export class SearchEstablishmentComponent implements OnInit {
       type: this.formEstablishment.value.tipo,
       category: this.formEstablishment.value.categoria
     }
-    console.log(formTypeCategory.type)
-      this.generalService.getEstablishmentByTypeCategory(formTypeCategory.type, formTypeCategory.category, this.userFinal.localidad).pipe().subscribe(
+    console.log(formTypeCategory)
+      this.generalService.getEstablishmentByTypeCategory(this.formEstablishment.value.tipo, this.formEstablishment.value.categoria, this.userFinal.localidad).pipe().subscribe(
         data => {
-          this.establishmentFinded = data.map((establishment: any) => ({
-            id_establishment: establishment.id_establishment,
-            nombre: establishment.nombre,
-            direccion:  {
-                calle: establishment.dirección.calle,
-                colonia: establishment.dirección.colonia,
-                descripcion: establishment.dirección.descripción,
-                id_dirección: establishment.dirección.id_dirección,
-                latitud: establishment.dirección.latitud,
-                longitud: establishment.dirección.longitud,
-                numero: establishment.dirección.numero
-            },
-            image: establishment.image
-          })); 
-          console.log(this.establishmentFinded)
+          console.log(data)
+          this.establishmentFinded = data
         },
         error => {
           console.log(error)
@@ -106,7 +93,7 @@ export class SearchEstablishmentComponent implements OnInit {
     console.log(this.formEstablishmentByService.value.servicio)
     let myService = this.formEstablishmentByService.value.servicio;
     console.log(myService)
-    this.generalService.getEstablishmentByService(this.formEstablishmentByService.value, this.userFinal.localidad).subscribe({
+    this.generalService.getEstablishmentByService(this.formEstablishmentByService.value.servicio, this.userFinal.localidad).subscribe({
       next: (data: any[]) => {
         console.log(data)
         this.establishmentFinded = data;        

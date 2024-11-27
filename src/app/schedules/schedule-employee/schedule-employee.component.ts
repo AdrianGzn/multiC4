@@ -60,6 +60,8 @@ export class ScheduleEmployeeComponent implements OnInit {
     this.user = finalUser;
     console.log(this.user);
 
+    this.getCurrentScheduleEstablishment();
+
     this.generalServices.getAllHorsById(this.user.id_usuario).subscribe({
       next: (item: SchedulesFromUserId[]) => {
         console.log('Se han obtenido los horarios del doctor exitosamente');
@@ -73,26 +75,6 @@ export class ScheduleEmployeeComponent implements OnInit {
         console.log(error);
       }
     });
-
-
-    if (
-      this.getCurrentScheduleEstablishment() &&
-      this.currentSchedule.id_horario != 0 &&
-      this.currentSchedule.entrada != '' &&
-      this.currentSchedule.salida != '' 
-    ) {
-      Swal.fire(
-        'Horario del establecimiento',
-        'La entrada es: ' + this.currentSchedule.entrada + ', y la salida es: ' + this.currentSchedule.salida,
-        'success'
-      );
-    } else {
-      Swal.fire(
-        'Sin horario de establecimiento',
-        'Aún no tiene un establecimiento asignado. Inténtelo más tarde',
-        'error'
-      );
-    }
   }
 
   cargarHorariosEnFormulario(): void {
@@ -185,8 +167,7 @@ export class ScheduleEmployeeComponent implements OnInit {
     });
   }
 
-  getCurrentScheduleEstablishment(): boolean {
-    let flag: boolean | any = null;
+  getCurrentScheduleEstablishment(): void {
 
     this.generalServices.getEstablishment().subscribe({  //Obtener establecimientos
       next: (itemEstablishments: EstablishmentGetResponse[]) => {        
@@ -201,8 +182,11 @@ export class ScheduleEmployeeComponent implements OnInit {
 
                     this.currentSchedule = elementEschedule;
                     console.log(this.currentSchedule);  //Almacenar el horario
-                    flag = true;
-                    
+                    Swal.fire(
+                      'Horario del establecimiento',
+                      'La entrada es: ' + this.currentSchedule.entrada + ', y la salida es: ' + this.currentSchedule.salida,
+                      'success'
+                    );
                   }
                 });
 
@@ -210,7 +194,6 @@ export class ScheduleEmployeeComponent implements OnInit {
               error: (error) => {
                 console.log('Ha ocurrido un error al obtener los horarios');
                 console.log(error);
-                flag = false;
               }
             })
 
@@ -220,12 +203,8 @@ export class ScheduleEmployeeComponent implements OnInit {
       error: (error) => {
         console.log('Ha ocurrido un error al obtener los horarios de los hospitales');
         console.log(error);
-        flag = false;
       }
     });
-
-    console.log(flag);
-    return flag;
   }
 
   validarHorarioFormulario(): boolean {

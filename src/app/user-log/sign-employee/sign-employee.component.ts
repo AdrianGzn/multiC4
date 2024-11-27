@@ -68,7 +68,14 @@ export class SignEmployeeComponent {
             localStorage.setItem('userData', JSON.stringify(data));  
                         
             this.userService.saveUser(data);
+
+            let currentDoctor = localStorage.getItem("userData")
+
+            if(currentDoctor) {
+              myUser = JSON.parse(currentDoctor)
+            }
             if (data.id_rol === 2) {
+              console.log(myUser)
               this.createSchedulesForDoctor(myUser.id_usuario);
               this.router.navigate(['/welcome/doctor']); 
             }

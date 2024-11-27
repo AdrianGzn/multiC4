@@ -68,10 +68,10 @@ export class UpdateComponent implements OnInit {
           console.log(formData.get("fecha_inicio"));
           this.generalService.createCampaign(formData).subscribe(
             (data) => {
-              console.log(data);
+              Swal.fire("Generar campaña", "Se genero la campaña", "success")
             },
             (error) => {
-              console.log(error);
+              Swal.fire("Generar campaña", "No se logro generar la campaña", "error")
             }
           );
         }
