@@ -7,7 +7,7 @@ import { ReceptionistSeeComponent } from './receptionist-see/receptionist-see.co
 import { UpdateComponent } from './update/update.component';
 import { UserSeeComponent } from './user-see/user-see.component';
 import { UserDoctorComponent } from './user-doctor/user-doctor.component';
-import { authGuard } from '../shared/guards/auth.guard';
+
 const routes: Routes = [
   { path: 'delete', component: DeleteComponent, },
   { path: 'details', component: DetailsComponent,  },

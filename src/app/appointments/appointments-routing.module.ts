@@ -4,7 +4,7 @@ import { SeeComponent } from './see/see.component';
 import { GenerateComponent } from './generate/generate.component';
 import { SeedoctorComponent } from './seedoctor/seedoctor.component';
 import { SeereceptionistComponent } from './seereceptionist/seereceptionist.component';
-import { authGuard } from '../shared/guards/auth.guard';
+
 const routes: Routes = [
   { path: 'see', component: SeeComponent},
   { path: 'seedoctor', component: SeedoctorComponent},

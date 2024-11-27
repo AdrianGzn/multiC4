@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { WelcomeDoctorComponent } from './welcome-doctor/welcome-doctor.component';
 import { WelcomePatientComponent } from './welcome-patient/welcome-patient.component';
 import { WelcomeReceptionistComponent } from './welcome-receptionist/welcome-receptionist.component';
-import { authGuard } from '../shared/guards/auth.guard';
 import { LandingComponent } from './landing/landing.component';
 
 const routes: Routes = [

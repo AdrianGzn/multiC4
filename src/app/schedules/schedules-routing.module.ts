@@ -1,8 +1,8 @@
 import { NgModule, OnInit } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ScheduleEmployeeComponent } from './schedule-employee/schedule-employee.component';
-import { authGuard } from '../shared/guards/auth.guard';
 import { GeneralServices } from '../shared/services/general-services.service';
+
 const routes: Routes = [
     { path: 'scheduleEmployee', component: ScheduleEmployeeComponent,  },
   ];
