@@ -3,10 +3,7 @@
   <button (click)="welcome()" class="flex-shrink-0">
     <img src="./assets/icon-vital.png" alt="Vital SH Logo" class="h-16 md:h-24 w-auto">
   </button>
-
-  <!-- Contenedor del menú y opciones -->
   <div class="flex items-center space-x-4 md:space-x-10 relative">
-    <!-- Menú hamburguesa para pantallas pequeñas -->
     <button 
       class="md:hidden flex items-center justify-center w-16 h-16 bg-[#E7D6F3] rounded-full text-[#9042B7] font-bold text-3xl mx-auto relative z-10" 
       (click)="toggleMobileMenu()">
@@ -20,19 +17,15 @@
         <button class="text-[#9042B7] font-bold text-sm hover:underline py-2 px-4 w-full text-left" (click)="establishments()">SERVICIOS</button>
         <button class="text-[#9042B7] font-bold text-sm hover:underline py-2 px-4 w-full text-left" (click)="see()">CITAS</button>
         <button class="text-[#9042B7] font-bold text-sm hover:underline py-2 px-4 w-full text-left" (click)="userSee()">CAMPAÑAS</button>
-        <!-- Botón de cerrar sesión para pantallas pequeñas dentro del menú hamburguesa -->
         <button class="bg-[#BE6DD7] text-white font-medium text-sm py-2 px-4 rounded hover:bg-purple-700 transition-colors mt-2 w-full text-left" (click)="endSesion()">Cerrar Sesión</button>
       </nav>
     </div>
   </div>
-
-  <!-- Navegación para pantallas grandes -->
   <nav class="hidden md:flex flex-grow justify-center space-x-10 md:space-x-20">
     <button class="text-[#9042B7] font-bold text-lg md:text-xl hover:underline" (click)="establishments()">SERVICIOS</button>
     <button class="text-[#9042B7] font-bold text-lg md:text-xl hover:underline" (click)="see()">CITAS</button>
     <button class="text-[#9042B7] font-bold text-lg md:text-xl hover:underline" (click)="userSee()">CAMPAÑAS</button>
   </nav>
 
-  <!-- Botón de cerrar sesión para pantallas grandes -->
   <button class="hidden md:block bg-[#BE6DD7] text-white font-medium text-lg py-3 px-6 rounded hover:bg-purple-700 transition-colors" (click)="endSesion()">Cerrar Sesión</button>
 </header>

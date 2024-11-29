@@ -33,7 +33,7 @@ export class CardEstablishmentComponent implements OnInit {
   starsArray: boolean[] = [];
   faStar: IconProp = faStar;
   fullStars = 0; 
-  halfStar = 0;  // Número de estrellas medias
+  halfStar = 0;  
 
   constructor(
     private router: Router,

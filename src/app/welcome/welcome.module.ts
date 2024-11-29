@@ -13,6 +13,9 @@ import { HeaderPatientComponent } from '../shared/header-patient/header-patient.
 import { LandingComponent } from './landing/landing.component';
 import { CartslandingComponent } from './cartslanding/cartslanding.component';
 import { CartspatientComponent } from './cartspatient/cartspatient.component';
+import { ToLowercasePipe } from './pipes/to-lowercase.pipe';
+import { ToUppercasePipe } from './pipes/to-uppercase.pipe';
+
 
 @NgModule({
   declarations: [
@@ -26,6 +29,8 @@ import { CartspatientComponent } from './cartspatient/cartspatient.component';
     LandingComponent,
     CartslandingComponent,
     CartspatientComponent,
+    ToUppercasePipe,  
+    ToLowercasePipe 
   ],
   imports: [
     CommonModule,

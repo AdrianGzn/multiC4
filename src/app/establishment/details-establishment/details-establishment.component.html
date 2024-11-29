@@ -7,26 +7,25 @@
     </div>
 
     <div class="w-1/2 p-6">
-      <h2 class="text-4xl font-bold text-[#A526CB]">{{serviceEstablishment.nameEstablishment}}</h2>
+      <h2 class="text-4xl font-bold text-[#A526CB]">{{serviceEstablishment.nameEstablishment | titleCase}}</h2>
       <h3 class="text-3xl font-semibold text-[#A526CB] mt-4">Servicios</h3>
       <ul class="list-disc list-inside text-gray-700 mt-2 space-y-1" *ngFor="let service of serviceEstablishment.servicios">
-        <li class="text-xl">{{service.service}}</li>
+        <li class="text-xl">{{service.service | titleCase}}</li>
       </ul>
       <h3 class="text-3xl font-semibold text-[#A526CB] mt-4">Descripción:</h3>
       <p class="text-xl text-gray-700 mt-1">
-        {{serviceEstablishment.descripcion}}
+        {{serviceEstablishment.descripcion | titleCase}}
       </p>
     </div>
   </div>
 
-  <!-- Aquí se incluye el mapa -->
   <div class="mx-4 h-[200px] overflow-hidden rounded-lg border border-gray-300">
     <app-map [DataMap]="{ lat: 16.7524, lng: -93.1171 }" [zoom]="15"></app-map>
   </div>
 
   <div class="p-6 mt-6">
     <p class="text-[#A526CB] text-xl font-semibold">
-      Se ubica en: Calle {{serviceEstablishment.direccion.calle}} 1, Colonia {{serviceEstablishment.direccion.colonia}}, número {{serviceEstablishment.direccion.numero}}
+      Se ubica en: Calle {{serviceEstablishment.direccion.calle | titleCase}} 1, Colonia {{serviceEstablishment.direccion.colonia | titleCase}}, número {{serviceEstablishment.direccion.numero}}
     </p>
 
     <p class="text-[#A526CB] mt-1 text-xl font-semibold">
