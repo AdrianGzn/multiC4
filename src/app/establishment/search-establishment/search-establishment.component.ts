@@ -18,7 +18,7 @@ export class SearchEstablishmentComponent implements OnInit {
   formEstablishmentByName: FormGroup;
   formEstablishmentByService: FormGroup;
   services: string[] = ["General", "Pediatría", "Obstetricia", "Odontología"];
-  tipo: string[] = ['Hospital', 'Clínica', 'Consultorio']; //lista de todos lo que va en formularios
+  tipo: string[] = ['Hospital', 'Clínica', 'Consultorio']; //lista de0 todos lo que va en formularios
   categoria: string[] = ['Público', 'Privado'];
   userFinal: any = {}
   establishmentFinded: any[] = [];
