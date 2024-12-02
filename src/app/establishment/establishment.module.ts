@@ -9,7 +9,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CardEstablishmentComponent } from './card-establishment/card-establishment.component';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { MapComponent } from './map/map.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'; 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { TitleCasePipe } from './pipes/title-case.pipe';
+import { DateFormatPipe } from './pipes/date-format.pipe'; 
 
 @NgModule({
   declarations: [
@@ -18,6 +20,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     SaveEstablishmentComponent,
     CardEstablishmentComponent,
     MapComponent,
+    TitleCasePipe,
+    DateFormatPipe,
 
   ],
   imports: [

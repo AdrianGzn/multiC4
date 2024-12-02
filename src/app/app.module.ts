@@ -8,11 +8,11 @@ import { QuotePatientComponent } from './appointments/quote-patient/quote-patien
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
-
 @NgModule({
   declarations: [
     AppComponent,
     CardQuoteComponent,
+    
 
   ],
   imports: [   

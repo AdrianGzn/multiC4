@@ -7,15 +7,14 @@
   <!-- Contenedor del texto y el botón (solo debajo de la imagen en pantallas pequeñas) -->
   <div class="w-full text-center lg:text-left lg:ml-12 mb-8 lg:mb-0 lg:order-first">
     <h2 class="text-3xl sm:text-4xl lg:text-5xl font-semibold mb-4 sm:mb-6" style="color: #812B8A;">
-      Encuentra los establecimientos más cercanos a ti
+      {{ 'Encuentra los establecimientos más cercanos a ti' | uppercase }}
     </h2>
     <button class="text-white py-3 sm:py-4 px-8 sm:px-12 rounded-lg w-auto text-xl sm:text-2xl transition-all duration-300"
     style="background-color: #812B8A;" 
     onmouseover="this.style.backgroundColor='#6c1e91'" 
     onmouseout="this.style.backgroundColor='#812B8A'" 
     (click)="establishments()">
-Encontrar
-</button>
-
+      {{ 'Encontrar' | lowercase }}
+    </button>
   </div>
 </div>

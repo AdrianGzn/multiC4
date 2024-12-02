@@ -23,8 +23,8 @@
                     <div class="w-[calc(48%)] min-w-[210px]">
                         <label class="form-child-label">Tipo:</label>
                         <select class="form-child border-fuchsia-800 w-full" id="id_tipo_establecimiento" formControlName="id_type_establishment">
-                            <option *ngFor="let option of type_options" value={{option.id_tipo_establecimiento}}>
-                                {{option.tipo}}
+                            <option *ngFor="let option of type_options" [value]="option.id_tipo_establecimiento">
+                                {{ option.tipo | titlecase }}
                             </option>
                         </select>
                     </div>
@@ -32,22 +32,23 @@
                     <div class="w-[calc(48%)] min-w-[210px]">
                         <label class="form-child-label">Categoría:</label>
                         <select class="form-child border-fuchsia-800 w-full" id="categoria" formControlName="categoria">
-                            <option *ngFor="let option of categoria" value={{option}}>
-                                {{option}}
+                            <option *ngFor="let option of categoria" [value]="option">
+                                {{ option | uppercase }}
                             </option>
                         </select>
                     </div>
                     <div class="w-[calc(48%)] min-w-[210px]">
-                        <label class="form-child-label">localidad:</label>
+                        <label class="form-child-label">Localidad:</label>
                         <select class="form-child w-full" formControlName="localidad">
                             <option *ngFor="let localidad of localidades" [value]="localidad">
-                                {{ localidad }}
+                                {{ localidad | lowercase }}
                             </option>
                         </select>
                     </div>
                 </div>
             </div>
         </form>
+        
         <form [formGroup]="formUbication" class="w-[90%] mt-5 rounded-md">
             <div class="w-full mb-6 bg-purple-200 p-5 rounded-md">
                 <p class="font-semibold text-purple-600 mb-2">UBICACIÓN</p>
@@ -86,6 +87,7 @@
                 </div>
             </div>
         </form>
+        
         <form [formGroup]="formSchedule" class="w-[90%] mt-5">
             <div class="w-full mb-6 flex flex-wrap bg-purple-200 p-5 rounded-md">
                 <p class="font-semibold text-purple-600 mb-2">HORARIO</p>
@@ -106,6 +108,7 @@
                 </div>
             </div>
         </form>
+
         <div class="w-[90%] mt-5">
             <div class="w-full mb-6 bg-purple-200 p-5 rounded-md">
                 <p class="font-semibold text-purple-600 mb-2">IMAGEN</p>
@@ -113,10 +116,11 @@
                 <label class="form-child-label">Agregar Imagen:</label>
                 <div class="flex justify-between">
                     <input class="bg-white form-child w-[48%]" type="file" id="selectImage" (change)="onChangeSelectedImage($event)" #fileinput>
-                    <button type="button" class="w-[48%] bg-purple-700 text-white p-1 ml-2 rounded" (click)="deleteSelectedImage(fileinput)">Eliminar imágen</button>
+                    <button type="button" class="w-[48%] bg-purple-700 text-white p-1 ml-2 rounded" (click)="deleteSelectedImage(fileinput)">Eliminar imagen</button>
                 </div>
             </div>
         </div>
+        
         <button (click)="onSubmit()" type="submit" class="bg-fuchsia-700 text-white p-2 rounded w-[90%] mb-8">Guardar</button>
 
         <form [formGroup]="formServices" class="w-[90%] mt-5">
@@ -128,7 +132,7 @@
                         <label class="form-child-label">Servicio:</label>
                         <select class="form-child w-full" formControlName="servicio">
                             <option *ngFor="let service of nameServices" [value]="service">
-                                {{ service }}
+                                {{ service | titlecase }}
                             </option>
                         </select>
                     </div>
@@ -144,13 +148,14 @@
                     <button type="button" class="w-[48%] bg-purple-700 text-white p-1 rounded" (click)="deleteService()">Eliminar servicio</button>
                 </div>
         
-                <p *ngIf="services.length === 0">No hay servicios que mostrar</p>
-                <div class="w-full min-h-[50px] bg-white mt-2" *ngFor="let service of services; let i = index" (click)="selectService(service)">
-                    <p *ngIf="services.length > 0" [ngClass]="{'bg-blue-100': selectedService === service}">{{service.service}}</p>
+                <p *ngIf="services.length === 0" class="text-center mt-4 text-gray-500 italic">No hay servicios que mostrar</p>
+                <div class="w-full min-h-[50px] bg-gray-100 hover:bg-gray-200 cursor-pointer mt-2 p-3 rounded-md transition-colors" *ngFor="let service of services; let i = index" (click)="selectService(service)">
+                    <p *ngIf="services.length > 0" class="text-gray-700 font-medium" [ngClass]="{'bg-blue-100 text-blue-700 p-2 rounded-md': selectedService === service}" >
+                      {{ service.service | uppercase }}
+                    </p>
                 </div>
             </div>
         </form>
-        
         <form [formGroup]="formDoctors" class="w-[90%] mt-5">
             <div class="w-full mb-6 bg-purple-200 p-5 rounded-md">
                 <p class="font-semibold text-purple-600 mb-2">DOCTORES</p>
@@ -180,9 +185,9 @@
                     <button type="button" class="w-[48%] bg-purple-700 text-white p-1 mt-2 rounded" (click)="deleteDoctorFromEstablishment()">Eliminar doctor</button>
                 </div>
         
-                <p *ngIf="currentDoctors.length === 0">No hay medicos que mostrar que mostrar</p>
-                <div class="w-full min-h-[50px] bg-white mt-2" *ngFor="let doctor of currentDoctors" (click)="selectDoctor(doctor.id_usuario)">
-                    <p *ngIf="currentDoctors.length > 0" [ngClass]="{'bg-blue-100': selectedDoctor === doctor.id_usuario}">{{doctor.nombre}}</p>
+                <p *ngIf="currentDoctors.length === 0" class="text-center text-gray-500 italic mt-4">No hay médicos que mostrar </p>
+                <div class="w-full min-h-[50px] bg-gray-100 hover:bg-gray-200 cursor-pointer mt-2 p-3 rounded-md transition-colors" *ngFor="let doctor of currentDoctors" (click)="selectDoctor(doctor.id_usuario)" >
+                    <p *ngIf="currentDoctors.length > 0" class="text-gray-700 font-medium" [ngClass]="{'bg-blue-100 text-blue-700 p-2 rounded-md': selectedDoctor === doctor.id_usuario}">{{ doctor.nombre }}</p>
                 </div>
             </div>
         </form>
